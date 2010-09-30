@@ -10,11 +10,12 @@ class IndexPage( webapp.RequestHandler ):
 
 class FileUploadHandler( webapp.RequestHandler ):
     def post( self ):
-        if( request.get( 'inputfile' ) ):
-            contents = request.get( 'inputfile' )
+        if( self.request.get( 'inputfile' ) ):
+            contents = self.request.get( 'inputfile' )
         if( contents ):
-            self.response.headers.add_header( 'Content-Type', 'application/xml; charset=utf-8' )
-            self.response.out.write( '<fileContent>%s</fileContent' % contents )
+            # self.response.headers.add_header( 'Content-Type', 'application/xml; charset=utf-8' )
+            self.response.out.write( contents )
+            # self.response.out.write( '<fileContent>%s</fileContent>' % contents )
 
 application = webapp.WSGIApplication(
                                      [('/', IndexPage),
