@@ -1,0 +1,23 @@
+application: tlatokenizer
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /stylesheets
+  static_dir: stylesheets
+
+- url: /javascript
+  static_dir: javascript
+
+- url: /img
+  static_dir: img
+
+- url: /plaintext_tokenize
+  script: plaintext_tokenize.py
+
+- url: /return_texts
+  script: find_texts.py
+
+- url: /.*
+  script: index.py
