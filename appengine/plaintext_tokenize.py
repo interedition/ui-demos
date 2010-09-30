@@ -11,7 +11,7 @@ def tokenize_plaintext( textstring, delimiter = None ):
     words = textstring.split( delimiter )
     for w in words:
         ( plainword, punct ) = strip_punct( w )
-        wtoken = { 'token': plainword }
+        wtoken = { 't': plainword }
         if len( punct ):
             wtoken['punctuation'] = punct
         tokens.append( wtoken )
