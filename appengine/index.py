@@ -13,7 +13,8 @@ class FileUploadHandler( webapp.RequestHandler ):
         if( request.get( 'inputfile' ) ):
             contents = request.get( 'inputfile' )
         if( contents ):
-            self.response.out.write( contents )
+            self.response.headers.add_header( 'Content-Type', 'application/xml; charset=utf-8' )
+            self.response.out.write( '<fileContent>%s</fileContent' % contents )
 
 application = webapp.WSGIApplication(
                                      [('/', IndexPage),
