@@ -1,0 +1,169 @@
+@charset "utf-8";
+/* CSS Document */
+
+* {
+	margin:0px;
+	padding:0px;
+}
+
+body {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#666666;
+}
+
+a {
+	color:#0099FF;
+	text-decoration:none
+}
+
+a:hover {
+	color:#FF66CC;
+
+}
+
+h1 {
+	font-size:24px;
+	font-weight:100;	
+	margin: 0px 0px 40px 0px;
+	padding:0px 0px -0px 0px;
+	width:280px;
+	border-bottom:1px solid #488DD2;
+	color: #488DD2;
+	
+}
+
+h2 {
+	font-size:18px;
+	font-weight:100;	
+	margin: 0px 0px 5px 0px;
+}
+
+p {
+	margin: 0px 0px 10px 0px;	
+}
+
+ul {
+	margin: 20px 0px 10px 0px;
+}
+
+li {
+	margin: 0px 0px 5px 15px;
+	list-style-image:url(images/arrow.gif);
+}
+
+.header {
+	padding: 20px 0px 0px 30px;
+	font-size:29px;
+	font-weight:100;		
+	border-bottom:1px solid #C6DCF1;
+}
+
+#logoL {
+	margin: 0px 30px 0px 0px;	
+}
+
+.intro {
+	padding: 30px 0px 30px 30px;
+	width:580px;
+	line-height:20px;	
+}
+
+.coll {
+	width:300px;
+	float:left;
+	margin: 0px 0px 0px 15px;
+	padding:30px 0px 0px 15px;
+	border-right:1px solid #C6DCF1;
+	min-height:440px;
+}
+
+.nmr {
+	font-size:40px;
+}
+
+.filefieldX {
+	padding:3px 3px 3px 3px;
+	border:1px solid #488DD2;
+	width:275px;
+}
+
+.textfieldX {
+	padding:3px 3px 3px 3px;
+	border:1px solid #488DD2;
+	width:260px;	
+}
+
+
+.divLink {
+color:#0099FF;
+cursor: pointer;
+}
+.divLink:hover {
+	color:#FF66CC;
+	cursor: pointer;
+
+}
+
+
+
+
+div.button {
+  background: transparent url('images/b_button_a.png') no-repeat scroll top right;
+  color: #444;
+  display: block;
+  float: left;
+  font: normal 12px arial, sans-serif;
+  height: 24px;
+  margin-right: 6px;
+  padding-right: 18px; /* sliding doors padding */
+  text-decoration: none;
+}
+
+div.button span {
+  background: transparent url('images/b_button_span.png') no-repeat;
+  display: block;
+  line-height: 14px;
+  padding: 5px 0 5px 18px;
+}
+
+div.button:hover {
+  background-position: bottom right;
+  color: #000;
+  outline: none; /* hide dotted outline in Firefox */
+}
+
+div.button:hover span {
+  background-position: bottom left;
+  }
+.fileFrame{
+	padding:0px;
+	height:40px;
+	width:160px;
+	
+	overflow: none;
+	float:left;
+	display:inline;	
+	border:1px solid #488DD2;
+}
+	.fileBox{
+		display: inline; width: 160px; height: 50px; overflow: hidden;
+			
+			padding: 0px;
+	}
+	.fileLine{
+		display: block;
+			height:50px;
+	width:250px;
+
+	overflow:hidden;
+	}
+	.removeFile{
+		display:inline;
+		border: none;
+		margin-left:4px;
+		padding-left: 4px;
+		
+	}
+
+  
