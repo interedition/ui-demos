@@ -49,9 +49,14 @@
 			"uris":allUris,
 			"files":fileContents	
 		};
-		/*$.ajax(url: "/html/showData.php", data: allData, context: document.body, success: function(response){
-        $("body").eq(0).html(response);
-      	});*/
+		$.ajax({
+			url: "/html/showData.php",
+			data: allData,
+			context: document.body,
+			success: function(response){
+				$("body").eq(0).html(response);
+			}
+		});
 	}
 	function getData(){
 		

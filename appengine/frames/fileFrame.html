@@ -25,7 +25,7 @@
 			
 			$("#fileName").val(fText);
 			fn = $("#fileName").val();
-			//window.parent.saveName(fn,window.name);
+			window.parent.saveName(fn,window.name);
 			document.forms.uploadFile.submit();
 			
 			//$("window").parent().trigger("fileChanged");
@@ -34,7 +34,7 @@
 	</script>
 </HEAD>
 <BODY>	
-<form name="uploadFile" method="post" action="/uploadFile">
+<form name="uploadFile" method="POST" enctype="multipart/form-data" action="/uploadfile">
 <a id="uploadText">Add a file</a>
 <input type="file" name="inputfile" id="uploadButton" onchange="saveFilename(this.value)" class="filefieldX"/>
 <input type="hidden" id="fileName" name="fileName"/>
