@@ -3,7 +3,7 @@
 	var curUrl=1;
 	var fileContents=[];
 	function saveName(fn,winName){
-        alert(winName);
+        
 		$("#"+winName).parent().append("<span class='fileName' id="+winName+"'>"+fn+"</span>");
 		$("#"+winName).hide();
 	}
@@ -19,12 +19,15 @@
 		if (me.contentWindow.location.href.substring(me.contentWindow.location.href.lastIndexOf("/")+1) != "fileFrame.html") {
 			//for (n in me.contentWindow.document){
 				var de=me.contentWindow.document.documentElement;
-				
+				var wname = me.name;
+				alert("wname:"+wname);
 				if (de.nodeName.substring(0,3).toLowerCase()=="tei"){
-					fileContents.push("<"+de.nodeName+">"+de.innerHTML+"</"+de.nodeName+">");
+					fileContents.push({"name":wname,"text":"<"+de.nodeName+">"+de.innerHTML+"</"+de.nodeName+">"});
 				}
 				else{
-					fileContents.push(de.getElementsByTagName("body")[0].innerHTML);
+					fileContents.push({"name":wname,"text":de.getElementsByTagName("body")[0].innerHTML});
+
+					//fileContents.push(de.getElementsByTagName("body")[0].innerHTML);
 				}
 			//}
 			//alert(JSON.stringify(me.contentWindow.document));
@@ -48,13 +51,18 @@
 		
 	}
 	function submitForm(){
-		var allUris = [];
+		var allData="";
 		$.each($(".textfieldX"),function(index,value){
-			alert($(value).val());
-			allUris.push($(value).val());
+			if ($(value).val().length > 0) {
+				alert($(value).val());
+				allData = allData + $(value).attr("name") + "=" + $(value).val() + "&";
+			}
 		});
-		var allData = "url1="+allUris+"&files="+fileContents;	
-		
+		for (var i=0;i<fileContents.length;i++){
+			var allData = allData+fileContents[i].name+"="+fileContents[i].text+"&";
+		}
+			
+		allData = allData.substring(0,allData.length-1);
 
 		$.ajax({
 			url: "/return_texts",
