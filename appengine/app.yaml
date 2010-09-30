@@ -10,8 +10,8 @@ handlers:
 - url: /js
   static_dir: js
 
-- url: /img
-  static_dir: img
+- url: /images
+  static_dir: images
 
 - url: /plaintext_tokenize
   script: plaintext_tokenize.py
