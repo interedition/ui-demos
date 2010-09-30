@@ -10,6 +10,7 @@ class IndexPage( webapp.RequestHandler ):
 
 class FileUploadHandler( webapp.RequestHandler ):
     def post( self ):
+        contents = None
         if( self.request.get( 'inputfile' ) ):
             contents = self.request.get( 'inputfile' )
         if( contents ):
