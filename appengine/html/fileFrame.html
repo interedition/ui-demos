@@ -25,8 +25,9 @@
 			
 			$("#fileName").val(fText);
 			fn = $("#fileName").val();
+			//window.parent.saveName(fn,window.name);
 			document.forms.uploadFile.submit();
-			window.parent.saveName(fn,window.name);
+			
 			//$("window").parent().trigger("fileChanged");
 		}
 		

@@ -1,9 +1,11 @@
 
 	var curLine=1;
 	var curUrl=1;
+	var fileContents=[];
 	function saveName(fn,winName){
-		$("#"+winName).parent().html(fn);
-		alert(fn+" "+winName);
+       
+		$("#"+winName).parent().html("<span class='fileName' id="+winName+"'>"+fn+"</span>");
+	
 	}
 	function removeFile(fileRemove){
 		$(fileRemove).parent().remove();
@@ -14,7 +16,14 @@
 		
 	}
 	function showContents(me){
-		alert(me.contentWindow.document.documentElement.innerHTML);
+		alert(me.contentWindow.location.href);
+		if (me.contentWindow.location.href.substring(me.contentWindow.location.href.lastIndexOf("/")+1) != "fileFrame.html") {
+			fileContents.push(me.contentWindow.document.documentElement.innerHTML);
+			alert(me.contentWindow.document.documentElement.innerHTML);
+		}
+		else{
+			alert("started");
+		}
 	}
 	function newFileLine(){
 	
