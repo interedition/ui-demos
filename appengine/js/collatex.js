@@ -104,14 +104,14 @@
 					if (uriNames.length > 0) {
 						for (var i = 0; i < uriNames.length; i++) {
 							for (var j = 0; j < response["" + uriNames[i]].length; j++) {
-								listTexts(uriNames[i]+"_"+j, uriVals[i], response["" + uriNames[i]][j], "submittedFileList");
+								listTexts(uriNames[i]+"_"+j, uriVals[i]+" "+j+" ", response["" + uriNames[i]][j], "submittedFileList");
 							}
 						}
 					}
 					if (fileContents.length > 0) {
 						for (var i = 0; i < fileContents.length; i++) {
 							for (var j = 0; j < response["" + fileContents[i].name].length; j++) {
-								listTexts(fileContents[i].name+"_"+j, fileContents[i].file, response["" + fileContents[i].name][j], "submittedFileList");
+								listTexts(fileContents[i].name+"_"+j, fileContents[i].file+" "+j+" ", response["" + fileContents[i].name][j], "submittedFileList");
 							}
 						}
 					}
