@@ -2,6 +2,7 @@
 	var curLine=1;
 	var curUrl=1;
 	var fileContents=[];
+	var firstResponse = [];
 	function saveName(fn,winName){
         
 		$("#"+winName).parent().append("<span class='fileName' id="+winName+"'>"+fn+"</span>");
@@ -19,20 +20,14 @@
 		if (me.contentWindow.location.href.substring(me.contentWindow.location.href.lastIndexOf("/")+1) != "fileFrame.html") {
 			//for (n in me.contentWindow.document){
 				var de=me.contentWindow.document.documentElement;
-				var wname = me.name;
-				
+				alert("innerHTML of xml "+de.innerHTML);
+				var wname = me.name;				
 				if (de.nodeName.substring(0,3).toLowerCase()=="tei"){
 					fileContents.push({"name":wname,"file":$(me).next().text(),"text":"<"+de.nodeName+">"+de.innerHTML+"</"+de.nodeName+">"});
 				}
 				else{
 					fileContents.push({"name":wname,"file":$(me).next().text(),"text":de.getElementsByTagName("body")[0].innerHTML});
-
-					//fileContents.push(de.getElementsByTagName("body")[0].innerHTML);
 				}
-			//}
-			//alert(JSON.stringify(me.contentWindow.document));
-			
-			
 		}
 	}
 	function newFileLine(){
@@ -63,17 +58,17 @@
 			xmlDoc.loadXML(txt);
 		}
 	}
-	function listTexts(name,val,txtStr,targetId){
+	function listTexts(name,val,txtjson,targetId){
 			
-		$("#"+targetId).append("<li id='li_"+name+"'><input type='checkbox' name='sel_li_"+name+"' id='sel_li_"+name+"'></input>"+val+"</li>");
-		
-		
-		txtContent = txtStr.substring(txtStr.indexOf("<text"));
-		var teiTexts = txtContent.split("</text>");
+		$("#"+targetId).append("<li id='li_"+name+"'><input type='checkbox' value='"+name+"' name='sel_li_"+name+"' id='sel_li_"+name+"'></input>"+val+"</li>");
+		//txtContent = txtStr.substring(txtStr.indexOf("<text"));
+		//var teiTexts = txtContent.split("</text>");
 		var lastli = $("#li_"+name);
-		$("#li_"+name).append("<ul></ul>");
-		for (var j = 1; j < teiTexts.length-1; j++){
-			$("#li_"+name).find("ul").append("<li id='li_"+name+"_"+j+"'><input type='checkbox' name='sel_li_"+name+"_"+j+"' id='sel_li_"+name+"_"+j+"'></input>text "+j+"</li>");
+		if (txtjson["subtexts"]) {
+			$("#li_" + name).append("<ul></ul>");
+			for (var j = 0; j < txtjson["subtexts"].length; j++) {
+				$("#li_" + name).find("ul").append("<li id='li_" + name + "_" + j + "'><input type='checkbox' value='"+name+"_"+j+"' name='sel_li_" + name + "_" + j + "' id='sel_li_" + name + "_" + j + "'></input>text " + (j+1) + "</li>");
+			}
 		}
 	}
 	function submitForm(){
@@ -93,28 +88,65 @@
 		}
 			
 		allData = allData.substring(0,allData.length-1);
-	
+		
 		$.ajax({
 			url: "/return_texts",
 			data: allData,
 			type: "POST",
 			success: function(response){
+				firstResponse = response;
+				alert("FIRST RESPONSE "+response);
 				$("#submittedFileList").html("");
-				if (uriNames.length > 0) {
-					for (var i = 0; i < uriNames.length; i++) {
+				if ((uriNames.length > 0) || (fileContents.length > 0)) {
+					$("#submittedLabel").show();
+					if (uriNames.length > 0) {
+						for (var i = 0; i < uriNames.length; i++) {
 						
-						listTexts(uriNames[i], uriVals[i], response[""+uriNames[i]][0].content, "submittedFileList");
+							listTexts(uriNames[i], uriVals[i], response["" + uriNames[i]][0], "submittedFileList");
+						}
 					}
-				}
-				if (fileContents.length > 0) {
-					for (var i = 0; i < fileContents.length; i++) {
-						listTexts(fileContents[i].name, fileContents[i].file, response[""+fileContents[i].name][0].content, "submittedFileList");
+					if (fileContents.length > 0) {
+						for (var i = 0; i < fileContents.length; i++) {
+							listTexts(fileContents[i].name, fileContents[i].file, response["" + fileContents[i].name][0], "submittedFileList");
+						}
 					}
 				}
 			}
 		});
 	}
-	function getData(){
+	function getTokens(){
+		fuzzymatch = $("#fuzzymatch").val();
+		collator = $("#collatorUL input:radio:checked").val();
+		output = $("#outputUL input:radio:checked").val();
+		texts = $("#submittedFileList input:checkbox:checked");
+		query = "fuzzymatch="+fuzzymatch+"&output="+output+"&collator="+collator;
+		
+		for(var i=0;i<texts.length;i++){
+			var textName = $(texts[i]).val();
+			var textParts = textName.split("_");
+			
+			var thisUrl = firstResponse[""+textParts[0]]; 
+			
+			if (textParts.length > 1) {
+				thisUrl = thisUrl[0].subtexts[parseInt(textParts[1])];
+				// TODO This needs to pass the entire JSON object, not just the text content!
+				query = query + "&" + $(texts[i]).val() + "=" + JSON.stringify(thisUrl);
+			}
+			else {
+				query = query + "&" + $(texts[i]).val() + "=" + JSON.stringify(thisUrl[0]);
+			}
+		}
+		alert(query);
+			$.ajax({
+			url: "/run_toolchain",
+			data: query,
+			type: "POST",
+			success: function(response){
+				secondResponse = response;
+				alert(secondResponse);
+			}
+		});
+		//alert(fuzzymatch+","+collator+","+output);
 		
 	}
 	$(document).ready(function(e){

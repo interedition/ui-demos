@@ -1,5 +1,7 @@
 import re
-# import simplejson as json
+import simplejson as json
+import urllib
+from google.appengine.api import urlfetch
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 
@@ -8,7 +10,7 @@ class MSDispatcher( webapp.RequestHandler ):
         self.response.out.write( '<html><head><title>Another post-only page</title></head><body>You should not be navigating here via GET.</body></html>' )
     
     tokenizers = { 'plaintext': 'http://tlatokenizer.appspot.com/plaintext_tokenize',
-                   'teixml': 'http://www.eccentricity.org/teitokenizer/',
+                   'teixml': 'http://www.eccentricity.org/teitokenizer/form_tokenize',
                    # 'lucene': 'maybe someday',
                    }
     regularizers = { 'fuzzymatch': 'http://furious-wind-27.heroku.com/regularize_fuzzy',
@@ -16,9 +18,9 @@ class MSDispatcher( webapp.RequestHandler ):
     collators = { 'collatex': 'http://gregor.middell.net/collatex/api/collate' }
     
     def post( self ):
+    	errormsg = []
         def is_text( x ):
-            x.startswith( 'file' ) or x.startswth( 'url' )
-        
+            return( x.startswith( 'file' ) or x.startswith( 'url' ) )
         text_ids = filter( is_text, self.request.arguments() )
         tokenized_texts = { 'witnesses': [] }
         for ti in text_ids:
@@ -26,7 +28,7 @@ class MSDispatcher( webapp.RequestHandler ):
             text = json.loads( self.request.get( ti ) )
             if( text['type'] == 'plaintext' ):
                 tokenizer_args['text'] = text['content']
-            elif( text['type'] = 'teixml' ):
+            elif( text['type'] == 'teixml' ):
                 tokenizer_args['xmltext'] = text['content']
             service = self.tokenizers.get( text['type'] )
             if service:
@@ -45,13 +47,15 @@ class MSDispatcher( webapp.RequestHandler ):
                 raise NoServiceError( 'No defined tokenizer for type %s' % text['type'] )
         
         payload = json.dumps( tokenized_texts, ensure_ascii=False ).encode( 'utf-8' )
+        #errormsg.append( payload )
+        
         if( self.request.get( 'fuzzymatch' ) ):
             service = self.regularizers.get( 'fuzzymatch' )
             urlresult = urlfetch.fetch( url=service,
                                         payload=payload,
                                         method='POST' )
             if urlresult.status_code == 200:
-                payload = json.loads( urlresult.content )
+                payload = urlresult.content
             else:
                 raise ServiceNotOKError( 'Service %s returned status code %d' 
                                     % ( service, urlresult.status_code ) )
@@ -66,7 +70,7 @@ class MSDispatcher( webapp.RequestHandler ):
                                         payload=payload,
                                         method='POST' )
             if urlresult.status_code == 200:
-                payload = json.loads( urlresult.content )
+                payload = urlresult.content
             else:
                 raise ServiceNotOKError( 'Service %s returned status code %d' 
                                     % ( service, urlresult.status_code ) )
@@ -74,8 +78,11 @@ class MSDispatcher( webapp.RequestHandler ):
             raise NoServiceError( 'No defined collator %s' 
                              % self.request.get( collator ) )
         
-        self.response.headers.__setitem__( 'content-type', 'application/json' )
-        self.response.out.write( payload )
+        if( len( errormsg ) > 0 ):
+            self.response.out.write( 'Got errors: %s' % "\n".join( errormsg ) )
+        else:
+            self.response.headers.__setitem__( 'content-type', 'application/json' )
+            self.response.out.write( payload )
 
 class NoServiceError( Exception ): pass
 class ServiceNotOKError( Exception ): pass

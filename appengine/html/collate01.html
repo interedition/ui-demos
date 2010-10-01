@@ -31,26 +31,39 @@
     <p>&nbsp;</p>
     <p><div onclick="submitForm()" class="button"><span>Upload and configure</span></div></p>
     <p>&nbsp;</p><p>&nbsp;</p>
-    <h2>Submitted files</h2>
-	
-    <ul id="submittedFileList">
-		
-    </ul>
+    
   </form>
 </div>
 <div class="col02 coll">
   <form action="" method="post" enctype="multipart/form-data" name="Configureform" id="Configureform">
     <h1><span class="nmr">2</span> Configure</h1>
-    <h2>Select the tokenisation: </h2>
+	<h2 id="submittedLabel">Submitted files</h2>
+	
+    <ul id="submittedFileList">
+		
+    </ul>
+   
 	<div class="textfiledetails_1">
-      <input type="checkbox" name="chosentext" id="tokenisation" />
-      Latin<br />
-      <input type="checkbox" name="chosentext" id="tokenisation" />
-      17th century English</div>
+	<div><h2>Fuzzy Matching (e.g. for medieval texts)<input id="fuzzymatch" name="fuzzymatch" type="checkbox"></input></h2></div>
+	<br/>
+	<div><h2>Collator</h2></div>
+	<ul id="collatorUL">
+		<li>Collatex <input name="collator" value="collatex" checked="yes" type="radio"></input></li>
+		<li>Other [not available] <input name="collator" value="other" type="radio"></input></li>
+	</ul>
+	<div><h2>Results as:</h2></div>
+		<ul id="outputUL">
+			<li>TEI <input name="output" checked="yes" value="application/xml" type="radio"></input></li>
+			<li>JSON <input name="output" value="application/json" type="radio"></input></li>
+			<li>HTML <input name="output" value="text/html" type="radio"></input></li>
+		</ul>
         <p>&nbsp;</p>
-    <p><a class="button" href="#"><span>Tokenise</span></a></p>
+		  <p><div onclick="getTokens()" class="button"><span>Get tokens</span></div></p>
+
+	</div>
   </form>
-</div>
+	
+	</div>
 <div class="col03 coll">
   <h1><span class="nmr">3</span> Result</h1>
   <h2>Export files</h2>

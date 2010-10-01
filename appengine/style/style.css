@@ -51,7 +51,9 @@ li {
 	margin: 0px 0px 5px 15px;
 	list-style-image:url("/images/arrow.gif");
 }
-
+#submittedLabel{
+	display: none;
+}
 .header {
 	padding: 20px 0px 0px 30px;
 	font-size:29px;

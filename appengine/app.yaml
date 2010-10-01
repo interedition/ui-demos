@@ -22,5 +22,8 @@ handlers:
 - url: /return_texts
   script: find_texts.py
 
+- url: /run_toolchain
+  script: dispatcher.py
+
 - url: /.*
   script: index.py

@@ -31,8 +31,8 @@ def get_tei_document_node( xmlstr ):
     therein that are named TEI.  This makes a good starting point for
     find_text_children.'''
     teifile = minidom.parseString( xmlstr.encode( "utf-8" ))
-    if( teifile.documentElement.tagName == 'teiCorpus' or
-        teifile.documentElement.tagName == 'TEI' ):
+    if( teifile.documentElement.tagName.lower() == 'teicorpus' or
+        teifile.documentElement.tagName.lower() == 'tei' ):
         return teifile.documentElement
     else:
         raise NoTEIDocumentElement( 'Document element is ' 
@@ -59,8 +59,9 @@ def find_text_children( teiElement ):
     ## The passed teiElement could either be a teiCorpus with TEI children
     ## or a single TEI.  We need to operate on TEI nodes.
     teinodes = []
-    if( teiElement.tagName == 'teiCorpus' ):
-        teinodes = teiElement.getElementsByTagName( 'TEI' )
+    # Lowercasing these tags is a HORRIBLE HACK and should die SOON
+    if( teiElement.tagName == 'teicorpus' ):
+        teinodes = teiElement.getElementsByTagName( 'tei' )
     else:
         teinodes = [ teiElement ]
     for teinode in teinodes:
