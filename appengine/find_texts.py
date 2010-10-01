@@ -35,7 +35,7 @@ class FindTexts( webapp.RequestHandler ):
                     files[param] = content
                 else:
                     errormsg.append( 'Could not fetch URL %s: %s' 
-                                     % ( url, content ) )
+                                     % ( urlstring, content ) )
             elif ( param.startswith( 'file' ) ):
                 content = self.request.get( param )
                 # Is it empty?
