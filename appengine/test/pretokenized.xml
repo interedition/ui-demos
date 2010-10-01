@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:svg="http://www.w3.org/2000/svg" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>Lorem ipsum 1</title>
+        <author>Cero</author>
+      </titleStmt>
+      <publicationStmt>
+        <p>Unpublished use case</p>
+      </publicationStmt>
+      <sourceDesc>
+        <p>Digital test file.</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <body>
+        <p><hi><w>Dolorem</w>
+        <w>ipsum</w></hi>
+        <w>lor</w>
+        <w>sit</w>
+        <w>amet,</w>
+        <w>consectetur</w>
+        <w>adipiscing</w>
+        <w>elit.</w>
+        <w>Donec</w>
+        <w>nec</w><lb/>
+        <w>mi</w>
+        <w>et</w>
+        <w>felis</w>
+        <w>gravida</w>
+        <w>hendrerit</w>
+        <w>ornare</w>
+        <w>eget</w>
+        <w>lorem.</w>
+        <w>Proin</w>
+        <w>nisi</w>
+        <w>sem,</w>
+        <w>aliquam</w>
+        <seg type="word">eg<lb/>et</seg>
+        <w>aliquet</w>
+        <w>ut,</w>
+        <w>lacinia</w>
+        <w>sed</w>
+        <w>erat.</w>
+        <w>Mauris</w>
+        <w>suscipit,</w>
+        <w>nisi</w>
+        <w>eget</w>
+        <w>dignissim</w>
+        <seg type="word">cons<lb/>ectetur,</seg>
+        <w>tortor</w>
+        <w>felis</w>
+        <w>tristique</w>
+        <w>lorem,</w>
+        <w>lacinia</w>
+        <w>feugiat</w>
+        <w>leo</w>
+        <w>ante</w>
+        <w>vel</w>
+        <w>diam.</w><lb/>
+        <w>Duis</w>
+        <w>ac</w>
+        <w>mauris</w>
+        <w>libero,</w>
+        <w>at</w>
+        <w>suscipit</w>
+        <w>risus.</w>
+        <w>Curabitur</w>
+        <w>orci</w>
+        <w>nunc,</w>
+        <w>commodo</w>
+        <w>sed</w><lb/>
+        <w>ornare</w>
+        <w>sed,</w>
+        <w>dictum</w>
+        <w>et</w>
+        <seg type="word"><corr type="scribal"><del>non</del><add>nunc</add></corr>.</seg>
+        <w>Nulla</w>
+        <w>facilisi.</w>
+        <w>Suspendisse</w>
+        <w>vestibulum</w>
+        <w>dignissim</w><lb/>
+        <w>turpis,</w>
+        <w>ut</w>
+        <w>pellentesque</w>
+        <w>orci</w>
+        <w>convallis</w>
+        <w>aliquet.</w>
+        <w>Mauris</w>
+        <w>metus</w>
+        <w>purus,</w>
+        <seg type="word">ullamcor<lb/>per</seg>
+        <w>ut</w>
+        <w>imperdiet</w>
+        <w>et,</w>
+        <w>tristique</w>
+        <w>fermentum</w>
+        <w>arcu.</w>
+        <seg type="word">Do<ex>nec</ex></seg>
+        <w>congue</w>
+        <w>blandit</w>
+        <w>aliquet.</w><lb/>
+        <w>Nunc</w>
+        <w>semper</w>
+        <w>mollis</w>
+        <w>mollis.</w>
+        <w>Nulla</w>
+        <seg type="word"><corr><del>tau</del><add>tem</add></corr>pus,</seg>
+        <w>augue</w>
+        <w>vitae</w>
+        <w>iaculis</w>
+        <w>vulputate,</w>
+        <seg type="word">ne<lb/>que</seg>
+        <w>diam</w>
+        <w>placerat</w>
+        <w>risus,</w>
+        <w>lacinia</w>
+        <w>luctus</w>
+        <w>purus</w>
+        <w>mauris</w>
+        <w>in</w>
+        <w>ligula.</w>
+        <w>Fusce</w>
+        <seg type="word">vehic<lb/>ula</seg>
+        <w>eleifend</w>
+        <w>pharetra.</w>
+        <w>Cras</w>
+        <w>nec</w>
+        <w>libero</w>
+        <w>diam,</w>
+        <w>at</w>
+        <w>semper</w>
+        <w>lacus.</w>
+        <w>Nulla</w>
+        <seg type="word">tristi<lb/>que,</seg>
+        <w>ligula</w>
+        <w>id</w>
+        <w>lobortis</w>
+        <w>volutpat,</w>
+        <w>eros</w>
+        <w>metus</w>
+        <w>condimentum</w>
+        <w>orci,</w>
+        <w>in</w>
+        <w>interdum</w><lb/>
+        <w>lorem</w>
+        <w>nisi</w>
+        <w>ut</w>
+        <w>justo.</w></p>
+    </body>
+  </text>
+</TEI>

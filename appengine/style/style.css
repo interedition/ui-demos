@@ -49,7 +49,7 @@ ul {
 
 li {
 	margin: 0px 0px 5px 15px;
-	list-style-image:url(images/arrow.gif);
+	list-style-image:url("/images/arrow.gif");
 }
 
 .header {
@@ -109,7 +109,7 @@ cursor: pointer;
 
 
 div.button {
-  background: transparent url('images/b_button_a.png') no-repeat scroll top right;
+  background: transparent url('/images/b_button_a.png') no-repeat scroll top right;
   color: #444;
   display: block;
   float: left;
@@ -121,7 +121,7 @@ div.button {
 }
 
 div.button span {
-  background: transparent url('images/b_button_span.png') no-repeat;
+  background: transparent url('/images/b_button_span.png') no-repeat;
   display: block;
   line-height: 14px;
   padding: 5px 0 5px 18px;

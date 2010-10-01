@@ -1,5 +1,7 @@
 import simplejson as json
 import handleInput
+import sys
+import xml
 from google.appengine.api import urlfetch
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
@@ -35,7 +37,10 @@ class FindTexts( webapp.RequestHandler ):
                     errormsg.append( 'Could not fetch URL %s: %s' 
                                      % ( url, content ) )
             elif ( param.startswith( 'file' ) ):
-                files[param] = self.request.get( param )
+                content = self.request.get( param )
+                # Is it empty?
+                if( content != '' ):
+                    files[param] = self.request.get( param )
             else:
                 errormsg.append( 'Unrecognized parameter name ' + param )
         
@@ -46,13 +51,14 @@ class FindTexts( webapp.RequestHandler ):
         textlist = {}
         for param in files.keys():
             content = files[param]
+            #errormsg.append( 'Content for %s is %s' % ( param, content ) )
             try:
                 filetype = handleInput.filetype( content )
             except xml.parsers.expat.ExpatError:
                 errorobj = sys.exc_info()[1]
                 errorstr = 'XML parsing error: line %d, column %d: %s' % ( errorobj.lineno, errorobj.offset, xml.parsers.expat.ErrorString( errorobj.code ) )
-                errormsg.append( 'Malformed XML file for %s: %s' 
-                                 % ( param, errorstr ) )
+                errormsg.append( 'Malformed XML file for %s (content %s): %s' 
+                                 % ( param, content, errorstr ) )
             else:
                 if( filetype == 'plaintext' ):
                     textlist[param] = [ { 'content': content } ]
@@ -65,9 +71,12 @@ class FindTexts( webapp.RequestHandler ):
                 else:
                     errormsg.append( 'Unsupported filetype %s for %s' 
                                      % ( filetype, param ) )
-        
-        self.response.headers.__setitem__( 'content-type', 'application/json' )
-        self.response.out.write( json.dumps( textlist, encoding="UTF-8", ensure_ascii=False ) )
+        # Do we have errors?
+        if( len( errormsg ) > 0 ):
+            self.response.out.write( 'Got errors: %s' % "\n".join( errormsg ) )
+        else:
+            self.response.headers.__setitem__( 'content-type', 'application/json' )
+            self.response.out.write( json.dumps( textlist, encoding="UTF-8", ensure_ascii=False ) )
         
 application = webapp.WSGIApplication(
                                      [('/return_texts', FindTexts)],
