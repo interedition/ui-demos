@@ -64,6 +64,9 @@ class MSDispatcher( webapp.RequestHandler ):
         if( service ):
             collation_headers = { 'Content-Type': 'application/json',
                                   'Accept' : self.request.get( 'output' ) }
+            # Cannot pass text/html in the Accept header evidently.
+            if( self.request.get( 'output' ) == 'text/html' ):
+                del collation_headers['Accept']
             
             urlresult = urlfetch.fetch( url=service,
                                         headers=collation_headers,
@@ -72,8 +75,8 @@ class MSDispatcher( webapp.RequestHandler ):
             if urlresult.status_code == 200:
                 payload = urlresult.content
             else:
-                raise ServiceNotOKError( 'Service %s returned status code %d' 
-                                    % ( service, urlresult.status_code ) )
+                raise ServiceNotOKError( 'Service %s returned status code %d, content %s' 
+                                    % ( service, urlresult.status_code, urlresult.content ) )
         else: 
             raise NoServiceError( 'No defined collator %s' 
                              % self.request.get( collator ) )
