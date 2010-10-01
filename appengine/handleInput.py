@@ -122,7 +122,8 @@ class teiText:
             self.subtexts.append( c )
     def dict_export ( self ):
         '''Will only export the XML text string and the subtexts.'''
-        data_struct = { 'content' : self.xmlobj.toxml() }
+        data_struct = { 'content' : self.xmlobj.toxml(),
+                        'type': 'teixml' }
         if( len( self.subtexts ) > 0 ):
             data_struct[ 'subtexts' ] = []
             for st in self.subtexts:

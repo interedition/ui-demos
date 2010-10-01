@@ -61,7 +61,8 @@ class FindTexts( webapp.RequestHandler ):
                                  % ( param, content, errorstr ) )
             else:
                 if( filetype == 'plaintext' ):
-                    textlist[param] = [ { 'content': content } ]
+                    textlist[param] = [ { 'content': content,
+                                          'type': filetype } ]
                 elif( filetype == 'teixml' ):
                     rootnode = handleInput.get_tei_document_node( content )
                     teiTexts = handleInput.find_text_children( rootnode )
