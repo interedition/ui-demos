@@ -16,8 +16,10 @@ class MSDispatcher( webapp.RequestHandler ):
     collators = { 'collatex': 'http://gregor.middell.net/collatex/api/collate' }
     
     def post( self ):
-        text_ids = filter( lambda x: x.startswith( 'text' ), 
-                           self.request.arguments() )
+        def is_text( x ):
+            x.startswith( 'file' ) or x.startswth( 'url' )
+        
+        text_ids = filter( is_text, self.request.arguments() )
         tokenized_texts = { 'witnesses': [] }
         for ti in text_ids:
             tokenizer_args = {}
