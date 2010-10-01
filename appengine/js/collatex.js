@@ -120,7 +120,7 @@
 		});
 	}
 	function getTokens(){
-		fuzzymatch = $("#fuzzymatch").val();
+		fuzzymatch = $("#fuzzymatch").is(':checked');
 		collator = $("#collatorUL input:radio:checked").val();
 		output = $("#outputUL input:radio:checked").val();
 		texts = $("#submittedFileList input:checkbox:checked");
