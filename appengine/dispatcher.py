@@ -49,7 +49,7 @@ class MSDispatcher( webapp.RequestHandler ):
         payload = json.dumps( tokenized_texts, ensure_ascii=False ).encode( 'utf-8' )
         #errormsg.append( payload )
         
-        if( self.request.get( 'fuzzymatch' ) ):
+        if( self.request.get( 'fuzzymatch' ) == 'true' ):
             service = self.regularizers.get( 'fuzzymatch' )
             urlresult = urlfetch.fetch( url=service,
                                         payload=payload,
