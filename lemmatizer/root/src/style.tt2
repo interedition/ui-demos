@@ -1,0 +1,26 @@
+<style type="text/css" media="screen">
+body { 
+    margin: 0; 
+    padding: 0 20px; 
+    font: 1em "Trebuchet MS", verdana, arial, sans-serif; 
+    font-size: 85%; 
+}
+#graph {
+    height: 202px;
+    width: 500px;
+    margin-top: 10px;
+    padding: 0px;
+    overflow: auto;
+    /* cursor: -moz-grab !important; */ /* should this be applied with JS? */
+    border: 2px solid #D9E4FF;
+}
+#constructedtext {
+    height: 300px;
+    width: 490px;
+    margin-top: 10px;
+    padding: 5px;
+    overflow: auto;
+    /* cursor: -moz-grab !important; */ /* should this be applied with JS? */
+    border: 2px solid #D9E4FF;
+}
+</style>

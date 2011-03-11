@@ -1,0 +1,29 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+
+<svg id="mine" width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg">
+
+<script type="text/javascript">
+//<![CDATA[
+function enlarge_circle(evt)     
+{
+    var circle = evt.target;
+    circle.setAttribute("r", 50);    
+}
+
+function shrink_circle(evt)     
+{
+    var circle = evt.target;
+    circle.setAttribute("r", 25);
+}
+// ]]>     
+</script>
+
+<circle id="yours" cx="100" cy="50" r="40" stroke="yellow" stroke-width="2" fill="red" onmouseout="shrink_circle(evt)" onmouseover="enlarge_circle(evt)"/>
+<circle id="yours" cx="1000" cy="50" r="40" stroke="yellow" stroke-width="2" fill="green" onmouseout="shrink_circle(evt)" onmouseover="enlarge_circle(evt)"/>
+<circle id="yours" cx="2000" cy="50" r="40" stroke="yellow" stroke-width="2" fill="blue" onmouseout="shrink_circle(evt)" onmouseover="enlarge_circle(evt)"/>
+<circle id="yours" cx="3000" cy="50" r="40" stroke="yellow" stroke-width="2" fill="black" onmouseout="shrink_circle(evt)" onmouseover="enlarge_circle(evt)"/>
+<circle id="yours" cx="4000" cy="50" r="40" stroke="yellow" stroke-width="2" fill="grey" onmouseout="shrink_circle(evt)" onmouseover="enlarge_circle(evt)"/>
+
+</svg>

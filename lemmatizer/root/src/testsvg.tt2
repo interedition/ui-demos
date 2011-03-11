@@ -1,0 +1,64 @@
+[% META title = 'TestSVG' -%]
+
+[% script = BLOCK %]
+<script type="text/javascript" src="[% c.uri_for('/js/jquery-1.4.4.min.js') %]"></script>
+<script type="text/javascript" src="[% c.uri_for('/js/jquery-ui-1.8.10.custom.min.js') %]"></script>
+<script type="text/javascript" src="[% c.uri_for('/js/jquery.mousewheel.min.js') %]"></script>
+<script type="text/javascript" src="[% c.uri_for('/js/jquery.svg.js') %]"></script>
+<script type="text/javascript">
+  $(function() {
+    $('#svgbasics').svg({loadURL: '[% c.uri_for('/static/CollatexSVGExampleJoris_002.svg') %]', onLoad: loadDone});
+  });
+
+  function loadDone() {
+    $('.node').dblclick( function(evt) {
+      append_node_text(evt);
+    });
+  }
+
+  function append_node_text(evt) {
+    $('#constructedtext').append('<span>'+$(evt.target).text()+'&#32;</span>');
+  }
+
+    $(document).ready(function () {        
+        $('#graph').mousedown(function (event) {
+            $(this)
+                .data('down', true)
+                .data('x', event.clientX)
+                .data('scrollLeft', this.scrollLeft);
+                
+            return false;
+        }).mouseup(function (event) {
+            $(this).data('down', false);
+        }).mousemove(function (event) {
+            if ($(this).data('down') == true) {
+                this.scrollLeft = $(this).data('scrollLeft') + $(this).data('x') - event.clientX;
+            }
+        }).mousewheel(function (event, delta) {
+            this.scrollLeft -= (delta * 30);
+        }).css({
+            'overflow' : 'hidden',
+            'cursor' : '-moz-grab'
+        });
+    });
+    
+    $(window).mouseout(function (event) {
+        if ($('#graph').data('down')) {
+            try {
+                if (event.originalTarget.nodeName == 'BODY' || event.originalTarget.nodeName == 'HTML') {
+                    $('#graph').data('down', false);
+                }                
+            } catch (e) {}
+        }
+    });
+</script>
+[% END %]
+
+	<div id="constructedtext">
+	</div>	
+	<div id="graph">
+		<!-- width seems to need to be as wide as the graph -->
+		<!-- a translation of -487 in the svg itself was needed to adjust the graph to the left of the div -->
+		<!-- unclear how to cope with height that doesn't fit box -->
+		<div id="svgbasics" style="height: 200px; width: 1670px; background-color: white; border: 1px solid white;"></div>
+	</div>
