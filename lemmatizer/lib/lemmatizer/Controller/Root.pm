@@ -33,6 +33,12 @@ sub index :Path :Args(0) {
     $c->stash->{template} = 'testsvg.tt2';
 }
 
+sub nodes :Global {
+    my ( $self, $c ) = @_;
+    $c->response->body( '<div>OK</div>' );
+    $c->response->status(200);
+}
+
 sub default :Path {
     my ( $self, $c ) = @_;
     $c->response->body( 'Page not found' );

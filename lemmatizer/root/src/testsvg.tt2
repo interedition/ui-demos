@@ -7,17 +7,24 @@
 <script type="text/javascript" src="[% c.uri_for('/js/jquery.svg.js') %]"></script>
 <script type="text/javascript">
   $(function() {
-    $('#svgbasics').svg({loadURL: '[% c.uri_for('/static/collate.svg') %]', onLoad: loadDone});
+    $('#svgbasics').svg({loadURL: '[% c.uri_for('/static/collate.svg') %]', onLoad: svgLoaded});
   });
 
-  function loadDone() {
+  function svgLoaded() {
     $('.node').dblclick( function(evt) {
       append_node_text(evt);
+    });
+    $('#log').ajaxError(function() {
+      $(this).text( 'Oops.. something went wrong with trying to save this change. Please try again...' );
     });
   }
 
   function append_node_text(evt) {
-    $('#constructedtext').append('<span>'+$(evt.target).text()+'&#32;</span>');
+    node_target = $(evt.target);
+    node_id = node_target.parent('g').attr( 'id' );
+    var jqxhr = $.post( 'nodes', 'node_id=' + node_id, function() {
+      $('#constructedtext').append('<span id="text_' + node_id + '">' + node_target.text() + '&#32;</span>');
+    });
   }
 
     $(document).ready(function () {        
@@ -61,4 +68,6 @@
 		<!-- a translation of -487 in the svg itself was needed to adjust the graph to the left of the div -->
 		<!-- unclear how to cope with height that doesn't fit box -->
 		<div id="svgbasics" style="height: 200px; width: 1670px; background-color: white; border: 1px solid white;"></div>
+	</div>
+	<div id="log">
 	</div>
