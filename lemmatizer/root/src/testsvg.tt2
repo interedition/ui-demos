@@ -7,7 +7,7 @@
 <script type="text/javascript" src="[% c.uri_for('/js/jquery.svg.js') %]"></script>
 <script type="text/javascript">
   $(function() {
-    $('#svgbasics').svg({loadURL: '[% c.uri_for('/static/CollatexSVGExampleJoris_002.svg') %]', onLoad: loadDone});
+    $('#svgbasics').svg({loadURL: '[% c.uri_for('/static/collate.svg') %]', onLoad: loadDone});
   });
 
   function loadDone() {
