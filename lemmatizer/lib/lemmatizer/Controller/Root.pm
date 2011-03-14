@@ -35,6 +35,7 @@ sub index :Path :Args(0) {
 
 sub nodes :Global {
     my ( $self, $c ) = @_;
+    print $c->request->params->{'node_id'};
     $c->response->body( '<div>OK</div>' );
     $c->response->status(200);
 }

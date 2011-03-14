@@ -8,6 +8,7 @@
 <script type="text/javascript">
   $(function() {
     $('#svgbasics').svg({loadURL: '[% c.uri_for('/static/collate.svg') %]', onLoad: svgLoaded});
+    //$('#svgbasics').svg({loadURL: '<svg width="2122pt" height="136pt" viewBox="0.00 0.00 2122.00 136.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 132)"><title>test</title><polygon style="fill:white;stroke:white;" points="-4,4 -4,-132 2118,-132 2118,4 -4,4"/></g></svg>', onLoad: svgLoaded});
   });
 
   function svgLoaded() {
