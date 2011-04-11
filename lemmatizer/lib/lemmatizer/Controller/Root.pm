@@ -3,6 +3,8 @@ package lemmatizer::Controller::Root;
 use strict;
 use warnings;
 use parent 'Catalyst::Controller';
+use JSON;
+use lemmatizer::Model::Graph;
 
 #
 # Sets the actions in this controller to be registered with no prefix
@@ -26,17 +28,39 @@ lemmatizer::Controller::Root - Root Controller for lemmatizer
 
 =cut
 
+my $graph;
+
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
 
-    # Hello World
+    # First we need to generate the SVG from the GraphML, and also keep track
+    # of the GraphML nodes.
+
+    # For now, we use a static GraphML.
+    my $dummy_file = "/home/tla/Interedition/lemmatizer/t/data/Collatex-16.xml";
+    open( GRAPHFILE, $dummy_file ) or die "Could not open $dummy_file";
+    my @lines = <GRAPHFILE>;
+    close GRAPHFILE;
+    $graph = lemmatizer::Model::Graph->new( 'xml' => join( '', @lines ) );
+    
+    my $svg_str = $graph->as_svg;
+    $svg_str =~ s/\n//gs;
+    $c->stash->{svg_string} = $svg_str;
     $c->stash->{template} = 'testsvg.tt2';
 }
 
-sub nodes :Global {
+sub nodeclick :Global {
     my ( $self, $c ) = @_;
-    $c->response->body( '<div>OK</div>' );
-    $c->response->status(200);
+    my $node = $c->request->params->{'node_id'};
+
+ #$DB::single = 1;
+    $graph->toggle_node( $node );
+    my @active = $graph->active_nodes( 1 );
+
+    $c->log->debug( "Active nodes are " . join( ', ', @active ) . "\n" );
+    $c->response->content_type( 'application/json' );
+    $c->response->content_encoding( 'UTF-8' );
+    $c->response->body( encode_json( \@active ) );
 }
 
 sub default :Path {

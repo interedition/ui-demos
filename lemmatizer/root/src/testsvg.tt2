@@ -7,7 +7,7 @@
 <script type="text/javascript" src="[% c.uri_for('/js/jquery.svg.js') %]"></script>
 <script type="text/javascript">
   $(function() {
-    $('#svgbasics').svg({loadURL: '[% c.uri_for('/static/collate.svg') %]', onLoad: svgLoaded});
+    $('#svgbasics').svg({loadURL: '[% svg_string %]', onLoad: svgLoaded});
   });
 
   function svgLoaded() {
@@ -21,10 +21,22 @@
 
   function append_node_text(evt) {
     node_target = $(evt.target);
-    node_id = node_target.parent('g').attr( 'id' );
-    var jqxhr = $.post( 'nodes', 'node_id=' + node_id, function() {
-      $('#constructedtext').append('<span id="text_' + node_id + '">' + node_target.text() + '&#32;</span>');
-    });
+    node_id = node_target.siblings('title').text();
+    var jqjson = $.getJSON( 'nodeclick', 'node_id=' + node_id, function(data) {
+      $('#constructedtext').empty();
+      $.each( data, function(item, value) {
+        if( value==null ) {
+          $('#constructedtext').append( ' &hellip; ' );
+        } else {
+          current_node = $('.node').children('title').filter( function(index) {
+            return $(this).text()==value;
+          });
+          current_node.siblings('ellipse').css({'fill':'#b3f36d','stroke':'green'});
+          node_text = current_node.siblings('text').text();
+          $('#constructedtext').append( node_text + '&#32;' );
+        }
+      });
+    }); 
   }
 
     $(document).ready(function () {        
