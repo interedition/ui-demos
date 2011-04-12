@@ -37,7 +37,7 @@ sub index :Path :Args(0) {
     # of the GraphML nodes.
 
     # For now, we use a static GraphML.
-    my $dummy_file = "/home/tla/Interedition/lemmatizer/t/data/Collatex-16.xml";
+    my $dummy_file = "t/data/Collatex-16.xml";
     open( GRAPHFILE, $dummy_file ) or die "Could not open $dummy_file";
     my @lines = <GRAPHFILE>;
     close GRAPHFILE;
@@ -46,6 +46,8 @@ sub index :Path :Args(0) {
     my $svg_str = $graph->as_svg;
     $svg_str =~ s/\n//gs;
     $c->stash->{svg_string} = $svg_str;
+    my @initial_nodes = $graph->active_nodes();
+    $c->stash->{initial_text} = join( ' ', map { $_->[1] ? $graph->text_of_node( $_->[0] ) : '...' } @initial_nodes );
     $c->stash->{template} = 'testsvg.tt2';
 }
 
@@ -54,10 +56,9 @@ sub nodeclick :Global {
     my $node = $c->request->params->{'node_id'};
 
  #$DB::single = 1;
-    $graph->toggle_node( $node );
-    my @active = $graph->active_nodes( 1 );
+    my @off = $graph->toggle_node( $node );
+    my @active = $graph->active_nodes( @off );
 
-    $c->log->debug( "Active nodes are " . join( ', ', @active ) . "\n" );
     $c->response->content_type( 'application/json' );
     $c->response->content_encoding( 'UTF-8' );
     $c->response->body( encode_json( \@active ) );
