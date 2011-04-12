@@ -12,31 +12,44 @@
 
   function svgLoaded() {
     $('.node').dblclick( function(evt) {
-      append_node_text(evt);
+      change_node_state(evt);
     });
     $('#log').ajaxError(function() {
       $(this).text( 'Oops.. something went wrong with trying to save this change. Please try again...' );
     });
   }
 
-  function append_node_text(evt) {
+// We're assuming JSON of the form:
+//   { 'node_1': 1, 'node_2': 0, 'node_3': 0, 'node_4': null, 'node_5': 1 }
+// with the following heuristics:
+//   1 -> turn the associated SVG node on, put in the associate word in the text box.
+//   0 -> turn SVG node off.
+//   null -> turn node off, put in ellipsis in text box at the corresponding place.
+
+  function change_node_state(evt) {
     node_target = $(evt.target);
     node_id = node_target.siblings('title').text();
     var jqjson = $.getJSON( 'nodeclick', 'node_id=' + node_id, function(data) {
       $('#constructedtext').empty();
       $.each( data, function(item, value) {
-        if( value==null ) {
-          $('#constructedtext').append( ' &hellip; ' );
-        } else {
-          current_node = $('.node').children('title').filter( function(index) {
-            return $(this).text()==value;
-          });
-          current_node.siblings('ellipse').css({'fill':'#b3f36d','stroke':'green'});
-          node_text = current_node.siblings('text').text();
+        node_id = value[0];
+        state = value[1];
+        current_node = $('.node').children('title').filter( function(index) {
+          return $(this).text() == node_id;
+        });
+        node_text = current_node.siblings('text').text();
+        node_ellipse = current_node.siblings('ellipse');
+        if( state == 1 ) {
+          node_ellipse.css({'fill':'#b3f36d','stroke':'green'});
           $('#constructedtext').append( node_text + '&#32;' );
+        } else {
+          node_ellipse.css({'fill':'#fff','stroke':'black'});
+          if(state == null ) {
+            $('#constructedtext').append( ' &hellip; ' );
+          }
         }
       });
-    }); 
+    });
   }
 
     $(document).ready(function () {        
