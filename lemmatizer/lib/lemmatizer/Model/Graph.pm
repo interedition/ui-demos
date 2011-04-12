@@ -17,22 +17,23 @@ sub new {
 		 'off_color' => 'white',
 		 @_ );
 
+    # TODO take other graph formats, e.g. dot
     unless( exists $opts{'xml'} ) {
 	warn "Cannot initialize graph with no 'xml' argument";
 	return undef;
     }
+    my $xml = delete( $opts{'xml'} );
     my $self = \%opts;
     bless( $self, $class );
 
     # May as well parse the graph into the GraphViz object now.
-    $self->parse_graphml();
+    $self->parse_graphml( $xml );
 
     return $self;
 }
 
 sub parse_graphml {
-    my $self = shift;
-    my $graphml_str = $self->{'xml'};
+    my( $self, $graphml_str ) = @_;
 
     my $parser = XML::LibXML->new();
     my $doc = $parser->parse_string( $graphml_str );
@@ -125,6 +126,7 @@ sub parse_graphml {
     # Common nodes should be 'on' by default.
     map { $node_hash{$_} = 1 } @common_nodes;
     $self->{node_state} = \%node_hash;
+    $self->{common_nodes} = \@common_nodes;
 
     # And then we have to calculate the position identifiers for
     # each word, keyed on the common nodes.  This will be 'fun'.
@@ -165,11 +167,7 @@ sub parse_graphml {
     
 sub make_graphviz {
     my( $self ) = @_;
-    # Now parse the graph into a GraphViz object.  We are going to use
-    # the GraphViz object to keep our state, in general, because there
-    # is no point having multiple objects for the same thing.  This
-    # will involve some slightly naughty hacking.  Fortunately for us,
-    # GraphViz.pm passes over attributes that begin with underscore.
+    # Now parse the graph into a GraphViz object.
     
     my $xpc = $self->{xpc};
     my $graph = $self->{graph};
@@ -196,28 +194,58 @@ sub as_svg {
     return $self->{graphviz}->as_svg();
 }
 
-# Returns a list of the nodes that are currently on.
+# Returns a list of the nodes that are currently on and the nodes for
+# which an ellipsis needs to stand in.  Optionally takes a list of
+# nodes that have just been turned off, to include in the list.
 sub active_nodes {
-    my( $self, $with_nulls ) = @_;
-    my @actives;
-    foreach my $node ( keys %{$self->{node_state}} ) {
-	push( @actives, $node ) if $self->{node_state}->{$node} == 1;
-    }
-    my @answer = sort { $self->_by_position( $a, $b ) } @actives;
+    my( $self, @toggled_off_nodes ) = @_;
+    
+    my $all_nodes = {};
+    map { $all_nodes->{ $_ } = $self->_find_position( $_ ) } keys %{$self->{node_state}};
+    my $positions = _invert_hash( $all_nodes );
+    my $positions_off = {};
+    map { $positions_off->{ $all_nodes->{$_} } = $_ } @toggled_off_nodes;
+    
+    # Now for each position, we have to see if a node is on, and we
+    # have to see if a node has been turned off.
+    my @answer;
+    foreach my $pos ( @{$self->{_all_positions}} ) {
+	my $nodes = $positions->{$pos};
 
-    if( $with_nulls ) {
-	# We need to insert an undef in every spot where a node might
-	# not be active.
+	# See if there is an active node for this position.
+	my @active_nodes = grep { $self->{node_state}->{$_} == 1 } @$nodes;
+	warn "More than one active node at position $pos!"
+	    unless scalar( @active_nodes ) < 2;
+	my $active;
+	if( scalar( @active_nodes ) ) {
+	    $active = $self->node_to_svg( $active_nodes[0]  );
+	}
 
-	my @positions = map { $self->_find_position( $_ ) } @answer;
-	my @all_positions = @{$self->{_all_positions}};
-	foreach my $idx ( 0 .. $#all_positions ) {
-	    next if $positions[$idx] eq $all_positions[$idx];
-	    splice( @positions, $idx, 0, undef );
-	    splice( @answer, $idx, 0, undef );
+	# Is there a formerly active node that was toggled off?
+	if( exists( $positions_off->{$pos} ) ) {
+	    my $off_node = $self->node_to_svg( $positions_off->{$pos} );
+	    if( $active ) {
+		push( @answer, [ $off_node, 0 ], [ $active, 1 ] );
+	    } elsif ( scalar @$nodes == 1 ) {
+		# This was the only node at its position. No ellipsis.
+		push( @answer, [ $off_node, 0 ] );
+	    } else {
+		# More than one node at this position, none now active.
+		# Restore the ellipsis.
+		push( @answer, [ $off_node, undef ] );
+	    }
+	# No formerly active node, so we just see if there is a currently
+	# active one.
+	} elsif( $active ) {
+	    # Push the active node, whatever it is.
+	    push( @answer, [ $active, 1 ] );
+	} else {
+	    # There is no change here; we need an ellipsis. Use
+	    # the first node in the list, arbitrarily.
+	    push( @answer, [ $self->node_to_svg( $nodes->[0] ), undef ] );
 	}
     }
-    @answer = map { defined( $_ ) ? $self->node_to_svg( $_ ) : undef } @answer;
+
     return @answer;
 }
 
@@ -261,11 +289,38 @@ sub _find_position {
     return $position;
 }
 
+sub _invert_hash {
+    my ( $hash, $plaintext_keys ) = @_;
+    my %new_hash;
+    foreach my $key ( keys %$hash ) {
+        my $val = $hash->{$key};
+        my $valkey = $val;
+        if( $plaintext_keys 
+            && ref( $val ) ) {
+            $valkey = $plaintext_keys->{ scalar( $val ) };
+            warn( "No plaintext value given for $val" ) unless $valkey;
+        }
+        if( exists ( $new_hash{$valkey} ) ) {
+            push( @{$new_hash{$valkey}}, $key );
+        } else {
+            $new_hash{$valkey} = [ $key ];
+        }
+    }
+    return \%new_hash;
+}
+
+
 # Takes a node ID to toggle; returns a list of nodes that are
 # turned OFF as a result.
 sub toggle_node {
     my( $self, $node_id ) = @_;
     $node_id = $self->node_from_svg( $node_id );
+
+    # Is it a common node? If so, we don't want to turn it off.
+    # Later we might want to allow it off, but give a warning.
+    if( grep { $_ =~ /^$node_id$/ } @{$self->{common_nodes}} ) {
+	return ();
+    }
 
     my @nodes_off;
     # If we are about to turn on a node...
@@ -334,4 +389,26 @@ sub identical_nodes {
     return $self->{transpositions}->{$node};
 }
 
+sub text_for_witness {
+    my( $self, $wit ) = @_;
+    # Get the witness name
+    my %wit_id_for = reverse %{$self->{witnesses}};
+    my $wit_id = $wit_id_for{$wit};
+    unless( $wit_id ) {
+        warn "Could not find an ID for witness $wit";
+        return;
+    }
+    
+    my $path = $self->{indices}->{$wit_id};
+    my @nodes = sort { $self->_cmp_position( $path->{$a}, $path->{$b} ) } keys( %$path );
+    my @words = map { $self->text_of_node( $_ ) } @nodes;
+    return join( ' ', @words );
+}
+
+sub text_of_node {
+    my( $self, $node_id ) = @_;
+    my $xpath = '//g:node[@id="' . $self->node_from_svg( $node_id) .
+        '"]/g:data[@key="' . $self->{nodedata}->{token} . '"]/child::text()';
+    return $self->{xpc}->findvalue( $xpath );
+}
 1;
