@@ -12,8 +12,11 @@
 
   function svgLoaded() {
     $('.node').dblclick( function(evt) {
-      change_node_state(evt);
+      node_target = $(evt.target);
+      node_id = node_target.siblings('title').text();
+      change_node_state(node_id);
     });
+    change_node_state(null);
     $('#log').ajaxError(function() {
       $(this).text( 'Oops.. something went wrong with trying to save this change. Please try again...' );
     });
@@ -26,9 +29,7 @@
 //   0 -> turn SVG node off.
 //   null -> turn node off, put in ellipsis in text box at the corresponding place.
 
-  function change_node_state(evt) {
-    node_target = $(evt.target);
-    node_id = node_target.siblings('title').text();
+  function change_node_state(node_id) {
     var jqjson = $.getJSON( 'nodeclick', 'node_id=' + node_id, function(data) {
       $('#constructedtext').empty();
       $.each( data, function(item, value) {
