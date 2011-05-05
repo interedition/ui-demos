@@ -1,14 +1,17 @@
 function svgLoaded() {
-  $('ellipse').mousedown( mousedown_listener );
   $('.node').dblclick( function(evt) {
     node_target = $(evt.target);
     node_id = node_target.siblings('title').text();
     change_node_state(node_id);
   });
-  change_node_state(null);
+  change_node_state( null, add_draggable );
   $('#log').ajaxError(function() {
     $(this).text( 'Oops.. something went wrong with trying to save this change. Please try again...' );
   });
+}
+
+function add_draggable() {
+  $('ellipse[fill="#fff"]').mousedown( mousedown_listener );
 }
 
 // We're assuming JSON of the form:
@@ -18,7 +21,7 @@ function svgLoaded() {
 //   0 -> turn SVG node off.
 //   null -> turn node off, put in ellipsis in text box at the corresponding place.
 
-function change_node_state(node_id) {
+function change_node_state(node_id, callback) {
   var jqjson = $.getJSON( 'nodeclick', 'node_id=' + node_id, function(data) {
     $('#constructedtext').empty();
     $.each( data, function(item, value) {
@@ -36,15 +39,16 @@ function change_node_state(node_id) {
         // Above solutions don't work with FF3.6 (most do in FF4 btw)
         // Apparently the svg is nor fully part of the DOM in every sense in FF3?
         // Maybe using JQuery::SVG would offer solutions in svg.styl etc. but it seems overkill tbh
-        node_ellipse.attr( 'style', 'fill:#b3f36d;stroke:green;' );
+        node_ellipse.attr( {stroke:'green', fill:'#b3f36d'} );
         $('#constructedtext').append( node_text + '&#32;' );
       } else {
-        node_ellipse.attr( 'style', 'fill:#fff;stroke:black;' );
+        node_ellipse.attr( {stroke:'black', fill:'#fff'} );
         if(state == null ) {
           $('#constructedtext').append( ' &hellip; ' );
         }
       }
     });
+    if( callback ) { callback() };
   });
 }
 
