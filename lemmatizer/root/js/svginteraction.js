@@ -3,7 +3,7 @@ function svgLoaded() {
     node_target = $(evt.target);
     node_id = node_target.siblings('title').text();
     change_node_state(node_id);
-  });
+  }).children('ellipse').attr( {stroke:'black', fill:'#fff'} );
   change_node_state( null, add_draggable );
   $('#log').ajaxError(function() {
     $(this).text( 'Oops.. something went wrong with trying to save this change. Please try again...' );
@@ -12,6 +12,19 @@ function svgLoaded() {
 
 function add_draggable() {
   $('ellipse[fill="#fff"]').mousedown( mousedown_listener );
+  $('ellipse[fill="#fff"]').hover( enterdroppable, leavedroppable );
+}
+
+function enterdroppable() {
+  if( $(this).data( 'dragging' ) != true ){
+    $(this).attr( 'fill', '#ffccff' );
+  }
+}
+
+function leavedroppable() {
+  if( $(this).data( 'dragging' ) != true ){
+    $(this).attr( 'fill', '#fff' );
+  }
 }
 
 // We're assuming JSON of the form:
@@ -43,7 +56,7 @@ function change_node_state(node_id, callback) {
         $('#constructedtext').append( node_text + '&#32;' );
       } else {
         node_ellipse.attr( {stroke:'black', fill:'#fff'} );
-        if(state == null ) {
+        if( state == null ) {
           $('#constructedtext').append( ' &hellip; ' );
         }
       }
@@ -57,6 +70,9 @@ var ellipse;
 
 function mousedown_listener(evt) {
   ellipse = $(this);
+  ellipse.attr( 'fill', '#ff66ff');
+  ellipse.data('dragging', true);
+  $('#graph').data('dragging', true);
   orgX = evt.clientX;
   orgY = evt.clientY;
   $('body').mousemove( mousemove_listener );
@@ -71,7 +87,11 @@ function mouseup_listener(evt) {
   $('body').unbind('mousemove');
   $('body').unbind('mouseup');
   ellipse.attr("transform","translate(0 0)");
+  ellipse.attr( 'fill', '#fff');
+  ellipse.data('dragging', false);
+  $('#graph').data('dragging', false);
 }
+
 
 $(document).ready(function () {        
   $('#graph').mousedown(function (event) {
@@ -83,7 +103,7 @@ $(document).ready(function () {
   }).mouseup(function (event) {
     $(this).data('down', false);
   }).mousemove(function (event) {
-    if ($(this).data('down') == true) {
+    if ($(this).data('down') == true && $(this).data('dragging') != true) {
       this.scrollLeft = $(this).data('scrollLeft') + $(this).data('x') - event.clientX;
     }
   }).mousewheel(function (event, delta) {
@@ -93,6 +113,7 @@ $(document).ready(function () {
     'cursor' : '-moz-grab'
   });
 });
+
 
 $(window).mouseout(function (event) {
   if ($('#graph').data('down')) {
