@@ -16,14 +16,15 @@ function add_draggable() {
 }
 
 function enterdroppable() {
-  if( $(this).data( 'dragging' ) != true ){
+  if( $(this).data( 'dragging' ) != true ) {
+    $(this).data( 'fill', $(this).attr('fill') );
     $(this).attr( 'fill', '#ffccff' );
   }
 }
 
 function leavedroppable() {
-  if( $(this).data( 'dragging' ) != true ){
-    $(this).attr( 'fill', '#fff' );
+  if( $(this).data( 'dragging' ) != true ) {
+    $(this).attr( 'fill', $(this).data('fill') );
   }
 }
 
@@ -40,11 +41,11 @@ function change_node_state(node_id, callback) {
     $.each( data, function(item, value) {
       node_id = value[0];
       state = value[1];
-      current_node = $('.node').children('title').filter( function(index) {
+      node_title = $('.node').children('title').filter( function(index) {
         return $(this).text() == node_id;
       });
-      node_text = current_node.siblings('text').text();
-      node_ellipse = current_node.siblings('ellipse');
+      node_text = node_title.siblings('text').text();
+      node_ellipse = node_title.siblings('ellipse');
       if( state == 1 ) {
         // node_ellipse.css( 'fill', '#b3f36d' );
         // node_ellipse.css( { 'fill':'#b3f36d', 'stroke':'green' } );
@@ -53,9 +54,11 @@ function change_node_state(node_id, callback) {
         // Apparently the svg is nor fully part of the DOM in every sense in FF3?
         // Maybe using JQuery::SVG would offer solutions in svg.styl etc. but it seems overkill tbh
         node_ellipse.attr( {stroke:'green', fill:'#b3f36d'} );
+        node_ellipse.data( 'fill', '#b3f36d' )
         $('#constructedtext').append( node_text + '&#32;' );
       } else {
         node_ellipse.attr( {stroke:'black', fill:'#fff'} );
+        node_ellipse.data( 'fill', '#fff' )
         if( state == null ) {
           $('#constructedtext').append( ' &hellip; ' );
         }
@@ -65,29 +68,61 @@ function change_node_state(node_id, callback) {
   });
 }
 
+var ellipse,left_path,left_arrow,node_label;
 var orgX,orgY;
-var ellipse;
+var leftX,leftY;
+var rightX,rightY;
 
 function mousedown_listener(evt) {
   ellipse = $(this);
-  ellipse.attr( 'fill', '#ff66ff');
   ellipse.data('dragging', true);
+  ellipse.attr('fill', '#ff66ff');
   $('#graph').data('dragging', true);
   orgX = evt.clientX;
   orgY = evt.clientY;
   $('body').mousemove( mousemove_listener );
   $('body').mouseup( mouseup_listener );
+
+  node_id = ellipse.siblings('title').text();
+  node_label = ellipse.siblings('text')
+  left_edge_title = $('.edge').children('title').filter( function(index) {
+    title = $(this).text();
+    return (new RegExp( node_id + '$' )).test(title);
+  });
+  left_path = left_edge_title.siblings('path')[0];
+  left_arrow = left_edge_title.siblings('polygon');
+  leftX = left_path.pathSegList.getItem(left_path.pathSegList.numberOfItems - 1).x;
+  leftY = left_path.pathSegList.getItem(left_path.pathSegList.numberOfItems - 1).y;
+  right_edge_title = $('.edge').children('title').filter( function(index) {
+    title = $(this).text();
+    return (new RegExp( '^' + node_id )).test(title);
+  });
+  right_path = right_edge_title.siblings('path')[0];
+  rightX = right_path.pathSegList.getItem(0).x;
+  rightY = right_path.pathSegList.getItem(0).y;
 }
 
 function mousemove_listener(evt) {
   ellipse.attr("transform","translate("+(evt.clientX - orgX)+" "+(evt.clientY - orgY)+")");
+  node_label.attr("transform","translate("+(evt.clientX - orgX)+" "+(evt.clientY - orgY)+")");
+  left_arrow.attr("transform","translate("+(evt.clientX - orgX)+" "+(evt.clientY - orgY)+")");
+  left_path.pathSegList.getItem(left_path.pathSegList.numberOfItems - 1).x=leftX + (evt.clientX - orgX);
+  left_path.pathSegList.getItem(left_path.pathSegList.numberOfItems - 1).y=leftY + (evt.clientY - orgY);
+  right_path.pathSegList.getItem(0).x=rightX + (evt.clientX - orgX);
+  right_path.pathSegList.getItem(0).y=rightY + (evt.clientY - orgY);
 }
 
 function mouseup_listener(evt) {
   $('body').unbind('mousemove');
   $('body').unbind('mouseup');
+  left_path.pathSegList.getItem(left_path.pathSegList.numberOfItems - 1).x=leftX;
+  left_path.pathSegList.getItem(left_path.pathSegList.numberOfItems - 1).y=leftY;
+  left_arrow.attr("transform","translate(0 0)");
+  right_path.pathSegList.getItem(0).x=rightX;
+  right_path.pathSegList.getItem(0).y=rightY;
+  node_label.attr("transform","translate(0 0)");
   ellipse.attr("transform","translate(0 0)");
-  ellipse.attr( 'fill', '#fff');
+  ellipse.attr( 'fill', ellipse.data( 'fill' ) );
   ellipse.data('dragging', false);
   $('#graph').data('dragging', false);
 }
