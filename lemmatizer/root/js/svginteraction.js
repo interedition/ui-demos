@@ -70,8 +70,7 @@ function change_node_state(node_id, callback) {
 
 var ellipse,left_path,left_arrow,node_label;
 var orgX,orgY;
-var leftX,leftY;
-var rightX,rightY;
+var left_edge_origin, right_edge_origin;
 
 function mousedown_listener(evt) {
   ellipse = $(this);
@@ -91,37 +90,57 @@ function mousedown_listener(evt) {
   });
   left_path = left_edge_title.siblings('path')[0];
   left_arrow = left_edge_title.siblings('polygon');
-  leftX = left_path.pathSegList.getItem(left_path.pathSegList.numberOfItems - 1).x;
-  leftY = left_path.pathSegList.getItem(left_path.pathSegList.numberOfItems - 1).y;
+  left_edge_origin = endpoint( left_path );
   right_edge_title = $('.edge').children('title').filter( function(index) {
     title = $(this).text();
     return (new RegExp( '^' + node_id )).test(title);
   });
-  right_path = right_edge_title.siblings('path')[0];
-  rightX = right_path.pathSegList.getItem(0).x;
-  rightY = right_path.pathSegList.getItem(0).y;
+  right_edge = right_edge_title.siblings('path')[0];
+  right_edge_origin = startpoint( right_edge );
+}
+
+function endpoint( path_domobj, x, y ) {
+  point = path_domobj.pathSegList.getItem(path_domobj.pathSegList.numberOfItems - 1);
+  if( x ) {
+    point.x = x;
+    point.y = y;
+  } else {
+    return( { 'x': point.x, 'y': point.y } );
+  }
+}
+
+function startpoint( path_domobj, x, y ) {
+  point = path_domobj.pathSegList.getItem(0);
+  if( x ) {
+    point.x = x;
+    point.y = y;
+  } else {
+    return( { 'x': point.x, 'y': point.y } );
+  }
 }
 
 function mousemove_listener(evt) {
-  ellipse.attr("transform","translate("+(evt.clientX - orgX)+" "+(evt.clientY - orgY)+")");
-  node_label.attr("transform","translate("+(evt.clientX - orgX)+" "+(evt.clientY - orgY)+")");
-  left_arrow.attr("transform","translate("+(evt.clientX - orgX)+" "+(evt.clientY - orgY)+")");
-  left_path.pathSegList.getItem(left_path.pathSegList.numberOfItems - 1).x=leftX + (evt.clientX - orgX);
-  left_path.pathSegList.getItem(left_path.pathSegList.numberOfItems - 1).y=leftY + (evt.clientY - orgY);
-  right_path.pathSegList.getItem(0).x=rightX + (evt.clientX - orgX);
-  right_path.pathSegList.getItem(0).y=rightY + (evt.clientY - orgY);
+  dx = (evt.clientX - orgX);
+  dy = (evt.clientY - orgY);
+  mousemove_translate( ellipse, dx, dy );
+  mousemove_translate( node_label, dx, dy );
+  mousemove_translate( left_arrow, dx, dy );
+  endpoint( left_path, left_edge_origin.x + dx, left_edge_origin.y + dy);
+  startpoint( right_edge, right_edge_origin.x + dx, right_edge_origin.y + dy);
+}
+
+function mousemove_translate( jqobj, dx, dy ) {
+  jqobj.attr( "transform", "translate(" + dx + " " + dy + ")" );
 }
 
 function mouseup_listener(evt) {
   $('body').unbind('mousemove');
   $('body').unbind('mouseup');
-  left_path.pathSegList.getItem(left_path.pathSegList.numberOfItems - 1).x=leftX;
-  left_path.pathSegList.getItem(left_path.pathSegList.numberOfItems - 1).y=leftY;
-  left_arrow.attr("transform","translate(0 0)");
-  right_path.pathSegList.getItem(0).x=rightX;
-  right_path.pathSegList.getItem(0).y=rightY;
-  node_label.attr("transform","translate(0 0)");
-  ellipse.attr("transform","translate(0 0)");
+  endpoint( left_path, left_edge_origin.x, left_edge_origin.y );
+  mousemove_translate( left_arrow, 0, 0 );
+  startpoint( right_edge, right_edge_origin.x, right_edge_origin.y );
+  mousemove_translate( node_label, 0, 0 );
+  mousemove_translate( ellipse, 0, 0 );
   ellipse.attr( 'fill', ellipse.data( 'fill' ) );
   ellipse.data('dragging', false);
   $('#graph').data('dragging', false);
