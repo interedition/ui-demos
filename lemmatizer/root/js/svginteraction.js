@@ -3,29 +3,13 @@ function svgLoaded() {
     node_target = $(evt.target);
     node_id = node_target.siblings('title').text();
     change_node_state(node_id);
-  }).children('ellipse').attr( {stroke:'black', fill:'#fff'} );
-  change_node_state( null, add_draggable );
+  }).children('ellipse').each( function() {
+    $(this).attr( {stroke:'black', fill:'#fff'} );
+  });
+  change_node_state( null, add_node_objs );
   $('#log').ajaxError(function() {
     $(this).text( 'Oops.. something went wrong with trying to save this change. Please try again...' );
   });
-}
-
-function add_draggable() {
-  $('ellipse[fill="#fff"]').mousedown( mousedown_listener );
-  $('ellipse[fill="#fff"]').hover( enterdroppable, leavedroppable );
-}
-
-function enterdroppable() {
-  if( $(this).data( 'dragging' ) != true ) {
-    $(this).data( 'fill', $(this).attr('fill') );
-    $(this).attr( 'fill', '#ffccff' );
-  }
-}
-
-function leavedroppable() {
-  if( $(this).data( 'dragging' ) != true ) {
-    $(this).attr( 'fill', $(this).data('fill') );
-  }
 }
 
 // We're assuming JSON of the form:
@@ -51,14 +35,14 @@ function change_node_state(node_id, callback) {
         // node_ellipse.css( { 'fill':'#b3f36d', 'stroke':'green' } );
         // node_ellipse.style.fill = 'green';
         // Above solutions don't work with FF3.6 (most do in FF4 btw)
-        // Apparently the svg is nor fully part of the DOM in every sense in FF3?
-        // Maybe using JQuery::SVG would offer solutions in svg.styl etc. but it seems overkill tbh
+        // Apparently the svg is not fully part of the DOM in every sense in FF3?
+        // Maybe using JQuery::SVG would offer solutions in svg.style etc. but it seems overkill tbh
         node_ellipse.attr( {stroke:'green', fill:'#b3f36d'} );
-        node_ellipse.data( 'fill', '#b3f36d' )
+        if( node_ellipse.data( 'node_obj' ) ) { node_ellipse.data( 'node_obj' ).draggable( false ) };
         $('#constructedtext').append( node_text + '&#32;' );
       } else {
         node_ellipse.attr( {stroke:'black', fill:'#fff'} );
-        node_ellipse.data( 'fill', '#fff' )
+        if( node_ellipse.data( 'node_obj' ) ) { node_ellipse.data( 'node_obj' ).draggable( true ) };
         if( state == null ) {
           $('#constructedtext').append( ' &hellip; ' );
         }
@@ -68,84 +52,129 @@ function change_node_state(node_id, callback) {
   });
 }
 
-var ellipse,left_path,left_arrow,node_label;
-var orgX,orgY;
-var left_edge_origin, right_edge_origin;
+function add_node_objs() {
+  $('ellipse[fill="#fff"]').each( function() {
+      $(this).data( 'node_obj', new node_obj( $(this) ) );
+    }
+  );
+}
 
-function mousedown_listener(evt) {
-  ellipse = $(this);
-  ellipse.data('dragging', true);
-  ellipse.attr('fill', '#ff66ff');
-  $('#graph').data('dragging', true);
-  orgX = evt.clientX;
-  orgY = evt.clientY;
-  $('body').mousemove( mousemove_listener );
-  $('body').mouseup( mouseup_listener );
+function node_obj(ellipse) {
+  this.ellipse = ellipse;
+  var self = this;
+  
+  this.x = 0;
+  this.y = 0;
+  this.dx = 0;
+  this.dy = 0;
+  this.node_elements = node_elements_for(self.ellipse);
 
+  this.mousedown_listener = function(evt) {
+    evt.stopPropagation();
+    self.x = evt.clientX;
+    self.y = evt.clientY;
+    $('body').mousemove( self.mousemove_listener );
+    $('body').mouseup( self.mouseup_listener );
+    self.ellipse.unbind('mouseenter').unbind('mouseleave')
+    self.ellipse.attr( 'fill', '#ff66ff' );
+  }
+
+  this.mousemove_listener = function(evt) {
+    self.dx = evt.clientX - self.x;
+    self.dy = evt.clientY - self.y;
+    self.move_elements();
+  }
+
+  this.mouseup_listener = function(evt) {
+    $('body').unbind('mousemove');
+    $('body').unbind('mouseup');
+    self.ellipse.attr( 'fill', '#fff' );
+    self.ellipse.hover( self.enter_node, self.leave_node );
+    self.reset_elements();
+  }
+
+  this.enter_node = function(evt) {
+    self.ellipse.attr( 'fill', '#ffccff' )
+  }
+
+  this.leave_node = function(evt) {
+    self.ellipse.attr( 'fill', '#fff' );
+  }
+
+  this.move_elements = function() {
+    $.each( self.node_elements, function(index, value) {
+      value.move(self.dx,self.dy);
+    });
+  }
+
+  this.reset_elements = function() {
+    $.each( self.node_elements, function(index, value) {
+      value.reset();
+    });
+  }
+
+  this.draggable = function( draggable ) {
+    if( draggable ) {
+      this.ellipse.mousedown( this.mousedown_listener );
+      this.ellipse.hover( this.enter_node, this.leave_node );  
+    } else {
+      this.ellipse.unbind('mouseenter').unbind('mouseleave').unbind('mousedown');
+    }
+  }
+
+  self.draggable( true );
+}
+
+function svgshape( shape_element ) {
+  this.shape = shape_element;
+  this.move = function(dx,dy) {
+    this.shape.attr( "transform", "translate(" + dx + " " + dy + ")" );
+  }
+  this.reset = function() {
+    this.shape.attr( "transform", "translate( 0, 0 )" );
+  }
+}
+
+function svgpath( path_element ) {
+  this.path = path_element;
+  this.x = this.path.x;
+  this.y = this.path.y;
+  this.move = function(dx,dy) {
+    this.path.x = this.x + dx;
+    this.path.y = this.y + dy;
+  }
+  this.reset = function() {
+    this.path.x = this.x;
+    this.path.y = this.y;
+  }
+}
+
+function node_elements_for( ellipse ) {
+  node_elements = get_edge_elements_for( ellipse );
+  node_elements.push( new svgshape( ellipse.siblings('text') ) );
+  node_elements.push( new svgshape( ellipse ) );
+  return node_elements;
+}
+
+function get_edge_elements_for( ellipse ) {
+  edge_elements = new Array();
   node_id = ellipse.siblings('title').text();
-  node_label = ellipse.siblings('text')
-  left_edge_title = $('.edge').children('title').filter( function(index) {
+  edge_in_pattern = new RegExp( node_id + '$' );
+  edge_out_pattern = new RegExp( '^' + node_id );
+  $.each( $('.edge').children('title'), function(index) {
     title = $(this).text();
-    return (new RegExp( node_id + '$' )).test(title);
+    if( edge_in_pattern.test(title) ) {
+      edge_elements.push( new svgshape( $(this).siblings('polygon') ) );
+      path_segments = $(this).siblings('path')[0].pathSegList;
+      edge_elements.push( new svgpath( path_segments.getItem(path_segments.numberOfItems - 1) ) );
+    }
+    if( edge_out_pattern.test(title) ) {
+      path_segments = $(this).siblings('path')[0].pathSegList;
+      edge_elements.push( new svgpath( path_segments.getItem(0) ) );
+    }
   });
-  left_path = left_edge_title.siblings('path')[0];
-  left_arrow = left_edge_title.siblings('polygon');
-  left_edge_origin = endpoint( left_path );
-  right_edge_title = $('.edge').children('title').filter( function(index) {
-    title = $(this).text();
-    return (new RegExp( '^' + node_id )).test(title);
-  });
-  right_edge = right_edge_title.siblings('path')[0];
-  right_edge_origin = startpoint( right_edge );
-}
-
-function endpoint( path_domobj, x, y ) {
-  point = path_domobj.pathSegList.getItem(path_domobj.pathSegList.numberOfItems - 1);
-  if( x ) {
-    point.x = x;
-    point.y = y;
-  } else {
-    return( { 'x': point.x, 'y': point.y } );
-  }
-}
-
-function startpoint( path_domobj, x, y ) {
-  point = path_domobj.pathSegList.getItem(0);
-  if( x ) {
-    point.x = x;
-    point.y = y;
-  } else {
-    return( { 'x': point.x, 'y': point.y } );
-  }
-}
-
-function mousemove_listener(evt) {
-  dx = (evt.clientX - orgX);
-  dy = (evt.clientY - orgY);
-  mousemove_translate( ellipse, dx, dy );
-  mousemove_translate( node_label, dx, dy );
-  mousemove_translate( left_arrow, dx, dy );
-  endpoint( left_path, left_edge_origin.x + dx, left_edge_origin.y + dy);
-  startpoint( right_edge, right_edge_origin.x + dx, right_edge_origin.y + dy);
-}
-
-function mousemove_translate( jqobj, dx, dy ) {
-  jqobj.attr( "transform", "translate(" + dx + " " + dy + ")" );
-}
-
-function mouseup_listener(evt) {
-  $('body').unbind('mousemove');
-  $('body').unbind('mouseup');
-  endpoint( left_path, left_edge_origin.x, left_edge_origin.y );
-  mousemove_translate( left_arrow, 0, 0 );
-  startpoint( right_edge, right_edge_origin.x, right_edge_origin.y );
-  mousemove_translate( node_label, 0, 0 );
-  mousemove_translate( ellipse, 0, 0 );
-  ellipse.attr( 'fill', ellipse.data( 'fill' ) );
-  ellipse.data('dragging', false);
-  $('#graph').data('dragging', false);
-}
-
+  return edge_elements;
+} 
 
 $(document).ready(function () {        
   $('#graph').mousedown(function (event) {
@@ -157,7 +186,7 @@ $(document).ready(function () {
   }).mouseup(function (event) {
     $(this).data('down', false);
   }).mousemove(function (event) {
-    if ($(this).data('down') == true && $(this).data('dragging') != true) {
+    if ($(this).data('down') == true ) {
       this.scrollLeft = $(this).data('scrollLeft') + $(this).data('x') - event.clientX;
     }
   }).mousewheel(function (event, delta) {
