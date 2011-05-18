@@ -3,6 +3,7 @@
 <head>
 <title>[% template.title or "Collation lemmatizer" %]</title>
 [% script %]
+<link type="text/css" href="css/cupertino/jquery-ui-1.8.13.custom.css" rel="stylesheet" />
 [% INCLUDE style.tt2 %]
 </head>
 

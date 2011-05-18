@@ -23,5 +23,12 @@ $(function() {
 		<!-- unclear how to cope with height that doesn't fit box -->
 		<div id="svgbasics" style="height: 200px; width: 1670px; background-color: white; border: 1px solid white;"></div>
 	</div>
-	<div id="log">
+	
+	<div id="dialog-form" title="Node collapse..">
+		<form>
+		<fieldset>
+			<label for="reason">Reason</label>
+			<input type="text" name="reason" id="reason" class="text ui-widget-content ui-corner-all" />
+		</fieldset>
+		</form>
 	</div>

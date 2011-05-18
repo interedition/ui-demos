@@ -87,6 +87,9 @@ function node_obj(ellipse) {
   }
 
   this.mouseup_listener = function(evt) {
+    if( $('ellipse[fill="#ffccff"]').size() > 0 ) {
+      $( "#dialog-form" ).dialog( "open" );
+    };
     $('body').unbind('mousemove');
     $('body').unbind('mouseup');
     self.ellipse.attr( 'fill', '#fff' );
@@ -191,6 +194,24 @@ $(document).ready(function () {
     'overflow' : 'hidden',
     'cursor' : '-moz-grab'
   });
+  $( "#dialog-form" ).dialog({
+    autoOpen: false,
+    height: 300,
+    width: 350,
+    modal: true,
+    buttons: {
+      "Ok": function() {
+        console.log( 'form is ok' );
+        $( this ).dialog( "close" );
+      },
+      Cancel: function() {
+        $( this ).dialog( "close" );
+      }
+    },
+    close: function() {
+      $('#reason').val( "" ).removeClass( "ui-state-error" );
+    }
+  });
 });
 
 
@@ -203,3 +224,5 @@ $(window).mouseout(function (event) {
     } catch (e) {}
   }
 });
+
+
