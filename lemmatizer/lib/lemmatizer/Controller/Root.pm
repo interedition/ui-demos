@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use parent 'Catalyst::Controller';
 use JSON;
-use lemmatizer::Model::Graph;
+use Text::Tradition::Graph;
 
 #
 # Sets the actions in this controller to be registered with no prefix
@@ -41,7 +41,7 @@ sub index :Path :Args(0) {
     open( GRAPHFILE, $dummy_file ) or die "Could not open $dummy_file";
     my @lines = <GRAPHFILE>;
     close GRAPHFILE;
-    $graph = lemmatizer::Model::Graph->new( 'xml' => join( '', @lines ) );
+    $graph = Text::Tradition::Graph->new( 'GraphML' => join( '', @lines ) );
     
     my $svg_str = $graph->as_svg;
     $svg_str =~ s/\n//gs;
@@ -55,13 +55,24 @@ sub nodeclick :Global {
     my ( $self, $c ) = @_;
     my $node = $c->request->params->{'node_id'};
 
- #$DB::single = 1;
+ $DB::single = 1;
     my @off = $graph->toggle_node( $node );
     my @active = $graph->active_nodes( @off );
 
     $c->response->content_type( 'application/json' );
     $c->response->content_encoding( 'UTF-8' );
     $c->response->body( encode_json( \@active ) );
+}
+
+sub node_collapse :Global {
+    my( $self, $c ) = @_;
+
+    my @all_collapsed;
+    # TODO all the work
+
+    $c->response->content_type( 'application/json' );
+    $c->response->content_encoding( 'UTF-8' );
+    $c->response->body( encode_json( \@all_collapsed ) );
 }
 
 sub default :Path {

@@ -2,6 +2,11 @@ package lemmatizer::Model::Graph;
 
 use strict;
 use warnings;
+use Text::Tradition::Graph;
+
+1;
+__END__
+
 use GraphViz;
 # TODO use Graph Easy instead of Graphviz directly
 use Graph::Easy;
