@@ -67,7 +67,7 @@ sub nodeclick :Global {
 sub node_collapse :Global {
     my( $self, $c ) = @_;
 
-    my $node = $c->request->params->{'node_id'};
+    my $node = $c->request->params->{'source_id'};
     my $target = $c->request->params->{'target_id'};
     my $reason = $c->request->params->{'reason'};
     my $global = $c->request->params->{'global'};
