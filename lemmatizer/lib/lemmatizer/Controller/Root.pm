@@ -67,12 +67,39 @@ sub nodeclick :Global {
 sub node_collapse :Global {
     my( $self, $c ) = @_;
 
-    my @all_collapsed;
-    # TODO all the work
+    my $node = $c->request->params->{'node_id'};
+    my $target = $c->request->params->{'target_id'};
+    my $reason = $c->request->params->{'reason'};
+    my $global = $c->request->params->{'global'};
+    my $response = {};
+
+    # TODO all the work.  For now hardcode a test case.
+    my %ok_mappings = ( 'n8' => 'n13',
+			'n13' => 'n8',
+			'n9' => 'n23',
+			'n23' => 'n9',
+			'n25' => 'n26',
+			'n26' => 'n25',
+	);
+
+    if( exists( $ok_mappings{$node} ) ) {
+	$response->{'OK'} = 1;
+	$response->{$node} = $ok_mappings{$node};
+	if( $global ) {
+	    my $extra;
+	    $extra = 'n9' if $node eq 'n8';
+	    $extra = 'n8' if $node eq 'n9';
+	    $extra = 'n23' if $node eq 'n13';
+	    $extra = 'n13' if $node eq 'n23';
+	    $response->{$extra} = $ok_mappings{$extra} if $extra;
+	}
+    } else {
+	$response->{'OK'} = undef;
+    }
 
     $c->response->content_type( 'application/json' );
     $c->response->content_encoding( 'UTF-8' );
-    $c->response->body( encode_json( \@all_collapsed ) );
+    $c->response->body( encode_json( $response ) );
 }
 
 sub default :Path {
