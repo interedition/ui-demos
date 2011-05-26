@@ -51,7 +51,7 @@ sub index :Path :Args(0) {
     $c->stash->{template} = 'testsvg.tt2';
 }
 
-sub nodeclick :Global {
+sub node_click :Global {
     my ( $self, $c ) = @_;
     my $node = $c->request->params->{'node_id'};
 
