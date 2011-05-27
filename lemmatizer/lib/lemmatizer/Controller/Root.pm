@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use parent 'Catalyst::Controller';
 use JSON;
-use Text::Tradition::Graph;
+use Text::Tradition;
 
 #
 # Sets the actions in this controller to be registered with no prefix
@@ -41,13 +41,15 @@ sub index :Path :Args(0) {
     open( GRAPHFILE, $dummy_file ) or die "Could not open $dummy_file";
     my @lines = <GRAPHFILE>;
     close GRAPHFILE;
-    $graph = Text::Tradition::Graph->new( 'GraphML' => join( '', @lines ) );
-    
+    my $tradition = Text::Tradition->new( 
+	'GraphML' => join( '', @lines ),
+	'name' => 'Collatex_16', );
+    $graph = $tradition->collation;
     my $svg_str = $graph->as_svg;
     $svg_str =~ s/\n//gs;
     $c->stash->{svg_string} = $svg_str;
-    my @initial_nodes = $graph->active_nodes();
-    $c->stash->{initial_text} = join( ' ', map { $_->[1] ? $graph->text_of_node( $_->[0] ) : '...' } @initial_nodes );
+    my @initial_nodes = $graph->lemma_readings();
+    $c->stash->{initial_text} = join( ' ', map { $_->[1] ? $graph->reading( $_->[0] )->label : '...' } @initial_nodes );
     $c->stash->{template} = 'testsvg.tt2';
 }
 
@@ -55,9 +57,8 @@ sub node_click :Global {
     my ( $self, $c ) = @_;
     my $node = $c->request->params->{'node_id'};
 
- $DB::single = 1;
-    my @off = $graph->toggle_node( $node );
-    my @active = $graph->active_nodes( @off );
+    my @off = $graph->toggle_reading( $node );
+    my @active = $graph->lemma_readings( @off );
 
     $c->response->content_type( 'application/json' );
     $c->response->content_encoding( 'UTF-8' );
