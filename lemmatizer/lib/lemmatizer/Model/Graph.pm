@@ -2,7 +2,7 @@ package lemmatizer::Model::Graph;
 
 use strict;
 use warnings;
-use Text::Tradition::Graph;
+use Text::Tradition;
 
 1;
 __END__
