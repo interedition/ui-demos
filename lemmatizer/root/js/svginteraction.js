@@ -1,6 +1,6 @@
 function svgLoaded() {
   $('ellipse').attr( {stroke:'black', fill:'#fff'} );
-  var jqjson = $.getJSON( 'nodeclick', 'node_id=null', function(data) {
+  var jqjson = $.getJSON( 'node_click', 'node_id=null', function(data) {
     $.each( data, function(item, node_id_and_state) {
       if( node_id_and_state[1] == 1 ) {
         node_ellipse = $('.node').children('title').filter( function(index) {
@@ -37,7 +37,7 @@ function node_obj(ellipse) {
 
   this.dblclick_listener = function(evt) {
     node_id = ellipse.siblings('title').text();
-    var jqjson = $.getJSON( 'nodeclick', 'node_id=' + node_id, function(data) {
+    var jqjson = $.getJSON( 'node_click', 'node_id=' + node_id, function(data) {
       $('#constructedtext').empty();
       $.each( data, function(item, node_id_and_state) {
         node_ellipse = $('.node').children('title').filter( function(index) {
@@ -86,9 +86,11 @@ function node_obj(ellipse) {
     self.move_elements();
   }
 
-  this.mouseup_listener = function(evt) {
+  this.mouseup_listener = function(evt) {    
     if( $('ellipse[fill="#ffccff"]').size() > 0 ) {
-      $( "#dialog-form" ).dialog( "open" );
+      $('#source_node_id').val( self.ellipse.siblings('title').text() );
+      $('#target_node_id').val( $('ellipse[fill="#ffccff"]').siblings("title").text() );
+      $( '#dialog-form' ).dialog( 'open' );
     };
     $('body').unbind('mousemove');
     $('body').unbind('mouseup');
@@ -196,12 +198,16 @@ $(document).ready(function () {
   });
   $( "#dialog-form" ).dialog({
     autoOpen: false,
-    height: 300,
-    width: 350,
+    height: 150,
+    width: 250,
     modal: true,
     buttons: {
       "Ok": function() {
-        console.log( 'form is ok' );
+        form_values = $('#collapse_node_form').serialize()
+        var jqjson = $.getJSON( 'node_collapse', form_values, function(data) {
+          $.each( data, function(item, node_id_and_state) { //do someting 
+          });
+        });
         $( this ).dialog( "close" );
       },
       Cancel: function() {

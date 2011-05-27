@@ -24,11 +24,15 @@ $(function() {
 		<div id="svgbasics" style="height: 200px; width: 1670px; background-color: white; border: 1px solid white;"></div>
 	</div>
 	
-	<div id="dialog-form" title="Node collapse..">
-		<form>
+	<div id="dialog-form" title="Equate readings..">
+		<form id="collapse_node_form">
 		<fieldset>
-			<label for="reason">Reason</label>
+			<input type="hidden" name="source_id" id="source_node_id"/>
+			<input type="hidden" name="target_id" id="target_node_id"/>
+			<label for="reason">Reason..</label>
 			<input type="text" name="reason" id="reason" class="text ui-widget-content ui-corner-all" />
+			<br/><label for="global">Apply globally?</label>
+			<input type="checkbox" name="global" id="global" class="text ui-widget-content ui-corner-all" />
 		</fieldset>
 		</form>
 	</div>
