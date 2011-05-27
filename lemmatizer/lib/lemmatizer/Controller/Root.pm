@@ -74,24 +74,52 @@ sub node_collapse :Global {
     my $response = {};
 
     # TODO all the work.  For now hardcode a test case.
-    my %ok_mappings = ( 'n8' => 'n13',
-			'n13' => 'n8',
-			'n9' => 'n23',
-			'n23' => 'n9',
-			'n25' => 'n26',
-			'n26' => 'n25',
-	);
+    my $ok_mappings = { 
+	'n8' => 'n13',
+	'n13' => 'n8',
+	'n9' => 'n23',
+	'n23' => 'n9',
+	'n25' => 'n26',
+	'n26' => 'n25',
+    };
 
-    if( exists( $ok_mappings{$node} ) ) {
+    my $collapsing_edges = { 
+	'n8' => { 'n12&#45;&gt;n8' => { 'target' => 'n12&#45;&gt;n13',
+					'label' => ', C' },
+		  'n8&#45;&gt;n14' => { 'target' => 'n13&#45;&gt;n14',
+					'label' => ', C' },
+	},
+	'n13' => { 'n12&#45;&gt;n13' => { 'target' => 'n12&#45;&gt;n8',
+					  'label' => ', C' },
+		   'n13&#45;&gt;n14' => { 'target' => 'n8&#45;&gt;n14',
+					  'label' => ', C' },
+	},
+	'n25' => { 'n25&#45;&gt;n27' => { 'target' => 'n26&#45;&gt;n27',
+					  'label' => ', C' },
+	},
+	'n26' => { 'n26&#45;&gt;n27' => { 'target' => 'n25&#45;&gt;n27',
+					  'label' => ', C' },
+	},
+	
+    };
+
+    if( exists( $ok_mappings->{$node} ) ) {
 	$response->{'OK'} = 1;
-	$response->{$node} = $ok_mappings{$node};
+	$response->{$node} = { 'target' => $ok_mappings->{$node} };
 	if( $global ) {
 	    my $extra;
 	    $extra = 'n9' if $node eq 'n8';
 	    $extra = 'n8' if $node eq 'n9';
 	    $extra = 'n23' if $node eq 'n13';
 	    $extra = 'n13' if $node eq 'n23';
-	    $response->{$extra} = $ok_mappings{$extra} if $extra;
+	    $response->{$extra} = { 'target' => $ok_mappings->{$extra} }
+	        if $extra;
+	}
+	foreach my $n ( keys %$response ) {
+	    next if $n eq 'OK';
+	    if( exists $collapsing_edges->{$n} ) {
+		$response->{$n}->{'edges'} = $collapsing_edges->{$n};
+	    }
 	}
     } else {
 	$response->{'OK'} = undef;
