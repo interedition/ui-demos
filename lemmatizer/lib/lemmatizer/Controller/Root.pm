@@ -105,7 +105,7 @@ sub node_collapse :Global {
     };
 
     if( exists( $ok_mappings->{$node} ) ) {
-	$response->{'OK'} = 1;
+	$c->response->status(200);
 	$response->{$node} = { 'target' => $ok_mappings->{$node} };
 	if( $global ) {
 	    my $extra;
@@ -123,7 +123,8 @@ sub node_collapse :Global {
 	    }
 	}
     } else {
-	$response->{'OK'} = undef;
+	$c->response->status(403);
+	$response->{'error'} = "Cannot collapse these readings";
     }
 
     $c->response->content_type( 'application/json' );
