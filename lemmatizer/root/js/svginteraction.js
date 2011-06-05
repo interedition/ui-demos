@@ -25,6 +25,18 @@ function add_node_objs() {
   );
 }
 
+function get_node_obj( node_id ) {
+  return $('.node').children('title').filter( function(index) {
+    return $(this).text() == node_id;
+  }).siblings('ellipse').data( 'node_obj' );
+}
+
+function get_edge( edge_id ) {
+  return $('.edge').filter( function(index) {
+    return $(this).children( 'title' ).text() == $('<div/>').html(edge_id).text() ;
+  });
+}
+
 function node_obj(ellipse) {
   this.ellipse = ellipse;
   var self = this;
@@ -34,23 +46,23 @@ function node_obj(ellipse) {
   this.dx = 0;
   this.dy = 0;
   this.node_elements = node_elements_for(self.ellipse);
+  this.sub_nodes = [];
+  this.super_node = null;
 
   this.dblclick_listener = function(evt) {
     node_id = ellipse.siblings('title').text();
     var jqjson = $.getJSON( 'node_click', 'node_id=' + node_id, function(data) {
       $('#constructedtext').empty();
       $.each( data, function(item, node_id_and_state) {
-        node_ellipse = $('.node').children('title').filter( function(index) {
-          return $(this).text() == node_id_and_state[0];
-        }).siblings('ellipse');
+        node = get_node_obj( node_id_and_state[0] );
         // 1 -> turn the associated SVG node on, put in the associate word in the text box.
         // 0 -> turn SVG node off.
         // null -> turn node off, put in ellipsis in text box at the corresponding place.
         if( node_id_and_state[1] == 1 ) {
           $('#constructedtext').append( node_ellipse.siblings('text').text() + '&#32;' );
-          if( node_ellipse.data( 'node_obj' ) ) { node_ellipse.data( 'node_obj' ).set_draggable( false ) }
+          if( node ) { node.set_draggable( false ) }
         } else {
-          if( node_ellipse.data( 'node_obj' ) ) { node_ellipse.data( 'node_obj' ).set_draggable( true ) };
+          if( node ) { node.set_draggable( true ) };
           if( node_id_and_state[1] == null ) {
             $('#constructedtext').append( ' &hellip; ' );
           }
@@ -96,11 +108,58 @@ function node_obj(ellipse) {
     $('body').unbind('mouseup');
     self.ellipse.attr( 'fill', '#fff' );
     self.ellipse.hover( self.enter_node, self.leave_node );
-    self.reset_elements();
+    if( self.super_node ) {
+      self.eclipse();
+    } else {
+      self.reset_elements();
+    }
+  }
+
+  this.cpos = function() {
+    return { x: self.ellipse.attr('cx'), y: self.ellipse.attr('cy') };
+  }
+
+  this.get_g = function() {
+    return self.ellipse.parent('g');
+  }
+
+  this.stack_behind = function( collapse_info ) {
+    self.super_node = get_node_obj( collapse_info.target );
+    self.super_node.sub_nodes.push( self );
+    self.eclipse();
+    if( collapse_info.edges ) {
+      $.each( collapse_info.edges, function( source_edge_id, target_info ) {
+        get_edge(source_edge_id).attr( 'display', 'none' );
+        target_edge = get_edge(target_info.target);
+        // Unfortunately, the simple solution doesn't work...
+        // target_edge.children( 'text' ).replaceWith( '<text x="2270" y="-59.400001525878906"><tspan text-anchor="middle">A, B</tspan><tspan fill="red">, C</tspan></text>' );
+        // ..so we take the long and winding road...
+        var svg = $('#svgbasics').children('svg').svg().svg('get');
+        textx = target_edge.children( 'text' )[0].x.baseVal.getItem(0).value
+        texty = target_edge.children( 'text' )[0].y.baseVal.getItem(0).value
+        current_label = target_edge.children( 'text' ).text(); 
+        target_edge.children( 'text' ).remove();
+        texts = svg.createText();
+        texts.span(current_label, {'text-anchor': 'middle'}).span(target_info.label, {fill: 'red'});
+        svg.text(target_edge, textx, texty, texts);
+      }); 
+    }
+  }
+
+  this.eclipse = function() {
+    self.dx = new Number( self.super_node.cpos().x ) - new Number( self.cpos().x ) + ( 10 * (self.super_node.sub_nodes.indexOf(self) + 1) );
+    self.dy = new Number( self.super_node.cpos().y ) - new Number( self.cpos().y ) + ( 5 * (self.super_node.sub_nodes.indexOf(self) + 1) );
+    self.move_elements();
+    eclipse_index = self.super_node.sub_nodes.indexOf(self) - 1;
+    if( eclipse_index > -1 ) {
+      self.get_g().insertBefore( self.super_node.sub_nodes[eclipse_index].get_g() );
+    } else {
+      self.get_g().insertBefore( self.super_node.get_g() );
+    }
   }
 
   this.enter_node = function(evt) {
-    self.ellipse.attr( 'fill', '#ffccff' )
+    self.ellipse.attr( 'fill', '#ffccff' );
   }
 
   this.leave_node = function(evt) {
@@ -175,8 +234,8 @@ function get_edge_elements_for( ellipse ) {
 } 
 
 $(document).ready(function () {
-  $('#log').ajaxError(function() {
-    $(this).text( 'Oops.. something went wrong with trying to save this change. Please try again...' );
+  $('#graph').ajaxError(function() {
+    console.log( 'Oops.. something went wrong with trying to save this change. Please try again...' );
   });
   $('#graph').mousedown(function (event) {
     $(this)
@@ -205,7 +264,8 @@ $(document).ready(function () {
       "Ok": function() {
         form_values = $('#collapse_node_form').serialize()
         var jqjson = $.getJSON( 'node_collapse', form_values, function(data) {
-          $.each( data, function(item, node_id_and_state) { //do someting 
+          $.each( data, function(item, collapse_info) { 
+            get_node_obj( item ).stack_behind( collapse_info );
           });
         });
         $( this ).dialog( "close" );
