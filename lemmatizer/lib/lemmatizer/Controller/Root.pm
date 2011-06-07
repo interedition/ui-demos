@@ -118,20 +118,24 @@ sub find_dup_edges {
     foreach my $n ( @shared_origin ) {
 	# This is a hardcoded hack that will break if GraphViz changes its
 	# SVG rendering logic.
-	my $target_svg_id = $source . '&#45;&gt;' . $target;
-	$result->{'target'} = $target_svg_id;
+	my $source_svg_id = $n->name . '&#45;&gt;' . $source;
+	my $target_svg_id = $n->name . '&#45;&gt;' . $target;
 	# There is only one of these.
-	my @edgelabel = $n->edges_to( $graph->reading( $source) );
-	$result->{'label'} = $edgelabel[0]->name;
+	my @el = $n->edges_to( $graph->reading( $source) );
+	my $edgelabel = join( ', ', '', $el[0]->name );
+	$result->{$source_svg_id} = { 'target' => $target_svg_id,
+				      'label'  => $edgelabel };
     }
     foreach my $n ( @shared_dest ) {
 	# This is a hardcoded hack that will break if GraphViz changes its
 	# SVG rendering logic.
-	my $target_svg_id = $source . '&#45;&gt;' . $n->name;
-	$result->{'target'} = $target_svg_id;
+	my $source_svg_id = $source . '&#45;&gt;' . $n->name;
+	my $target_svg_id = $target . '&#45;&gt;' . $n->name;
 	# There is only one of these.
-	my @edgelabel = $graph->reading( $source )->edges_to( $n );
-	$result->{'label'} = $edgelabel[0]->name;
+	my @el = $graph->reading( $source )->edges_to( $n );
+	my $edgelabel = join( ', ', '', $el[0]->name );
+	$result->{$source_svg_id} = { 'target' => $target_svg_id,
+				      'label'  => $edgelabel };
     }
     $graph->expand_graph_paths();
     return $result;

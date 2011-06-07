@@ -225,7 +225,11 @@ sub add_relationship {
     my @joined = ( [ $source->name, $target->name ] );  # Keep track of the nodes we join.
     
     $options->{'this_relation'} = [ $source, $target ];
-    my $rel = Text::Tradition::Collation::Relationship->new( %$options );
+    my $rel;
+    eval { $rel = Text::Tradition::Collation::Relationship->new( %$options ) };
+    if( $@ ) {
+	return ( undef, $@ );
+    }
     $self->graph->add_edge( $source, $target, $rel );
     if( $options->{'global'} ) {
 	# Look for all readings with the source label, and if there are
