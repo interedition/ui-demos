@@ -50,7 +50,7 @@ function node_obj(ellipse) {
   this.super_node = null;
 
   this.dblclick_listener = function(evt) {
-    node_id = ellipse.siblings('title').text();
+    node_id = self.ellipse.siblings('title').text();
     var jqjson = $.getJSON( 'node_click', 'node_id=' + node_id, function(data) {
       $('#constructedtext').empty();
       $.each( data, function(item, node_id_and_state) {
@@ -59,6 +59,10 @@ function node_obj(ellipse) {
         // 0 -> turn SVG node off.
         // null -> turn node off, put in ellipsis in text box at the corresponding place.
         if( node_id_and_state[1] == 1 ) {
+//TODO: create test suite en refactor this in to more OO! (node and node_ellipse are 'conflated')
+          node_ellipse = $('.node').children('title').filter( function(index) {
+            return $(this).text() == node_id_and_state[0];
+          }).siblings('ellipse');
           $('#constructedtext').append( node_ellipse.siblings('text').text() + '&#32;' );
           if( node ) { node.set_draggable( false ) }
         } else {
