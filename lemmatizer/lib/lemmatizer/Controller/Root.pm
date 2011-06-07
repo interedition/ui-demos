@@ -42,7 +42,7 @@ sub index :Path :Args(0) {
     my @lines = <GRAPHFILE>;
     close GRAPHFILE;
     my $tradition = Text::Tradition->new( 
-	'GraphML' => join( '', @lines ),
+	'CollateX' => join( '', @lines ),
 	'name' => 'Collatex_16', );
     $graph = $tradition->collation;
     my $svg_str = $graph->as_svg;
@@ -72,64 +72,81 @@ sub node_collapse :Global {
     my $target = $c->request->params->{'target_id'};
     my $reason = $c->request->params->{'reason'};
     my $global = $c->request->params->{'global'};
+    $global = 1 if $global; # make it a Bool for Moose
     my $response = {};
 
     # TODO all the work.  For now hardcode a test case.
-    my $ok_mappings = { 
-	'n8' => 'n13',
-	'n13' => 'n8',
-	'n9' => 'n23',
-	'n23' => 'n9',
-	'n25' => 'n26',
-	'n26' => 'n25',
-    };
+    my $opts = { 'type' => $reason,
+		 'global' => $global };
+    my( $status, @nodes ) = $graph->add_relationship( $node, $target, $opts );
 
-    my $collapsing_edges = { 
-	'n8' => { 'n12&#45;&gt;n8' => { 'target' => 'n12&#45;&gt;n13',
-					'label' => ', C' },
-		  'n8&#45;&gt;n14' => { 'target' => 'n13&#45;&gt;n14',
-					'label' => ', C' },
-	},
-	'n13' => { 'n12&#45;&gt;n13' => { 'target' => 'n12&#45;&gt;n8',
-					  'label' => ', C' },
-		   'n13&#45;&gt;n14' => { 'target' => 'n8&#45;&gt;n14',
-					  'label' => ', C' },
-	},
-	'n25' => { 'n25&#45;&gt;n27' => { 'target' => 'n26&#45;&gt;n27',
-					  'label' => ', C' },
-	},
-	'n26' => { 'n26&#45;&gt;n27' => { 'target' => 'n25&#45;&gt;n27',
-					  'label' => ', C' },
-	},
-	
-    };
+    $c->response->status( $status ? 200 : 403 );
 
-    if( exists( $ok_mappings->{$node} ) ) {
-	$c->response->status(200);
-	$response->{$node} = { 'target' => $ok_mappings->{$node} };
-	if( $global ) {
-	    my $extra;
-	    $extra = 'n9' if $node eq 'n8';
-	    $extra = 'n8' if $node eq 'n9';
-	    $extra = 'n23' if $node eq 'n13';
-	    $extra = 'n13' if $node eq 'n23';
-	    $response->{$extra} = { 'target' => $ok_mappings->{$extra} }
-	        if $extra;
+    if( $status ) {
+	# TODO work
+	foreach my $pair ( @nodes ) {
+	    my( $ps, $pt ) = @$pair;
+	    $response->{$ps} = { 'target' => $pt };
 	}
+
 	foreach my $n ( keys %$response ) {
-	    next if $n eq 'OK';
-	    if( exists $collapsing_edges->{$n} ) {
-		$response->{$n}->{'edges'} = $collapsing_edges->{$n};
-	    }
+	    # Edges are of the form $node . &#45;&gt; . $node
+	    # Look for any predecessor and successor node shared
+	    # between source and target, and collapse those edges.
+	    # We want response->node->target = (node)
+	    #                       ->edges->target = (edge)
+	    #                              ->label = (label)
+	    my $collapsed_edges = find_dup_edges( $n, $response->{$n}->{'target'} );
+	    $response->{$n}->{'edges'} = $collapsed_edges;
 	}
-    } else {
-	$c->response->status(403);
-	$response->{'error'} = "Cannot collapse these readings";
     }
-
     $c->response->content_type( 'application/json' );
     $c->response->content_encoding( 'UTF-8' );
     $c->response->body( encode_json( $response ) );
+}
+
+sub find_dup_edges {
+    my( $source, $target ) = @_;
+    $graph->collapse_graph_paths();
+    my @source_origin = map { $_->from } $graph->reading( $source )->incoming();
+    my @target_origin = map { $_->from } $graph->reading( $target )->incoming();
+    my @source_dest = map { $_->to } $graph->reading( $source )->outgoing();
+    my @target_dest = map { $_->to } $graph->reading( $target )->outgoing();
+    my @shared_origin = union( \@source_origin, \@target_origin );
+    my @shared_dest = union( \@source_dest, \@target_dest );
+    my $result = {};
+    foreach my $n ( @shared_origin ) {
+	# This is a hardcoded hack that will break if GraphViz changes its
+	# SVG rendering logic.
+	my $target_svg_id = $source . '&#45;&gt;' . $target;
+	$result->{'target'} = $target_svg_id;
+	# There is only one of these.
+	my @edgelabel = $n->edges_to( $graph->reading( $source) );
+	$result->{'label'} = $edgelabel[0]->name;
+    }
+    foreach my $n ( @shared_dest ) {
+	# This is a hardcoded hack that will break if GraphViz changes its
+	# SVG rendering logic.
+	my $target_svg_id = $source . '&#45;&gt;' . $n->name;
+	$result->{'target'} = $target_svg_id;
+	# There is only one of these.
+	my @edgelabel = $graph->reading( $source )->edges_to( $n );
+	$result->{'label'} = $edgelabel[0]->name;
+    }
+    $graph->expand_graph_paths();
+    return $result;
+}
+sub union {
+    my( $list1, $list2 ) = @_;
+    my %all;
+    my @union;
+    map { $all{$_->name} = 1 } @$list1;
+    foreach my $l ( @$list2 ) {
+	if( $all{$l->name} ) {
+	    push( @union, $l );
+	}
+    }
+    return @union;
 }
 
 sub default :Path {

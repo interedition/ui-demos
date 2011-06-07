@@ -76,7 +76,7 @@ underscore in its name.
 
 =cut
 
-my $SHORTEND = 20; # Debug var - set this to limit the number of lines parsed
+my $SHORTEND = ''; # Debug var - set this to limit the number of lines parsed
 
 my %base_text_index;
 my $edits_required = {};
@@ -176,6 +176,9 @@ sub merge_base {
 	my %pc_seen; # Keep track of mss with explicit post-corr data
 	foreach my $k ( grep { /^rdg/ } keys( %$app ) ) {
 	    my @mss = grep { $app->{$_} eq $k } keys( %$app );
+
+	    # Keep track of lemma nodes that don't actually appear in
+	    # any MSS; we will want to remove them from the collation.
 	    push( @unwitnessed_lemma_nodes, @lemma_set )
 		if !@mss && $k eq 'rdg_0';
 
@@ -189,11 +192,11 @@ sub merge_base {
 	    }
 	    next if $k eq 'rdg_0';
 
+	    # Parse the variant into reading tokens.
 	    # TODO don't hardcode the reading split operation
 	    my @variant = split( /\s+/, $app->{$k} );
 	    @variant = () if $app->{$k} eq '/'; # This is an omission.
 	    
-	    # Make the variant into a set of readings.
 	    my @variant_readings;
 	    my $ctr = 0;
 	    foreach my $vw ( @variant ) {
@@ -213,8 +216,7 @@ sub merge_base {
 	# collated sets.  Modifies the reading sets that were passed.
 	collate_variants( $collation, @reading_sets );
 
-	# TODO Here would be a very good place to set up relationships
-	# between the nodes and the lemma.
+	# Record any stated relationships between the nodes and the lemma.
 	set_relationships( $collation, $app, \@lemma_set, $variant_objects );
 
 	# Now create the splice-edit objects that will be used
@@ -250,7 +252,7 @@ sub merge_base {
     foreach my $w ( grep { $_ !~ /_post$/ } keys %$edits_required ) {
 	print STDERR "Creating witness $w\n";
 	my $witness_obj = $collation->tradition->add_witness( sigil => $w );
-	my $debug = undef; # $w eq 'Vb10';
+	my $debug; #  = $w eq 'Vb11';
 	my @ante_corr_seq = apply_edits( $collation, $edits_required->{$w}, $debug );
 	my @post_corr_seq = apply_edits( $collation, $edits_required->{$w."_post"}, $debug )
 	    if exists( $edits_required->{$w."_post"} );
@@ -272,13 +274,49 @@ sub merge_base {
     }
 
     # Now remove our 'base text' edges, which is to say, the only
-    # ones we have created so far.  Also remove any nodes that didn't
-    # appear in any witnesses.
+    # ones we have created so far.  Also remove any unwitnessed
+    # lemma nodes (TODO unless we are treating base as witness)
     foreach ( $collation->paths() ) {
 	$collation->del_path( $_ );
     }
     foreach( @unwitnessed_lemma_nodes ) {
 	$collation->del_reading( $_ );
+    }
+
+    ### HACKY HACKY Do some one-off path corrections here.
+    if( $collation->linear ) {
+	my $c = $collation;
+	my $end = $SHORTEND ? $SHORTEND : 155;
+	my $path = $c->tradition->witness('Vb11')->path;
+	if( $end > 16 ) {
+	    $c->merge_readings( $c->reading('rdg_1/16.3.0'), $c->reading('rdg_1/16.2.1') );
+	    splice( @$path, 209, 2, $c->reading( 'rdg_1/16.3.0' ), $c->reading( 'rdg_1/16.2.2' ) );
+	}
+	# What else?
+    } else {
+	my $c = $collation;
+	my $end = $SHORTEND ? $SHORTEND : 155;
+	# Vb5:
+	my $path = $c->tradition->witness('Vb5')->path;
+	splice( @$path, 1436, 0, $c->reading('106,14') ) if $end > 106;
+	# Vb11: 
+	$path = $c->tradition->witness('Vb11')->path;
+	if( $end > 16 ) {
+	    $c->merge_readings( $c->reading('rdg_1/16.3.0'), $c->reading('rdg_1/16.2.1') );
+	    splice( @$path, 209, 2, $c->reading( 'rdg_1/16.3.0' ), $c->reading( '16,1' ) );
+	}
+	# Vb12 a.c.:
+	$path = $c->tradition->witness('Vb12')->uncorrected_path;
+	splice( @$path, 1828, 1, $c->reading('rdg_2/137.5.0') ) if $end > 137;
+	# Vb13:
+	$path = $c->tradition->witness('Vb13')->path;
+	splice( @$path, 782, 0, $c->reading( '58,5' ) ) if $end > 58;
+	# Vb20 a.c.: 
+	$path = $c->tradition->witness('Vb20')->uncorrected_path;
+	splice( @$path, 1251, 1, $c->reading( '94,6' ) ) if $end > 94;
+	# Vb26: 
+	$path = $c->tradition->witness('Vb26')->path;
+	splice( @$path, 618, 0, $c->reading('46,2') ) if $end > 46;
     }
 
     # Now walk paths and calculate positions.
@@ -449,9 +487,9 @@ sub collate_nonlinearly {
 	    if( @same ) {
 		foreach my $i ( 0 .. $#same ) {
 		    unless( $merged{$same[$i]->name} ) {
-			print STDERR sprintf( "Merging %s into %s\n", 
-					      $vw->name,
-					      $same[$i]->name );
+			#print STDERR sprintf( "Merging %s into %s\n", 
+			#		      $vw->name,
+			#		      $same[$i]->name );
 			$collation->merge_readings( $same[$i], $vw );
 			$merged{$same[$i]->name} = 1;
 			$matched = $i;
@@ -478,14 +516,19 @@ sub set_relationships {
     my( $collation, $app, $lemma, $variants ) = @_;
     foreach my $rkey ( keys %$variants ) {
 	my $var = $variants->{$rkey}->{'reading'};
-	my $typekey = sprintf( "_%s_type", $rkey );
-	my $type = $app->{$typekey};
+	my $type = $app->{sprintf( "_%s_type", $rkey )};
+	my $noncorr = $app->{sprintf( "_%s_non_corr", $rkey )};
+	my $nonindep = $app->{sprintf( "_%s_non_indep", $rkey )};
+	
+	my %rel_options = ();
+	$rel_options{'non_correctable'} = $noncorr if $noncorr && $noncorr =~ /^\d$/;
+	$rel_options{'non_indep'} = $nonindep if $nonindep && $nonindep =~ /^\d$/;
 	
 	if( $type =~ /^(inv|tr|rep)$/i ) {
 	    # Transposition or repetition: look for nodes with the
 	    # same label but different IDs and mark them.
 	    $type = 'repetition' if $type =~ /^rep/i;
-	    $DB::single = 1 if $type eq 'repetition';
+	    $rel_options{'type'} = $type;
 	    my %labels;
 	    foreach my $r ( @$lemma ) {
 		$labels{cmp_str( $r )} = $r;
@@ -495,46 +538,37 @@ sub set_relationships {
 		    $r->name ne $labels{$r->label}->name ) {
 		    if( $type eq 'repetition' ) {
 			# Repetition
-			$collation->add_relationship( $type, $r, $labels{$r->label} );
+			$collation->add_relationship( $r, $labels{$r->label}, \%rel_options );
 		    } else {
 			# Transposition
 			$r->set_identical( $labels{$r->label} );
 		    }
 		}
 	    }
-	} elsif( $type =~ /^(gr|sp(el)?)$/i ) {
-	    # Grammar/spelling: this can be a one-to-one or one-to-many
-	    # mapping.  We should think about merging readings if it is
-	    # one-to-many.
+	} elsif( $type =~ /^(gr|lex|sp(el)?)$/i ) {
+
+	    # Grammar/spelling/lexical: this can be a one-to-one or
+	    # one-to-many mapping.  We should think about merging
+	    # readings if it is one-to-many.
+
 	    $type = 'grammatical' if $type =~ /gr/i;
 	    $type = 'spelling' if $type =~ /sp/i;
 	    $type = 'repetition' if $type =~ /rep/i;
+	    $type = 'lexical' if $type =~ /lex/i;
+	    $rel_options{'type'} = $type;
 	    if( @$lemma == @$var ) {
 		foreach my $i ( 0 .. $#{$lemma} ) {
-		    $collation->add_relationship( $type, $var->[$i],
-						  $lemma->[$i] );
-		}
-	    } elsif ( @$lemma > @$var && @$var == 1 ) {
-		# Merge the lemma readings into one
-		## TODO This is a bad solution. We need a real one-to-many
-		##  mapping.
-		my $ln1 = shift @$lemma;
-		foreach my $ln ( @$lemma ) {
-		    $collation->merge_readings( $ln1, $ln, ' ' );
-		}
-		$lemma = [ $ln1 ];
-		$collation->add_relationship( $type, $var->[0], $lemma->[0] );
-	    } elsif ( @$lemma < @$var && @$lemma == 1 ) {
-		my $vn1 = shift @$var;
-		foreach my $vn ( @$var ) {
-		    $collation->merge_readings( $vn1, $vn, ' ' );
-		}
-		$var = [ $vn1 ];
-		$collation->add_relationship( $type, $var->[0], $lemma->[0] );
+		    $collation->add_relationship( $var->[$i], $lemma->[$i],
+			\%rel_options );
+		} 
 	    } else {
-		warn "Cannot set $type relationship on a many-to-many variant";
+		# An uneven many-to-many mapping.  Make a segment out of
+		# whatever we have.
+		my $lemseg = @$lemma > 1 ? $collation->add_segment( @$lemma ) : $lemma->[0];
+		my $varseg = @$var > 1 ? $collation->add_segment( @$var ) : $var->[0];
+		$collation->add_relationship( $varseg, $lemseg, \%rel_options );
 	    }
-	} elsif( $type !~ /^(lex|add|om)$/i ) {
+	} elsif( $type !~ /^(add|om)$/i ) {
 	    warn "Unrecognized type $type";
 	}
     }
@@ -573,16 +607,18 @@ sub apply_edits {
 				  $drift,
 				  ) if $debug;
 				  
-	    warn( sprintf( "Should be replacing %s (%s) with %s (%s) " .
-			   "but %s (%s) is there instead", 
-			   join( ' ', map {$_->label} @base_phrase ),
-			   join( ' ', map {$_->name} @base_phrase ),
-			   join( ' ', map {$_->label} @$items ),
-			   join( ' ', map {$_->name} @$items ),
-			   join( ' ', map {$_->label} @this_phrase ),
-			   join( ' ', map {$_->name} @this_phrase ),
-			   ) )
-		if $lemma_text[$realoffset]->name ne $lemma_start;
+	    if( $lemma_text[$realoffset]->name ne $lemma_start ) {
+		warn( sprintf( "Should be replacing %s (%s) with %s (%s) " .
+			       "but %s (%s) is there instead", 
+			       join( ' ', map {$_->label} @base_phrase ),
+			       join( ' ', map {$_->name} @base_phrase ),
+			       join( ' ', map {$_->label} @$items ),
+			       join( ' ', map {$_->name} @$items ),
+			       join( ' ', map {$_->label} @this_phrase ),
+			       join( ' ', map {$_->name} @this_phrase ),
+		      ) );
+		# next;
+	    }
 	}
 	splice( @lemma_text, $realoffset, $length, @$items );
 	$drift += @$items - $length;

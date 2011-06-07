@@ -26,6 +26,8 @@ has 'source' => (
     predicate => 'has_source',
     );
 
+# Path.  This is an array of Reading nodes that should mirror the
+# text above.
 has 'path' => (
     is => 'rw',
     isa => 'ArrayRef[Text::Tradition::Collation::Reading]',
@@ -69,7 +71,6 @@ around text => sub {
     
     $self->$orig( @_ );
 };
-
 
 no Moose;
 __PACKAGE__->meta->make_immutable;
