@@ -9,7 +9,7 @@ class MSDispatcher( webapp.RequestHandler ):
     def get( self ):
         self.response.out.write( '<html><head><title>Another post-only page</title></head><body>You should not be navigating here via GET.</body></html>' )
     
-    tokenizers = { 'plaintext': 'http://tlatokenizer.appspot.com/plaintext_tokenize',
+    tokenizers = { 'plaintext': 'http://interedition-tools.appspot.com/plaintext_tokenize',
                    'teixml': 'http://www.eccentricity.org/teitokenizer/form_tokenize',
                    # 'lucene': 'maybe someday',
                    }
@@ -62,8 +62,11 @@ class MSDispatcher( webapp.RequestHandler ):
         
         service = self.collators.get( self.request.get( 'collator' ) )
         if( service ):
+	    output = self.request.get( 'output' )
+	    if( output == "application/graphml" ):
+                output = "application/graphml+xml"
             collation_headers = { 'Content-Type': 'application/json',
-                                  'Accept' : self.request.get( 'output' ) }
+                                  'Accept' : output }
             # Cannot pass text/html in the Accept header evidently.
             if( self.request.get( 'output' ) == 'text/html' ):
                 del collation_headers['Accept']

@@ -14,7 +14,7 @@ handlers:
   static_dir: images
 
 - url: /frames
-  static_dir: frames
+  static_dir: html/frames
 
 - url: /plaintext_tokenize
   script: plaintext_tokenize.py
@@ -24,6 +24,10 @@ handlers:
 
 - url: /run_toolchain
   script: dispatcher.py
+
+- url: /test.*
+  login: admin
+  script: gaeunit.py
 
 - url: /.*
   script: index.py
