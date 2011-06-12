@@ -25,5 +25,9 @@ handlers:
 - url: /run_toolchain
   script: dispatcher.py
 
+- url: /test.*
+  login: admin
+  script: gaeunit.py
+
 - url: /.*
   script: index.py
