@@ -1,2 +1,2 @@
-require 'vmtransformer_controller'
+require './vmtransformer_controller'
 run Sinatra::Application

@@ -1,9 +1,10 @@
 require 'rubygems'
 require 'sinatra'
+require 'haml'
 require 'xml/xslt'
 
 #set :environment, :development
-#set :show_exceptions, false
+#set :show_exceptions, true
 
 class VMTransformerController
  
