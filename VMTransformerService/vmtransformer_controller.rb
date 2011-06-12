@@ -11,12 +11,19 @@ class VMTransformerController
   get '/doc' do
     haml :doc
   end
-  
+
   post '/vmtransform' do
     xslt = XML::XSLT.new()
     xslt.xml = request.body.read
     xslt.xsl = File.open( 'vmachine.xsl', 'rb' ).read
     xslt.serve()
   end
-  
+
+  post '/vmexample' do
+    xslt = XML::XSLT.new()
+    xslt.xml = File.open( 'test/prophecy_of_merlin.xml', 'rb' ).read
+    xslt.xsl = File.open( 'vmachine.xsl', 'rb' ).read
+    xslt.serve()
+  end
+
 end
