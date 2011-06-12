@@ -14,7 +14,7 @@ handlers:
   static_dir: images
 
 - url: /frames
-  static_dir: html/frames
+  static_dir: frames
 
 - url: /plaintext_tokenize
   script: plaintext_tokenize.py
