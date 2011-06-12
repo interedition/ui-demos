@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Client Admin Site</title>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <LINK HREF='style.css' MEDIA='screen' REL='StyleSheet' TYPE='text/css'></LINK>
+  </head>
+  <body>
+    <div id='application'>
+      <div class='doc_sub1header'>Web service mode:</div>
+      <div class='doc_body'>
+        Send a POST request to this service at /regularize_fuzzy, the request body of which should contain a JSON formatted CollateX token sets adhering to http://gregor.middell.net/collatex/api/collate
+        . It'll return your set containing normalized tokens based on fuzzy regularization in the vocabulary of all the text contained, otherwise your JSON will be untouched.
+      </div>
+      <div class='doc_sub1header'>Interactive mode:</div>
+      <div class='doc_body'>Not implemented yet</div>
+    </div>
+  </body>
+</html>

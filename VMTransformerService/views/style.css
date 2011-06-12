@@ -1,0 +1,10 @@
+.doc_sub1header {
+  font-family:"Times New Roman", Times, serif;
+  font-size: 11pt;
+  font-weight: bold; 
+}
+.doc_body {
+  font-family:"Times New Roman", Times, serif;
+  font-size: 10pt;
+  font-weight: normal; 
+}

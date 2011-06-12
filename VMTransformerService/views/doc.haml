@@ -1,0 +1,23 @@
+!!!
+%html
+  %head
+    %title Fuzzy Normalizer Web Service
+    %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}
+    %style{:type => "text/css", :media => "screen"}
+      :plain
+        .doc_sub1header {
+          font-family:"Times New Roman", Times, serif;
+          font-size: 11pt;
+          font-weight: bold; 
+        }
+        .doc_body {
+          font-family:"Times New Roman", Times, serif;
+          font-size: 10pt;
+          font-weight: normal; 
+        }
+  %body
+    #application
+      .doc_sub1header="Web service mode: "
+      .doc_body="Send a POST request to this service at /regularize_fuzzy, the request body of which should contain a JSON formatted CollateX token sets adhering to http:\/\/gregor.middell.net\/collatex\/api\/collate\r\n. It'll return your set containing normalized tokens based on fuzzy regularization in the vocabulary of all the text contained, otherwise your JSON will be untouched."
+      .doc_sub1header="Interactive mode: "
+      .doc_body="Not implemented yet"
