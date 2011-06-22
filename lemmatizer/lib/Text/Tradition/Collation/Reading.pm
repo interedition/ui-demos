@@ -123,6 +123,22 @@ sub is_at_position {
     return $self->position->is_colocated( @_ );
 }
 
+# Returns all readings that are joined by relationships to this one.
+sub related_readings {
+    my( $self, $type ) = @_;
+    my @type_edges = grep { $_->isa( $type ) } $self->edges;
+    my %connected;
+    foreach my $e ( @type_edges ) {
+	if( $self->name eq $e->to->name ) {
+	    $connected{$e->name} = $e->from;
+	} else {
+	    $connected{$e->name} = $e->to;
+	}
+    }
+    return values %connected;
+    
+}
+
 # Returns all readings that adjoin this one on any path.
 sub neighbor_readings {
     my( $self, $direction ) = @_;
