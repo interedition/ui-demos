@@ -1,0 +1,1052 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>The Altar -- The Versioning Machine 4.0</title>
+<link rel="stylesheet" type="text/css" href="../src/vmachine.css">
+<!--[if IE 6]>
+            <link rel="stylesheet" type="text/css" href="../src/vmachine_ie6.css">
+         <![endif]--><script type="text/javascript" src="../src/vmachine.js"></script><script type="text/javascript">
+      var witnesses = new Array();
+      
+         witnesses["w"] = "w";
+      
+         witnesses["b"] = "b";
+      
+         witnesses["p"] = "p";
+      
+      var maxPanels = 3;
+   </script>
+</head>
+<body onload="init();">
+<div id="mainBanner">
+<div id="brandingLogo"><img id="logo" alt="Powered by the Versioning Machine" src="../vm-images/poweredby.gif"></div>
+<div id="headline">
+<h1 onclick="toggleBiblio();">The Altar</h1>
+<span class="versionCount"> has 3 versions</span>
+</div>
+<img id="topEdge" src="../vm-images/topedge.gif" alt=""><div id="mainControls">
+<input type="button" id="newPanel" value="New Version" onclick="openPanel();">
+         •
+         <input type="button" id="bibToggle" value="Bibliographic Info" onclick="toggleBiblio();">
+         •
+         <label for="toggleLineNumbers">Line Numbers:</label><input type="checkbox" id="toggleLineNumbers" onclick="toggleLineNumbers(this.checked);" checked>
+         •
+         <select id="notesMenu" onchange="notesFormat(this.value);"><option value="popup" selected>Popup notes</option>
+<option value="inline">Inline notes</option>
+<option value="none">
+                     Hide notes
+                  </option></select>
+         •
+         <a href="../samples.html">Index of texts</a>
+</div>
+</div>
+<div id="mssArea">
+<div class="panel" id="bibPanel">
+<div class="panelBanner">
+<img class="closePanel" onclick="toggleBiblio();" alt="X" src="../vm-images/closePanel.gif">
+            Bibliographic Information
+         </div>
+<div class="bibContent">
+<h2>The Altar</h2>
+<h4>Original Source</h4>
+            
+               
+                  
+                     See witness list.
+                  
+               
+            
+         <h4>Witness List</h4>
+<ul>
+<li>
+<strong>Witness w:</strong> Williams MS. Jones B62</li>
+<li>
+<strong>Witness b:</strong> Bodleian MS. Tanner 307</li>
+<li>
+<strong>Witness p:</strong> The Temple: Sacred Poems and Private Ejaculations, first edition
+                  (Cambridge, 1633)</li>
+</ul>
+<h4>Electronic Edition Information:</h4>
+<h5>Responsibility Statement:</h5>
+<ul>
+<li>Transcribed, encoded, and edited by Robert Whalen</li>
+<li>Sponsored by Northern Michigan University and the National Endowment for the Humanities</li>
+<li>Funding provided by Northern Michigan University and the National Endowment for the Humanities</li>
+</ul>
+<h5>Publication Details:</h5>
+            <p>Published by Robert Whalen for demonstration purposes only. May not be reproduced without
+               permission..</p>
+            
+               
+            
+            
+            
+               <p></p>
+            
+            
+         <h4>Encoding Principles</h4>
+         
+            <p>"The Altar" is part of a comprehensive edition of George Herbert's English verse, <span class="hi rend-italic">The Digital Temple</span>. This larger project includes
+               computer-readable transcriptions, in both original- and modern-spelling versions, of
+               Williams MS. Jones B62, Bodleian MS. Tanner 307, and a copy of <span class="hi rend-italic">The
+                  Temple: Sacred Poems and Private Ejaculations</span>, first edition (Cambridge,
+               1633); high-resolution digital images of the sources (excepting the Latin verse in
+               Williams); an apparatus that includes critical, textual, and technical introductions
+               and annotations; and a user interface with which to navigate these materials.</p>
+         
+         <p>Transcriptions are encoded in TEI(P5)-conformant XML.</p>
+         
+            <p>Currently, only the Williams images and transcriptions are captured directly from the
+               source. Images (where available) and transcriptions of the Bodleian MS. and first
+               edition are captured from Scolar black-and-white facsimiles.</p>
+         
+         
+            
+               <p>Apparent errors are preserved and editorial corrections provided using SIC and
+                  CORR tags, but only where the editor conjectures that the original scribe or
+                  compositor would have recognized the instance as an error. For example, what
+                  according to modern usage is incorrect subject/verb agreement might have been
+                  deemed acceptable to a seventeenth-century scribe or compositor. All such
+                  instances are treated instead using the ORIG and REG tags. (See below.) </p>
+            
+            
+               <p>Original spellings, abbreviations, and orthography are preserved and
+                  regularizations provided. Where in the manuscripts a character's status as
+                  majuscule or miniscule is ambiguous, the editor has silently chosen one or the
+                  other based on context and judgment (i.e., does not register such ambiguity in
+                  either the markup or the notes).</p>
+            
+            
+               <p>Original quotation marks, if any, are preserved.</p>
+            
+            
+               <p>Original hyphenation is preserved.</p>
+            
+         
+
+         
+
+         
+
+      </div>
+</div>
+<div id="manuscripts">
+<div class="panel mssPanel">
+<div class="panelBanner">
+<img class="closePanel" onclick="closePanel(this.parentNode.parentNode);" src="../vm-images/closePanel.gif" alt="X">Witness <select class="witnessMenu" onchange="changeWitness(this.value,this.parentNode.parentNode);"><option selected value="w">1: w</option>
+<option value="b">2: b</option>
+<option value="p">3: p</option></select>
+</div>
+<div class="mssContent">
+
+         <hr class="pagebreak w">
+         
+
+         <hr class="pagebreak b">
+         
+         
+
+         <hr class="pagebreak p">
+         
+         
+
+         <div class="div type-poem rend-center">
+
+            <div class="head rend-center">
+               <span class="apparatus app-id2295855 clickable" onclick="matchApp('app-id2295855');">
+                  <span class="reading w"><span class="hi rend-underline">The Altar</span>.</span>
+                  <span class="reading b">
+                     <span class="hi rend-underline">The Altar</span>
+                  </span>
+                  <span class="reading p">The Altar.</span>
+               </span>
+               <span class="noteicon">n<div class="note">
+<strong>Note:</strong> See Wilcox (89) for the poem's debt to the pattern and <span class="hi rend-italic">schola
+                     cordis</span> (School of the Heart) emblem traditions. <br class="linebreak"><br class="linebreak">The title
+                  signifies the stone altar that in Catholic tradition was associated with Christ's
+                  sacrifice on the Cross; the speaker's heart offered as a "living sacrifice"
+                  (Romans 12:1); the poem itself and <span class="hi rend-italic">The Temple</span> as a whole.
+                  (The following poem in all three sources happens to be "The Sacrifice.")
+                  <br class="linebreak"><br class="linebreak">Though metaphorically the speaker's heart, the phrase <span class="hi rend-italic">broken Altar/ALTAR</span> in the first line would have provocatively suggested
+                  Reformation acts of iconoclasm that included the removal and/or destruction of
+                  such remnants of the old religion. Toward the end of Herbert's life, advocates of
+                  ceremonial worship and what Archbishop William Laud was to call the Beauty of
+                  Holiness boldly restored the altars to a place of prominence in some English
+                  churches. <br class="linebreak"><br class="linebreak">The Cambridge printers' innovation in #p—i.e., the
+                  upper-case rendering of <span class="hi rend-italic">ALTAR</span>, <span class="hi rend-italic">HEART</span>, and <span class="hi rend-italic">SACRIFICE</span>—foregrounds as
+                  complementary the poem's devotional and ceremonial features, and thereby
+                  privileges a <span class="hi rend-italic">via media</span> reading of an otherwise
+                  ideologically conflicted poem. Indeed, the change from <span class="hi rend-italic">onely</span> to <span class="hi rend-italic">bleſsed</span> in line 15 of witness #w suggests
+                  Herbert's concern that <span class="hi rend-italic">onely sacrifice</span> might seem a
+                  Protestant emphasis on the uniqueness of the Atonement at the expense of more
+                  Catholic notions of Real Presence and the replication of sacrifice in the ritual
+                  of the Eucharist. (According to the 31st of the <span class="hi rend-italic">Thirty-Nine
+                     Articles</span>, "the Offering of Christ once made is that perfect redemption,
+                  propitiation, and satisfaction, for all the sins of the whole world, both original
+                  and actual; and there is none other satisfaction for sin, but that alone.
+                  Wherefore the sacrifices of Masses, in the which it was commonly said, that the
+                  Priest did offer Christ for the quick and the dead, to have remission of pain or
+                  guilt, were blasphemous fables, and dangerous deceits.") Such revision exemplifies
+                  what historian Anthony Milton has called "negative popery": the increasing
+                  tendency of some early Stuart divines to advance Catholic ideas minus the once <span class="hi rend-italic">de rigueur</span> caveats disavowing them. (<span class="hi rend-italic">Catholic and Reformed</span>, 63-72.) Wilcox's reading—that the #w
+                  version unrevised "reveals H.'s assumption that there is now only one sacrifice"
+                  (93)—seems to suggest that the revision somehow left intact the earlier
+                  and more decidedly Protestant assertion.</div></span>
+            </div>
+
+            <div class="lg lg-n1 type-stanza">
+               <div class="line lineid2296024" onclick="matchLine('lineid2296024');">
+<div class="linenumber">1</div>
+                  <span class="apparatus">
+                     <span class="reading w">A broken Altar lord thy servant 
+                           <span class="choice">reares<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> rears</div></div></span>
+                        
+                     </span>
+                     <span class="reading b">A broken Altar, Lord, thy servant 
+                           <span class="choice">reares<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> rears</div></div></span>
+                        
+                     </span>
+                     <span class="reading p">A broken A L T A R, Lord, thy 
+                           <span class="choice">ſervant<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> servant</div></div></span>
+                        
+                        
+                           <span class="choice">reares<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> rears</div></div></span>
+                        ,</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">reares</span>: brings into existence by constructing (<span class="hi rend-italic">OED</span> 9), a meaning at odds with <span class="hi rend-italic">broken</span> only if it is assumed that the speaker could have anything
+                        more to offer than a broken heart. The word also connotes raising the dead
+                           (<span class="hi rend-italic">OED</span> 3.a), by extension the Resurrection, itself a
+                        triumph in which the broken body of Christ is raised to be a glorified
+                        body.</div></span>
+                  </span>
+               </div>
+               <div class="line lineid2295564" onclick="matchLine('lineid2295564');">
+<div class="linenumber">2</div>
+                  <span class="apparatus">
+                     <span class="reading w">Made of a 
+                           <span class="choice">Hart<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Heart</div></div></span>
+                         and 
+                           <span class="choice">cimented<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> cemented</div></div></span>
+                        
+                        
+                           <span class="choice">w<span class="hi rend-superscript">th</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> with</div></div></span>
+                        
+                        
+                           <span class="choice">teares<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> tears</div></div></span>
+                        .</span>
+                     <span class="reading b">Made of a heart, 
+                           <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        
+                        
+                           <span class="choice">cimented<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> cemented</div></div></span>
+                         with 
+                           <span class="choice">teares<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> tears</div></div></span>
+                        .</span>
+                     <span class="reading p">Made of a heart, and cemented with 
+                           <span class="choice">teares<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> tears</div></div></span>
+                        :</span>
+                  </span>
+               </div>
+               <div class="line lineid2295717" onclick="matchLine('lineid2295717');">
+<div class="linenumber">3</div>
+                  <span class="apparatus">
+                     <span class="reading w">Whose parts are as thy hand did frame</span>
+                     <span class="reading b">Whose parts are, as thy hand did frame;</span>
+                     <span class="reading p">
+                        
+                           <span class="choice">Whoſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Whose</div></div></span>
+                         parts are as thy hand did frame;</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">frame</span>: prepare, as a carpenter, for use in
+                        building (<span class="hi rend-italic">OED</span> 4). Jesus was a carpenter (Mark 6:3)
+                        and is "a son over his own house; whose house are we," for "he that built
+                        all things is God" (Hebrews 3:4-6).</div></span>
+                  </span>
+               </div>
+               <div class="line lineid2296153" onclick="matchLine('lineid2296153');">
+<div class="linenumber">4</div>
+                  <span class="apparatus">
+                     <span class="reading w">No 
+                           <span class="choice">workmans<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> workman's</div></div></span>
+                        
+                        
+                           <span class="choice">toole<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> tool</div></div></span>
+                         hath touch'd
+                        
+                           <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                         same</span>
+                     <span class="reading b">No 
+                           <span class="choice">workemans<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> workman's</div></div></span>
+                        
+                        
+                           <span class="choice">toole<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> tool</div></div></span>
+                         hath touch'd
+                        
+                           <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                         same.</span>
+                     <span class="reading p">No 
+                           <span class="choice">workmans<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> workman's</div></div></span>
+                         tool hath touch'd the 
+                           <span class="choice">ſame<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> same</div></div></span>
+                        .</span>
+                  </span>
+               </div>
+               <div class="line lineid2296320" onclick="matchLine('lineid2296320');">
+<div class="linenumber">5</div>
+                  <span class="apparatus">
+                     <span class="reading w">A 
+                           <span class="choice">Hart<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Heart</div></div></span>
+                         alone</span>
+                     <span class="reading b">A heart alone</span>
+                     <span class="reading p">A H E A R T alone</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">alone</span>: only.</div></span>
+                  </span>
+               </div>
+               <div class="line lineid2296373" onclick="matchLine('lineid2296373');">
+<div class="linenumber">6</div>
+                  <span class="apparatus">
+                     <span class="reading w">Is such a stone</span>
+                     <span class="reading b">Is such a stone,</span>
+                     <span class="reading p">Is 
+                           <span class="choice">ſuch<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> such</div></div></span>
+                         a 
+                           <span class="choice">ﬅone<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> stone</div></div></span>
+                        ,</span>
+                  </span>
+               </div>
+               <div class="line lineid2296429" onclick="matchLine('lineid2296429');">
+<div class="linenumber">7</div>
+                  <span class="apparatus">
+                     <span class="reading w">As nothing but</span>
+                     <span class="reading b">As nothing but</span>
+                     <span class="reading p">As nothing but</span>
+                  </span>
+               </div>
+               <div class="line lineid2296454" onclick="matchLine('lineid2296454');">
+<div class="linenumber">8</div>
+                  <span class="apparatus">
+                     <span class="reading w">Thy 
+                           <span class="choice">powre<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> power</div></div></span>
+                         doth 
+                           <span class="choice">cutt<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> cut</div></div></span>
+                        .</span>
+                     <span class="reading b">Thy power doth cut.</span>
+                     <span class="reading p">Thy pow'r doth cut.</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">Lines 5-8</span>: "Only a heart is so hard as that God's
+                        power alone is able to penetrate it."</div></span>
+                  </span>
+               </div>
+
+
+               <div class="line lineid2296526" onclick="matchLine('lineid2296526');">
+<div class="linenumber">9</div>
+                  <span class="apparatus">
+                     <span class="reading w">Wherefore each part</span>
+                     <span class="reading b">
+                           <span class="choice">Wherefor<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Wherefore</div></div></span>
+                         each part</span>
+                     <span class="reading p">Wherefore each part</span>
+                  </span>
+               </div>
+               <div class="line lineid2296566" onclick="matchLine('lineid2296566');">
+<div class="linenumber">10</div>
+                  <span class="apparatus">
+                     <span class="reading w">
+                        
+                           <span class="choice">Øf<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Of</div></div></span>
+                         my hard 
+                           <span class="choice">hart<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> heart</div></div></span>
+                        
+                     </span>
+                     <span class="reading b">Of my hard heart</span>
+                     <span class="reading p">Of my hard heart</span>
+                  </span>
+               </div>
+               <div class="line lineid2296621" onclick="matchLine('lineid2296621');">
+<div class="linenumber">11</div>
+                  <span class="apparatus">
+                     <span class="reading w">Meets in this frame</span>
+                     <span class="reading b p">Meets in this frame,</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">frame</span>: i.e., the poem; the stone altar of
+                        sacrifice; the speaker's body which houses his <span class="hi rend-italic">hart/heart</span>—"My body is the frame wherein 'tis held"
+                        (Shakespeare, Sonnet 24, line 3)— and is "the temple of God" (1
+                        Corinthians 3:16).</div></span>
+                  </span>
+               </div>
+               <div class="line lineid2296660" onclick="matchLine('lineid2296660');">
+<div class="linenumber">12</div>
+                  <span class="apparatus">
+                     <span class="reading w">To 
+                           <span class="choice">praiſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> praise</div></div></span>
+                         thy name</span>
+                     <span class="reading b">To praise thy Name.</span>
+                     <span class="reading p">To 
+                           <span class="choice">praiſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> praise</div></div></span>
+                         thy name.</span>
+                  </span>
+               </div>
+
+
+               <div class="line lineid2296717" onclick="matchLine('lineid2296717');">
+<div class="linenumber">13</div>
+                  <span class="apparatus">
+                     <span class="reading w">That If I chance to hold my peace</span>
+                     <span class="reading b">That, if I chance to hold my peace,</span>
+                     <span class="reading p">That if I chance to hold my peace,</span>
+                  </span>
+               </div>
+               <div class="line lineid2296743" onclick="matchLine('lineid2296743');">
+<div class="linenumber">14</div>
+                  <span class="apparatus">
+                     <span class="reading w">
+                        
+                           <span class="choice">Theſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> These</div></div></span>
+                         stones to 
+                           <span class="choice">praiſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> praise</div></div></span>
+                         thee may not 
+                           <span class="choice">ceaſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> cease</div></div></span>
+                        
+                     </span>
+                     <span class="reading b">These stones to praise thee may not cease.</span>
+                     <span class="reading p">
+                        
+                           <span class="choice">Theſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> These</div></div></span>
+                        
+                        
+                           <span class="choice">ﬅones<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> stones</div></div></span>
+                         to 
+                           <span class="choice">praiſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> praise</div></div></span>
+                         thee may not 
+                           <span class="choice">ceaſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> cease</div></div></span>
+                        .</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">Lines 13-14</span>: "And some of the Pharisees from among
+                        the multitude said unto him, Master, rebuke thy disciples. And he answered
+                        and said unto them, I tell you that, if these should hold their peace, the
+                        stones would immediately cry out" (Luke 19:39-40).</div></span>
+                  </span>
+               </div>
+               <div class="line lineid2296892" onclick="matchLine('lineid2296892');">
+<div class="linenumber">15</div>
+                  <span class="apparatus">
+                     <span class="reading w">
+                        
+                           <span class="choice">Ø<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> O</div></div></span>
+                        
+                        
+                           <span class="choice">lett<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> let</div></div></span>
+                         thy 
+                           <span class="choice">
+                                 <del class=" rend-strike">onely</del>
+                              <div class="corr"><div class="interior">
+<strong>Regularized form:</strong> only</div></div></span>
+                        
+                        
+                           <span class="choice">
+                                 <ins class="rend-supralinear">bleſsed</ins>
+                              <div class="corr"><div class="interior">
+<strong>Regularized form:</strong> blessed</div></div></span>
+                         sacrifice 
+                           <span class="choice">bee<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> be</div></div></span>
+                         mine,</span>
+                     <span class="reading b">O 
+                           <span class="choice">lett<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> let</div></div></span>
+                         thy blessed sacrifice be mine,</span>
+                     <span class="reading p">O let thy 
+                           <span class="choice">bleſſed<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> blessed</div></div></span>
+                        
+                        S A C R I F I C E be mine,</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> See headnote for the significance of the #w emendation.</div></span>
+                  </span>
+               </div>
+               <div class="line lineid2297052" onclick="matchLine('lineid2297052');">
+<div class="linenumber">16</div>
+                  <span class="apparatus">
+                     <span class="reading w">And 
+                           <span class="choice">sanctifie<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> sanctify</div></div></span>
+                         this Altar to 
+                           <span class="choice">bee<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> be</div></div></span>
+                         thine.</span>
+                     <span class="reading b">And sanctify this Altar to be thine.</span>
+                     <span class="reading p">And 
+                           <span class="choice">ſanctiﬁe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> sanctify</div></div></span>
+                         this A L T A R to be thine.</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">Lines 15-16</span>: For the multiple significations of
+                           <span class="hi rend-italic">Altar/ALTAR</span>, see headnote and the note for line
+                        11. Though the placement of <span class="hi rend-italic">SACRIFICE</span> over <span class="hi rend-italic">ALTAR</span> in #p is fortuitous and perhaps deliberate (as
+                        is the "broken" spacing of the words in these as well as lines 1 and 5), the
+                        layout in both manuscripts is unremarkable. But for <span class="hi rend-italic">Altar</span> having a majuscule initial, neither word there is
+                        distinguished in any way. Had Herbert intended to highlight them in #w (the
+                        only source in which he is known to have had a hand), he might have
+                        specified an italic script, as indeed he does elsewhere in #w—for
+                        example, in the final line of "Poetry" (entitled "The Quiddity" in
+                        #b/#p).</div></span>
+                  </span>
+               </div>
+            </div>
+         </div>
+         
+
+      </div>
+</div>
+<div class="panel mssPanel">
+<div class="panelBanner">
+<img class="closePanel" onclick="closePanel(this.parentNode.parentNode);" src="../vm-images/closePanel.gif" alt="X">Witness <select class="witnessMenu" onchange="changeWitness(this.value,this.parentNode.parentNode);"><option value="w">1: w</option>
+<option selected value="b">2: b</option>
+<option value="p">3: p</option></select>
+</div>
+<div class="mssContent">
+
+         <hr class="pagebreak w">
+         
+
+         <hr class="pagebreak b">
+         
+         
+
+         <hr class="pagebreak p">
+         
+         
+
+         <div class="div type-poem rend-center">
+
+            <div class="head rend-center">
+               <span class="apparatus app-id2295855 clickable" onclick="matchApp('app-id2295855');">
+                  <span class="reading w"><span class="hi rend-underline">The Altar</span>.</span>
+                  <span class="reading b">
+                     <span class="hi rend-underline">The Altar</span>
+                  </span>
+                  <span class="reading p">The Altar.</span>
+               </span>
+               <span class="noteicon">n<div class="note">
+<strong>Note:</strong> See Wilcox (89) for the poem's debt to the pattern and <span class="hi rend-italic">schola
+                     cordis</span> (School of the Heart) emblem traditions. <br class="linebreak"><br class="linebreak">The title
+                  signifies the stone altar that in Catholic tradition was associated with Christ's
+                  sacrifice on the Cross; the speaker's heart offered as a "living sacrifice"
+                  (Romans 12:1); the poem itself and <span class="hi rend-italic">The Temple</span> as a whole.
+                  (The following poem in all three sources happens to be "The Sacrifice.")
+                  <br class="linebreak"><br class="linebreak">Though metaphorically the speaker's heart, the phrase <span class="hi rend-italic">broken Altar/ALTAR</span> in the first line would have provocatively suggested
+                  Reformation acts of iconoclasm that included the removal and/or destruction of
+                  such remnants of the old religion. Toward the end of Herbert's life, advocates of
+                  ceremonial worship and what Archbishop William Laud was to call the Beauty of
+                  Holiness boldly restored the altars to a place of prominence in some English
+                  churches. <br class="linebreak"><br class="linebreak">The Cambridge printers' innovation in #p—i.e., the
+                  upper-case rendering of <span class="hi rend-italic">ALTAR</span>, <span class="hi rend-italic">HEART</span>, and <span class="hi rend-italic">SACRIFICE</span>—foregrounds as
+                  complementary the poem's devotional and ceremonial features, and thereby
+                  privileges a <span class="hi rend-italic">via media</span> reading of an otherwise
+                  ideologically conflicted poem. Indeed, the change from <span class="hi rend-italic">onely</span> to <span class="hi rend-italic">bleſsed</span> in line 15 of witness #w suggests
+                  Herbert's concern that <span class="hi rend-italic">onely sacrifice</span> might seem a
+                  Protestant emphasis on the uniqueness of the Atonement at the expense of more
+                  Catholic notions of Real Presence and the replication of sacrifice in the ritual
+                  of the Eucharist. (According to the 31st of the <span class="hi rend-italic">Thirty-Nine
+                     Articles</span>, "the Offering of Christ once made is that perfect redemption,
+                  propitiation, and satisfaction, for all the sins of the whole world, both original
+                  and actual; and there is none other satisfaction for sin, but that alone.
+                  Wherefore the sacrifices of Masses, in the which it was commonly said, that the
+                  Priest did offer Christ for the quick and the dead, to have remission of pain or
+                  guilt, were blasphemous fables, and dangerous deceits.") Such revision exemplifies
+                  what historian Anthony Milton has called "negative popery": the increasing
+                  tendency of some early Stuart divines to advance Catholic ideas minus the once <span class="hi rend-italic">de rigueur</span> caveats disavowing them. (<span class="hi rend-italic">Catholic and Reformed</span>, 63-72.) Wilcox's reading—that the #w
+                  version unrevised "reveals H.'s assumption that there is now only one sacrifice"
+                  (93)—seems to suggest that the revision somehow left intact the earlier
+                  and more decidedly Protestant assertion.</div></span>
+            </div>
+
+            <div class="lg lg-n1 type-stanza">
+               <div class="line lineid2296024" onclick="matchLine('lineid2296024');">
+<div class="linenumber">1</div>
+                  <span class="apparatus">
+                     <span class="reading w">A broken Altar lord thy servant 
+                           <span class="choice">reares<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> rears</div></div></span>
+                        
+                     </span>
+                     <span class="reading b">A broken Altar, Lord, thy servant 
+                           <span class="choice">reares<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> rears</div></div></span>
+                        
+                     </span>
+                     <span class="reading p">A broken A L T A R, Lord, thy 
+                           <span class="choice">ſervant<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> servant</div></div></span>
+                        
+                        
+                           <span class="choice">reares<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> rears</div></div></span>
+                        ,</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">reares</span>: brings into existence by constructing (<span class="hi rend-italic">OED</span> 9), a meaning at odds with <span class="hi rend-italic">broken</span> only if it is assumed that the speaker could have anything
+                        more to offer than a broken heart. The word also connotes raising the dead
+                           (<span class="hi rend-italic">OED</span> 3.a), by extension the Resurrection, itself a
+                        triumph in which the broken body of Christ is raised to be a glorified
+                        body.</div></span>
+                  </span>
+               </div>
+               <div class="line lineid2295564" onclick="matchLine('lineid2295564');">
+<div class="linenumber">2</div>
+                  <span class="apparatus">
+                     <span class="reading w">Made of a 
+                           <span class="choice">Hart<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Heart</div></div></span>
+                         and 
+                           <span class="choice">cimented<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> cemented</div></div></span>
+                        
+                        
+                           <span class="choice">w<span class="hi rend-superscript">th</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> with</div></div></span>
+                        
+                        
+                           <span class="choice">teares<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> tears</div></div></span>
+                        .</span>
+                     <span class="reading b">Made of a heart, 
+                           <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        
+                        
+                           <span class="choice">cimented<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> cemented</div></div></span>
+                         with 
+                           <span class="choice">teares<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> tears</div></div></span>
+                        .</span>
+                     <span class="reading p">Made of a heart, and cemented with 
+                           <span class="choice">teares<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> tears</div></div></span>
+                        :</span>
+                  </span>
+               </div>
+               <div class="line lineid2295717" onclick="matchLine('lineid2295717');">
+<div class="linenumber">3</div>
+                  <span class="apparatus">
+                     <span class="reading w">Whose parts are as thy hand did frame</span>
+                     <span class="reading b">Whose parts are, as thy hand did frame;</span>
+                     <span class="reading p">
+                        
+                           <span class="choice">Whoſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Whose</div></div></span>
+                         parts are as thy hand did frame;</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">frame</span>: prepare, as a carpenter, for use in
+                        building (<span class="hi rend-italic">OED</span> 4). Jesus was a carpenter (Mark 6:3)
+                        and is "a son over his own house; whose house are we," for "he that built
+                        all things is God" (Hebrews 3:4-6).</div></span>
+                  </span>
+               </div>
+               <div class="line lineid2296153" onclick="matchLine('lineid2296153');">
+<div class="linenumber">4</div>
+                  <span class="apparatus">
+                     <span class="reading w">No 
+                           <span class="choice">workmans<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> workman's</div></div></span>
+                        
+                        
+                           <span class="choice">toole<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> tool</div></div></span>
+                         hath touch'd
+                        
+                           <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                         same</span>
+                     <span class="reading b">No 
+                           <span class="choice">workemans<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> workman's</div></div></span>
+                        
+                        
+                           <span class="choice">toole<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> tool</div></div></span>
+                         hath touch'd
+                        
+                           <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                         same.</span>
+                     <span class="reading p">No 
+                           <span class="choice">workmans<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> workman's</div></div></span>
+                         tool hath touch'd the 
+                           <span class="choice">ſame<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> same</div></div></span>
+                        .</span>
+                  </span>
+               </div>
+               <div class="line lineid2296320" onclick="matchLine('lineid2296320');">
+<div class="linenumber">5</div>
+                  <span class="apparatus">
+                     <span class="reading w">A 
+                           <span class="choice">Hart<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Heart</div></div></span>
+                         alone</span>
+                     <span class="reading b">A heart alone</span>
+                     <span class="reading p">A H E A R T alone</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">alone</span>: only.</div></span>
+                  </span>
+               </div>
+               <div class="line lineid2296373" onclick="matchLine('lineid2296373');">
+<div class="linenumber">6</div>
+                  <span class="apparatus">
+                     <span class="reading w">Is such a stone</span>
+                     <span class="reading b">Is such a stone,</span>
+                     <span class="reading p">Is 
+                           <span class="choice">ſuch<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> such</div></div></span>
+                         a 
+                           <span class="choice">ﬅone<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> stone</div></div></span>
+                        ,</span>
+                  </span>
+               </div>
+               <div class="line lineid2296429" onclick="matchLine('lineid2296429');">
+<div class="linenumber">7</div>
+                  <span class="apparatus">
+                     <span class="reading w">As nothing but</span>
+                     <span class="reading b">As nothing but</span>
+                     <span class="reading p">As nothing but</span>
+                  </span>
+               </div>
+               <div class="line lineid2296454" onclick="matchLine('lineid2296454');">
+<div class="linenumber">8</div>
+                  <span class="apparatus">
+                     <span class="reading w">Thy 
+                           <span class="choice">powre<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> power</div></div></span>
+                         doth 
+                           <span class="choice">cutt<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> cut</div></div></span>
+                        .</span>
+                     <span class="reading b">Thy power doth cut.</span>
+                     <span class="reading p">Thy pow'r doth cut.</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">Lines 5-8</span>: "Only a heart is so hard as that God's
+                        power alone is able to penetrate it."</div></span>
+                  </span>
+               </div>
+
+
+               <div class="line lineid2296526" onclick="matchLine('lineid2296526');">
+<div class="linenumber">9</div>
+                  <span class="apparatus">
+                     <span class="reading w">Wherefore each part</span>
+                     <span class="reading b">
+                           <span class="choice">Wherefor<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Wherefore</div></div></span>
+                         each part</span>
+                     <span class="reading p">Wherefore each part</span>
+                  </span>
+               </div>
+               <div class="line lineid2296566" onclick="matchLine('lineid2296566');">
+<div class="linenumber">10</div>
+                  <span class="apparatus">
+                     <span class="reading w">
+                        
+                           <span class="choice">Øf<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Of</div></div></span>
+                         my hard 
+                           <span class="choice">hart<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> heart</div></div></span>
+                        
+                     </span>
+                     <span class="reading b">Of my hard heart</span>
+                     <span class="reading p">Of my hard heart</span>
+                  </span>
+               </div>
+               <div class="line lineid2296621" onclick="matchLine('lineid2296621');">
+<div class="linenumber">11</div>
+                  <span class="apparatus">
+                     <span class="reading w">Meets in this frame</span>
+                     <span class="reading b p">Meets in this frame,</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">frame</span>: i.e., the poem; the stone altar of
+                        sacrifice; the speaker's body which houses his <span class="hi rend-italic">hart/heart</span>—"My body is the frame wherein 'tis held"
+                        (Shakespeare, Sonnet 24, line 3)— and is "the temple of God" (1
+                        Corinthians 3:16).</div></span>
+                  </span>
+               </div>
+               <div class="line lineid2296660" onclick="matchLine('lineid2296660');">
+<div class="linenumber">12</div>
+                  <span class="apparatus">
+                     <span class="reading w">To 
+                           <span class="choice">praiſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> praise</div></div></span>
+                         thy name</span>
+                     <span class="reading b">To praise thy Name.</span>
+                     <span class="reading p">To 
+                           <span class="choice">praiſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> praise</div></div></span>
+                         thy name.</span>
+                  </span>
+               </div>
+
+
+               <div class="line lineid2296717" onclick="matchLine('lineid2296717');">
+<div class="linenumber">13</div>
+                  <span class="apparatus">
+                     <span class="reading w">That If I chance to hold my peace</span>
+                     <span class="reading b">That, if I chance to hold my peace,</span>
+                     <span class="reading p">That if I chance to hold my peace,</span>
+                  </span>
+               </div>
+               <div class="line lineid2296743" onclick="matchLine('lineid2296743');">
+<div class="linenumber">14</div>
+                  <span class="apparatus">
+                     <span class="reading w">
+                        
+                           <span class="choice">Theſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> These</div></div></span>
+                         stones to 
+                           <span class="choice">praiſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> praise</div></div></span>
+                         thee may not 
+                           <span class="choice">ceaſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> cease</div></div></span>
+                        
+                     </span>
+                     <span class="reading b">These stones to praise thee may not cease.</span>
+                     <span class="reading p">
+                        
+                           <span class="choice">Theſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> These</div></div></span>
+                        
+                        
+                           <span class="choice">ﬅones<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> stones</div></div></span>
+                         to 
+                           <span class="choice">praiſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> praise</div></div></span>
+                         thee may not 
+                           <span class="choice">ceaſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> cease</div></div></span>
+                        .</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">Lines 13-14</span>: "And some of the Pharisees from among
+                        the multitude said unto him, Master, rebuke thy disciples. And he answered
+                        and said unto them, I tell you that, if these should hold their peace, the
+                        stones would immediately cry out" (Luke 19:39-40).</div></span>
+                  </span>
+               </div>
+               <div class="line lineid2296892" onclick="matchLine('lineid2296892');">
+<div class="linenumber">15</div>
+                  <span class="apparatus">
+                     <span class="reading w">
+                        
+                           <span class="choice">Ø<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> O</div></div></span>
+                        
+                        
+                           <span class="choice">lett<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> let</div></div></span>
+                         thy 
+                           <span class="choice">
+                                 <del class=" rend-strike">onely</del>
+                              <div class="corr"><div class="interior">
+<strong>Regularized form:</strong> only</div></div></span>
+                        
+                        
+                           <span class="choice">
+                                 <ins class="rend-supralinear">bleſsed</ins>
+                              <div class="corr"><div class="interior">
+<strong>Regularized form:</strong> blessed</div></div></span>
+                         sacrifice 
+                           <span class="choice">bee<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> be</div></div></span>
+                         mine,</span>
+                     <span class="reading b">O 
+                           <span class="choice">lett<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> let</div></div></span>
+                         thy blessed sacrifice be mine,</span>
+                     <span class="reading p">O let thy 
+                           <span class="choice">bleſſed<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> blessed</div></div></span>
+                        
+                        S A C R I F I C E be mine,</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> See headnote for the significance of the #w emendation.</div></span>
+                  </span>
+               </div>
+               <div class="line lineid2297052" onclick="matchLine('lineid2297052');">
+<div class="linenumber">16</div>
+                  <span class="apparatus">
+                     <span class="reading w">And 
+                           <span class="choice">sanctifie<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> sanctify</div></div></span>
+                         this Altar to 
+                           <span class="choice">bee<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> be</div></div></span>
+                         thine.</span>
+                     <span class="reading b">And sanctify this Altar to be thine.</span>
+                     <span class="reading p">And 
+                           <span class="choice">ſanctiﬁe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> sanctify</div></div></span>
+                         this A L T A R to be thine.</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">Lines 15-16</span>: For the multiple significations of
+                           <span class="hi rend-italic">Altar/ALTAR</span>, see headnote and the note for line
+                        11. Though the placement of <span class="hi rend-italic">SACRIFICE</span> over <span class="hi rend-italic">ALTAR</span> in #p is fortuitous and perhaps deliberate (as
+                        is the "broken" spacing of the words in these as well as lines 1 and 5), the
+                        layout in both manuscripts is unremarkable. But for <span class="hi rend-italic">Altar</span> having a majuscule initial, neither word there is
+                        distinguished in any way. Had Herbert intended to highlight them in #w (the
+                        only source in which he is known to have had a hand), he might have
+                        specified an italic script, as indeed he does elsewhere in #w—for
+                        example, in the final line of "Poetry" (entitled "The Quiddity" in
+                        #b/#p).</div></span>
+                  </span>
+               </div>
+            </div>
+         </div>
+         
+
+      </div>
+</div>
+</div>
+<div class="panel" id="notesPanel" style="display: none;">
+<div class="panelBanner">
+<img class="closePanel" onclick="hideNotesPanel();" alt="X" src="../vm-images/closePanel.gif">
+            Textual Notes
+         </div>
+<div class="noteContent">
+<strong>Note: </strong>See Wilcox (89) for the poem's debt to the pattern and <span class="hi rend-italic">schola
+                     cordis</span> (School of the Heart) emblem traditions. <br class="linebreak"><br class="linebreak">The title
+                  signifies the stone altar that in Catholic tradition was associated with Christ's
+                  sacrifice on the Cross; the speaker's heart offered as a "living sacrifice"
+                  (Romans 12:1); the poem itself and <span class="hi rend-italic">The Temple</span> as a whole.
+                  (The following poem in all three sources happens to be "The Sacrifice.")
+                  <br class="linebreak"><br class="linebreak">Though metaphorically the speaker's heart, the phrase <span class="hi rend-italic">broken Altar/ALTAR</span> in the first line would have provocatively suggested
+                  Reformation acts of iconoclasm that included the removal and/or destruction of
+                  such remnants of the old religion. Toward the end of Herbert's life, advocates of
+                  ceremonial worship and what Archbishop William Laud was to call the Beauty of
+                  Holiness boldly restored the altars to a place of prominence in some English
+                  churches. <br class="linebreak"><br class="linebreak">The Cambridge printers' innovation in #p—i.e., the
+                  upper-case rendering of <span class="hi rend-italic">ALTAR</span>, <span class="hi rend-italic">HEART</span>, and <span class="hi rend-italic">SACRIFICE</span>—foregrounds as
+                  complementary the poem's devotional and ceremonial features, and thereby
+                  privileges a <span class="hi rend-italic">via media</span> reading of an otherwise
+                  ideologically conflicted poem. Indeed, the change from <span class="hi rend-italic">onely</span> to <span class="hi rend-italic">bleſsed</span> in line 15 of witness #w suggests
+                  Herbert's concern that <span class="hi rend-italic">onely sacrifice</span> might seem a
+                  Protestant emphasis on the uniqueness of the Atonement at the expense of more
+                  Catholic notions of Real Presence and the replication of sacrifice in the ritual
+                  of the Eucharist. (According to the 31st of the <span class="hi rend-italic">Thirty-Nine
+                     Articles</span>, "the Offering of Christ once made is that perfect redemption,
+                  propitiation, and satisfaction, for all the sins of the whole world, both original
+                  and actual; and there is none other satisfaction for sin, but that alone.
+                  Wherefore the sacrifices of Masses, in the which it was commonly said, that the
+                  Priest did offer Christ for the quick and the dead, to have remission of pain or
+                  guilt, were blasphemous fables, and dangerous deceits.") Such revision exemplifies
+                  what historian Anthony Milton has called "negative popery": the increasing
+                  tendency of some early Stuart divines to advance Catholic ideas minus the once <span class="hi rend-italic">de rigueur</span> caveats disavowing them. (<span class="hi rend-italic">Catholic and Reformed</span>, 63-72.) Wilcox's reading—that the #w
+                  version unrevised "reveals H.'s assumption that there is now only one sacrifice"
+                  (93)—seems to suggest that the revision somehow left intact the earlier
+                  and more decidedly Protestant assertion.</div>
+<div class="noteContent">
+<div class="position" onclick="matchLine('lineid2296024');">Line number 1</div>
+<strong>Note: </strong><span class="hi rend-italic">reares</span>: brings into existence by constructing (<span class="hi rend-italic">OED</span> 9), a meaning at odds with <span class="hi rend-italic">broken</span> only if it is assumed that the speaker could have anything
+                        more to offer than a broken heart. The word also connotes raising the dead
+                           (<span class="hi rend-italic">OED</span> 3.a), by extension the Resurrection, itself a
+                        triumph in which the broken body of Christ is raised to be a glorified
+                        body.</div>
+<div class="noteContent">
+<div class="position" onclick="matchLine('lineid2295717');">Line number 3</div>
+<strong>Note: </strong><span class="hi rend-italic">frame</span>: prepare, as a carpenter, for use in
+                        building (<span class="hi rend-italic">OED</span> 4). Jesus was a carpenter (Mark 6:3)
+                        and is "a son over his own house; whose house are we," for "he that built
+                        all things is God" (Hebrews 3:4-6).</div>
+<div class="noteContent">
+<div class="position" onclick="matchLine('lineid2296320');">Line number 5</div>
+<strong>Note: </strong><span class="hi rend-italic">alone</span>: only.</div>
+<div class="noteContent">
+<div class="position" onclick="matchLine('lineid2296454');">Line number 8</div>
+<strong>Note: </strong><span class="hi rend-italic">Lines 5-8</span>: "Only a heart is so hard as that God's
+                        power alone is able to penetrate it."</div>
+<div class="noteContent">
+<div class="position" onclick="matchLine('lineid2296621');">Line number 11</div>
+<strong>Note: </strong><span class="hi rend-italic">frame</span>: i.e., the poem; the stone altar of
+                        sacrifice; the speaker's body which houses his <span class="hi rend-italic">hart/heart</span>—"My body is the frame wherein 'tis held"
+                        (Shakespeare, Sonnet 24, line 3)— and is "the temple of God" (1
+                        Corinthians 3:16).</div>
+<div class="noteContent">
+<div class="position" onclick="matchLine('lineid2296743');">Line number 14</div>
+<strong>Note: </strong><span class="hi rend-italic">Lines 13-14</span>: "And some of the Pharisees from among
+                        the multitude said unto him, Master, rebuke thy disciples. And he answered
+                        and said unto them, I tell you that, if these should hold their peace, the
+                        stones would immediately cry out" (Luke 19:39-40).</div>
+<div class="noteContent">
+<div class="position" onclick="matchLine('lineid2296892');">Line number 15</div>
+<strong>Note: </strong>See headnote for the significance of the #w emendation.</div>
+<div class="noteContent">
+<div class="position" onclick="matchLine('lineid2297052');">Line number 16</div>
+<strong>Note: </strong><span class="hi rend-italic">Lines 15-16</span>: For the multiple significations of
+                           <span class="hi rend-italic">Altar/ALTAR</span>, see headnote and the note for line
+                        11. Though the placement of <span class="hi rend-italic">SACRIFICE</span> over <span class="hi rend-italic">ALTAR</span> in #p is fortuitous and perhaps deliberate (as
+                        is the "broken" spacing of the words in these as well as lines 1 and 5), the
+                        layout in both manuscripts is unremarkable. But for <span class="hi rend-italic">Altar</span> having a majuscule initial, neither word there is
+                        distinguished in any way. Had Herbert intended to highlight them in #w (the
+                        only source in which he is known to have had a hand), he might have
+                        specified an italic script, as indeed he does elsewhere in #w—for
+                        example, in the final line of "Poetry" (entitled "The Quiddity" in
+                        #b/#p).</div>
+<div id="noNotesFound" class="noteContent">
+            Sorry, but there are no notes associated with
+            any currently displayed witness.
+         </div>
+</div>
+<br class="clear">
+</div>
+<div class="viewerRoot" id="panel_imageViewer">
+<div title="Click to drag panel." class="viewerHandle" id="handle_imageViewer">
+<span class="viewerHandleLt" id="title_imageViewer">Image Viewer</span><img class="viewerHandleRt" onclick="return hidePanel('imageViewer');" alt="X" src="../vm-images/closePanel.gif">
+</div>
+<div class="viewerContent" id="content_imageViewer"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,543 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+      <title>Autumn, 1922 -- The Versioning Machine 4.0</title>
+      <link rel="stylesheet" type="text/css" href="../src/vmachine.css">
+      <!--[if IE 6]>
+            <link rel="stylesheet" type="text/css" href="../src/vmachine_ie6.css">
+         <![endif]--><script type="text/javascript" src="../src/vmachine.js"></script><script type="text/javascript">
+      var witnesses = new Array();
+      
+         witnesses["a1"] = "a1";
+      
+         witnesses["a2"] = "a2";
+      
+         witnesses["a3"] = "a3";
+      
+         witnesses["a4"] = "a4";
+      
+         witnesses["pub"] = "pub";
+      
+      var maxPanels = 5;
+   </script></head>
+   <body onload="init();">
+      <div id="mainBanner">
+         <div id="brandingLogo"><img id="logo" alt="Powered by the Versioning Machine" src="../src/images/poweredby.gif"></div>
+         <div id="headline">
+            <h1 onclick="toggleBiblio();">Autumn, 1922</h1><span class="versionCount"> has 5 versions</span></div><img id="topEdge" src="../src/images/topedge.gif" alt=""><div id="mainControls"><input type="button" id="newPanel" value="New Version" onclick="openPanel();">
+            &#8226;
+            <input type="button" id="bibToggle" value="Bibliographic Info" onclick="toggleBiblio();">
+            
+            &#8226;
+            <label for="toggleLineNumbers">Line Numbers:</label><input type="checkbox" id="toggleLineNumbers" onclick="toggleLineNumbers(this.checked);" checked>
+            &#8226;
+            <select id="notesMenu" onchange="notesFormat(this.value);">
+               <option value="popup" selected>Popup notes</option>
+               <option value="inline">Inline notes</option>
+               <option value="none">
+                  Hide notes
+                  
+               </option></select>
+            &#8226;
+            <a href="../samples.html">Index of texts</a></div>
+      </div>
+      <div id="mssArea">
+         <div class="panel" id="bibPanel">
+            <div class="panelBanner"><img class="closePanel" onclick="toggleBiblio();" alt="X" src="../src/images/closePanel.gif">
+               Bibliographic Information
+               
+            </div>
+            <div class="bibContent">
+               <h2>Autumn, 1922</h2>
+               <h3>
+                  by Thomas MacGreevy
+               </h3>
+               <h4>Original Source</h4>
+                           
+               <p>Diplomatic editions of MacGreevy's poetry were created from Collected Poems of Thomas MacGreevy: An Annotated Edition, edited by Susan Schreibman  (Anna Livia Press and The Catholic University of America Press, 1991). Images of MacGreevy's
+                  published poems were taken from MacGreevy's own copy of Poems (Heinemann, 1934). Manuscript copies are from MacGreevy's papers at Trinity College, Dublin (individual manuscript numbers
+                  appear in the Witness Details below).
+               </p>
+                        
+               <h4>Witness List</h4>
+               <ul>
+                  <li><strong>Witness a1:</strong> 'A Short History of Our Own Time'
+                     				(7989/1/10)
+                  </li>
+                  <li><strong>Witness a2:</strong> 'Civil War', which was deleted and
+                     				replaced with 'Ireland, Autumn 1922'
+                  </li>
+                  <li><strong>Witness a3:</strong> 'Ireland Autumn, 1922'
+                     				(7989/1/7)
+                  </li>
+                  <li><strong>Witness a4:</strong> (7989/1/8)
+                  </li>
+                  <li><strong>Witness pub:</strong> The poem was published in 
+                     				Poems under the title 'Autumn,
+                     				1922'
+                  </li>
+               </ul>
+               <h4>Textual Notes</h4>
+               <div class="note">There are four TS versions of this poem entitled 'Ireland Autumn, 1922', 'Civil War', and 'A Short History of Our Own Time'.
+                  The poem was most probably written between 1924 and 1926. To the editor's knowledge, it has not been reprinted 
+                  <hr>
+               </div>
+               <div class="note"><em class="label">render:</em> Additions appear in a green, fixed-width font.
+               </div>
+               <h4>Electronic Edition Information:</h4>
+               <h5>Responsibility Statement:</h5>
+               <ul>
+                  <li>Text Encoding  by  Susan Schreibman and  Jarom McDonald</li>
+                  <li>Proofing and Additional Encoding by   Lara Vetter and  Susan Schreibman</li>
+               </ul>
+               <h5>Publication Details:</h5>
+                           
+               <p>Published by Susan Schreibman.</p>
+                           
+                              Maryland Institute for Technology in the Humanities (MITH), University of Maryland, College Park, MD 20742
+                           
+                           
+                              
+               <p>Thomas MacGreevy's poetry is reprinted here with the kind permission of Margaret Farrington and Elizabeth Ryan.</p>
+                              
+               <p>This poem is being made available for demonstration purposes only. It may not be reproduced without explicit permission from
+                  the copyright holder. For copyright information, please contact Susan Schreibman at ss423@umail.umd.edu
+               </p>
+                           
+                        
+               <h4>Encoding Principles</h4>
+                        
+                           
+               <p>Test document for versioning machine project. Marked-up collation of
+                  			 Autumn.
+               </p>
+                           
+               <p>DTD constructed from TEI poetry base with tagsets for linking,
+                  			 figures, analysis, transcr, textcrit.
+               </p>
+                        
+                        
+                     
+            </div>
+         </div>
+         <div id="manuscripts">
+            <div class="panel mssPanel">
+               <div class="panelBanner"><img class="closePanel" onclick="closePanel(this.parentNode.parentNode);" src="../src/images/closePanel.gif" alt="X">Witness <select class="witnessMenu" onchange="changeWitness(this.value,this.parentNode.parentNode);">
+                     <option selected value="a1">1: a1</option>
+                     <option value="a2">2: a2</option>
+                     <option value="a3">3: a3</option>
+                     <option value="a4">4: a4</option>
+                     <option value="pub">5: pub</option></select></div>
+               <div class="mssContent"><img src="../src/images/image.gif" class="imageLink a2" onclick="return showImgPanel(event, 'imageViewer','images/autumn_a2.jpg','a2','-250','0');"><img src="../src/images/image.gif" class="imageLink a3" onclick="return showImgPanel(event, 'imageViewer','images/autumn_a3.jpg','a3','-250','0');"><img src="../src/images/image.gif" class="imageLink a4" onclick="return showImgPanel(event, 'imageViewer','images/autumn_a4.jpg','a4','-250','0');"><img src="../src/images/image.gif" class="imageLink pub" onclick="return showImgPanel(event, 'imageViewer','images/autumn_pub.jpg','pub','-250','0');">
+                           
+                  <div class="head">
+                                 
+                                    <span class="apparatus app-d0e169 clickable" onclick="matchApp('app-d0e169');">
+                                          <span class="reading a1">A Short History of Our Own Times.</span>
+                                          <span class="reading a2">
+                                                
+                           <del class=" rend-typed">CIVIL WAR</del>
+                                                
+                           <ins class="rend-hand">
+                              				Ireland, Autumn 1922
+                           </ins>
+                                             </span>
+                                          <span class="reading a3 a4">IRELAND, AUTUMN, 1922</span>
+                                          <span class="reading pub">
+                                                
+                           <ins class="rend-hand">IRELAND</ins> AUTUMN, 1922</span>
+                                       </span>
+                                    <span class="noteicon">c
+                        <div class="note"><strong>Critical note:</strong> 
+                                             
+                           <p>The alternative titles MacGreevy experimented with  provide the
+                              			 key to this very short poem. By the autumn of 1922 over six years had passed
+                              			 since Patrick Pearse had proclaimed the Irish Republic in Dublin's General Post
+                              			 Office. The country had seen the heart of its capital destroyed by the fires of
+                              			 Easter 1916, and this was followed after the Seinn Fein victory in the 1918
+                              			 election by an extended campaign of guerilla warfare against the British with
+                              			 its reprisals and counter-reprisals.
+                           </p>
+                                             
+                           <p>In the end, nationalist Ireland was
+                              			 divided into bitterly opposing camps, and engaged in civil war over the terms
+                              			 of the agreement reached in London in December 1921. The new national
+                              			 institutions that emerged did so more through the passage of time than as the
+                              			 expression of any national ideal or vision. MacGreevy's poem captures the
+                              			 despair and weariness of a nation torn apart by war and bitter political
+                              			 divisions.
+                           </p>
+                                          
+                        </div></span>
+                                 
+                              
+                  </div>
+                           
+                  <div class="lg lg-n1">
+                                 
+                     <div class="line lined0e206" onclick="matchLine('lined0e206');">
+                        <div class="linenumber">1</div>
+                                       <span class="apparatus">
+                                             <span class="reading a1 a2 a3 a4 pub">The sun burns out,</span>
+                                          </span>
+                                    
+                     </div>
+                                 
+                     <div class="line lined0e215" onclick="matchLine('lined0e215');">
+                        <div class="linenumber">2</div>
+                                       <span class="apparatus">
+                                             <span class="reading a1">The world withers,</span>
+                                             <span class="reading a3 a4">The world withers,<br class="stanzabreak">
+                                                </span>
+                                             <span class="reading a2 pub">The world withers<br class="stanzabreak">
+                                                </span>
+                                          </span>
+                                    
+                     </div>
+                                 
+                     <div class="line lined0e234" onclick="matchLine('lined0e234');">
+                        <div class="linenumber">3</div>
+                                       <span class="apparatus">
+                                             <span class="reading a1">Poets sing no more,</span>
+                                          </span>
+                                    
+                     </div>
+                                 
+                     <div class="line lined0e243" onclick="matchLine('lined0e243');">
+                        <div class="linenumber">4</div>
+                                       <span class="apparatus">
+                                             <span class="reading a1 a2 a4 pub">And time grows afraid of the triumph of time.
+                              				
+                              				<span class="noteicon">g
+                                 <div class="note"><strong>Gloss note:</strong> 
+                                    <p>The fifth of six allegorical triumphs in
+                                       				  Petrarch's Trionfi is the Triumph of Time.
+                                       				  Petrarch's Triumphs, often depicted as Father Time in his chariot surrounded by
+                                       				  symbolic devices such as the scythe and hourglass, were frequently represented
+                                       				  by Baroque and Renaissance artists.
+                                    </p>
+                                                            
+                                    <p>MacGreevy, however, may be thinking of one
+                                       				  or more of the paintings that he saw during his visit to the Prado in Madrid in
+                                       				  1924. One is Goya's Saturn [Time] Devouring His Son, and the other is Pieter
+                                       				  Brueghel the Elder's The Triumph of Death, which depicts a whole society
+                                       				  visited by death riding a pale horse (using imagery from the Apocalypse)
+                                       				  against a background of barren landscape and a darkened sky.
+                                    </p>
+                                                         
+                                 </div></span>
+                                                </span>
+                                             <span class="reading a3">And time grows afraid</span>
+                                          </span>
+                                    
+                     </div>
+                                 
+                     <div class="line lined0e266" onclick="matchLine('lined0e266');">
+                        <div class="linenumber">5</div>
+                                       <span class="apparatus">
+                                             <span class="reading a3">Of the triumph of time.
+                              				<span class="noteicon">g
+                                 <div class="note"><strong>Gloss note:</strong> The fifth of six allegorical triumphs in
+                                    				  Petrarch's Trionfi is the Triumph of Time.
+                                    				  Petrarch's Triumphs, often depicted as Father Time in his chariot surrounded by
+                                    				  symbolic devices such as the scythe and hourglass, were frequently represented
+                                    				  by Baroque and Renaissance artists. MacGreevy, however, may be thinking of one
+                                    				  or more of the paintings that he saw during his visit to the Prado in Madrid in
+                                    				  1924. One is Goya's Saturn [Time] Devouring His Son, and the other is Pieter
+                                    				  Brueghel the Elder's The Triumph of Death, which depicts a whole society
+                                    				  visited by death riding a pale horse (using imagery from the Apocalypse)
+                                    				  against a background of barren landscape and a darkened sky.
+                                 </div></span>
+                                                </span>
+                                          </span>
+                                    
+                     </div>
+                              
+                  </div>
+                           
+                              <span class="apparatus app-d0e284 clickable" onclick="matchApp('app-d0e284');">
+                                    <span class="reading a1">
+                                          <br class="linebreak">
+                                          Thomas Mc Greevy,
+                                          
+                                             <br class="linebreak">
+                                             19 Lincoln Chambers,
+                                             <br class="linebreak">
+                                             Lincoln Place,
+                                             <br class="linebreak">
+                                             DUBLIN.
+                                          
+                                       </span>
+                                    <span class="reading a4">
+                                          <br class="linebreak">
+                                          L. St. Senan 
+                                          <span class="noteicon">b
+                           <div class="note"><strong>Biographical note:</strong>     MacGreevy published several poems and reviews under the pseudonym L. St. Senan in the early-mid 1920s. 
+                              Saint Senan (d.560) founded several monasteries in MacGreevy's  native Ireland. Senan's last settlement was on Scattery Island
+                              in the estuary of the Shannon, near MacGreevy's birthplace. 
+                              
+                           </div></span>
+                                          <br class="linebreak">
+                                           (L. St. Senan)
+                                          <br class="linebreak">
+                                          Thomas McGreevy,
+                                          
+                                             <br class="linebreak">
+                                             15 Cheyne Gardens, London, S.W.3
+                                          
+                                       </span>
+                                 </span>
+                           
+                        
+               </div>
+            </div>
+            <div class="panel mssPanel">
+               <div class="panelBanner"><img class="closePanel" onclick="closePanel(this.parentNode.parentNode);" src="../src/images/closePanel.gif" alt="X">Witness <select class="witnessMenu" onchange="changeWitness(this.value,this.parentNode.parentNode);">
+                     <option value="a1">1: a1</option>
+                     <option selected value="a2">2: a2</option>
+                     <option value="a3">3: a3</option>
+                     <option value="a4">4: a4</option>
+                     <option value="pub">5: pub</option></select></div>
+               <div class="mssContent"><img src="../src/images/image.gif" class="imageLink a2" onclick="return showImgPanel(event, 'imageViewer','images/autumn_a2.jpg','a2','-250','0');"><img src="../src/images/image.gif" class="imageLink a3" onclick="return showImgPanel(event, 'imageViewer','images/autumn_a3.jpg','a3','-250','0');"><img src="../src/images/image.gif" class="imageLink a4" onclick="return showImgPanel(event, 'imageViewer','images/autumn_a4.jpg','a4','-250','0');"><img src="../src/images/image.gif" class="imageLink pub" onclick="return showImgPanel(event, 'imageViewer','images/autumn_pub.jpg','pub','-250','0');">
+                           
+                  <div class="head">
+                                 
+                                    <span class="apparatus app-d0e169 clickable" onclick="matchApp('app-d0e169');">
+                                          <span class="reading a1">A Short History of Our Own Times.</span>
+                                          <span class="reading a2">
+                                                
+                           <del class=" rend-typed">CIVIL WAR</del>
+                                                
+                           <ins class="rend-hand">
+                              				Ireland, Autumn 1922
+                           </ins>
+                                             </span>
+                                          <span class="reading a3 a4">IRELAND, AUTUMN, 1922</span>
+                                          <span class="reading pub">
+                                                
+                           <ins class="rend-hand">IRELAND</ins> AUTUMN, 1922</span>
+                                       </span>
+                                    <span class="noteicon">c
+                        <div class="note"><strong>Critical note:</strong> 
+                                             
+                           <p>The alternative titles MacGreevy experimented with  provide the
+                              			 key to this very short poem. By the autumn of 1922 over six years had passed
+                              			 since Patrick Pearse had proclaimed the Irish Republic in Dublin's General Post
+                              			 Office. The country had seen the heart of its capital destroyed by the fires of
+                              			 Easter 1916, and this was followed after the Seinn Fein victory in the 1918
+                              			 election by an extended campaign of guerilla warfare against the British with
+                              			 its reprisals and counter-reprisals.
+                           </p>
+                                             
+                           <p>In the end, nationalist Ireland was
+                              			 divided into bitterly opposing camps, and engaged in civil war over the terms
+                              			 of the agreement reached in London in December 1921. The new national
+                              			 institutions that emerged did so more through the passage of time than as the
+                              			 expression of any national ideal or vision. MacGreevy's poem captures the
+                              			 despair and weariness of a nation torn apart by war and bitter political
+                              			 divisions.
+                           </p>
+                                          
+                        </div></span>
+                                 
+                              
+                  </div>
+                           
+                  <div class="lg lg-n1">
+                                 
+                     <div class="line lined0e206" onclick="matchLine('lined0e206');">
+                        <div class="linenumber">1</div>
+                                       <span class="apparatus">
+                                             <span class="reading a1 a2 a3 a4 pub">The sun burns out,</span>
+                                          </span>
+                                    
+                     </div>
+                                 
+                     <div class="line lined0e215" onclick="matchLine('lined0e215');">
+                        <div class="linenumber">2</div>
+                                       <span class="apparatus">
+                                             <span class="reading a1">The world withers,</span>
+                                             <span class="reading a3 a4">The world withers,<br class="stanzabreak">
+                                                </span>
+                                             <span class="reading a2 pub">The world withers<br class="stanzabreak">
+                                                </span>
+                                          </span>
+                                    
+                     </div>
+                                 
+                     <div class="line lined0e234" onclick="matchLine('lined0e234');">
+                        <div class="linenumber">3</div>
+                                       <span class="apparatus">
+                                             <span class="reading a1">Poets sing no more,</span>
+                                          </span>
+                                    
+                     </div>
+                                 
+                     <div class="line lined0e243" onclick="matchLine('lined0e243');">
+                        <div class="linenumber">4</div>
+                                       <span class="apparatus">
+                                             <span class="reading a1 a2 a4 pub">And time grows afraid of the triumph of time.
+                              				
+                              				<span class="noteicon">g
+                                 <div class="note"><strong>Gloss note:</strong> 
+                                    <p>The fifth of six allegorical triumphs in
+                                       				  Petrarch's Trionfi is the Triumph of Time.
+                                       				  Petrarch's Triumphs, often depicted as Father Time in his chariot surrounded by
+                                       				  symbolic devices such as the scythe and hourglass, were frequently represented
+                                       				  by Baroque and Renaissance artists.
+                                    </p>
+                                                            
+                                    <p>MacGreevy, however, may be thinking of one
+                                       				  or more of the paintings that he saw during his visit to the Prado in Madrid in
+                                       				  1924. One is Goya's Saturn [Time] Devouring His Son, and the other is Pieter
+                                       				  Brueghel the Elder's The Triumph of Death, which depicts a whole society
+                                       				  visited by death riding a pale horse (using imagery from the Apocalypse)
+                                       				  against a background of barren landscape and a darkened sky.
+                                    </p>
+                                                         
+                                 </div></span>
+                                                </span>
+                                             <span class="reading a3">And time grows afraid</span>
+                                          </span>
+                                    
+                     </div>
+                                 
+                     <div class="line lined0e266" onclick="matchLine('lined0e266');">
+                        <div class="linenumber">5</div>
+                                       <span class="apparatus">
+                                             <span class="reading a3">Of the triumph of time.
+                              				<span class="noteicon">g
+                                 <div class="note"><strong>Gloss note:</strong> The fifth of six allegorical triumphs in
+                                    				  Petrarch's Trionfi is the Triumph of Time.
+                                    				  Petrarch's Triumphs, often depicted as Father Time in his chariot surrounded by
+                                    				  symbolic devices such as the scythe and hourglass, were frequently represented
+                                    				  by Baroque and Renaissance artists. MacGreevy, however, may be thinking of one
+                                    				  or more of the paintings that he saw during his visit to the Prado in Madrid in
+                                    				  1924. One is Goya's Saturn [Time] Devouring His Son, and the other is Pieter
+                                    				  Brueghel the Elder's The Triumph of Death, which depicts a whole society
+                                    				  visited by death riding a pale horse (using imagery from the Apocalypse)
+                                    				  against a background of barren landscape and a darkened sky.
+                                 </div></span>
+                                                </span>
+                                          </span>
+                                    
+                     </div>
+                              
+                  </div>
+                           
+                              <span class="apparatus app-d0e284 clickable" onclick="matchApp('app-d0e284');">
+                                    <span class="reading a1">
+                                          <br class="linebreak">
+                                          Thomas Mc Greevy,
+                                          
+                                             <br class="linebreak">
+                                             19 Lincoln Chambers,
+                                             <br class="linebreak">
+                                             Lincoln Place,
+                                             <br class="linebreak">
+                                             DUBLIN.
+                                          
+                                       </span>
+                                    <span class="reading a4">
+                                          <br class="linebreak">
+                                          L. St. Senan 
+                                          <span class="noteicon">b
+                           <div class="note"><strong>Biographical note:</strong>     MacGreevy published several poems and reviews under the pseudonym L. St. Senan in the early-mid 1920s. 
+                              Saint Senan (d.560) founded several monasteries in MacGreevy's  native Ireland. Senan's last settlement was on Scattery Island
+                              in the estuary of the Shannon, near MacGreevy's birthplace. 
+                              
+                           </div></span>
+                                          <br class="linebreak">
+                                           (L. St. Senan)
+                                          <br class="linebreak">
+                                          Thomas McGreevy,
+                                          
+                                             <br class="linebreak">
+                                             15 Cheyne Gardens, London, S.W.3
+                                          
+                                       </span>
+                                 </span>
+                           
+                        
+               </div>
+            </div>
+         </div>
+         <div class="panel" id="notesPanel" style="display: none;">
+            <div class="panelBanner"><img class="closePanel" onclick="hideNotesPanel();" alt="X" src="../src/images/closePanel.gif">
+               Textual Notes
+               
+            </div>
+            <div class="noteContent"><strong>Critical note: </strong>
+                                 
+               <p>The alternative titles MacGreevy experimented with  provide the
+                  			 key to this very short poem. By the autumn of 1922 over six years had passed
+                  			 since Patrick Pearse had proclaimed the Irish Republic in Dublin's General Post
+                  			 Office. The country had seen the heart of its capital destroyed by the fires of
+                  			 Easter 1916, and this was followed after the Seinn Fein victory in the 1918
+                  			 election by an extended campaign of guerilla warfare against the British with
+                  			 its reprisals and counter-reprisals.
+               </p>
+                                 
+               <p>In the end, nationalist Ireland was
+                  			 divided into bitterly opposing camps, and engaged in civil war over the terms
+                  			 of the agreement reached in London in December 1921. The new national
+                  			 institutions that emerged did so more through the passage of time than as the
+                  			 expression of any national ideal or vision. MacGreevy's poem captures the
+                  			 despair and weariness of a nation torn apart by war and bitter political
+                  			 divisions.
+               </p>
+                              
+            </div>
+            <div class="noteContent a1 a2 a4 pub">
+               <div class="witnesses">a1 a2 a4 pub</div>
+               <div class="position" onclick="matchLine('lined0e243');">Line number 4</div><strong>Gloss note: </strong><p>The fifth of six allegorical triumphs in
+                  				  Petrarch's Trionfi is the Triumph of Time.
+                  				  Petrarch's Triumphs, often depicted as Father Time in his chariot surrounded by
+                  				  symbolic devices such as the scythe and hourglass, were frequently represented
+                  				  by Baroque and Renaissance artists.
+               </p>
+                                       
+               <p>MacGreevy, however, may be thinking of one
+                  				  or more of the paintings that he saw during his visit to the Prado in Madrid in
+                  				  1924. One is Goya's Saturn [Time] Devouring His Son, and the other is Pieter
+                  				  Brueghel the Elder's The Triumph of Death, which depicts a whole society
+                  				  visited by death riding a pale horse (using imagery from the Apocalypse)
+                  				  against a background of barren landscape and a darkened sky.
+               </p>
+                                    
+            </div>
+            <div class="noteContent a3">
+               <div class="witnesses">a3</div>
+               <div class="position" onclick="matchLine('lined0e266');">Line number 5</div><strong>Gloss note: </strong>The fifth of six allegorical triumphs in
+               				  Petrarch's Trionfi is the Triumph of Time.
+               				  Petrarch's Triumphs, often depicted as Father Time in his chariot surrounded by
+               				  symbolic devices such as the scythe and hourglass, were frequently represented
+               				  by Baroque and Renaissance artists. MacGreevy, however, may be thinking of one
+               				  or more of the paintings that he saw during his visit to the Prado in Madrid in
+               				  1924. One is Goya's Saturn [Time] Devouring His Son, and the other is Pieter
+               				  Brueghel the Elder's The Triumph of Death, which depicts a whole society
+               				  visited by death riding a pale horse (using imagery from the Apocalypse)
+               				  against a background of barren landscape and a darkened sky.
+            </div>
+            <div class="noteContent a4">
+               <div class="witnesses">a4</div><strong>Biographical note: </strong>    MacGreevy published several poems and reviews under the pseudonym L. St. Senan in the early-mid 1920s. 
+               Saint Senan (d.560) founded several monasteries in MacGreevy's  native Ireland. Senan's last settlement was on Scattery Island
+               in the estuary of the Shannon, near MacGreevy's birthplace. 
+               
+            </div>
+            <div id="noNotesFound" class="noteContent">
+               Sorry, but there are no notes associated with
+               any currently displayed witness.
+               
+            </div>
+         </div><br class="clear"></div>
+      <div class="viewerRoot" id="panel_imageViewer">
+         <div title="Click to drag panel." class="viewerHandle" id="handle_imageViewer"><span class="viewerHandleLt" id="title_imageViewer">Image Viewer</span><img class="viewerHandleRt" onclick="return hidePanel('imageViewer');" alt="X" src="../src/images/closePanel.gif"></div>
+         <div class="viewerContent" id="content_imageViewer"></div>
+      </div>
+   </body>
+</html>

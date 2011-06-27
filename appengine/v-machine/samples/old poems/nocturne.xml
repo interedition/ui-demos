@@ -1,0 +1,308 @@
+<?xml-stylesheet href="../src/vmachine.xsl" type="text/xsl" ?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"> 
+    
+    <teiHeader>
+        <fileDesc> 
+            
+            <titleStmt> 
+                
+                <title>Nocturne</title> 
+                
+                <author>Thomas MacGreevy</author> 
+                
+                <respStmt> 
+                    
+                    <resp>Text Encoding by Susan Schreibman and Jarom McDonald.</resp> 
+                    
+                    <resp>Proofing and additional Encoding by Lara Vetter</resp> 
+                    
+                    <resp>Annotations by Susan Schreibman</resp> 
+                    
+                    <name/>
+                    
+                </respStmt> 
+                
+            </titleStmt> 
+            
+            <publicationStmt>
+                <publisher>Susan Schreibman</publisher>
+                <address> 
+                    
+                    <addrLine>Maryland Institute for Technology in the Humanities (MITH),
+                        University of Maryland, College Park, MD 20742</addrLine> 
+                    
+                </address>
+                <availability status="restricted"> 
+                    
+                    <p>Thomas MacGreevy's poetry is reprinted here with the kind permission of Margaret Farrington and Elizabeth Ryan.</p>
+                    <p>This poem is being made available for demonstration purposes only. It may not be reproduced without explicit permission from the copyright holder. For copyright information, please contact Susan Schreibman at ss423@umail.umd.edu</p>
+                    
+                    
+                </availability>
+            </publicationStmt> 
+            
+            <notesStmt> 
+                 <note type="image" anchored="true">
+					<witDetail target="a1" wit="a1" place="apparatus">
+						
+
+					</witDetail>
+	       
+	
+					<witDetail target="a2" wit="a2" place="apparatus">
+						
+					
+					</witDetail>
+	 	    
+	
+					<witDetail target="a3" wit="a3"  place="apparatus">
+					
+					
+						</witDetail>
+	 	    
+	
+					<witDetail target="a4" wit="a4"  place="apparatus">
+						
+						</witDetail>
+	 	    
+	
+					<witDetail target="pub" wit="pub"  place="apparatus">
+             
+
+					</witDetail>
+	
+					
+				</note> 
+                <note type="critical" anchored="true">There are three TS versions of this poem entitled
+                    'Nocturne, Saint Eloi, 1918'. It was published as 'Nocturne, Saint Eloi, 1929'
+                    in The Irish Statesman, II:4 (28 September 1929) 69, under the pseudonym L.
+                    Saint Senan (See 'Saint Senan's Well'). 'Nocturne' was written in late 1928 or
+                    early 1929. To the editor's knowledge, it has not been reprinted.</note> 
+                
+                <note type="biographical" anchored="true">During World War I, MacGreevy served for
+                    twenty-two months as a second lieutenant in the Royal Field Artillery, spending
+                    most of that time in the front line of the Somme (after the war he was promoted
+                    to the rank of lieutenant). In France he was wounded twice, the second time
+                    (September 1918) more seriously at Commines, where he received a shoulder
+                    wound. </note> 
+                
+                <note type="render" anchored="true">Additions appear in a green, fixed-width font.</note> 		
+            </notesStmt> 
+            
+            <sourceDesc> 
+                
+                <p>Diplomatic editions of MacGreevy's poetry were created from <title rend="italic">Collected Poems of Thomas MacGreevy: An Annotated Edition</title>, edited by Susan Schreibman  (Anna Livia Press and The Catholic University of America Press, 1991). Images of MacGreevy's published poems were taken from MacGreevy's own copy of <title rend="italic">Poems</title> (Heinemann, 1934). Manuscript copies are from MacGreevy's papers at Trinity College, Dublin (individual manuscript numbers appear in the Witness Details below).</p>
+                
+                
+            </sourceDesc> 
+            
+        </fileDesc>
+        <encodingDesc> 
+            
+            <projectDesc> 
+                
+                <p>Test document for versioning machine project. Marked-up collation of
+                    Nocturne.</p> 
+                
+                <p>DTD constructed from TEI poetry base with tagsets for linking,
+                    figures, analysis, transcr, textcrit.</p> 
+                
+            </projectDesc>
+            
+            <variantEncoding location="internal" method="parallel-segmentation"/> 
+            
+        </encodingDesc>
+       
+    </teiHeader> 
+    
+    <text> 
+        
+        <front> 
+            
+            <div> 
+                
+                <listWit> 
+                    
+                    <witness xml:id="a1">'Nocturne, Saint Eloi, 1918' (TCD
+                        7878/1/2)</witness> 
+                    
+                    <witness xml:id="a2">'Nocturne of St. Eloi, 1918' (TCD MS
+                        7989/1/3)</witness> 
+                    
+                    <witness xml:id="a3">'Nocturne, Saint Eloi' (TCD MS
+                        79891/1)</witness> 
+                    
+                    <witness xml:id="pub">This poem was published in Poems as
+                        'Nocturne'</witness> 
+                    
+                </listWit> 
+                
+            </div> 
+            
+        </front> 
+        
+        <body> 
+            
+            <div1> 
+                
+                <head> 
+                    
+                    <title> 
+                        
+                        <app> 
+                            
+                            <rdg wit="a1">Nocturne, St. Eloi, 1918.</rdg> 
+                            
+                            <rdg wit="a2">NOCTURNE OF ST. ELOI, 1918</rdg> 
+                            
+                            <rdg wit="a2"> 
+                                <del type="hand">Weeds of virtue</del>
+                            </rdg> 
+                            
+                            <rdg wit="a2"> 
+                                <del type="hand">The</del> Widowed Virtue</rdg> 
+                            
+                            <rdg wit="a3">NOCTURNE, SAINT ELOI</rdg> 
+                            
+                            <rdg wit="pub">NOCTURNE</rdg> 
+                            
+                        </app> 
+                    </title> 
+                    
+                    <note type="critical" anchored="true"> 
+                        
+                        <p>Saint Eloi, one of the most popular Saints of the Middle Ages,
+                            founded a monastery near the present village of Mont St. Eloi, five miles
+                            northwest of the city of Arras in northern France. The ruins of the monastery
+                            remain, and in 1917-18 were close to the Western Front. There is also a British
+                            Military Cemetery nearby.</p> 
+                        
+                        <p>Eloi may also be a reference to the words of Christ on the
+                            cross: 'Eloi, Eloi, lamma sabacthani? . . . My God, my God, why hast thou
+                            forsaken me?' (Mark 15:34-5).</p>
+                        
+                    </note>
+                </head> 
+                
+                <div2 type="dedication"> 
+                    
+                    <p> 
+                        
+                        <app> 
+                            
+                            <rdg wit="a3">
+                                <hi rend="underline">To the memory of
+                                    <del type="hand">[?]</del> Geoffrey<lb/> England Taylor, 2nd Lieutenant,
+                                    R.F.A.,<lb/> died of wounds received in action, in<lb/> France, September, 26,
+                                    1918.</hi> 
+                                
+                                <note type="biographical" anchored="true"> 
+                                    
+                                    <p>Geoffrey England Taylor, a fellow cadet at the training
+                                        academy at Bloomsbury in London, was MacGreevy's closest friend during the war.
+                                        Both men were drafted to the same division in France. MacGreevy was assigned to
+                                        guns, Taylor to trench mortars: 'the greatest misfortune that could befall a
+                                        gunner-officer. Trench mortars were regarded with horror . . . [they were] a
+                                        suicide club.' </p> 
+                                    
+                                    <p>While MacGreevy was recovering from his shoulder wound in
+                                        Manchester, he found Taylor's name in the Died of Wounds section of the
+                                        Casualty List. The death of Geoffrey Taylor, 'one of the most sensitively
+                                        gentle' of men, represented to MacGreevy the worst horror of war: the
+                                        destruction of 'life's hopes and dreams'; 'intelligence and beauty'. 
+                                        <title rend="italic">Memoirs</title>, pp. 318-19. </p>
+                                    
+                                    
+                                </note>
+                            </rdg> 
+                            
+                            <rdg wit="pub">
+                                <hi rend="italic">To Geoffrey England Taylor, 2nd
+                                    Lieutenant, R.F.A.,<lb/> "Died of wounds"</hi>. 
+                                <note type="biographical" anchored="true"> 
+                                    
+                                    <p>Geoffrey England Taylor, a fellow cadet at the training
+                                        academy at Bloomsbury in London, was MacGreevy's closest friend during the war.
+                                        Both men were drafted to the same division in France. MacGreevy was assigned to
+                                        guns, Taylor to trench mortars: 'the greatest misfortune that could befall a
+                                        gunner-officer. Trench mortars were regarded with horror . . . [they were] a
+                                        suicide club.' </p> 
+                                    
+                                    <p>While MacGreevy was recovering from his shoulder wound in
+                                        Manchester, he found Taylor's name in the Died of Wounds section of the
+                                        Casualty List. The death of Geoffrey Taylor, 'one of the most sensitively
+                                        gentle' of men, represented to MacGreevy the worst horror of war: the
+                                        destruction of 'life's hopes and dreams'; 'intelligence and beauty'. 
+                                        <title rend="italic">Memoirs</title>, pp. 318-19. </p>
+                                    
+                                    
+                                </note>
+                            </rdg> 
+                            
+                        </app> 
+                    </p> 
+                    
+                </div2> 
+                
+                <div2> 
+                    
+                    <lg> 
+                        
+                        <l n="1"> I labour in a barren place,</l> 
+                        
+                        <l n="2"> 
+                            
+                            <app> 
+                                
+                                <rdg wit="a1">Afraid, aware, <del type="hand">little</del>
+                                    
+                                    
+                                    <add rend="hand">blundering</add>, lonely thing:</rdg> 
+                                
+                                <rdg wit="a2 a3 pub">Alone, self-conscious, frightened,
+                                    blundering;</rdg> 
+                                
+                            </app> 
+                        </l> 
+                        
+                        <l n="3"> 
+                            
+                            <app> 
+                                
+                                <rdg wit="a1">Far away, stars wheeling on through space.</rdg> 
+                                
+                                <rdg wit="a2"> 
+                                    <del type="hand">Above me</del>,
+                                    <add rend="hand">Far away</add> stars wheeling in space,</rdg> 
+                                
+                                <rdg wit="a3">Far above, stars wheeling in space,</rdg> 
+                                
+                                <rdg wit="pub">Far away, stars wheeling in space,</rdg> 
+                                
+                            </app> 
+                        </l> 
+                        
+                        <l n="4"> About my feet, earth voices whispering.
+                            
+                            <app> 
+                                
+                                <rdg wit="a1 pub"></rdg>
+                                
+                                
+                                
+                                <rdg wit="a2 a3">. . . .</rdg> 
+                                
+                            </app> 
+                        </l> 
+                        
+                    </lg> 
+                    
+                </div2> 
+                
+            </div1> 
+            
+        </body> 
+        
+    </text> 
+    
+</TEI>

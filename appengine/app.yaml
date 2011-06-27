@@ -13,6 +13,9 @@ handlers:
 - url: /images
   static_dir: images
 
+- url: /v-machine
+  static_dir: v-machine
+
 - url: /frames
   static_dir: frames
 
@@ -24,6 +27,15 @@ handlers:
 
 - url: /run_toolchain
   script: dispatcher.py
+
+- url: /teidisplay
+  script: teiResult.py
+
+- url: /htmldisplay
+  script: htmlResult.py
+
+- url: /graphmldisplay
+  script: graphmlResult.py
 
 - url: /test.*
   login: admin

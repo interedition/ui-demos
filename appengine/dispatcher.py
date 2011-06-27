@@ -17,6 +17,11 @@ class MSDispatcher( webapp.RequestHandler ):
                      }
     collators = { 'collatex': 'http://gregor.middell.net/collatex/api/collate' }
     
+    resultactions = { 'application/xhtml+xml': { 'formaction': '/htmldisplay', 'buttons': [ 'Render the HTML' ] },
+                      'application/xml': { 'formaction': '/teidisplay', 'buttons': [ 'Display in Versioning Machine' ] }, 
+                      'application/graphml+xml': { 'formaction': '/graphml', 'buttons': [ 'Send to lemmatizer' ] },
+                      }
+    
     def post( self ):
     	errormsg = []
         def is_text( x ):
@@ -47,7 +52,6 @@ class MSDispatcher( webapp.RequestHandler ):
                 raise NoServiceError( 'No defined tokenizer for type %s' % text['type'] )
         
         payload = json.dumps( tokenized_texts, ensure_ascii=False ).encode( 'utf-8' )
-        #errormsg.append( payload )
         
         if( self.request.get( 'fuzzymatch' ) == 'true' ):
             service = self.regularizers.get( 'fuzzymatch' )
@@ -55,20 +59,20 @@ class MSDispatcher( webapp.RequestHandler ):
                                         payload=payload,
                                         method='POST' )
             if urlresult.status_code == 200:
-                payload = urlresult.content
+                payload = urlresult.content   # Still JSON here
             else:
                 raise ServiceNotOKError( 'Service %s returned status code %d' 
                                     % ( service, urlresult.status_code ) )
         
         service = self.collators.get( self.request.get( 'collator' ) )
+        output = self.request.get( 'output' )
         if( service ):
-	    output = self.request.get( 'output' )
-	    if( output == "application/graphml" ):
-                output = "application/graphml+xml"
+	    if( output == "application/graphml" or output == "image/svg" or output == "application/xhtml" ):
+                output = output + "+xml"
             collation_headers = { 'Content-Type': 'application/json',
                                   'Accept' : output }
             # Cannot pass text/html in the Accept header evidently.
-            if( self.request.get( 'output' ) == 'text/html' ):
+            if( output == 'text/html' ):
                 del collation_headers['Accept']
             
             urlresult = urlfetch.fetch( url=service,
@@ -76,7 +80,8 @@ class MSDispatcher( webapp.RequestHandler ):
                                         payload=payload,
                                         method='POST' )
             if urlresult.status_code == 200:
-                payload = urlresult.content
+                payload = urlresult.content  ## Could be one of several formats now
+                payload = payload.decode("utf-8")
             else:
                 raise ServiceNotOKError( 'Service %s returned status code %d, content %s' 
                                     % ( service, urlresult.status_code, urlresult.content ) )
@@ -87,8 +92,13 @@ class MSDispatcher( webapp.RequestHandler ):
         if( len( errormsg ) > 0 ):
             self.response.out.write( 'Got errors: %s' % "\n".join( errormsg ) )
         else:
+            answer = { 'result': payload,
+                       'output': output,
+                       'formaction': self.resultactions.get( output ).get( 'formaction' ),
+                       'buttons': self.resultactions.get( output ).get( 'buttons' ),
+                       }
             self.response.headers.__setitem__( 'content-type', 'application/json' )
-            self.response.out.write( payload )
+            self.response.out.write( json.dumps( answer, ensure_ascii=False ).encode( 'utf-8' ) )
 
 class NoServiceError( Exception ): pass
 class ServiceNotOKError( Exception ): pass

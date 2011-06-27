@@ -1,0 +1,299 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+      <title>"Faith is a fine invention" -- The Versioning Machine 4.0</title>
+      <link rel="stylesheet" type="text/css" href="../src/vmachine.css">
+      <!--[if IE 6]>
+            <link rel="stylesheet" type="text/css" href="../src/vmachine_ie6.css">
+         <![endif]--><script type="text/javascript" src="../src/vmachine.js"></script><script type="text/javascript">
+      var witnesses = new Array();
+      
+         witnesses["a660"] = "a660";
+      
+         witnesses["h201"] = "h201";
+      
+         witnesses["h72"] = "h72";
+      
+         witnesses["p1891"] = "p1891";
+      
+         witnesses["l1894"] = "l1894";
+      
+         witnesses["cp32"] = "cp32";
+      
+         witnesses["ll227"] = "ll227";
+      
+      var maxPanels = 7;
+   </script></head>
+   <body onload="init();">
+      <div id="mainBanner">
+         <div id="brandingLogo"><img id="logo" alt="Powered by the Versioning Machine" src="../src/images/poweredby.gif"></div>
+         <div id="headline">
+            <h1 onclick="toggleBiblio();">"Faith is a fine invention"</h1><span class="versionCount"> has 7 versions</span></div><img id="topEdge" src="../src/images/topedge.gif" alt=""><div id="mainControls"><input type="button" id="newPanel" value="New Version" onclick="openPanel();">
+            &#8226;
+            <input type="button" id="bibToggle" value="Bibliographic Info" onclick="toggleBiblio();">
+            
+            &#8226;
+            <label for="toggleLineNumbers">Line Numbers:</label><input type="checkbox" id="toggleLineNumbers" onclick="toggleLineNumbers(this.checked);" checked>
+            &#8226;
+            <select id="notesMenu" disabled>
+               <option>No notes found</option></select>
+            &#8226;
+            <a href="../samples.html">Index of texts</a></div>
+      </div>
+      <div id="mssArea">
+         <div class="panel" id="bibPanel">
+            <div class="panelBanner"><img class="closePanel" onclick="toggleBiblio();" alt="X" src="../src/images/closePanel.gif">
+               Bibliographic Information
+               
+            </div>
+            <div class="bibContent">
+               <h2>"Faith is a fine invention"</h2>
+               <h3>
+                  by by Emily Dickinson
+               </h3>
+               <h4>Original Source</h4>
+               				
+               <p>See Witness List.</p>
+               			
+               <h4>Witness List</h4>
+               <ul>
+                  <li><strong>Witness a660:</strong> A 660, verse embedded in letter to Samuel Bowles.
+                  </li>
+                  <li><strong>Witness h201:</strong> H 201, fascicle version of poem.
+                  </li>
+                  <li><strong>Witness h72:</strong> H 72, fascicle version of poem.
+                  </li>
+                  <li><strong>Witness p1891:</strong> Published as poem XXX in the second volume of Todd and Higginson's Poems of Emily Dickinson.
+                  </li>
+                  <li><strong>Witness l1894:</strong> Letter to Samuel Bowles published in Todd's edition of Dickinson's letters.
+                  </li>
+                  <li><strong>Witness cp32:</strong> Published as poem LVI in Martha Dickinson Bianchi's Complete Poems of Emily Dickinson.
+                  </li>
+                  <li><strong>Witness ll227:</strong> Letter to Samuel Bowles published in Bianchi's The Life and Letters of Emily Dickinson.
+                  </li>
+               </ul>
+               <h4>Electronic Edition Information:</h4>
+               <h5>Responsibility Statement:</h5>
+               <ul>
+                  <li>Text encoding by Jarom McDonald. </li>
+               </ul>
+               <h5>Publication Details:</h5>
+               				
+               					
+               <p>This poem is available only for demonstration purposes. It was
+                  				created as part of a research project to experiment with ways of displaying
+                  				multiple witnesses of a TEI-encoded poem using XML, XSLT and JavaScript.
+               </p>
+               				
+               			
+               <h4>Encoding Principles</h4>
+               			
+               				
+               <p>Test document for versioning machine project. Marked-up collation of
+                  			 three manuscript witnesses: A 660, H 201, and H 72, and four early print witnesses: Poems (1891)--XXX,
+                  Letters (1894)--p. 191, Complete Poems (1924)--LVI, and Life and Letters (1926)--p. 227. 
+               </p>
+               				
+               <p>DTD constructed from TEI prose base with tagsets for linking,
+                  			 figures, analysis, transcr, textcrit.
+               </p>
+               			
+               			
+               		
+            </div>
+         </div>
+         <div id="manuscripts">
+            <div class="panel mssPanel">
+               <div class="panelBanner"><img class="closePanel" onclick="closePanel(this.parentNode.parentNode);" src="../src/images/closePanel.gif" alt="X">Witness <select class="witnessMenu" onchange="changeWitness(this.value,this.parentNode.parentNode);">
+                     <option selected value="a660">1: a660</option>
+                     <option value="h201">2: h201</option>
+                     <option value="h72">3: h72</option>
+                     <option value="p1891">4: p1891</option>
+                     <option value="l1894">5: l1894</option>
+                     <option value="cp32">6: cp32</option>
+                     <option value="ll227">7: ll227</option></select></div>
+               <div class="mssContent"><img src="../src/images/image.gif" class="imageLink p1891" onclick="return showImgPanel(event, 'imageViewer','images/p1891.jpg','p1891','-250','0');"><img src="../src/images/image.gif" class="imageLink ll227" onclick="return showImgPanel(event, 'imageViewer','images/ll227.jpg','ll227','-250','0');">
+                  			
+                  <div class="div1">
+                     				
+                     <div class="lg">
+                        					
+                        <div class="line lined0e133" onclick="matchLine('lined0e133');">
+                           <div class="linenumber">1</div>
+                           						<span class="apparatus">
+                              							<span class="reading a660 h72">"Faith"</span>
+                              							<span class="reading h201 l1894 ll227">Faith</span>
+                              							<span class="reading p1891 cp32">FAITH</span>
+                              						</span> is a fine invention
+                        </div>
+                        					
+                        <div class="line lined0e148" onclick="matchLine('lined0e148');">
+                           <div class="linenumber">2</div>
+                           						<span class="apparatus">
+                              							<span class="reading a660 ll227">When </span>
+                              							<span class="reading h201 h72 p1891 l1894 cp32">For </span>
+                              						</span>
+                           						<span class="apparatus">
+                              							<span class="reading a660 h201 h72">Gentlemen </span>
+                              							<span class="reading p1891 l1894 cp32 ll227">gentlemen </span>
+                              						</span>
+                           						<span class="apparatus">
+                              							<span class="reading a660 ll227">can </span>
+                              							<span class="reading h201 h72 p1891 l1894 cp32">who </span>
+                              						</span>
+                           						<span class="apparatus">
+                              							<span class="reading a660 h201 h72">
+                                 								<span class="hi rend-underline">see</span>
+                                 							</span>
+                              							<span class="reading p1891 l1894 cp32 ll227">see</span>
+                              						</span>
+                           						<span class="apparatus">
+                              							<span class="reading h72 ll227">!</span>
+                              							<span class="reading a660 h201"> -</span>
+                              							<span class="reading p1891 cp32">;</span>
+                              							<span class="reading l1894">,</span>
+                              						</span>
+                           					
+                        </div>
+                        					
+                        <div class="line lined0e205" onclick="matchLine('lined0e205');">
+                           <div class="linenumber">3</div>
+                           				But 
+                           				  <span class="apparatus">
+                              					 <span class="reading h72">Microscopes</span>
+                              							<span class="reading a660 h201">
+                                 								<span class="hi rend-underline">Microscopes</span>
+                                 							</span>
+                              							<span class="reading p1891 l1894 cp32 ll227">microscopes</span>
+                              						</span> are prudent
+                        </div>
+                        					
+                        <div class="line lined0e223" onclick="matchLine('lined0e223');">
+                           <div class="linenumber">4</div> 
+                           				In an
+                           				  <span class="apparatus">
+                              					 <span class="reading a660 h201 h72">Emergency</span>
+                              							<span class="reading p1891 l1894 cp32 ll227">emergency</span>
+                              						</span>
+                           						<span class="apparatus">
+                              							<span class="reading a660 l1894">. 
+                                 <hr class="pagebreak l1894"></span>
+                              							<span class="reading h201 h72 p1891 ll227 cp32">!</span>
+                              						</span>
+                           					
+                        </div><img src="../src/images/image.gif" class="imageLink l1894" onclick="return showImgPanel(event, 'imageViewer','images/cp32.jpg','l1894','-250','0');">
+                        				
+                     </div>
+                     			
+                  </div>
+                  		
+               </div>
+            </div>
+            <div class="panel mssPanel">
+               <div class="panelBanner"><img class="closePanel" onclick="closePanel(this.parentNode.parentNode);" src="../src/images/closePanel.gif" alt="X">Witness <select class="witnessMenu" onchange="changeWitness(this.value,this.parentNode.parentNode);">
+                     <option value="a660">1: a660</option>
+                     <option selected value="h201">2: h201</option>
+                     <option value="h72">3: h72</option>
+                     <option value="p1891">4: p1891</option>
+                     <option value="l1894">5: l1894</option>
+                     <option value="cp32">6: cp32</option>
+                     <option value="ll227">7: ll227</option></select></div>
+               <div class="mssContent"><img src="../src/images/image.gif" class="imageLink p1891" onclick="return showImgPanel(event, 'imageViewer','images/p1891.jpg','p1891','-250','0');"><img src="../src/images/image.gif" class="imageLink ll227" onclick="return showImgPanel(event, 'imageViewer','images/ll227.jpg','ll227','-250','0');">
+                  			
+                  <div class="div1">
+                     				
+                     <div class="lg">
+                        					
+                        <div class="line lined0e133" onclick="matchLine('lined0e133');">
+                           <div class="linenumber">1</div>
+                           						<span class="apparatus">
+                              							<span class="reading a660 h72">"Faith"</span>
+                              							<span class="reading h201 l1894 ll227">Faith</span>
+                              							<span class="reading p1891 cp32">FAITH</span>
+                              						</span> is a fine invention
+                        </div>
+                        					
+                        <div class="line lined0e148" onclick="matchLine('lined0e148');">
+                           <div class="linenumber">2</div>
+                           						<span class="apparatus">
+                              							<span class="reading a660 ll227">When </span>
+                              							<span class="reading h201 h72 p1891 l1894 cp32">For </span>
+                              						</span>
+                           						<span class="apparatus">
+                              							<span class="reading a660 h201 h72">Gentlemen </span>
+                              							<span class="reading p1891 l1894 cp32 ll227">gentlemen </span>
+                              						</span>
+                           						<span class="apparatus">
+                              							<span class="reading a660 ll227">can </span>
+                              							<span class="reading h201 h72 p1891 l1894 cp32">who </span>
+                              						</span>
+                           						<span class="apparatus">
+                              							<span class="reading a660 h201 h72">
+                                 								<span class="hi rend-underline">see</span>
+                                 							</span>
+                              							<span class="reading p1891 l1894 cp32 ll227">see</span>
+                              						</span>
+                           						<span class="apparatus">
+                              							<span class="reading h72 ll227">!</span>
+                              							<span class="reading a660 h201"> -</span>
+                              							<span class="reading p1891 cp32">;</span>
+                              							<span class="reading l1894">,</span>
+                              						</span>
+                           					
+                        </div>
+                        					
+                        <div class="line lined0e205" onclick="matchLine('lined0e205');">
+                           <div class="linenumber">3</div>
+                           				But 
+                           				  <span class="apparatus">
+                              					 <span class="reading h72">Microscopes</span>
+                              							<span class="reading a660 h201">
+                                 								<span class="hi rend-underline">Microscopes</span>
+                                 							</span>
+                              							<span class="reading p1891 l1894 cp32 ll227">microscopes</span>
+                              						</span> are prudent
+                        </div>
+                        					
+                        <div class="line lined0e223" onclick="matchLine('lined0e223');">
+                           <div class="linenumber">4</div> 
+                           				In an
+                           				  <span class="apparatus">
+                              					 <span class="reading a660 h201 h72">Emergency</span>
+                              							<span class="reading p1891 l1894 cp32 ll227">emergency</span>
+                              						</span>
+                           						<span class="apparatus">
+                              							<span class="reading a660 l1894">. 
+                                 <hr class="pagebreak l1894"></span>
+                              							<span class="reading h201 h72 p1891 ll227 cp32">!</span>
+                              						</span>
+                           					
+                        </div><img src="../src/images/image.gif" class="imageLink l1894" onclick="return showImgPanel(event, 'imageViewer','images/cp32.jpg','l1894','-250','0');">
+                        				
+                     </div>
+                     			
+                  </div>
+                  		
+               </div>
+            </div>
+         </div>
+         <div class="panel" id="notesPanel" style="display: none;">
+            <div class="panelBanner"><img class="closePanel" onclick="hideNotesPanel();" alt="X" src="../src/images/closePanel.gif">
+               Textual Notes
+               
+            </div>
+            <div id="noNotesFound" class="noteContent">
+               Sorry, but there are no notes associated with
+               any currently displayed witness.
+               
+            </div>
+         </div><br class="clear"></div>
+      <div class="viewerRoot" id="panel_imageViewer">
+         <div title="Click to drag panel." class="viewerHandle" id="handle_imageViewer"><span class="viewerHandleLt" id="title_imageViewer">Image Viewer</span><img class="viewerHandleRt" onclick="return hidePanel('imageViewer');" alt="X" src="../src/images/closePanel.gif"></div>
+         <div class="viewerContent" id="content_imageViewer"></div>
+      </div>
+   </body>
+</html>
