@@ -6,11 +6,11 @@
    
    <!-- <xsl:strip-space elements="*" /> -->
    
-   <xsl:variable name="indexPage">/v-machine/samples.html</xsl:variable>
+   <xsl:variable name="indexPage">../samples.html</xsl:variable>
    
-   <xsl:variable name="vmLogo">/v-machine/vm-images/poweredby.gif</xsl:variable>
+   <xsl:variable name="vmLogo">../vm-images/poweredby.gif</xsl:variable>
    
-   <xsl:variable name="cssInclude">/v-machine/src/vmachine.css</xsl:variable>
+   <xsl:variable name="cssInclude">../src/vmachine.css</xsl:variable>
    
    <!-- The JavaScript include file. Keep in mind that, as of April 1, 2008,
    the current beta version of Firefox 3.0 has instituted strong JavaScript
@@ -19,9 +19,9 @@
    (i.e., anything on your local computer not beginning with "http://").
    Because of this, if you want to use the VM offline, you will need to
    move the JavaScript includes into the same directory as your TEI documents,
-   and modify the filename below (for example, "/v-machine/src/vmachine.js" becomes
+   and modify the filename below (for example, "../src/vmachine.js" becomes
    "vmachine.js") -->
-   <xsl:variable name="jsInclude">/v-machine/src/vmachine.js</xsl:variable>
+   <xsl:variable name="jsInclude">../src/vmachine.js</xsl:variable>
 
    <xsl:variable name="initialVersions">2</xsl:variable>
    
@@ -88,7 +88,7 @@
             </xsl:attribute>
          </link>
          <xsl:comment><![CDATA[[if IE 6]>
-            <link rel="stylesheet" type="text/css" href="/v-machine/src/vmachine_ie6.css">
+            <link rel="stylesheet" type="text/css" href="../src/vmachine_ie6.css">
          <![endif]]]></xsl:comment>
          <script type="text/javascript">
             <xsl:attribute name="src">
@@ -146,7 +146,7 @@
             </xsl:if>
          </span>
       </div>
-      <img id="topEdge" src="/v-machine/vm-images/topedge.gif" alt="" />
+      <img id="topEdge" src="../vm-images/topedge.gif" alt="" />
    </xsl:template>
    
    <xsl:template name="mainControls">
@@ -224,7 +224,7 @@
       <xsl:param name="increment" />
       <div class="panel mssPanel">
          <div class="panelBanner">
-            <img class="closePanel" onclick="closePanel(this.parentNode.parentNode);" src="/v-machine/vm-images/closePanel.gif" alt="X" />
+            <img class="closePanel" onclick="closePanel(this.parentNode.parentNode);" src="../vm-images/closePanel.gif" alt="X" />
             <xsl:text>Witness </xsl:text>
             <select class="witnessMenu" onchange="changeWitness(this.value,this.parentNode.parentNode);">
                <xsl:for-each select="//tei:witness">
@@ -270,7 +270,7 @@
             </xsl:attribute>
          </xsl:if>
          <div class="panelBanner">
-            <img class="closePanel" onclick="toggleBiblio();" alt="X" src="/v-machine/vm-images/closePanel.gif" />
+            <img class="closePanel" onclick="toggleBiblio();" alt="X" src="../vm-images/closePanel.gif" />
             Bibliographic Information
          </div>
          <div class="bibContent">
@@ -435,7 +435,7 @@
             </xsl:attribute>
          </xsl:if>
          <div class="panelBanner">
-            <img class="closePanel" onclick="hideNotesPanel();" alt="X" src="/v-machine/vm-images/closePanel.gif" />
+            <img class="closePanel" onclick="hideNotesPanel();" alt="X" src="../vm-images/closePanel.gif" />
             Textual Notes
          </div>
          <xsl:for-each select="//tei:body//tei:note[not(@type='image')]">
@@ -541,7 +541,7 @@
       <xsl:param name="imageURL" />
       <xsl:param name="witness" />
       <xsl:if test="$imageURL != ''">
-         <img src="/v-machine/vm-images/image.gif">
+         <img src="../vm-images/image.gif">
             <xsl:attribute name="class">
                <xsl:text>imageLink</xsl:text>
                <xsl:if test="$witness != ''">
@@ -984,7 +984,7 @@
       <div class="viewerRoot" id="panel_imageViewer">
          <div title="Click to drag panel." class="viewerHandle" id="handle_imageViewer">
             <span class="viewerHandleLt" id="title_imageViewer">Image Viewer</span>
-            <img class="viewerHandleRt" onclick="return hidePanel('imageViewer');" alt="X" src="/v-machine/vm-images/closePanel.gif" />
+            <img class="viewerHandleRt" onclick="return hidePanel('imageViewer');" alt="X" src="../vm-images/closePanel.gif" />
          </div>
          <div class="viewerContent" id="content_imageViewer"></div>
       </div>
