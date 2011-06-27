@@ -3,6 +3,7 @@ package lemmatizer::Controller::Root;
 use strict;
 use warnings;
 use parent 'Catalyst::Controller';
+use File::Basename;
 use JSON;
 use lemmatizer::Model::Graph;
 use Text::Tradition;
@@ -34,6 +35,7 @@ and a list of which of the graph nodes are initially 'on'.
 
 my $graph;
 
+## TODO at some point index will need to be the file upload facility.
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
 
@@ -45,15 +47,70 @@ sub index :Path :Args(0) {
     open( GRAPHFILE, $dummy_file ) or die "Could not open $dummy_file";
     my @lines = <GRAPHFILE>;
     close GRAPHFILE;
-    $graph = lemmatizer::Model::Graph->new( 'type' => 'CollateX',
-					    'data' => join( '', @lines ) );
+    $graph = lemmatizer::Model::Graph->new( 'CollateX' => join( '', @lines ) );
     my $svg_str = $graph->as_svg;
     $svg_str =~ s/\n//gs;
-    $c->stash->{svg_string} = $svg_str;
+    $c->stash->{graph} = $svg_str;
+    # my $stemma_tree = Text::Tradition::Stemma->new( 'collation' => $graph->collation );
+    # $c->stash->{stemma} = $stemma_tree->run_pars();
+    # Use a dummy stemma for UI purposes for now
+    open( STEMMA, "t/data/test_tree.svg" ) or die "Could not open dummy stemma";
+    @lines = <STEMMA>;
+    my $stemmatree = join( '', @lines );
+    $stemmatree =~ s/\n//gs;
+    $c->stash->{stemma} = $stemmatree;
     my @initial_nodes = $graph->lemma_readings();
     $c->stash->{initial_text} = join( ' ', map { $_->[1] ? $graph->reading( $_->[0] )->label : '...' } @initial_nodes );
     $c->stash->{template} = 'testsvg.tt2';
 }
+
+=head2 upload
+
+AJAX method: expects a bunch of files to be uploaded, and returns a
+structured JSON answer as documented at
+https://github.com/blueimp/jQuery-File-Upload/wiki/Setup
+
+=cut
+
+my %input = ();
+
+sub upload :Global {
+    my( $self, $c ) = @_;
+    my $answer = [];
+    foreach my $upload ( $c->request->upload('file') ) {
+	my( $lname, $lpath, $lsuf ) = fileparse( $upload->filename, 
+						 qr/\.[^.]*$/ );
+	my $sname = unique_name( $lname, $lsuf, map { $_->{'name'} } @$answer );
+	my $url = '//self/some/url';
+	my $filedata = { 'name' => $sname,
+			 'size' => $upload->size,
+			 'url' => $url,
+			 'delete_url' => $url . '?' . $sname,
+			 'delete_type' => 'DELETE',
+	};
+	$input{$upload->filename} = $filedata;
+	push( @$answer, $filedata );
+    }
+    return $answer;
+}
+
+# Helper function for ensuring unique filenames
+sub unique_name {
+    my( $name, $suffix, @existing ) = @_;
+    my $ctr = 0;
+    foreach my $fn ( @existing ) {
+	if( $fn =~ /^$name(_(\d+))?$suffix/ ) {
+	    $ctr = $2 + 1 unless $ctr > $2;
+	}
+    }
+    if( $ctr ) {
+	return $name . "_$ctr" . $suffix;
+    } else {
+	return $name . $suffix;
+    }
+}
+    
+    
 
 =head2 node_click
 

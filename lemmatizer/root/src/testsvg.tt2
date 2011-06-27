@@ -9,14 +9,21 @@
 <script type="text/javascript" src="[% c.uri_for('/js/svginteraction.js') %]"></script>
 <script type="text/javascript">
 $(function() {
-  $('#svgbasics').svg({loadURL: '[% svg_string %]', onLoad: svgLoaded});
+  $('#svgbasics').svg({loadURL: '[% graph %]', onLoad: svgLoaded});
+  $('#stemmatree').svg({loadURL: '[% stemma %]'});
 });
 </script>
 
 [% END %]
 
-	<div id="constructedtext">
-	</div>	
+    <div id="top_container">
+	  <div id="constructedtext">
+	  </div>	
+	  <div id="stemma_container">
+		<div id="stemmatree" style="height: 290px; width: 480px; background-color: white; border: 1px solid white;"></div>
+	  </div>
+	</div>
+	<br />  
 	<div id="graph">
 		<!-- width seems to need to be as wide as the graph -->
 		<!-- a translation of -487 in the svg itself was needed to adjust the graph to the left of the div -->

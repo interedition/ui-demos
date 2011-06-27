@@ -5,14 +5,24 @@ use warnings;
 use Text::Tradition;
 
 ## This is the module where the tradition graph can be manipulated for
-## the purpose of the lemmatizer app.
+## the purpose of the lemmatizer app.  It is essentially a wrapper
+## class, with some logic to account for the fact that we are dealing
+## with the single-edge version of the graph in this application.
 
 sub new {
-    my( $class, %args ) = shift;
+    my( $class ) = shift;
     
     # Create the tradition and save it.  Most of the calls to the
     # graph will be passed to the Text::Tradition object, but some are
     # specific to our representation of the lemmatizer.
+    $DB::single = 1;
+    my $trad = Text::Tradition->new( @_ );
+    my $self = { 'tradition' => $trad,
+		 'collation' => $trad->collation, 
+    };
+
+    bless( $self, $class );
+    return $self;
 
 }
 
@@ -53,7 +63,7 @@ sub node_collapse {
 	    # We want response->node->target = (node)
 	    #                       ->edges->target = (edge)
 	    #                              ->label = (label)
-	    my $collapsed_edges = find_dup_edges( $n, $response->{$n}->{'target'} );
+	    my $collapsed_edges = $self->find_dup_edges( $n, $response->{$n}->{'target'} );
 	    $response->{$n}->{'edges'} = $collapsed_edges;
 	}
     } else {
@@ -66,7 +76,7 @@ sub node_collapse {
 
 ## Helper methods for node collapse functionality
 sub find_dup_edges {
-    my( $source, $target ) = @_;
+    my( $self, $source, $target ) = @_;
 
     # Origin: need to get the nodes on the 'from' side of both source
     # edges and target edges, and then see which in group A are either
@@ -75,6 +85,7 @@ sub find_dup_edges {
     # target edge is the one that leads from the relationship primary
     # to the target.  Label is made from all the edges that go from
     # any of the relationship nodes to the source.
+    my $graph = $self->collation;
 
     my @source_origin = map { $_->from } $graph->reading( $source )->incoming();
     my @target_origin = map { $_->from } $graph->reading( $target )->incoming();
@@ -108,6 +119,7 @@ sub find_dup_edges {
     $graph->expand_graph_paths();
     return $result;
 }
+
 sub union {
     my( $list1, $list2 ) = @_;
     my %all;
@@ -127,18 +139,31 @@ sub union {
 
 sub as_svg {
     my $self = shift;
-    return $self->collation->as_svg;
+    return $self->collation->as_svg( @_ );
 }
 
 sub lemma_readings {
     my $self = shift;
-    return $self->collation->lemma_readings;
+    return $self->collation->lemma_readings( @_ );
 }
 
 sub toggle_reading {
     my $self = shift;
-    return $self->collation->toggle_reading;
+    return $self->collation->toggle_reading( @_ );
 }
 
+sub reading { 
+    my $self = shift;
+    return $self->collation->reading( @_ );
+}
+
+## Accessor methods
+sub collation {
+    return $_[0]->{'collation'};
+}
+
+sub tradition {
+    return $_[0]->{'tradition'};
+}
 
 1;
