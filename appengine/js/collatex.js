@@ -147,9 +147,13 @@
 				"data": query,
 				"type": "POST",
 				"async": false,
-				"dataType": "text",
+				"dataType": "json",
 				"success": function(resp){
-					$("#collatedResult").val(resp);
+				        $("#collatedResult").val(resp.result);
+					$("#Resultform").attr("action", resp.formaction);
+					for (var i=0; i < resp.buttons.length; i++) {
+					    $("#resultButton").append("<input type='submit' name='" + i + "' value='" + resp.buttons[i] + "'>");
+					}
 				}
 			});
 		

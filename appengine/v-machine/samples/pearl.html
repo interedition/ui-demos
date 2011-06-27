@@ -1,0 +1,2179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>The Pearl -- The Versioning Machine 4.0</title>
+<link rel="stylesheet" type="text/css" href="../src/vmachine.css">
+<!--[if IE 6]>
+            <link rel="stylesheet" type="text/css" href="../src/vmachine_ie6.css">
+         <![endif]--><script type="text/javascript" src="../src/vmachine.js"></script><script type="text/javascript">
+      var witnesses = new Array();
+      
+         witnesses["w"] = "w";
+      
+         witnesses["b"] = "b";
+      
+         witnesses["p"] = "p";
+      
+      var maxPanels = 3;
+   </script>
+</head>
+<body onload="init();">
+<div id="mainBanner">
+<div id="brandingLogo"><img id="logo" alt="Powered by the Versioning Machine" src="../vm-images/poweredby.gif"></div>
+<div id="headline">
+<h1 onclick="toggleBiblio();">The Pearl</h1>
+<span class="versionCount"> has 3 versions</span>
+</div>
+<img id="topEdge" src="../vm-images/topedge.gif" alt=""><div id="mainControls">
+<input type="button" id="newPanel" value="New Version" onclick="openPanel();">
+         •
+         <input type="button" id="bibToggle" value="Bibliographic Info" onclick="toggleBiblio();">
+         •
+         <label for="toggleLineNumbers">Line Numbers:</label><input type="checkbox" id="toggleLineNumbers" onclick="toggleLineNumbers(this.checked);" checked>
+         •
+         <select id="notesMenu" onchange="notesFormat(this.value);"><option value="popup" selected>Popup notes</option>
+<option value="inline">Inline notes</option>
+<option value="none">
+                     Hide notes
+                  </option></select>
+         •
+         <a href="../samples.html">Index of texts</a>
+</div>
+</div>
+<div id="mssArea">
+<div class="panel" id="bibPanel">
+<div class="panelBanner">
+<img class="closePanel" onclick="toggleBiblio();" alt="X" src="../vm-images/closePanel.gif">
+            Bibliographic Information
+         </div>
+<div class="bibContent">
+<h2>The Pearl</h2>
+<h4>Original Source</h4>
+            
+               
+                  
+                     See witness list.
+                  
+               
+            
+         <h4>Witness List</h4>
+<ul>
+<li>
+<strong>Witness w:</strong> Williams MS. Jones B62</li>
+<li>
+<strong>Witness b:</strong> Bodleian MS. Tanner 307</li>
+<li>
+<strong>Witness p:</strong> The Temple: Sacred Poems and Private Ejaculations, first edition
+                  (Cambridge, 1633)</li>
+</ul>
+<h4>Electronic Edition Information:</h4>
+<h5>Responsibility Statement:</h5>
+<ul>
+<li>Transcribed, encoded, and edited by Robert Whalen</li>
+<li>Sponsored by Northern Michigan University and the National Endowment for the Humanities</li>
+<li>Funding provided by Northern Michigan University and the National Endowment for the Humanities</li>
+</ul>
+<h5>Publication Details:</h5>
+            <p>Published by Robert Whalen for demonstration purposes only. May not be reproduced without
+               permission..</p>
+            
+               
+            
+            
+            
+               <p></p>
+            
+            
+         <h4>Encoding Principles</h4>
+         
+            <p>"The Pearl" is part of a comprehensive edition of George Herbert's English verse, <span class="hi rend-italic">The Digital Temple</span>. This larger project includes
+               computer-readable transcriptions, in both original- and modern-spelling versions, of
+               Williams MS. Jones B62, Bodleian MS. Tanner 307, and a copy of <span class="hi rend-italic">The
+                  Temple: Sacred Poems and Private Ejaculations</span>, first edition (Cambridge,
+               1633); high-resolution digital images of the sources (excepting the Latin verse in
+               Williams); an apparatus that includes critical, textual, and technical introductions
+               and annotations; and a user interface with which to navigate these materials.</p>
+         
+         <p>Transcriptions are encoded in TEI(P5)-conformant XML.</p>
+         
+            <p>Currently, only the Williams images and transcriptions are captured directly from the
+               source. Images (where available) and transcriptions of the Bodleian MS. and first
+               edition are captured from Scolar black-and-white facsimiles.</p>
+         
+         
+            
+               <p>Apparent errors are preserved and editorial corrections provided using SIC and
+                  CORR tags, but only where the editor conjectures that the original scribe or
+                  compositor would have recognized the instance as an error. For example, what
+                  according to modern usage is incorrect subject/verb agreement might have been
+                  deemed acceptable to a seventeenth-century scribe or compositor. All such
+                  instances are treated instead using the ORIG and REG tags. (See below.) </p>
+            
+            
+               <p>Original spellings, abbreviations, and orthography are preserved and
+                  regularizations provided. Where in the manuscripts a character's status as
+                  majuscule or miniscule is ambiguous, the editor has silently chosen one or the
+                  other based on context and judgment (i.e., does not register such ambiguity in
+                  either the markup or the notes).</p>
+            
+            
+               <p>Original quotation marks, if any, are preserved.</p>
+            
+            
+               <p>Original hyphenation is preserved.</p>
+            
+         
+
+         
+
+         
+
+      </div>
+</div>
+<div id="manuscripts">
+<div class="panel mssPanel">
+<div class="panelBanner">
+<img class="closePanel" onclick="closePanel(this.parentNode.parentNode);" src="../vm-images/closePanel.gif" alt="X">Witness <select class="witnessMenu" onchange="changeWitness(this.value,this.parentNode.parentNode);"><option selected value="w">1: w</option>
+<option value="b">2: b</option>
+<option value="p">3: p</option></select>
+</div>
+<div class="mssContent">
+
+         <hr class="pagebreak w">
+         
+
+         <hr class="pagebreak b">
+         
+         
+         
+
+         <hr class="pagebreak p">
+         
+         
+
+         <div class="div type-poem rend-right">
+
+            <div class="head">
+               <span class="apparatus app-id2628336 clickable" onclick="matchApp('app-id2628336');">
+                  <span class="reading w">The <span class="choice">Pearle<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Pearl</div></div></span>: Matth: 13.45.</span>
+                  <span class="reading b">The <span class="choice">Pearle<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Pearl</div></div></span>
+                     Math. 13.</span>
+                  <span class="reading p">¶ The Pearl. <span class="hi rend-italic">
+                        Matth. </span>
+                     13.</span>
+                  <span class="noteicon">n<div class="note">
+<strong>Note:</strong> "Again, the kingdom of heaven is like unto a merchant man, seeking goodly
+                     pearls: who, when he had found one pearl of great price, went and sold all that
+                     he had, and bought it" (Matthew 13:45-46). Elaborating this passage from the
+                     Sermon on the Mount, the poem reviews wistfully even while denouncing much of
+                     what is positive in worldly experience: the pleasures of intellect, social
+                     distinction, and the flesh.</div></span>
+               </span>
+            </div>
+
+            <div class="lg lg-n1 type-stanza">
+               <div class="line lineid2628426" onclick="matchLine('lineid2628426');">
+<div class="linenumber">1</div>
+                  <span class="apparatus">
+                     <span class="reading w">I know <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        <span class="choice">wayes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> ways</div></div></span> of
+                        learning, both the Head</span>
+                     <span class="reading b">I know <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        <span class="choice">waies<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> ways</div></div></span> of
+                        Learning. both the head</span>
+                     <span class="reading p">I <span class="choice">Know<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> know</div></div></span> the <span class="choice">wayes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> ways</div></div></span> of
+                        learning; both the head</span>
+                  </span>
+               </div>
+
+               <div class="line lineid2628588" onclick="matchLine('lineid2628588');">
+<div class="linenumber">2</div>
+                  <span class="apparatus">
+                     <span class="reading w">And Pipes that feed <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        <span class="choice">Preſs<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Press</div></div></span> and
+                        make it <span class="choice">runn<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> run</div></div></span>.</span>
+                     <span class="reading b">And pipes, <span class="choice">y<span class="hi rend-superscript">t</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> that</div></div></span> feed <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        <span class="choice">presse<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> press</div></div></span>,
+                           <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        make it <span class="choice">runne<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> run</div></div></span>:</span>
+                     <span class="reading p">And pipes that feed the <span class="choice">preſſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> press</div></div></span>, and
+                        make it <span class="choice">runne<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> run</div></div></span>;</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">Lines 1-2</span>: The <span class="hi rend-italic">Head/head</span>
+                        and <span class="hi rend-italic">Pipes/pipes</span> can be read as both mechanical
+                        components of the printing press and the human head and its channels through
+                        which experience enters the mind via the eyes and ears and, transformed into
+                        knowledge, exits via the mouth (speech being counterpart to the printed
+                        word). This opening metaphor immediately establishes the tone of the poem by
+                        suggesting that much of human knowledge is but a mechanistic response to
+                        sensory stimuli—knowledge which <span class="hi rend-italic">reason/reaſon hath from Nature/nature</span> (line 3).</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2628768" onclick="matchLine('lineid2628768');">
+<div class="linenumber">3</div>
+                  <span class="apparatus">
+                     <span class="reading w">What reason hath from Nature purchased</span>
+                     <span class="reading b">What reason hath from Nature borrowed,</span>
+                     <span class="reading p">What <span class="choice">reaſon<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> reason</div></div></span> hath
+                        from nature borrowed,</span>
+                  </span>
+               </div>
+
+               <div class="line lineid2628803" onclick="matchLine('lineid2628803');">
+<div class="linenumber">4</div>
+                  <span class="apparatus">
+                     <span class="reading w"><span class="choice">Ør<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Or</div></div></span>
+                        of itself like a good <span class="choice">huſwife<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> housewife</div></div></span>
+                        <span class="choice">spunn<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> spun</div></div></span></span>
+                     <span class="reading b">Or of <span class="choice">it
+                                 selfe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> itself</div></div></span>, like a good <span class="choice">huswife<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> housewife</div></div></span>
+                        <span class="choice">spunne<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> spun</div></div></span></span>
+                     <span class="reading p">Or of <span class="choice">it
+                                 ſelf<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> itself</div></div></span>, like a good <span class="choice">huſwife<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> housewife</div></div></span>, <span class="choice">ſpunne<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> spun</div></div></span></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2628036" onclick="matchLine('lineid2628036');">
+<div class="linenumber">5</div>
+                  <span class="apparatus">
+                     <span class="reading w">In <span class="choice">lawes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> laws</div></div></span>
+                        <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        <span class="choice">Policie<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Policy</div></div></span>: what <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        <span class="choice">starres<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> stars</div></div></span>
+                        conspire:</span>
+                     <span class="reading b">In Laws <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        <span class="choice">Policie<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Policy</div></div></span>. what <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        <span class="choice">starres<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> stars</div></div></span>
+                        conspire,</span>
+                     <span class="reading p">In laws and <span class="choice">policie<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> policy</div></div></span>; what
+                        the <span class="choice">ﬅarres<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> stars</div></div></span>
+                        <span class="choice">conſpire<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> conspire</div></div></span>,</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">Lines 4-5, or … Policie/policie</span>:
+                        Reason, like a resourceful housewife who makes due with the materials at her
+                        immediate disposal, is self-sufficient with respect to the knowledge and
+                        practice of law and politics. <span class="hi rend-italic">conspire/conſpire</span>: combine harmoniously (<span class="hi rend-italic">OED</span> 3.a).</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2628824" onclick="matchLine('lineid2628824');">
+<div class="linenumber">6</div>
+                  <span class="apparatus">
+                     <span class="reading w">What willing Nature speaks, what <span class="choice">forst<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> forc'd</div></div></span> by
+                        fire:</span>
+                     <span class="reading b">What willing Nature <span class="choice">speakes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> speaks</div></div></span>, what
+                           forc'd by fire.</span>
+                     <span class="reading p">What willing nature <span class="choice">ſpeaks<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> speaks</div></div></span>, what forc'd by <span class="choice">ﬁre<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> fire</div></div></span>;</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> "What is immediately apparent, what revealed by fire," the latter
+                        referring perhaps to some alchemical or occult process through which
+                        nature's secrets are exposed.</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2628912" onclick="matchLine('lineid2628912');">
+<div class="linenumber">7</div>
+                  <span class="apparatus">
+                     <span class="reading w">Both th'old <span class="choice">diſcoveries<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> discoveries</div></div></span>,
+                           <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span> new-found seas,</span>
+                     <span class="reading b">Both the'old <span class="choice">discoueries<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> discoveries</div></div></span>,
+                           <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        <span class="choice">New
+                              found<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> New-found</div></div></span> seas,</span>
+                     <span class="reading p">Both th' old <span class="choice">diſcoveries<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> discoveries</div></div></span>,
+                        and the <span class="choice">new
+                                 found<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> new-found</div></div></span>
+                        <span class="choice">ſeas<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> seas</div></div></span>,</span>
+                  </span>
+               </div>
+
+               <div class="line lineid2629060" onclick="matchLine('lineid2629060');">
+<div class="linenumber">8</div>
+                  <span class="apparatus">
+                     <span class="reading w">The stock and surplus, cause and History.</span>
+                     <span class="reading b">The stock <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span> surplus,
+                        cause and history:</span>
+                     <span class="reading p">The <span class="choice">ﬅock<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> stock</div></div></span> and <span class="choice">ſurplus<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> surplus</div></div></span>, <span class="choice">cauſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> cause</div></div></span> and
+                           <span class="choice">hiﬅorie<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> history</div></div></span>:</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> The abundance of knowledge already acquired, and how it came to be (i.e.,
+                        philology).</div></span>
+                  </span>
+               </div>
+
+               <hr class="pagebreak b">
+               
+               
+
+               <div class="line lineid2629175" onclick="matchLine('lineid2629175');">
+<div class="linenumber">9</div>
+                  <span class="apparatus">
+                     <span class="reading w">All these stand open or I have the <span class="choice">keyes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> keys</div></div></span>.</span>
+                     <span class="reading b">All these stand open, or I <span class="choice">haue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> have</div></div></span> the <span class="choice">keyes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> keys</div></div></span>.</span>
+                     <span class="reading p">All <span class="choice">theſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> these</div></div></span>
+                        <span class="choice">ﬅand<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> stand</div></div></span>
+                        open, or I have the <span class="choice">keyes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> keys</div></div></span>:</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">keyes</span>: i.e., means and methods with which to
+                        unlock nature's secrets (see line 6 and note).</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2629272" onclick="matchLine('lineid2629272');">
+<div class="linenumber">10</div>
+                  <span class="apparatus">
+                     <span class="reading w">Yet I love Thee.</span>
+                     <span class="reading b">Yet I <span class="choice">loue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> love</div></div></span> thee.</span>
+                     <span class="reading p">Yet I love thee.</span>
+                  </span>
+               </div>
+            </div>
+
+            <div class="lg lg-n2 type-stanza">
+               <div class="line lineid2629315" onclick="matchLine('lineid2629315');">
+<div class="linenumber">11</div>
+                  <span class="apparatus">
+                     <span class="reading w">I know the <span class="choice">wayes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> ways</div></div></span> of Honour:
+                        what maintains</span>
+                     <span class="reading b">I know <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        <span class="choice">wayes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> ways</div></div></span> of <span class="choice">honor<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> honour</div></div></span>.
+                        what <span class="choice">mantaines<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> maintains</div></div></span></span>
+                     <span class="reading p">I know the <span class="choice">wayes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> ways</div></div></span> of honour,
+                        what maintains</span>
+                  </span>
+               </div>
+
+               <div class="line lineid2629406" onclick="matchLine('lineid2629406');">
+<div class="linenumber">12</div>
+                  <span class="apparatus">
+                     <span class="reading w">The quick <span class="choice">returnes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> returns</div></div></span> of <span class="choice">curtesie<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> courtesy</div></div></span> and <span class="choice">witt<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> wit</div></div></span>:</span>
+                     <span class="reading b">The quick <span class="choice">returnes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> returns</div></div></span> of <span class="choice">curtesie<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> courtesy</div></div></span> and <span class="choice">witt<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> wit</div></div></span>:</span>
+                     <span class="reading p">The quick returns of <span class="choice">courteſie<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> courtesy</div></div></span> and
+                        wit:</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> "The courtier's skill in lively banter."</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2629514" onclick="matchLine('lineid2629514');">
+<div class="linenumber">13</div>
+                  <span class="apparatus">
+                     <span class="reading w">In <span class="choice">vyes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> vies</div></div></span> of <span class="choice">fauours<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> favours</div></div></span>
+                        <span class="choice">whither<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> whether</div></div></span> party
+                        gains,</span>
+                     <span class="reading b">In <span class="choice">vyes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> vies</div></div></span> of <span class="choice">fauo<span class="hi rend-superscript">rs</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> favours</div></div></span>, whether party <span class="choice">gaines<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> gains</div></div></span>,</span>
+                     <span class="reading p">In vies of favours whether <span class="choice">partie<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> party</div></div></span>
+                        gains,</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> "Which of two courtiers wins favour in a contest of deference to a person
+                        of rank."</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2629622" onclick="matchLine('lineid2629622');">
+<div class="linenumber">14</div>
+                  <span class="apparatus">
+                     <span class="reading w">When glory <span class="choice">swels<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> swells</div></div></span>
+                        <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        <span class="choice">hart<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> heart</div></div></span> and
+                           moldeth it</span>
+                     <span class="reading b">When Glory swells <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        heart, <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        moldeth it</span>
+                     <span class="reading p">When <span class="choice">glorie<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> glory</div></div></span>
+                        <span class="choice">ſwells<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> swells</div></div></span>
+                        the heart, and moldeth it</span>
+                  </span>
+               </div>
+
+               <div class="line lineid2629745" onclick="matchLine('lineid2629745');">
+<div class="linenumber">15</div>
+                  <span class="apparatus">
+                     <span class="reading w">To all <span class="choice">expreſsions<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> expressions</div></div></span>
+                        both of hand <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span> eye</span>
+                     <span class="reading b">To all expressions both of hand <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        <span class="choice">eie<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> eye</div></div></span>,</span>
+                     <span class="reading p">To all <span class="choice">expreſſions<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> expressions</div></div></span> both of
+                        hand and eye,</span>
+                  </span>
+               </div>
+
+               <div class="line lineid2629827" onclick="matchLine('lineid2629827');">
+<div class="linenumber">16</div>
+                  <span class="apparatus">
+                     <span class="reading w"><span class="choice">W<span class="hi rend-superscript">ch</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Which</div></div></span> on the world a <span class="choice">tru<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> true</div></div></span>-love-<span class="choice">knott<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> knot</div></div></span> may
+                           <span class="choice">tye<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> tie</div></div></span></span>
+                     <span class="reading b"><span class="choice">W<span class="hi rend-superscript">ch</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Which</div></div></span> on <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span> World a true-<span class="choice">loue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> love</div></div></span>-knot
+                        may tie</span>
+                     <span class="reading p">Which on the world a true-love-knot may tie,</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">tru/true-love/loue-knot</span>: ornamental knot used as a
+                        symbol of true love.</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2629944" onclick="matchLine('lineid2629944');">
+<div class="linenumber">17</div>
+                  <span class="apparatus">
+                     <span class="reading w">And <span class="choice">beare<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> bear</div></div></span>
+                        <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span> bundle <span class="choice">wheresoere<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> wheresoe'er</div></div></span> it
+                        goes.</span>
+                     <span class="reading b">And <span class="choice">beare<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> bear</div></div></span>
+                        <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span> bundle, <span class="choice">wheresoere<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> wheresoe'er</div></div></span> it
+                        goes:</span>
+                     <span class="reading p">And bear the bundle, <span class="choice">whereſoe're<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> wheresoe'er</div></div></span>
+                        it goes:</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">Lines 15-17</span>: "When the desire for fame and
+                        reputation at court is evident in subtle physical gestures and glances: a
+                        wooing of the world as though it were a mistress—a pretence
+                        which, like a burdensome load, must always be sustained."</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2630066" onclick="matchLine('lineid2630066');">
+<div class="linenumber">18</div>
+                  <span class="apparatus">
+                     <span class="reading w">How many drams of spirit there must <span class="choice">bee<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> be</div></div></span></span>
+                     <span class="reading b">How many <span class="choice">drammes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> drams</div></div></span> of
+                        spirit there must <span class="choice">bee<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> be</div></div></span></span>
+                     <span class="reading p">How many <span class="choice">drammes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> drams</div></div></span> of <span class="choice">ſpirit<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> spirit</div></div></span>
+                        there <span class="choice">muﬅ<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> must</div></div></span>
+                        be</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">drams/drammes</span>: small amounts (<span class="hi rend-italic">OED</span> 3.b). <span class="hi rend-italic">spirit/ſpirit</span>: mental
+                        vigor, courage (<span class="hi rend-italic">OED</span> 13.a); vital bodily fluid (<span class="hi rend-italic">OED</span> 16.a); distilled alcohol (<span class="hi rend-italic">OED</span> 21).</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2630190" onclick="matchLine('lineid2630190');">
+<div class="linenumber">19</div>
+                  <span class="apparatus">
+                     <span class="reading w">To sell my life <span class="choice">vnto<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> unto</div></div></span> my <span class="choice">frends<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> friends</div></div></span>
+                        or foes</span>
+                     <span class="reading b">To sell my life <span class="choice">vnto<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> unto</div></div></span> my <span class="choice">freinds<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> friends</div></div></span> or
+                        foes.</span>
+                     <span class="reading p">To <span class="choice">ſell<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> sell</div></div></span> my life unto my
+                        friends or foes:</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">Lines 18-19</span>: The speaker bemoans the considerable
+                        energy it takes to sustain worldly respectability, wryly suggesting that
+                        such effort can be mustered at all only with a little fortifying courage
+                        from the bottle.</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2630282" onclick="matchLine('lineid2630282');">
+<div class="linenumber">20</div>
+                  <span class="apparatus">
+                     <span class="reading w">Yet I love Thee.</span>
+                     <span class="reading b">Yet I <span class="choice">loue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> love</div></div></span> thee.</span>
+                     <span class="reading p">Yet I love thee.</span>
+                  </span>
+               </div>
+            </div>
+
+            <hr class="pagebreak w">
+            
+            
+
+            <div class="lg lg-n3 type-stanza">
+               <div class="line lineid2630352" onclick="matchLine('lineid2630352');">
+<div class="linenumber">21</div>
+                  <span class="apparatus">
+                     <span class="reading w">I know <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        <span class="choice">wayes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> ways</div></div></span> of
+                        Pleasure: the sweet strains,</span>
+                     <span class="reading b">I know <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        <span class="choice">waies<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> ways</div></div></span> of
+                        Pleasure. <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span> sweet <span class="choice">straines<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> strains</div></div></span>,</span>
+                     <span class="reading p">I know the <span class="choice">wayes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> ways</div></div></span> of <span class="choice">pleaſure<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> pleasure</div></div></span>, the <span class="choice">ſweet<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> sweet</div></div></span>
+                        <span class="choice">ﬅrains<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> strains</div></div></span>,</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">strains/straines/ﬅrains</span>: passages of song or verse
+                           (<span class="hi rend-italic">OED</span> 13.b); sexual exertions.</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2630507" onclick="matchLine('lineid2630507');">
+<div class="linenumber">22</div>
+                  <span class="apparatus">
+                     <span class="reading w">The <del class=" rend-strike">gustos</del>
+                        <ins class="rend-supralinear">lullings</ins> and the relishes of <span class="choice">itt<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> it</div></div></span>.<span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic"><del class=" rend-strike">gustos</del></span>: keen enjoyments
+                              (<span class="hi rend-italic">OED</span> 2).</div></span></span>
+                     <span class="reading b">The Lullings <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        <span class="choice">rellishes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> relishes</div></div></span> of <span class="choice">itt<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> it</div></div></span>:</span>
+                     <span class="reading p">The lullings and the <span class="choice">reliſhes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> relishes</div></div></span> of
+                        it;</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">lullings/Lullings</span>: soothing songs (<span class="hi rend-italic">OED</span> 1.b); soothing caresses (<span class="hi rend-italic">OED</span> lull, v.1, 1). <span class="hi rend-italic">relishes/rellishes/reliſhes</span>: pleasing flavours or qualities
+                           (<span class="hi rend-italic">OED</span> 1.d); and, as Wilcox (325) notes, musical
+                        embellishments (<span class="hi rend-italic">OED</span> relish, n.3).</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2630677" onclick="matchLine('lineid2630677');">
+<div class="linenumber">23</div>
+                  <span class="apparatus">
+                     <span class="reading w">The propositions of <span class="choice">hott<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> hot</div></div></span> blood and
+                        brains:</span>
+                     <span class="reading b">The propositions of <span class="choice">hott<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> hot</div></div></span> blood <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        <span class="choice">braines<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> brains</div></div></span>:</span>
+                     <span class="reading p">The <span class="choice">propoſitions<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> propositions</div></div></span> of hot
+                           <span class="choice">bloud<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> blood</div></div></span>
+                        and brains;</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">propositions/propoſitions</span>: schemes or courses of action (<span class="hi rend-italic">OED</span> 2.a).</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2630792" onclick="matchLine('lineid2630792');">
+<div class="linenumber">24</div>
+                  <span class="apparatus">
+                     <span class="reading w">What mirth <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        <span class="choice">Musick<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Music</div></div></span>
+                        <span class="choice">meane<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> mean</div></div></span>, what
+                           <span class="choice">loue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> love</div></div></span>
+                        <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        <span class="choice">witt<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> wit</div></div></span></span>
+                     <span class="reading b">What Mirth <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        <span class="choice">Musiq<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Music</div></div></span>
+                        <span class="choice">meane<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> mean</div></div></span>: what
+                           <span class="choice">loue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> love</div></div></span>
+                        <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        <span class="choice">witt<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> wit</div></div></span></span>
+                     <span class="reading p">What mirth and <span class="choice">muſick<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> music</div></div></span> mean; what love
+                        and wit</span>
+                  </span>
+               </div>
+
+               <div class="line lineid2630952" onclick="matchLine('lineid2630952');">
+<div class="linenumber">25</div>
+                  <span class="apparatus">
+                     <span class="reading w">Have done these <del class=" rend-strike">twenty</del>
+                        <ins class="rend-supralinear">many</ins> hundred <span class="choice">yeers<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> years</div></div></span> and
+                        more:</span>
+                     <span class="reading b"><span class="choice">Haue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Have</div></div></span> done these twenty
+                        hundred <span class="choice">yeares<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> years</div></div></span>
+                        <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        more:</span>
+                     <span class="reading p">Have done <span class="choice">theſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> these</div></div></span>
+                        <span class="choice">twentie<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> twenty</div></div></span>
+                        hundred <span class="choice">yeares<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> years</div></div></span>, and
+                        more:</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">Lines 24-25</span>: "What are the major cultural
+                        achievements inspired by love from Classical antiquity to the
+                        present."</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2631073" onclick="matchLine('lineid2631073');">
+<div class="linenumber">26</div>
+                  <span class="apparatus">
+                     <span class="reading w">
+                        <del class=" rend-strike">Where both their <span class="choice">baſkets<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> baskets</div></div></span> are
+                              <span class="choice">w<span class="hi rend-superscript">th</span>
+                                    all<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> withal</div></div></span> their store</del>
+                        <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">their</span>: i.e., <span class="hi rend-italic">loue</span>'s and
+                              <span class="hi rend-italic">witt</span>'s.</div></span>
+                     </span>
+                     <span class="reading b">I know <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        <span class="choice">proiects<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> projects</div></div></span> of <span class="choice">vnbundled<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> unbundled</div></div></span>
+                        store:</span>
+                     <span class="reading p">I know the projects of
+                        unbridled <span class="choice">ﬅore<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> store</div></div></span>:</span>
+                     <span class="reading b p">
+                        <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">vnbundled/unbridled</span>: Whereas the #b version
+                           means merely unpacked or released, the #p revision means unrestrained or
+                           undisciplined (as of a horse without a bridle).</div></span>
+                     </span>
+                  </span>
+               </div>
+
+               <div class="line lineid2631226" onclick="matchLine('lineid2631226');">
+<div class="linenumber">27</div>
+                  <span class="apparatus">
+                     <span class="reading w">
+                        <del class=" rend-strike">The smacks of dainties and their exaltation:</del>
+                        <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">smacks</span>: agreeable flavours (<span class="hi rend-italic">OED</span> 1.c). <span class="hi rend-italic">dainties</span>: choice viands (<span class="hi rend-italic">OED</span> 6). <span class="hi rend-italic">their exaltation</span>:
+                           the elation they cause (<span class="hi rend-italic">OED</span> 2.b).</div></span>
+                     </span>
+                     <span class="reading b">My stuff is flesh, not <span class="choice">brasse<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> brass</div></div></span>; my
+                        senses <span class="choice">liue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> live</div></div></span>,</span>
+                     <span class="reading p">My <span class="choice">ﬅuﬀe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> stuff</div></div></span> is <span class="choice">ﬂeſh<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> flesh</div></div></span>, not <span class="choice">braſſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> brass</div></div></span>; my <span class="choice">ſenſes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> senses</div></div></span>
+                        live,</span>
+                  </span>
+               </div>
+
+               <div class="line lineid2631370" onclick="matchLine('lineid2631370');">
+<div class="linenumber">28</div>
+                  <span class="apparatus">
+                     <span class="reading w">
+                        <del class=" rend-strike">What both <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                           stops and pegs of pleasure <span class="choice">bee<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> be</div></div></span>:</del>
+                        <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">stops</span>: ventages or apertures on the tube of a
+                           wind instrument (<span class="hi rend-italic">OED</span> 15.a). <span class="hi rend-italic">pegs</span>: tuning pegs of a stringed instrument (<span class="hi rend-italic">OED</span> 2.a).</div></span>
+                     </span>
+                     <span class="reading b">And grumble oft; that they <span class="choice">haue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> have</div></div></span> more in <span class="choice">mee<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> me</div></div></span></span>
+                     <span class="reading p">And grumble oft, that they have more in me</span>
+                  </span>
+               </div>
+
+               <div class="line lineid2631472" onclick="matchLine('lineid2631472');">
+<div class="linenumber">29</div>
+                  <span class="apparatus">
+                     <span class="reading w">The <span class="choice">ioyes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> joys</div></div></span> of Company or
+                           Contemplation<span class="noteicon">n<div class="note">
+<strong>Note:</strong> "The pleasures of society or solitary
+                           reflection."</div></span></span>
+                     <span class="reading b"><span class="choice">Then<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Than</div></div></span> he, <span class="choice">y<span class="hi rend-superscript">t</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> that</div></div></span> curbs them, being but
+                        one to <span class="choice">fiue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> five</div></div></span>.</span>
+                     <span class="reading p"><span class="choice">Then<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Than</div></div></span> he that curbs
+                        them, being but one to <span class="choice">ﬁve<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> five</div></div></span>:</span>
+                     <span class="reading b p">
+                        <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">Lines 27-29</span>: "I am made of flesh and my five
+                           senses complain often that they are restrained by Reason even though
+                           outnumbering him five to one."</div></span>
+                     </span>
+                  </span>
+               </div>
+
+               <div class="line lineid2631584" onclick="matchLine('lineid2631584');">
+<div class="linenumber">30</div>
+                  <span class="apparatus">
+                     <span class="reading w">Yet I love Thee</span>
+                     <span class="reading b">Yet I <span class="choice">loue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> love</div></div></span> thee.</span>
+                     <span class="reading p">Yet I love thee.</span>
+                  </span>
+               </div>
+            </div>
+            
+            
+
+            <hr class="pagebreak b">
+            
+            
+            
+
+            <hr class="pagebreak p">
+            
+            
+
+            <div class="lg lg-n4 type-stanza">
+               <div class="line lineid2631720" onclick="matchLine('lineid2631720');">
+<div class="linenumber">31</div>
+                  <span class="apparatus">
+                     <span class="reading w">I know all these <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span> have
+                        them in my hand.</span>
+                     <span class="reading b">I know all these, <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        <span class="choice">haue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> have</div></div></span> them
+                        in my hand.</span>
+                     <span class="reading p">I know all <span class="choice">theſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> these</div></div></span>, and have
+                        them in my hand:</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">have/haue them in my hand</span>: i.e., by virtue of
+                        having written this poem.</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2631797" onclick="matchLine('lineid2631797');">
+<div class="linenumber">32</div>
+                  <span class="apparatus">
+                     <span class="reading w">Therefore not <span class="choice">seeled<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> sealed</div></div></span>, but <span class="choice">w<span class="hi rend-superscript">th</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> with</div></div></span> open eyes</span>
+                     <span class="reading b">Therefore not sealed, but with open eyes</span>
+                     <span class="reading p">Therefore not <span class="choice">ſealed<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> sealed</div></div></span>, but
+                        with open eyes</span>
+                  </span>
+               </div>
+
+               <div class="line lineid2631859" onclick="matchLine('lineid2631859');">
+<div class="linenumber">33</div>
+                  <span class="apparatus">
+                     <span class="reading w">I fly to thee, and fully <span class="choice">vnderstand<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> understand</div></div></span></span>
+                     <span class="reading b">I fly to thee, and fully <span class="choice">vnderstand<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> understand</div></div></span>,</span>
+                     <span class="reading p">I <span class="choice">ﬂie<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> fly</div></div></span> to thee, and fully
+                           <span class="choice">underﬅand<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> understand</div></div></span></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2631924" onclick="matchLine('lineid2631924');">
+<div class="linenumber">34</div>
+                  <span class="apparatus">
+                     <span class="reading w">Both the <span class="choice">maine<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> main</div></div></span> sale and
+                        the Commodities</span>
+                     <span class="reading b">Both <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        <span class="choice">maine<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> main</div></div></span> sale,
+                        and the commodities:</span>
+                     <span class="reading p">Both the main <span class="choice">ſale<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> sale</div></div></span>, and the
+                        commodities;</span>
+                  </span>
+               </div>
+
+               <div class="line lineid2631996" onclick="matchLine('lineid2631996');">
+<div class="linenumber">35</div>
+                  <span class="apparatus">
+                     <span class="reading w">And at what rate <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span> price I
+                           <span class="choice">haue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> have</div></div></span> thy
+                        love,</span>
+                     <span class="reading b">And at what rate <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span> price I
+                           <span class="choice">haue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> have</div></div></span> thy
+                           <span class="choice">loue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> love</div></div></span></span>
+                     <span class="reading p">And at what rate and price I have thy love;</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">Lines 32-35</span>: Using a cold, mercantile language of
+                        exchange, the speaker arrogantly presumes to comprehend the extent of the
+                        sacrifice required to follow Christ. Worse yet, he fails utterly to
+                        comprehend the extent of Christ's sacrifice relative to his own.</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2632087" onclick="matchLine('lineid2632087');">
+<div class="linenumber">36</div>
+                  <span class="apparatus">
+                     <span class="reading w"><span class="choice">W<span class="hi rend-superscript">th</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> With</div></div></span> all the Circumstances
+                           <span class="choice">y<span class="hi rend-superscript">t</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> that</div></div></span> may <span class="choice">moue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> move</div></div></span>.</span>
+                     <span class="reading b">With all <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span> circumstances, <span class="choice">y<span class="hi rend-superscript">t</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> that</div></div></span> may <span class="choice">moue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> move</div></div></span>,</span>
+                     <span class="reading p">With all the <span class="choice">circumﬅances<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> circumstances</div></div></span>
+                        that may move:</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> "The speaker even claims to be able to anticipate changes in
+                        circumstances and to understand how they will affect the agreement" (Wilcox,
+                        326).</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2632209" onclick="matchLine('lineid2632209');">
+<div class="linenumber">37</div>
+                  <span class="apparatus">
+                     <span class="reading w">Yet <span class="choice">th<ins class="rend-infralinear">‸</ins><ins class="rend-supralinear">r</ins>ough<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> through</div></div></span> these labyrinths
+                        not my <span class="choice">groueling<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> groveling</div></div></span>
+                        <span class="choice">witt<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> wit</div></div></span>,</span>
+                     <span class="reading b">Yet through these <span class="choice">labarinths<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> labyrinths</div></div></span>,
+                        not my <span class="choice">groueling<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> groveling</div></div></span>
+                        <span class="choice">witt<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> wit</div></div></span>,</span>
+                     <span class="reading p">Yet through the labyrinths, not my groveling wit,</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">labyrinths/labarinths</span>: mazes, recalling the story
+                        of Theseus and the Minotaur in Ovid's <span class="hi rend-italic">Metamorphoses</span>
+                        (8.130ff.). After slaying the beast, Theseus finds his way out of the
+                        labyrinth by means of Ariadne's thread (the latter suggested here by the <span class="hi rend-italic">silk twist/twiﬅ</span> in the following line). <span class="hi rend-italic">groueling/groveling witt/wit</span>: This sudden assertion
+                        that the poem to this point has been merely obsequious seems entirely at
+                        odds with the arrogance of the lines (32-36) immediately preceding. The
+                        crucial question is whether the acknowledgement of such folly has
+                        sufficiently corrected it. But perhaps that is the point: nothing the
+                        speaker says or does can redeem him. The poem's conclusion is the moment
+                        before the <span class="hi rend-italic">clime/climbe</span> (line 40) has even
+                        begun.</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2632354" onclick="matchLine('lineid2632354');">
+<div class="linenumber">38</div>
+                  <span class="apparatus">
+                     <span class="reading w">But thy silk-twist, <span class="choice">lett<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> let</div></div></span>
+                        <span class="choice">downe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> down</div></div></span> from
+                           <span class="choice">Heauen<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Heaven</div></div></span> to <span class="choice">mee<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> me</div></div></span></span>
+                     <span class="reading b">But thy silk twist, let <span class="choice">downe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> down</div></div></span> from <span class="choice">heauen<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> heaven</div></div></span>
+                        to <span class="choice">mee<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> me</div></div></span>,</span>
+                     <span class="reading p">But thy <span class="choice">ſilk<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> silk</div></div></span>
+                        <span class="choice">twiﬅ<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> twist</div></div></span> let
+                        down from heav'n to me,</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">silk-/silk/ſilk
+                           twist/twiﬅ</span>: In addition to the echo of Ovid (see line 37 and note),
+                        Wilcox (326-27) cites three possible interpretations of this much-discussed
+                        phrase: an echo of Jacob's ladder linking heaven and earth (Genesis 28:12);
+                        the proverbial "threefold cord" that "is not quickly broken" (Ecclesiastes
+                        3:12) and therefore a type of the Trinity; and a passage in Calvin's <span class="hi rend-italic">Institutes</span> (1.6.3) in which the "twist" of God's Word
+                        is said to lead the Christian to salvation.</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2632512" onclick="matchLine('lineid2632512');">
+<div class="linenumber">39</div>
+                  <span class="apparatus">
+                     <span class="reading w">Did both conduct and teach <span class="choice">mee<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> me</div></div></span> how by <span class="choice">itt<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> it</div></div></span></span>
+                     <span class="reading b">Did both conduct, <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span> teach <span class="choice">mee<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> me</div></div></span>, how by
+                        it</span>
+                     <span class="reading p">Did both <span class="choice">conduct<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> conduct</div></div></span> and teach me, how
+                        by it</span>
+                  </span>
+               </div>
+
+               <div class="line lineid2632592" onclick="matchLine('lineid2632592');">
+<div class="linenumber">40</div>
+                  <span class="apparatus">
+                     <span class="reading w">To <span class="choice">clime<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> climb</div></div></span> to
+                        Thee.</span>
+                     <span class="reading b">To <span class="choice">climbe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> climb</div></div></span> to
+                        Thee.</span>
+                     <span class="reading p">To <span class="choice">climbe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> climb</div></div></span> to
+                        thee.</span>
+                  </span>
+               </div>
+            </div>
+         </div>
+
+      </div>
+</div>
+<div class="panel mssPanel">
+<div class="panelBanner">
+<img class="closePanel" onclick="closePanel(this.parentNode.parentNode);" src="../vm-images/closePanel.gif" alt="X">Witness <select class="witnessMenu" onchange="changeWitness(this.value,this.parentNode.parentNode);"><option value="w">1: w</option>
+<option selected value="b">2: b</option>
+<option value="p">3: p</option></select>
+</div>
+<div class="mssContent">
+
+         <hr class="pagebreak w">
+         
+
+         <hr class="pagebreak b">
+         
+         
+         
+
+         <hr class="pagebreak p">
+         
+         
+
+         <div class="div type-poem rend-right">
+
+            <div class="head">
+               <span class="apparatus app-id2628336 clickable" onclick="matchApp('app-id2628336');">
+                  <span class="reading w">The <span class="choice">Pearle<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Pearl</div></div></span>: Matth: 13.45.</span>
+                  <span class="reading b">The <span class="choice">Pearle<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Pearl</div></div></span>
+                     Math. 13.</span>
+                  <span class="reading p">¶ The Pearl. <span class="hi rend-italic">
+                        Matth. </span>
+                     13.</span>
+                  <span class="noteicon">n<div class="note">
+<strong>Note:</strong> "Again, the kingdom of heaven is like unto a merchant man, seeking goodly
+                     pearls: who, when he had found one pearl of great price, went and sold all that
+                     he had, and bought it" (Matthew 13:45-46). Elaborating this passage from the
+                     Sermon on the Mount, the poem reviews wistfully even while denouncing much of
+                     what is positive in worldly experience: the pleasures of intellect, social
+                     distinction, and the flesh.</div></span>
+               </span>
+            </div>
+
+            <div class="lg lg-n1 type-stanza">
+               <div class="line lineid2628426" onclick="matchLine('lineid2628426');">
+<div class="linenumber">1</div>
+                  <span class="apparatus">
+                     <span class="reading w">I know <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        <span class="choice">wayes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> ways</div></div></span> of
+                        learning, both the Head</span>
+                     <span class="reading b">I know <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        <span class="choice">waies<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> ways</div></div></span> of
+                        Learning. both the head</span>
+                     <span class="reading p">I <span class="choice">Know<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> know</div></div></span> the <span class="choice">wayes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> ways</div></div></span> of
+                        learning; both the head</span>
+                  </span>
+               </div>
+
+               <div class="line lineid2628588" onclick="matchLine('lineid2628588');">
+<div class="linenumber">2</div>
+                  <span class="apparatus">
+                     <span class="reading w">And Pipes that feed <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        <span class="choice">Preſs<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Press</div></div></span> and
+                        make it <span class="choice">runn<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> run</div></div></span>.</span>
+                     <span class="reading b">And pipes, <span class="choice">y<span class="hi rend-superscript">t</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> that</div></div></span> feed <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        <span class="choice">presse<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> press</div></div></span>,
+                           <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        make it <span class="choice">runne<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> run</div></div></span>:</span>
+                     <span class="reading p">And pipes that feed the <span class="choice">preſſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> press</div></div></span>, and
+                        make it <span class="choice">runne<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> run</div></div></span>;</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">Lines 1-2</span>: The <span class="hi rend-italic">Head/head</span>
+                        and <span class="hi rend-italic">Pipes/pipes</span> can be read as both mechanical
+                        components of the printing press and the human head and its channels through
+                        which experience enters the mind via the eyes and ears and, transformed into
+                        knowledge, exits via the mouth (speech being counterpart to the printed
+                        word). This opening metaphor immediately establishes the tone of the poem by
+                        suggesting that much of human knowledge is but a mechanistic response to
+                        sensory stimuli—knowledge which <span class="hi rend-italic">reason/reaſon hath from Nature/nature</span> (line 3).</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2628768" onclick="matchLine('lineid2628768');">
+<div class="linenumber">3</div>
+                  <span class="apparatus">
+                     <span class="reading w">What reason hath from Nature purchased</span>
+                     <span class="reading b">What reason hath from Nature borrowed,</span>
+                     <span class="reading p">What <span class="choice">reaſon<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> reason</div></div></span> hath
+                        from nature borrowed,</span>
+                  </span>
+               </div>
+
+               <div class="line lineid2628803" onclick="matchLine('lineid2628803');">
+<div class="linenumber">4</div>
+                  <span class="apparatus">
+                     <span class="reading w"><span class="choice">Ør<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Or</div></div></span>
+                        of itself like a good <span class="choice">huſwife<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> housewife</div></div></span>
+                        <span class="choice">spunn<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> spun</div></div></span></span>
+                     <span class="reading b">Or of <span class="choice">it
+                                 selfe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> itself</div></div></span>, like a good <span class="choice">huswife<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> housewife</div></div></span>
+                        <span class="choice">spunne<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> spun</div></div></span></span>
+                     <span class="reading p">Or of <span class="choice">it
+                                 ſelf<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> itself</div></div></span>, like a good <span class="choice">huſwife<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> housewife</div></div></span>, <span class="choice">ſpunne<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> spun</div></div></span></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2628036" onclick="matchLine('lineid2628036');">
+<div class="linenumber">5</div>
+                  <span class="apparatus">
+                     <span class="reading w">In <span class="choice">lawes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> laws</div></div></span>
+                        <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        <span class="choice">Policie<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Policy</div></div></span>: what <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        <span class="choice">starres<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> stars</div></div></span>
+                        conspire:</span>
+                     <span class="reading b">In Laws <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        <span class="choice">Policie<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Policy</div></div></span>. what <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        <span class="choice">starres<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> stars</div></div></span>
+                        conspire,</span>
+                     <span class="reading p">In laws and <span class="choice">policie<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> policy</div></div></span>; what
+                        the <span class="choice">ﬅarres<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> stars</div></div></span>
+                        <span class="choice">conſpire<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> conspire</div></div></span>,</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">Lines 4-5, or … Policie/policie</span>:
+                        Reason, like a resourceful housewife who makes due with the materials at her
+                        immediate disposal, is self-sufficient with respect to the knowledge and
+                        practice of law and politics. <span class="hi rend-italic">conspire/conſpire</span>: combine harmoniously (<span class="hi rend-italic">OED</span> 3.a).</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2628824" onclick="matchLine('lineid2628824');">
+<div class="linenumber">6</div>
+                  <span class="apparatus">
+                     <span class="reading w">What willing Nature speaks, what <span class="choice">forst<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> forc'd</div></div></span> by
+                        fire:</span>
+                     <span class="reading b">What willing Nature <span class="choice">speakes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> speaks</div></div></span>, what
+                           forc'd by fire.</span>
+                     <span class="reading p">What willing nature <span class="choice">ſpeaks<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> speaks</div></div></span>, what forc'd by <span class="choice">ﬁre<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> fire</div></div></span>;</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> "What is immediately apparent, what revealed by fire," the latter
+                        referring perhaps to some alchemical or occult process through which
+                        nature's secrets are exposed.</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2628912" onclick="matchLine('lineid2628912');">
+<div class="linenumber">7</div>
+                  <span class="apparatus">
+                     <span class="reading w">Both th'old <span class="choice">diſcoveries<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> discoveries</div></div></span>,
+                           <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span> new-found seas,</span>
+                     <span class="reading b">Both the'old <span class="choice">discoueries<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> discoveries</div></div></span>,
+                           <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        <span class="choice">New
+                              found<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> New-found</div></div></span> seas,</span>
+                     <span class="reading p">Both th' old <span class="choice">diſcoveries<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> discoveries</div></div></span>,
+                        and the <span class="choice">new
+                                 found<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> new-found</div></div></span>
+                        <span class="choice">ſeas<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> seas</div></div></span>,</span>
+                  </span>
+               </div>
+
+               <div class="line lineid2629060" onclick="matchLine('lineid2629060');">
+<div class="linenumber">8</div>
+                  <span class="apparatus">
+                     <span class="reading w">The stock and surplus, cause and History.</span>
+                     <span class="reading b">The stock <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span> surplus,
+                        cause and history:</span>
+                     <span class="reading p">The <span class="choice">ﬅock<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> stock</div></div></span> and <span class="choice">ſurplus<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> surplus</div></div></span>, <span class="choice">cauſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> cause</div></div></span> and
+                           <span class="choice">hiﬅorie<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> history</div></div></span>:</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> The abundance of knowledge already acquired, and how it came to be (i.e.,
+                        philology).</div></span>
+                  </span>
+               </div>
+
+               <hr class="pagebreak b">
+               
+               
+
+               <div class="line lineid2629175" onclick="matchLine('lineid2629175');">
+<div class="linenumber">9</div>
+                  <span class="apparatus">
+                     <span class="reading w">All these stand open or I have the <span class="choice">keyes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> keys</div></div></span>.</span>
+                     <span class="reading b">All these stand open, or I <span class="choice">haue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> have</div></div></span> the <span class="choice">keyes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> keys</div></div></span>.</span>
+                     <span class="reading p">All <span class="choice">theſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> these</div></div></span>
+                        <span class="choice">ﬅand<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> stand</div></div></span>
+                        open, or I have the <span class="choice">keyes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> keys</div></div></span>:</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">keyes</span>: i.e., means and methods with which to
+                        unlock nature's secrets (see line 6 and note).</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2629272" onclick="matchLine('lineid2629272');">
+<div class="linenumber">10</div>
+                  <span class="apparatus">
+                     <span class="reading w">Yet I love Thee.</span>
+                     <span class="reading b">Yet I <span class="choice">loue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> love</div></div></span> thee.</span>
+                     <span class="reading p">Yet I love thee.</span>
+                  </span>
+               </div>
+            </div>
+
+            <div class="lg lg-n2 type-stanza">
+               <div class="line lineid2629315" onclick="matchLine('lineid2629315');">
+<div class="linenumber">11</div>
+                  <span class="apparatus">
+                     <span class="reading w">I know the <span class="choice">wayes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> ways</div></div></span> of Honour:
+                        what maintains</span>
+                     <span class="reading b">I know <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        <span class="choice">wayes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> ways</div></div></span> of <span class="choice">honor<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> honour</div></div></span>.
+                        what <span class="choice">mantaines<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> maintains</div></div></span></span>
+                     <span class="reading p">I know the <span class="choice">wayes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> ways</div></div></span> of honour,
+                        what maintains</span>
+                  </span>
+               </div>
+
+               <div class="line lineid2629406" onclick="matchLine('lineid2629406');">
+<div class="linenumber">12</div>
+                  <span class="apparatus">
+                     <span class="reading w">The quick <span class="choice">returnes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> returns</div></div></span> of <span class="choice">curtesie<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> courtesy</div></div></span> and <span class="choice">witt<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> wit</div></div></span>:</span>
+                     <span class="reading b">The quick <span class="choice">returnes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> returns</div></div></span> of <span class="choice">curtesie<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> courtesy</div></div></span> and <span class="choice">witt<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> wit</div></div></span>:</span>
+                     <span class="reading p">The quick returns of <span class="choice">courteſie<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> courtesy</div></div></span> and
+                        wit:</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> "The courtier's skill in lively banter."</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2629514" onclick="matchLine('lineid2629514');">
+<div class="linenumber">13</div>
+                  <span class="apparatus">
+                     <span class="reading w">In <span class="choice">vyes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> vies</div></div></span> of <span class="choice">fauours<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> favours</div></div></span>
+                        <span class="choice">whither<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> whether</div></div></span> party
+                        gains,</span>
+                     <span class="reading b">In <span class="choice">vyes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> vies</div></div></span> of <span class="choice">fauo<span class="hi rend-superscript">rs</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> favours</div></div></span>, whether party <span class="choice">gaines<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> gains</div></div></span>,</span>
+                     <span class="reading p">In vies of favours whether <span class="choice">partie<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> party</div></div></span>
+                        gains,</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> "Which of two courtiers wins favour in a contest of deference to a person
+                        of rank."</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2629622" onclick="matchLine('lineid2629622');">
+<div class="linenumber">14</div>
+                  <span class="apparatus">
+                     <span class="reading w">When glory <span class="choice">swels<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> swells</div></div></span>
+                        <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        <span class="choice">hart<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> heart</div></div></span> and
+                           moldeth it</span>
+                     <span class="reading b">When Glory swells <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        heart, <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        moldeth it</span>
+                     <span class="reading p">When <span class="choice">glorie<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> glory</div></div></span>
+                        <span class="choice">ſwells<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> swells</div></div></span>
+                        the heart, and moldeth it</span>
+                  </span>
+               </div>
+
+               <div class="line lineid2629745" onclick="matchLine('lineid2629745');">
+<div class="linenumber">15</div>
+                  <span class="apparatus">
+                     <span class="reading w">To all <span class="choice">expreſsions<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> expressions</div></div></span>
+                        both of hand <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span> eye</span>
+                     <span class="reading b">To all expressions both of hand <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        <span class="choice">eie<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> eye</div></div></span>,</span>
+                     <span class="reading p">To all <span class="choice">expreſſions<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> expressions</div></div></span> both of
+                        hand and eye,</span>
+                  </span>
+               </div>
+
+               <div class="line lineid2629827" onclick="matchLine('lineid2629827');">
+<div class="linenumber">16</div>
+                  <span class="apparatus">
+                     <span class="reading w"><span class="choice">W<span class="hi rend-superscript">ch</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Which</div></div></span> on the world a <span class="choice">tru<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> true</div></div></span>-love-<span class="choice">knott<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> knot</div></div></span> may
+                           <span class="choice">tye<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> tie</div></div></span></span>
+                     <span class="reading b"><span class="choice">W<span class="hi rend-superscript">ch</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Which</div></div></span> on <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span> World a true-<span class="choice">loue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> love</div></div></span>-knot
+                        may tie</span>
+                     <span class="reading p">Which on the world a true-love-knot may tie,</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">tru/true-love/loue-knot</span>: ornamental knot used as a
+                        symbol of true love.</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2629944" onclick="matchLine('lineid2629944');">
+<div class="linenumber">17</div>
+                  <span class="apparatus">
+                     <span class="reading w">And <span class="choice">beare<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> bear</div></div></span>
+                        <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span> bundle <span class="choice">wheresoere<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> wheresoe'er</div></div></span> it
+                        goes.</span>
+                     <span class="reading b">And <span class="choice">beare<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> bear</div></div></span>
+                        <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span> bundle, <span class="choice">wheresoere<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> wheresoe'er</div></div></span> it
+                        goes:</span>
+                     <span class="reading p">And bear the bundle, <span class="choice">whereſoe're<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> wheresoe'er</div></div></span>
+                        it goes:</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">Lines 15-17</span>: "When the desire for fame and
+                        reputation at court is evident in subtle physical gestures and glances: a
+                        wooing of the world as though it were a mistress—a pretence
+                        which, like a burdensome load, must always be sustained."</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2630066" onclick="matchLine('lineid2630066');">
+<div class="linenumber">18</div>
+                  <span class="apparatus">
+                     <span class="reading w">How many drams of spirit there must <span class="choice">bee<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> be</div></div></span></span>
+                     <span class="reading b">How many <span class="choice">drammes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> drams</div></div></span> of
+                        spirit there must <span class="choice">bee<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> be</div></div></span></span>
+                     <span class="reading p">How many <span class="choice">drammes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> drams</div></div></span> of <span class="choice">ſpirit<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> spirit</div></div></span>
+                        there <span class="choice">muﬅ<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> must</div></div></span>
+                        be</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">drams/drammes</span>: small amounts (<span class="hi rend-italic">OED</span> 3.b). <span class="hi rend-italic">spirit/ſpirit</span>: mental
+                        vigor, courage (<span class="hi rend-italic">OED</span> 13.a); vital bodily fluid (<span class="hi rend-italic">OED</span> 16.a); distilled alcohol (<span class="hi rend-italic">OED</span> 21).</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2630190" onclick="matchLine('lineid2630190');">
+<div class="linenumber">19</div>
+                  <span class="apparatus">
+                     <span class="reading w">To sell my life <span class="choice">vnto<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> unto</div></div></span> my <span class="choice">frends<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> friends</div></div></span>
+                        or foes</span>
+                     <span class="reading b">To sell my life <span class="choice">vnto<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> unto</div></div></span> my <span class="choice">freinds<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> friends</div></div></span> or
+                        foes.</span>
+                     <span class="reading p">To <span class="choice">ſell<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> sell</div></div></span> my life unto my
+                        friends or foes:</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">Lines 18-19</span>: The speaker bemoans the considerable
+                        energy it takes to sustain worldly respectability, wryly suggesting that
+                        such effort can be mustered at all only with a little fortifying courage
+                        from the bottle.</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2630282" onclick="matchLine('lineid2630282');">
+<div class="linenumber">20</div>
+                  <span class="apparatus">
+                     <span class="reading w">Yet I love Thee.</span>
+                     <span class="reading b">Yet I <span class="choice">loue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> love</div></div></span> thee.</span>
+                     <span class="reading p">Yet I love thee.</span>
+                  </span>
+               </div>
+            </div>
+
+            <hr class="pagebreak w">
+            
+            
+
+            <div class="lg lg-n3 type-stanza">
+               <div class="line lineid2630352" onclick="matchLine('lineid2630352');">
+<div class="linenumber">21</div>
+                  <span class="apparatus">
+                     <span class="reading w">I know <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        <span class="choice">wayes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> ways</div></div></span> of
+                        Pleasure: the sweet strains,</span>
+                     <span class="reading b">I know <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        <span class="choice">waies<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> ways</div></div></span> of
+                        Pleasure. <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span> sweet <span class="choice">straines<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> strains</div></div></span>,</span>
+                     <span class="reading p">I know the <span class="choice">wayes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> ways</div></div></span> of <span class="choice">pleaſure<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> pleasure</div></div></span>, the <span class="choice">ſweet<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> sweet</div></div></span>
+                        <span class="choice">ﬅrains<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> strains</div></div></span>,</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">strains/straines/ﬅrains</span>: passages of song or verse
+                           (<span class="hi rend-italic">OED</span> 13.b); sexual exertions.</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2630507" onclick="matchLine('lineid2630507');">
+<div class="linenumber">22</div>
+                  <span class="apparatus">
+                     <span class="reading w">The <del class=" rend-strike">gustos</del>
+                        <ins class="rend-supralinear">lullings</ins> and the relishes of <span class="choice">itt<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> it</div></div></span>.<span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic"><del class=" rend-strike">gustos</del></span>: keen enjoyments
+                              (<span class="hi rend-italic">OED</span> 2).</div></span></span>
+                     <span class="reading b">The Lullings <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        <span class="choice">rellishes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> relishes</div></div></span> of <span class="choice">itt<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> it</div></div></span>:</span>
+                     <span class="reading p">The lullings and the <span class="choice">reliſhes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> relishes</div></div></span> of
+                        it;</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">lullings/Lullings</span>: soothing songs (<span class="hi rend-italic">OED</span> 1.b); soothing caresses (<span class="hi rend-italic">OED</span> lull, v.1, 1). <span class="hi rend-italic">relishes/rellishes/reliſhes</span>: pleasing flavours or qualities
+                           (<span class="hi rend-italic">OED</span> 1.d); and, as Wilcox (325) notes, musical
+                        embellishments (<span class="hi rend-italic">OED</span> relish, n.3).</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2630677" onclick="matchLine('lineid2630677');">
+<div class="linenumber">23</div>
+                  <span class="apparatus">
+                     <span class="reading w">The propositions of <span class="choice">hott<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> hot</div></div></span> blood and
+                        brains:</span>
+                     <span class="reading b">The propositions of <span class="choice">hott<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> hot</div></div></span> blood <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        <span class="choice">braines<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> brains</div></div></span>:</span>
+                     <span class="reading p">The <span class="choice">propoſitions<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> propositions</div></div></span> of hot
+                           <span class="choice">bloud<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> blood</div></div></span>
+                        and brains;</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">propositions/propoſitions</span>: schemes or courses of action (<span class="hi rend-italic">OED</span> 2.a).</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2630792" onclick="matchLine('lineid2630792');">
+<div class="linenumber">24</div>
+                  <span class="apparatus">
+                     <span class="reading w">What mirth <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        <span class="choice">Musick<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Music</div></div></span>
+                        <span class="choice">meane<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> mean</div></div></span>, what
+                           <span class="choice">loue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> love</div></div></span>
+                        <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        <span class="choice">witt<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> wit</div></div></span></span>
+                     <span class="reading b">What Mirth <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        <span class="choice">Musiq<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Music</div></div></span>
+                        <span class="choice">meane<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> mean</div></div></span>: what
+                           <span class="choice">loue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> love</div></div></span>
+                        <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        <span class="choice">witt<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> wit</div></div></span></span>
+                     <span class="reading p">What mirth and <span class="choice">muſick<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> music</div></div></span> mean; what love
+                        and wit</span>
+                  </span>
+               </div>
+
+               <div class="line lineid2630952" onclick="matchLine('lineid2630952');">
+<div class="linenumber">25</div>
+                  <span class="apparatus">
+                     <span class="reading w">Have done these <del class=" rend-strike">twenty</del>
+                        <ins class="rend-supralinear">many</ins> hundred <span class="choice">yeers<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> years</div></div></span> and
+                        more:</span>
+                     <span class="reading b"><span class="choice">Haue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Have</div></div></span> done these twenty
+                        hundred <span class="choice">yeares<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> years</div></div></span>
+                        <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        more:</span>
+                     <span class="reading p">Have done <span class="choice">theſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> these</div></div></span>
+                        <span class="choice">twentie<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> twenty</div></div></span>
+                        hundred <span class="choice">yeares<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> years</div></div></span>, and
+                        more:</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">Lines 24-25</span>: "What are the major cultural
+                        achievements inspired by love from Classical antiquity to the
+                        present."</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2631073" onclick="matchLine('lineid2631073');">
+<div class="linenumber">26</div>
+                  <span class="apparatus">
+                     <span class="reading w">
+                        <del class=" rend-strike">Where both their <span class="choice">baſkets<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> baskets</div></div></span> are
+                              <span class="choice">w<span class="hi rend-superscript">th</span>
+                                    all<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> withal</div></div></span> their store</del>
+                        <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">their</span>: i.e., <span class="hi rend-italic">loue</span>'s and
+                              <span class="hi rend-italic">witt</span>'s.</div></span>
+                     </span>
+                     <span class="reading b">I know <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        <span class="choice">proiects<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> projects</div></div></span> of <span class="choice">vnbundled<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> unbundled</div></div></span>
+                        store:</span>
+                     <span class="reading p">I know the projects of
+                        unbridled <span class="choice">ﬅore<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> store</div></div></span>:</span>
+                     <span class="reading b p">
+                        <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">vnbundled/unbridled</span>: Whereas the #b version
+                           means merely unpacked or released, the #p revision means unrestrained or
+                           undisciplined (as of a horse without a bridle).</div></span>
+                     </span>
+                  </span>
+               </div>
+
+               <div class="line lineid2631226" onclick="matchLine('lineid2631226');">
+<div class="linenumber">27</div>
+                  <span class="apparatus">
+                     <span class="reading w">
+                        <del class=" rend-strike">The smacks of dainties and their exaltation:</del>
+                        <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">smacks</span>: agreeable flavours (<span class="hi rend-italic">OED</span> 1.c). <span class="hi rend-italic">dainties</span>: choice viands (<span class="hi rend-italic">OED</span> 6). <span class="hi rend-italic">their exaltation</span>:
+                           the elation they cause (<span class="hi rend-italic">OED</span> 2.b).</div></span>
+                     </span>
+                     <span class="reading b">My stuff is flesh, not <span class="choice">brasse<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> brass</div></div></span>; my
+                        senses <span class="choice">liue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> live</div></div></span>,</span>
+                     <span class="reading p">My <span class="choice">ﬅuﬀe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> stuff</div></div></span> is <span class="choice">ﬂeſh<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> flesh</div></div></span>, not <span class="choice">braſſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> brass</div></div></span>; my <span class="choice">ſenſes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> senses</div></div></span>
+                        live,</span>
+                  </span>
+               </div>
+
+               <div class="line lineid2631370" onclick="matchLine('lineid2631370');">
+<div class="linenumber">28</div>
+                  <span class="apparatus">
+                     <span class="reading w">
+                        <del class=" rend-strike">What both <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                           stops and pegs of pleasure <span class="choice">bee<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> be</div></div></span>:</del>
+                        <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">stops</span>: ventages or apertures on the tube of a
+                           wind instrument (<span class="hi rend-italic">OED</span> 15.a). <span class="hi rend-italic">pegs</span>: tuning pegs of a stringed instrument (<span class="hi rend-italic">OED</span> 2.a).</div></span>
+                     </span>
+                     <span class="reading b">And grumble oft; that they <span class="choice">haue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> have</div></div></span> more in <span class="choice">mee<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> me</div></div></span></span>
+                     <span class="reading p">And grumble oft, that they have more in me</span>
+                  </span>
+               </div>
+
+               <div class="line lineid2631472" onclick="matchLine('lineid2631472');">
+<div class="linenumber">29</div>
+                  <span class="apparatus">
+                     <span class="reading w">The <span class="choice">ioyes<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> joys</div></div></span> of Company or
+                           Contemplation<span class="noteicon">n<div class="note">
+<strong>Note:</strong> "The pleasures of society or solitary
+                           reflection."</div></span></span>
+                     <span class="reading b"><span class="choice">Then<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Than</div></div></span> he, <span class="choice">y<span class="hi rend-superscript">t</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> that</div></div></span> curbs them, being but
+                        one to <span class="choice">fiue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> five</div></div></span>.</span>
+                     <span class="reading p"><span class="choice">Then<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Than</div></div></span> he that curbs
+                        them, being but one to <span class="choice">ﬁve<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> five</div></div></span>:</span>
+                     <span class="reading b p">
+                        <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">Lines 27-29</span>: "I am made of flesh and my five
+                           senses complain often that they are restrained by Reason even though
+                           outnumbering him five to one."</div></span>
+                     </span>
+                  </span>
+               </div>
+
+               <div class="line lineid2631584" onclick="matchLine('lineid2631584');">
+<div class="linenumber">30</div>
+                  <span class="apparatus">
+                     <span class="reading w">Yet I love Thee</span>
+                     <span class="reading b">Yet I <span class="choice">loue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> love</div></div></span> thee.</span>
+                     <span class="reading p">Yet I love thee.</span>
+                  </span>
+               </div>
+            </div>
+            
+            
+
+            <hr class="pagebreak b">
+            
+            
+            
+
+            <hr class="pagebreak p">
+            
+            
+
+            <div class="lg lg-n4 type-stanza">
+               <div class="line lineid2631720" onclick="matchLine('lineid2631720');">
+<div class="linenumber">31</div>
+                  <span class="apparatus">
+                     <span class="reading w">I know all these <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span> have
+                        them in my hand.</span>
+                     <span class="reading b">I know all these, <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span>
+                        <span class="choice">haue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> have</div></div></span> them
+                        in my hand.</span>
+                     <span class="reading p">I know all <span class="choice">theſe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> these</div></div></span>, and have
+                        them in my hand:</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">have/haue them in my hand</span>: i.e., by virtue of
+                        having written this poem.</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2631797" onclick="matchLine('lineid2631797');">
+<div class="linenumber">32</div>
+                  <span class="apparatus">
+                     <span class="reading w">Therefore not <span class="choice">seeled<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> sealed</div></div></span>, but <span class="choice">w<span class="hi rend-superscript">th</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> with</div></div></span> open eyes</span>
+                     <span class="reading b">Therefore not sealed, but with open eyes</span>
+                     <span class="reading p">Therefore not <span class="choice">ſealed<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> sealed</div></div></span>, but
+                        with open eyes</span>
+                  </span>
+               </div>
+
+               <div class="line lineid2631859" onclick="matchLine('lineid2631859');">
+<div class="linenumber">33</div>
+                  <span class="apparatus">
+                     <span class="reading w">I fly to thee, and fully <span class="choice">vnderstand<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> understand</div></div></span></span>
+                     <span class="reading b">I fly to thee, and fully <span class="choice">vnderstand<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> understand</div></div></span>,</span>
+                     <span class="reading p">I <span class="choice">ﬂie<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> fly</div></div></span> to thee, and fully
+                           <span class="choice">underﬅand<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> understand</div></div></span></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2631924" onclick="matchLine('lineid2631924');">
+<div class="linenumber">34</div>
+                  <span class="apparatus">
+                     <span class="reading w">Both the <span class="choice">maine<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> main</div></div></span> sale and
+                        the Commodities</span>
+                     <span class="reading b">Both <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span>
+                        <span class="choice">maine<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> main</div></div></span> sale,
+                        and the commodities:</span>
+                     <span class="reading p">Both the main <span class="choice">ſale<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> sale</div></div></span>, and the
+                        commodities;</span>
+                  </span>
+               </div>
+
+               <div class="line lineid2631996" onclick="matchLine('lineid2631996');">
+<div class="linenumber">35</div>
+                  <span class="apparatus">
+                     <span class="reading w">And at what rate <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span> price I
+                           <span class="choice">haue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> have</div></div></span> thy
+                        love,</span>
+                     <span class="reading b">And at what rate <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span> price I
+                           <span class="choice">haue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> have</div></div></span> thy
+                           <span class="choice">loue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> love</div></div></span></span>
+                     <span class="reading p">And at what rate and price I have thy love;</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">Lines 32-35</span>: Using a cold, mercantile language of
+                        exchange, the speaker arrogantly presumes to comprehend the extent of the
+                        sacrifice required to follow Christ. Worse yet, he fails utterly to
+                        comprehend the extent of Christ's sacrifice relative to his own.</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2632087" onclick="matchLine('lineid2632087');">
+<div class="linenumber">36</div>
+                  <span class="apparatus">
+                     <span class="reading w"><span class="choice">W<span class="hi rend-superscript">th</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> With</div></div></span> all the Circumstances
+                           <span class="choice">y<span class="hi rend-superscript">t</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> that</div></div></span> may <span class="choice">moue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> move</div></div></span>.</span>
+                     <span class="reading b">With all <span class="choice">y<span class="hi rend-superscript">e</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> the</div></div></span> circumstances, <span class="choice">y<span class="hi rend-superscript">t</span><div class="corr"><div class="interior">
+<strong>Regularized form:</strong> that</div></div></span> may <span class="choice">moue<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> move</div></div></span>,</span>
+                     <span class="reading p">With all the <span class="choice">circumﬅances<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> circumstances</div></div></span>
+                        that may move:</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> "The speaker even claims to be able to anticipate changes in
+                        circumstances and to understand how they will affect the agreement" (Wilcox,
+                        326).</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2632209" onclick="matchLine('lineid2632209');">
+<div class="linenumber">37</div>
+                  <span class="apparatus">
+                     <span class="reading w">Yet <span class="choice">th<ins class="rend-infralinear">‸</ins><ins class="rend-supralinear">r</ins>ough<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> through</div></div></span> these labyrinths
+                        not my <span class="choice">groueling<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> groveling</div></div></span>
+                        <span class="choice">witt<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> wit</div></div></span>,</span>
+                     <span class="reading b">Yet through these <span class="choice">labarinths<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> labyrinths</div></div></span>,
+                        not my <span class="choice">groueling<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> groveling</div></div></span>
+                        <span class="choice">witt<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> wit</div></div></span>,</span>
+                     <span class="reading p">Yet through the labyrinths, not my groveling wit,</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">labyrinths/labarinths</span>: mazes, recalling the story
+                        of Theseus and the Minotaur in Ovid's <span class="hi rend-italic">Metamorphoses</span>
+                        (8.130ff.). After slaying the beast, Theseus finds his way out of the
+                        labyrinth by means of Ariadne's thread (the latter suggested here by the <span class="hi rend-italic">silk twist/twiﬅ</span> in the following line). <span class="hi rend-italic">groueling/groveling witt/wit</span>: This sudden assertion
+                        that the poem to this point has been merely obsequious seems entirely at
+                        odds with the arrogance of the lines (32-36) immediately preceding. The
+                        crucial question is whether the acknowledgement of such folly has
+                        sufficiently corrected it. But perhaps that is the point: nothing the
+                        speaker says or does can redeem him. The poem's conclusion is the moment
+                        before the <span class="hi rend-italic">clime/climbe</span> (line 40) has even
+                        begun.</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2632354" onclick="matchLine('lineid2632354');">
+<div class="linenumber">38</div>
+                  <span class="apparatus">
+                     <span class="reading w">But thy silk-twist, <span class="choice">lett<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> let</div></div></span>
+                        <span class="choice">downe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> down</div></div></span> from
+                           <span class="choice">Heauen<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> Heaven</div></div></span> to <span class="choice">mee<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> me</div></div></span></span>
+                     <span class="reading b">But thy silk twist, let <span class="choice">downe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> down</div></div></span> from <span class="choice">heauen<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> heaven</div></div></span>
+                        to <span class="choice">mee<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> me</div></div></span>,</span>
+                     <span class="reading p">But thy <span class="choice">ſilk<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> silk</div></div></span>
+                        <span class="choice">twiﬅ<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> twist</div></div></span> let
+                        down from heav'n to me,</span>
+                     <span class="noteicon">n<div class="note">
+<strong>Note:</strong> <span class="hi rend-italic">silk-/silk/ſilk
+                           twist/twiﬅ</span>: In addition to the echo of Ovid (see line 37 and note),
+                        Wilcox (326-27) cites three possible interpretations of this much-discussed
+                        phrase: an echo of Jacob's ladder linking heaven and earth (Genesis 28:12);
+                        the proverbial "threefold cord" that "is not quickly broken" (Ecclesiastes
+                        3:12) and therefore a type of the Trinity; and a passage in Calvin's <span class="hi rend-italic">Institutes</span> (1.6.3) in which the "twist" of God's Word
+                        is said to lead the Christian to salvation.</div></span>
+                  </span>
+               </div>
+
+               <div class="line lineid2632512" onclick="matchLine('lineid2632512');">
+<div class="linenumber">39</div>
+                  <span class="apparatus">
+                     <span class="reading w">Did both conduct and teach <span class="choice">mee<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> me</div></div></span> how by <span class="choice">itt<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> it</div></div></span></span>
+                     <span class="reading b">Did both conduct, <span class="choice">&amp;<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> and</div></div></span> teach <span class="choice">mee<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> me</div></div></span>, how by
+                        it</span>
+                     <span class="reading p">Did both <span class="choice">conduct<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> conduct</div></div></span> and teach me, how
+                        by it</span>
+                  </span>
+               </div>
+
+               <div class="line lineid2632592" onclick="matchLine('lineid2632592');">
+<div class="linenumber">40</div>
+                  <span class="apparatus">
+                     <span class="reading w">To <span class="choice">clime<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> climb</div></div></span> to
+                        Thee.</span>
+                     <span class="reading b">To <span class="choice">climbe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> climb</div></div></span> to
+                        Thee.</span>
+                     <span class="reading p">To <span class="choice">climbe<div class="corr"><div class="interior">
+<strong>Regularized form:</strong> climb</div></div></span> to
+                        thee.</span>
+                  </span>
+               </div>
+            </div>
+         </div>
+
+      </div>
+</div>
+</div>
+<div class="panel" id="notesPanel" style="display: none;">
+<div class="panelBanner">
+<img class="closePanel" onclick="hideNotesPanel();" alt="X" src="../vm-images/closePanel.gif">
+            Textual Notes
+         </div>
+<div class="noteContent">
+<strong>Note: </strong>"Again, the kingdom of heaven is like unto a merchant man, seeking goodly
+                     pearls: who, when he had found one pearl of great price, went and sold all that
+                     he had, and bought it" (Matthew 13:45-46). Elaborating this passage from the
+                     Sermon on the Mount, the poem reviews wistfully even while denouncing much of
+                     what is positive in worldly experience: the pleasures of intellect, social
+                     distinction, and the flesh.</div>
+<div class="noteContent">
+<div class="position" onclick="matchLine('lineid2628588');">Line number 2</div>
+<strong>Note: </strong><span class="hi rend-italic">Lines 1-2</span>: The <span class="hi rend-italic">Head/head</span>
+                        and <span class="hi rend-italic">Pipes/pipes</span> can be read as both mechanical
+                        components of the printing press and the human head and its channels through
+                        which experience enters the mind via the eyes and ears and, transformed into
+                        knowledge, exits via the mouth (speech being counterpart to the printed
+                        word). This opening metaphor immediately establishes the tone of the poem by
+                        suggesting that much of human knowledge is but a mechanistic response to
+                        sensory stimuli—knowledge which <span class="hi rend-italic">reason/reaſon hath from Nature/nature</span> (line 3).</div>
+<div class="noteContent">
+<div class="position" onclick="matchLine('lineid2628036');">Line number 5</div>
+<strong>Note: </strong><span class="hi rend-italic">Lines 4-5, or … Policie/policie</span>:
+                        Reason, like a resourceful housewife who makes due with the materials at her
+                        immediate disposal, is self-sufficient with respect to the knowledge and
+                        practice of law and politics. <span class="hi rend-italic">conspire/conſpire</span>: combine harmoniously (<span class="hi rend-italic">OED</span> 3.a).</div>
+<div class="noteContent">
+<div class="position" onclick="matchLine('lineid2628824');">Line number 6</div>
+<strong>Note: </strong>"What is immediately apparent, what revealed by fire," the latter
+                        referring perhaps to some alchemical or occult process through which
+                        nature's secrets are exposed.</div>
+<div class="noteContent">
+<div class="position" onclick="matchLine('lineid2629060');">Line number 8</div>
+<strong>Note: </strong>The abundance of knowledge already acquired, and how it came to be (i.e.,
+                        philology).</div>
+<div class="noteContent">
+<div class="position" onclick="matchLine('lineid2629175');">Line number 9</div>
+<strong>Note: </strong><span class="hi rend-italic">keyes</span>: i.e., means and methods with which to
+                        unlock nature's secrets (see line 6 and note).</div>
+<div class="noteContent">
+<div class="position" onclick="matchLine('lineid2629406');">Line number 12</div>
+<strong>Note: </strong>"The courtier's skill in lively banter."</div>
+<div class="noteContent">
+<div class="position" onclick="matchLine('lineid2629514');">Line number 13</div>
+<strong>Note: </strong>"Which of two courtiers wins favour in a contest of deference to a person
+                        of rank."</div>
+<div class="noteContent">
+<div class="position" onclick="matchLine('lineid2629827');">Line number 16</div>
+<strong>Note: </strong><span class="hi rend-italic">tru/true-love/loue-knot</span>: ornamental knot used as a
+                        symbol of true love.</div>
+<div class="noteContent">
+<div class="position" onclick="matchLine('lineid2629944');">Line number 17</div>
+<strong>Note: </strong><span class="hi rend-italic">Lines 15-17</span>: "When the desire for fame and
+                        reputation at court is evident in subtle physical gestures and glances: a
+                        wooing of the world as though it were a mistress—a pretence
+                        which, like a burdensome load, must always be sustained."</div>
+<div class="noteContent">
+<div class="position" onclick="matchLine('lineid2630066');">Line number 18</div>
+<strong>Note: </strong><span class="hi rend-italic">drams/drammes</span>: small amounts (<span class="hi rend-italic">OED</span> 3.b). <span class="hi rend-italic">spirit/ſpirit</span>: mental
+                        vigor, courage (<span class="hi rend-italic">OED</span> 13.a); vital bodily fluid (<span class="hi rend-italic">OED</span> 16.a); distilled alcohol (<span class="hi rend-italic">OED</span> 21).</div>
+<div class="noteContent">
+<div class="position" onclick="matchLine('lineid2630190');">Line number 19</div>
+<strong>Note: </strong><span class="hi rend-italic">Lines 18-19</span>: The speaker bemoans the considerable
+                        energy it takes to sustain worldly respectability, wryly suggesting that
+                        such effort can be mustered at all only with a little fortifying courage
+                        from the bottle.</div>
+<div class="noteContent">
+<div class="position" onclick="matchLine('lineid2630352');">Line number 21</div>
+<strong>Note: </strong><span class="hi rend-italic">strains/straines/ﬅrains</span>: passages of song or verse
+                           (<span class="hi rend-italic">OED</span> 13.b); sexual exertions.</div>
+<div class="noteContent w">
+<div class="witnesses">w</div>
+<div class="position" onclick="matchLine('lineid2630507');">Line number 22</div>
+<strong>Note: </strong><span class="hi rend-italic"><del class=" rend-strike">gustos</del></span>: keen enjoyments
+                              (<span class="hi rend-italic">OED</span> 2).</div>
+<div class="noteContent">
+<div class="position" onclick="matchLine('lineid2630507');">Line number 22</div>
+<strong>Note: </strong><span class="hi rend-italic">lullings/Lullings</span>: soothing songs (<span class="hi rend-italic">OED</span> 1.b); soothing caresses (<span class="hi rend-italic">OED</span> lull, v.1, 1). <span class="hi rend-italic">relishes/rellishes/reliſhes</span>: pleasing flavours or qualities
+                           (<span class="hi rend-italic">OED</span> 1.d); and, as Wilcox (325) notes, musical
+                        embellishments (<span class="hi rend-italic">OED</span> relish, n.3).</div>
+<div class="noteContent">
+<div class="position" onclick="matchLine('lineid2630677');">Line number 23</div>
+<strong>Note: </strong><span class="hi rend-italic">propositions/propoſitions</span>: schemes or courses of action (<span class="hi rend-italic">OED</span> 2.a).</div>
+<div class="noteContent">
+<div class="position" onclick="matchLine('lineid2630952');">Line number 25</div>
+<strong>Note: </strong><span class="hi rend-italic">Lines 24-25</span>: "What are the major cultural
+                        achievements inspired by love from Classical antiquity to the
+                        present."</div>
+<div class="noteContent w">
+<div class="witnesses">w</div>
+<div class="position" onclick="matchLine('lineid2631073');">Line number 26</div>
+<strong>Note: </strong><span class="hi rend-italic">their</span>: i.e., <span class="hi rend-italic">loue</span>'s and
+                              <span class="hi rend-italic">witt</span>'s.</div>
+<div class="noteContent b p">
+<div class="witnesses">b p</div>
+<div class="position" onclick="matchLine('lineid2631073');">Line number 26</div>
+<strong>Note: </strong><span class="hi rend-italic">vnbundled/unbridled</span>: Whereas the #b version
+                           means merely unpacked or released, the #p revision means unrestrained or
+                           undisciplined (as of a horse without a bridle).</div>
+<div class="noteContent w">
+<div class="witnesses">w</div>
+<div class="position" onclick="matchLine('lineid2631226');">Line number 27</div>
+<strong>Note: </strong><span class="hi rend-italic">smacks</span>: agreeable flavours (<span class="hi rend-italic">OED</span> 1.c). <span class="hi rend-italic">dainties</span>: choice viands (<span class="hi rend-italic">OED</span> 6). <span class="hi rend-italic">their exaltation</span>:
+                           the elation they cause (<span class="hi rend-italic">OED</span> 2.b).</div>
+<div class="noteContent w">
+<div class="witnesses">w</div>
+<div class="position" onclick="matchLine('lineid2631370');">Line number 28</div>
+<strong>Note: </strong><span class="hi rend-italic">stops</span>: ventages or apertures on the tube of a
+                           wind instrument (<span class="hi rend-italic">OED</span> 15.a). <span class="hi rend-italic">pegs</span>: tuning pegs of a stringed instrument (<span class="hi rend-italic">OED</span> 2.a).</div>
+<div class="noteContent w">
+<div class="witnesses">w</div>
+<div class="position" onclick="matchLine('lineid2631472');">Line number 29</div>
+<strong>Note: </strong>"The pleasures of society or solitary
+                           reflection."</div>
+<div class="noteContent b p">
+<div class="witnesses">b p</div>
+<div class="position" onclick="matchLine('lineid2631472');">Line number 29</div>
+<strong>Note: </strong><span class="hi rend-italic">Lines 27-29</span>: "I am made of flesh and my five
+                           senses complain often that they are restrained by Reason even though
+                           outnumbering him five to one."</div>
+<div class="noteContent">
+<div class="position" onclick="matchLine('lineid2631720');">Line number 31</div>
+<strong>Note: </strong><span class="hi rend-italic">have/haue them in my hand</span>: i.e., by virtue of
+                        having written this poem.</div>
+<div class="noteContent">
+<div class="position" onclick="matchLine('lineid2631996');">Line number 35</div>
+<strong>Note: </strong><span class="hi rend-italic">Lines 32-35</span>: Using a cold, mercantile language of
+                        exchange, the speaker arrogantly presumes to comprehend the extent of the
+                        sacrifice required to follow Christ. Worse yet, he fails utterly to
+                        comprehend the extent of Christ's sacrifice relative to his own.</div>
+<div class="noteContent">
+<div class="position" onclick="matchLine('lineid2632087');">Line number 36</div>
+<strong>Note: </strong>"The speaker even claims to be able to anticipate changes in
+                        circumstances and to understand how they will affect the agreement" (Wilcox,
+                        326).</div>
+<div class="noteContent">
+<div class="position" onclick="matchLine('lineid2632209');">Line number 37</div>
+<strong>Note: </strong><span class="hi rend-italic">labyrinths/labarinths</span>: mazes, recalling the story
+                        of Theseus and the Minotaur in Ovid's <span class="hi rend-italic">Metamorphoses</span>
+                        (8.130ff.). After slaying the beast, Theseus finds his way out of the
+                        labyrinth by means of Ariadne's thread (the latter suggested here by the <span class="hi rend-italic">silk twist/twiﬅ</span> in the following line). <span class="hi rend-italic">groueling/groveling witt/wit</span>: This sudden assertion
+                        that the poem to this point has been merely obsequious seems entirely at
+                        odds with the arrogance of the lines (32-36) immediately preceding. The
+                        crucial question is whether the acknowledgement of such folly has
+                        sufficiently corrected it. But perhaps that is the point: nothing the
+                        speaker says or does can redeem him. The poem's conclusion is the moment
+                        before the <span class="hi rend-italic">clime/climbe</span> (line 40) has even
+                        begun.</div>
+<div class="noteContent">
+<div class="position" onclick="matchLine('lineid2632354');">Line number 38</div>
+<strong>Note: </strong><span class="hi rend-italic">silk-/silk/ſilk
+                           twist/twiﬅ</span>: In addition to the echo of Ovid (see line 37 and note),
+                        Wilcox (326-27) cites three possible interpretations of this much-discussed
+                        phrase: an echo of Jacob's ladder linking heaven and earth (Genesis 28:12);
+                        the proverbial "threefold cord" that "is not quickly broken" (Ecclesiastes
+                        3:12) and therefore a type of the Trinity; and a passage in Calvin's <span class="hi rend-italic">Institutes</span> (1.6.3) in which the "twist" of God's Word
+                        is said to lead the Christian to salvation.</div>
+<div id="noNotesFound" class="noteContent">
+            Sorry, but there are no notes associated with
+            any currently displayed witness.
+         </div>
+</div>
+<br class="clear">
+</div>
+<div class="viewerRoot" id="panel_imageViewer">
+<div title="Click to drag panel." class="viewerHandle" id="handle_imageViewer">
+<span class="viewerHandleLt" id="title_imageViewer">Image Viewer</span><img class="viewerHandleRt" onclick="return hidePanel('imageViewer');" alt="X" src="../vm-images/closePanel.gif">
+</div>
+<div class="viewerContent" id="content_imageViewer"></div>
+</div>
+</body>
+</html>

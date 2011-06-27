@@ -1,0 +1,2758 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+      <title>Thistledownflight -- The Versioning Machine 4.0</title>
+      <link rel="stylesheet" type="text/css" href="../src/vmachine.css">
+      <!--[if IE 6]>
+            <link rel="stylesheet" type="text/css" href="../src/vmachine_ie6.css">
+         <![endif]--><script type="text/javascript" src="../src/vmachine.js"></script><script type="text/javascript">
+      var witnesses = new Array();
+      
+         witnesses["a1"] = "a1";
+      
+         witnesses["a2"] = "a2";
+      
+         witnesses["a3"] = "a3";
+      
+         witnesses["a4"] = "a4";
+      
+         witnesses["a5"] = "a5";
+      
+         witnesses["a6"] = "a6";
+      
+      var maxPanels = 6;
+   </script></head>
+   <body onload="init();">
+      <div id="mainBanner">
+         <div id="brandingLogo"><img id="logo" alt="Powered by the Versioning Machine" src="../src/images/poweredby.gif"></div>
+         <div id="headline">
+            <h1 onclick="toggleBiblio();">Thistledownflight</h1><span class="versionCount"> has 6 versions</span></div><img id="topEdge" src="../src/images/topedge.gif" alt=""><div id="mainControls"><input type="button" id="newPanel" value="New Version" onclick="openPanel();">
+            &#8226;
+            <input type="button" id="bibToggle" value="Bibliographic Info" onclick="toggleBiblio();">
+            
+            &#8226;
+            <label for="toggleLineNumbers">Line Numbers:</label><input type="checkbox" id="toggleLineNumbers" onclick="toggleLineNumbers(this.checked);" checked>
+            &#8226;
+            <select id="notesMenu" onchange="notesFormat(this.value);">
+               <option value="popup" selected>Popup notes</option>
+               <option value="inline">Inline notes</option>
+               <option value="none">
+                  Hide notes
+                  
+               </option></select>
+            &#8226;
+            <a href="../samples.html">Index of texts</a></div>
+      </div>
+      <div id="mssArea">
+         <div class="panel" id="bibPanel">
+            <div class="panelBanner"><img class="closePanel" onclick="toggleBiblio();" alt="X" src="../src/images/closePanel.gif">
+               Bibliographic Information
+               
+            </div>
+            <div class="bibContent">
+               <h2>Thistledownflight</h2>
+               <h3>
+                  by 
+                                 Elsa von Freytag-Loringhoven
+                              
+               </h3>
+               <h4>Original Source</h4>
+                           
+               <p>The Baroness' poems and papers are contained in the Archives and Manuscripts Department at the University of Maryland Libraries.
+                   Complete papers cover the period from 1917-1933 and consist of manuscripts, drafts, notes, correspondence, drawings and photographs.
+               </p>
+                           
+               <p>Textual transcription and analysis of the seven poems encoded here were undertaken in Fall 2003 by graduate students in William H. Sherman's English 601 class, "Literary Research and Critical Contexts."</p>
+                           
+               <p>Text editing of "Thistledownflight" was performed by Helen Lucille DeVinney.</p>
+                        
+               <h4>Witness List</h4>
+               <ul>
+                  <li><strong>Witness a1:</strong> Thitledownflight: Version 1 - Most-Finished version 
+                  </li>
+                  <li><strong>Witness a2:</strong> Thistledownflight: Version 2 - Typed 
+                  </li>
+                  <li><strong>Witness a3:</strong> Thistledownflight: Version 3
+                  </li>
+                  <li><strong>Witness a4:</strong> Thistledownflight: Version 3 - Rewritten Second Half 
+                  </li>
+                  <li><strong>Witness a5:</strong> Ghinga: Version 4 - Images Only
+                  </li>
+                  <li><strong>Witness a6:</strong> Ginga: Version 5 - The Early Draft of Thistledownflight 
+                  </li>
+               </ul>
+               <h4>Textual Notes</h4>
+               <div class="note">There are five versions of "Thistledownflight," presented here in the following order: 
+                  			four handwritten versions and one typewritten version (Version 2) by the Baroness (in the order of the "most-finished"
+                  version to the earliest draft, as determined 
+                  			by the editor).  Since Baroness rewrtoe the sencond half of the version 3 and it to the version 3,
+                  			the second half version is separately encoded as Witness a4.  The version 4 (Witness 5) is available only as the images.
+                   
+                  			Titles of the latest three versions are "Thistledownflight".  "Ginga" is used as titles for the earlier two versions. 
+                  			The poem is unpublished.
+                  <hr>
+               </div>
+               <div class="note">The following is an excerpt from Helen Lucille DeVinney's transcription rationale:
+                  <hr>
+               </div>
+               <div class="note">
+                                 
+                  <p>The handwriting is her typical use of majuscule letters, and the letters themselves 
+                     				are slightly larger than her standard print. It is presented as a visual poem; 
+                     				the Baroness has taken pains to add her own artistic decorations to the paper. Her use 
+                     				of the page is sparse, and the layout of the words themselves is artistic. The placement 
+                     				of the line groupings is irregular, and, in the case of the final word &#8220;Thistledownflight,&#8221;
+                     				she arranges the word itself in an artistic way. Interestingly, the poem is unsigned, 
+                     				as are each of the subsequent drafts.
+                  </p>
+                  					
+                                 
+                  <p>In some cases her handwriting seems to be slightly different in the corrections, 
+                     				but this alone is not enough to determine that the revisions occurred at another time. 
+                     				Her arrangement suggests that the poem was beginning to take shape: certain words or lines 
+                     				are clearly grouped and begin to suggest the arrangement of 2r/2v [Version 2]. 
+                     				She clearly leaves room for possibility....In 4r/4v [Version 4]  we see the appearance of 
+                     				the later title "Thistle down flight," which are also the last lines of the poem. 
+                     				This version seems to precede 3r/3v [Version 3]; in 3r/3v we see the adoption of the title 
+                     				"Thistledownflight," as well as the arrangement and corrections of some of her 
+                     				revisions in 4r/4v.  
+                  </p>
+                              
+                  <hr>
+               </div>
+               <div class="note">Read Helen Lucille DeVinney's essay "Thistledownflight."
+                              
+                  <hr>
+               </div>
+               <div class="note">Additions appear in a green, fixed-width font. Deletions appear in a red, fixed-width font with strikethrough.</div>
+               <h4>Electronic Edition Information:</h4>
+               <h5>Responsibility Statement:</h5>
+               <ul>
+                  <li>Encoded by  Kenichiro Shimada and  Helen Lucille DeVinney</li>
+               </ul>
+               <h5>Publication Details:</h5>
+                           2004
+                           
+               <p>Published by Special Collections, University of Maryland Libraries.</p>
+                           
+                              
+                                 University of Maryland, College Park, MD  20742
+                              
+               				
+                           
+                           
+                              
+               <p>Researchers can gain access to the Papers of Elsa von Freytag-Loringhoven in the Maryland Room, Hornbake Library, University of Maryland Libraries, College Park, MD  20742</p>
+                              
+               <p>"Thistiledownflight" manuscripts located in Series III, Box four, Folder 11; microfiche id numbers 5/920-5/927, 5/969.</p>
+                              
+               <p>Special Collections at the University of Maryland provides more information about the microfilm edition of the papers. </p>
+                              
+               <p>Images and manuscripts drafts of this poem may not be reproduced or downloaded and used on another site without the explicit
+                  permission of UMD Archives. They may not be reproduced or downloaded and used on another site without the explicit permission
+                  of UMD Archives. Though the intellectual property of Elsa von Freytag-Loringhoven is in the public domain, all annotations and editorial commentary are copyrighted.
+               </p>
+                           
+                        
+               <h4>Encoding Principles</h4>
+                        
+                           
+               <p>DTD constructed from TEI poetry base with tagsets for linking, figures, analysis, transcr, textcrit.</p>
+                        
+                        
+                     
+            </div>
+         </div>
+         <div id="manuscripts">
+            <div class="panel mssPanel">
+               <div class="panelBanner"><img class="closePanel" onclick="closePanel(this.parentNode.parentNode);" src="../src/images/closePanel.gif" alt="X">Witness <select class="witnessMenu" onchange="changeWitness(this.value,this.parentNode.parentNode);">
+                     <option selected value="a1">1: a1</option>
+                     <option value="a2">2: a2</option>
+                     <option value="a3">3: a3</option>
+                     <option value="a4">4: a4</option>
+                     <option value="a5">5: a5</option>
+                     <option value="a6">6: a6</option></select></div>
+               <div class="mssContent"><img src="../src/images/image.gif" class="imageLink a1" onclick="return showImgPanel(event, 'imageViewer','images/thistledown_1b.jpg','a1','-250','0');"><img src="../src/images/image.gif" class="imageLink a1" onclick="return showImgPanel(event, 'imageViewer','images/thistledown_1a.jpg','a1','-250','0');"><img src="../src/images/image.gif" class="imageLink a2" onclick="return showImgPanel(event, 'imageViewer','images/thistledown_3.jpg','a2','-250','0');"><img src="../src/images/image.gif" class="imageLink a2" onclick="return showImgPanel(event, 'imageViewer','images/thistledown_2.jpg','a2','-250','0');"><img src="../src/images/image.gif" class="imageLink a3" onclick="return showImgPanel(event, 'imageViewer','images/thistledown_4a.jpg','a3','-250','0');"><img src="../src/images/image.gif" class="imageLink a4" onclick="return showImgPanel(event, 'imageViewer','images/thistledown_4b.jpg','a4','-250','0');"><img src="../src/images/image.gif" class="imageLink a5" onclick="return showImgPanel(event, 'imageViewer','images/thistledown_5b.jpg','a5','-250','0');"><img src="../src/images/image.gif" class="imageLink a5" onclick="return showImgPanel(event, 'imageViewer','images/thistledown_5a.jpg','a5','-250','0');"><img src="../src/images/image.gif" class="imageLink a6" onclick="return showImgPanel(event, 'imageViewer','images/To Be-1.jpg','a6','-250','0');">
+                           
+                  <div class="head">
+                                 
+                                    <span class="apparatus app-d0e281 clickable" onclick="matchApp('app-d0e281');">
+                                          <span class="reading a1">Thistledownflight</span>
+                                          <span class="reading a2">Thistledownflight</span>
+                                          <span class="reading a3">Thistle down flight</span>
+                                          <span class="reading a4">Thistle down flight-Second half of Version 3 
+                           				<span class="noteicon">n
+                              <div class="note"><strong>Note:</strong> Baroness rewrote the second half (second column) of Version 3.  
+                                 				This part is separately encoded in order to enjoy advantages of 
+                                 				the Versioning Machine.
+                              </div></span>
+                                             </span>
+                                          <span class="reading a5 a6">GINGA</span>
+                                          <span class="reading a5">
+                                                <span class="noteicon">n
+                              <div class="note"><strong>Note:</strong> 
+                                 				Version4 (Witness5) was not encoded since there are too many 
+                                 				revisions (in this version) to apply parallel segmentation.
+                              </div></span>
+                                             </span>
+                                       </span>
+                                    <br class="stanzabreak">
+                                 
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e312" onclick="matchLine('lined0e312');">
+                     <div class="linenumber">1</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">GHINGHA </span>
+                                       <span class="reading a1 a3">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                       <span class="reading a3">(DJUNA)</span>
+                                       <span class="reading a6">GINGA</span>
+                        				
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e333" onclick="matchLine('lined0e333');">
+                     <div class="linenumber">2</div>
+                                 <span class="apparatus">
+                        					
+                                       <span class="reading a1 a2 a3">I</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e342" onclick="matchLine('lined0e342');">
+                     <div class="linenumber">3</div>
+                                 <span class="apparatus">
+                                       <span class="reading a6">
+                                             
+                           <del>MUST</del>I</span>
+                                       <span class="reading a1 a2 a3 a6">TREMBLE</span>
+                                       <span class="reading a1">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                    </span>
+                              
+                  </div>
+                  	
+                  	
+                  
+                  			
+                           
+                  <div class="line lined0e363" onclick="matchLine('lined0e363');">
+                     <div class="linenumber">4</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">DO</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e372" onclick="matchLine('lined0e372');">
+                     <div class="linenumber">5</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">NOT</span>
+                                    </span>
+                              
+                  </div>
+                  
+                  			
+                           
+                  <div class="line lined0e381" onclick="matchLine('lined0e381');">
+                     <div class="linenumber">6</div>
+                                 <span class="apparatus">
+                                       <span class="reading a6">MAY NOT</span>
+                                       <span class="reading a1 a2 a3 a6">LAUGH</span>
+                                       <span class="reading a1 a2 a3">!</span>
+                                       <span class="reading a6">&#8212;</span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e401" onclick="matchLine('lined0e401');">
+                     <div class="linenumber">7</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">BORN</span>
+                        				
+                                    </span>
+                              
+                  </div>
+                  	
+                  
+                  			
+                           
+                  <div class="line lined0e410" onclick="matchLine('lined0e410');">
+                     <div class="linenumber">8</div>
+                                 <span class="apparatus">
+                                       <span class="reading a6">MOTHER</span>
+                                       <span class="reading a1 a2 a3 a6">FINE</span>
+                                       <span class="reading a6">FLOWER</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e425" onclick="matchLine('lined0e425');">
+                     <div class="linenumber">9</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">FLOWER</span>
+                                       <span class="reading a1 a3">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                    </span>
+                              
+                  </div>
+                  
+                  			
+                           
+                  <div class="line lined0e440" onclick="matchLine('lined0e440');">
+                     <div class="linenumber">10</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">BY</span>
+                                    </span>
+                              
+                  </div>
+                  
+                  			
+                           
+                  <div class="line lined0e449" onclick="matchLine('lined0e449');">
+                     <div class="linenumber">11</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3 a6">ORCHID</span>
+                                       <span class="reading a6">SPPECKLED DARK-LIGHT</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e461" onclick="matchLine('lined0e461');">
+                     <div class="linenumber">13</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">SPECKLED</span>
+                                       <span class="reading a1">&#8212;</span>
+                                       <span class="reading a2">&#8211; </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e476" onclick="matchLine('lined0e476');">
+                     <div class="linenumber">14</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">DARK</span>
+                                       <span class="reading a1 a3">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                    </span>
+                              
+                  </div>
+                  
+                  			
+                           
+                  <div class="line lined0e491" onclick="matchLine('lined0e491');">
+                     <div class="linenumber">15</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">LIGHT</span>
+                                       <span class="reading a1">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  
+                  			
+                           
+                  <div class="line lined0e508" onclick="matchLine('lined0e508');">
+                     <div class="linenumber">16</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <del>DOOMED</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                           
+                  <div class="line lined0e520" onclick="matchLine('lined0e520');">
+                     <div class="linenumber">17</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">SHE</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e529" onclick="matchLine('lined0e529');">
+                     <div class="linenumber">18</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3 a6">WEPT</span>
+                                       <span class="reading a6">
+                                             
+                           <ins>AT</ins>
+                                             
+                           <del>MORN</del>NIGHT SUMPTUOUS
+                           <ins class="rend-superscript">MEAGER</ins>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e550" onclick="matchLine('lined0e550');">
+                     <div class="linenumber">19</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">AT</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e559" onclick="matchLine('lined0e559');">
+                     <div class="linenumber">20</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">NIGHT</span>
+                                       <span class="reading a1 a2">!</span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e573" onclick="matchLine('lined0e573');">
+                     <div class="linenumber">21</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">CURSED</span>
+                                       <span class="reading a6">CURSING</span>
+                                       <span class="reading a6">
+                                             
+                           <del>PROPER</del>
+                                             
+                           <ins class="place-superscript">SNARING</ins>
+                                             
+                           <ins class="place-infraliniar">SNARE OF AMPLE</ins>LIFE'S PURSE</span>
+                                    </span>
+                              
+                  </div>
+                  
+                  			
+                           
+                  <div class="line lined0e597" onclick="matchLine('lined0e597');">
+                     <div class="linenumber">22</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">TAUT</span>
+                        				
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e606" onclick="matchLine('lined0e606');">
+                     <div class="linenumber">23</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">SNARE</span>
+                                    </span>
+                              
+                  </div>
+                  	
+                  
+                  			
+                           
+                  <div class="line lined0e615" onclick="matchLine('lined0e615');">
+                     <div class="linenumber">24</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">OF</span>
+                                    </span>
+                              
+                  </div>
+                  
+                  			
+                           
+                  <div class="line lined0e624" onclick="matchLine('lined0e624');">
+                     <div class="linenumber">25</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">DULLARD'S</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e633" onclick="matchLine('lined0e633');">
+                     <div class="linenumber">26</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">AMPLE</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e642" onclick="matchLine('lined0e642');">
+                     <div class="linenumber">27</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">PURSE</span>
+                                       <span class="reading a1">&#8212;</span>
+                                       <span class="reading a2">&#8211;&#8211;</span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e659" onclick="matchLine('lined0e659');">
+                     <div class="linenumber">28</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">AT</span>
+                                    </span>
+                              
+                  </div>
+                  
+                  			
+                           
+                  <div class="line lined0e668" onclick="matchLine('lined0e668');">
+                     <div class="linenumber">29</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">SPIRITLEDGE</span>
+                                       <span class="reading a1">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                        				
+                                    </span>
+                              
+                  </div>
+                  
+                  			
+                           
+                  <div class="line lined0e683" onclick="matchLine('lined0e683');">
+                     <div class="linenumber">30</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">BRIGHT</span>
+                                    </span>
+                              
+                  </div>
+                           
+                  <div class="line lined0e692" onclick="matchLine('lined0e692');">
+                     <div class="linenumber">31</div>
+                                 <span class="apparatus">
+                                       <span class="reading a6">
+                                             
+                           <del>BRIGHT</del>
+                                          </span>
+                                       <span class="reading a1 a2 a3">YOUTH</span>
+                                       <span class="reading a6">OF HERS</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e710" onclick="matchLine('lined0e710');">
+                     <div class="linenumber">32</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">OF</span>
+                                       <span class="reading a6">TORN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SPIRIT BORN</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e722" onclick="matchLine('lined0e722');">
+                     <div class="linenumber">33</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">HER'S</span>
+                                       <span class="reading a1">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                       <span class="reading a6">
+                                             
+                           <del>AT AGE OF</del>
+                                             
+                           <ins>AT</ins>
+                                             
+                           <del>WSDOM WORN EDGE</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e749" onclick="matchLine('lined0e749');">
+                     <div class="linenumber">34</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2">BRIGHT</span>
+                                       <span class="reading a1">&#8212;</span>
+                                       <span class="reading a2">&#8211;&#8211;</span>
+                                       <span class="reading a3">
+                                             
+                           <del>BRIGHT</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                           <del>WORN</del>
+                                          </span>
+                                       <span class="reading a6">SOUL FORLORN</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e776" onclick="matchLine('lined0e776');">
+                     <div class="linenumber">35</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <del>WORN</del>
+                                          </span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  
+                  			
+                           
+                  <div class="line lined0e790" onclick="matchLine('lined0e790');">
+                     <div class="linenumber">36</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a3">AT</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e799" onclick="matchLine('lined0e799');">
+                     <div class="linenumber">37</div>
+                                 <span class="apparatus">
+                                       <span class="reading a2 a6">AT</span>
+                                       <span class="reading a1 a2 a3">WISDOMEDGE</span>
+                                       <span class="reading a1">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                       <span class="reading a6">WISDOM EDGE</span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  
+                  			
+                           
+                  <div class="line lined0e822" onclick="matchLine('lined0e822');">
+                     <div class="linenumber">38</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">TORN</span>
+                                       <span class="reading a1 a2">!</span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  
+                  			
+                           
+                  <div class="line lined0e836" onclick="matchLine('lined0e836');">
+                     <div class="linenumber">39</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <del>BLIGHT</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  
+                  			
+                           
+                  <div class="line lined0e848" onclick="matchLine('lined0e848');">
+                     <div class="linenumber">40</div>
+                                 <span class="apparatus">
+                                       <span class="reading a6">WHY</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e857" onclick="matchLine('lined0e857');">
+                     <div class="linenumber">41</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3 a4">GHINGA</span>
+                                       <span class="reading a6">GINGA</span>
+                                       <span class="reading a1 a3">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                       <span class="reading a3">&nbsp;(DJUNA)</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e878" onclick="matchLine('lined0e878');">
+                     <div class="linenumber">42</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <del>WHY</del>&#8212;</span>
+                                       <span class="reading a4">
+                                             
+                           <del>THOUGH</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                           
+                  <div class="line lined0e896" onclick="matchLine('lined0e896');">
+                     <div class="linenumber">43</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3 a4">FROM</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e905" onclick="matchLine('lined0e905');">
+                     <div class="linenumber">44</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">HER'S</span>
+                                       <span class="reading a3">&#8212;</span>
+                                       <span class="reading a4">HER
+                           <del>S</del>S</span>
+                                    </span>
+                              
+                  </div>
+                  
+                  			
+                           
+                  <div class="line lined0e923" onclick="matchLine('lined0e923');">
+                     <div class="linenumber">45</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3 a4">PATH</span>
+                                       <span class="reading a4">
+                                             
+                           <del>COURSE BED</del>
+                                          </span>
+                                       <span class="reading a1 a2 a4">CURVE</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e941" onclick="matchLine('lined0e941');">
+                     <div class="linenumber">46</div>
+                                 <span class="apparatus">
+                                       <span class="reading a6">PATH</span>
+                                       <span class="reading a1 a2 a3 a4 a6">DIVERGED</span>
+                                       <span class="reading a1 a3">&#8212;</span>
+                                       <span class="reading a2">&#8211;&#8211;</span>
+                                       <span class="reading a3">
+                                             
+                           <ins class="rend-superscript">YET</ins>
+                                          </span>
+                                       <span class="reading a6">
+                                             
+                           <del>FROM HERS</del>
+                                             
+                           <ins class="rend-superscript">AM I URGED</ins>
+                                             
+                           <ins class="rend-subscript">FROM HERS</ins>
+                                          </span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e979" onclick="matchLine('lined0e979');">
+                     <div class="linenumber">47</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">AM
+                           <ins class="rend-superscript">
+                              <del>WHY</del>
+                                                
+                           </ins>
+                                             <span class="noteicon">n
+                              <div class="note"><strong>Note:</strong> 
+                                 	This paragraph was revised several times. As well as the other parts of the Version 3, 
+                                 	all rewritten parts here are organized in a way of &#8220;a word in a line.&#8221;  
+                                 	See the image of Version 3 in order to acquire the actual locations and layouts.
+                                 	In the far left of the first column, there is rewritten paragraph &#8220;YET IS SHE URGED 
+                                 	D IN HEIR TO QUAKE ANEW VAGRANT FORLORAN SPILL&#8221; ("FORLORAN" is crossed out).  Next this paragraph, 
+                                 	there is another revised paragraph &#8220;YET WITHIN HEIR SHE QUAKES ANEW&#8221;("YET" is crossed out).  
+                                 	Left side of the second column, there are another revisions.  
+                                 	&#8220;YET IS SHE URGED TO," &#8220;QUAKE ANEW IN HEIR,&#8221; &#8220;TOO VGRANT SPILL.&#8221;
+                                 
+                              </div></span>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e996" onclick="matchLine('lined0e996');">
+                     <div class="linenumber">48</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a4">WITHIN</span>
+                                       <span class="reading a3">I</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1008" onclick="matchLine('lined0e1008');">
+                     <div class="linenumber">49</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <del>F</del>URGED
+                           	</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1020" onclick="matchLine('lined0e1020');">
+                     <div class="linenumber">50</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a4">HEIR</span>
+                                       <span class="reading a2">HERE &nbsp;
+                           <ins>HEIR</ins>
+                                          </span>
+                                       <span class="reading a3">
+                                             
+                           <del>TO TO WITH</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1041" onclick="matchLine('lined0e1041');">
+                     <div class="linenumber">51</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a4">SHE</span>
+                                    </span>
+                              
+                  </div>
+                  	
+                  
+                  			
+                           
+                  <div class="line lined0e1050" onclick="matchLine('lined0e1050');">
+                     <div class="linenumber">52</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1">SOB'S</span>
+                                       <span class="reading a2">SOBS</span>
+                                       <span class="reading a4">
+                                             
+                           <del>QUAKE</del>&nbsp;
+                           <del>WEPS</del>
+                                          </span>
+                                       <span class="reading a3">QUAKE</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1074" onclick="matchLine('lined0e1074');">
+                     <div class="linenumber">53</div>
+                                 <span class="apparatus">
+                                       <span class="reading a6">TO MUST I QUAKE</span>
+                                       <span class="reading a1 a2 a3 a4 a6">ANEW</span>
+                                       <span class="reading a1 a2">:</span>
+                                       <span class="reading a3">!</span>
+                                       <span class="reading a4">&nbsp;&nbsp;&nbsp;SOBS</span>
+                                       <span class="reading a6">
+                                             
+                           <ins class="rend-subscript">
+                                                   
+                              <del>FRESH</del>
+                                                
+                           </ins>
+                                          </span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  	
+                  
+                  			
+                           
+                  <div class="line lined0e1106" onclick="matchLine('lined0e1106');">
+                     <div class="linenumber">54</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <del>IS</del>&nbsp;
+                           <del>FOR</del>&nbsp;
+                           <del>IS</del>
+                                             
+                           <ins class="rend-superscript">FOR</ins>
+                                          </span>
+                                       <span class="reading a4">
+                                             
+                           <del>IN</del>
+                                          </span>
+                                       <span class="reading a6">
+                                             
+                           <del>IS</del>HER SPARK WITHIN
+                           <del>MY HORSE HOUSE</del>
+                                             
+                           <ins class="rend-subscript">YOUNG SHELL</ins>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1145" onclick="matchLine('lined0e1145');">
+                     <div class="linenumber">55</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a4">VAGRANT</span>
+                                       <span class="reading a3">
+                                             
+                           <del>HEIR BULB</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                           <del>VAGRANT</del>
+                                          </span>
+                        				
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1163" onclick="matchLine('lined0e1163');">
+                     <div class="linenumber">56</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <del>DOOMED DOOMED</del>
+                                          </span>
+                        				
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1175" onclick="matchLine('lined0e1175');">
+                     <div class="linenumber">57</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <del>VAGRANCY</del>
+                                             
+                           <ins class="rend-superscript">FOR</ins>
+                                          </span>
+                                       <span class="reading a1 a2 a3 a4">SPILL</span>
+                                       <span class="reading a1 a2">!</span>
+                                       <span class="reading a3">
+                                             
+                           <del>DOOM</del>
+                                          </span>
+                                       <span class="reading a6">
+                                             
+                           <del>IS IT</del>&nbsp; 
+                           <del>IS IT</del>CURSED TOO?</span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                           
+                  <div class="line lined0e1213" onclick="matchLine('lined0e1213');">
+                     <div class="linenumber">58</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">TOO
+                           <ins class="rend-superscript">
+                              <del>DOOMED</del>
+                                                
+                           </ins>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                           <del>LIGHT</del>
+                                          </span>
+                                       <span class="reading a6">
+                                             
+                           <del>IS THERE NO</del>ISLE HOT BEDSTEAD</span>
+                                    </span>
+                              
+                  </div>
+                           
+                  <div class="line lined0e1236" onclick="matchLine('lined0e1236');">
+                     <div class="linenumber">59</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">BLOOD &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                           <del>VAGRANT</del>HEIR
+                           <del>ESS</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                           
+                  <div class="line lined0e1251" onclick="matchLine('lined0e1251');">
+                     <div class="linenumber">60</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <del>HAS</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1263" onclick="matchLine('lined0e1263');">
+                     <div class="linenumber">61</div>
+                                 <span class="apparatus">
+                                       <span class="reading a6">HAS
+                           <ins>IS</ins>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                       <span class="reading a1 a2 a3 a4 a6">BEACON</span>
+                                       <span class="reading a1">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1284" onclick="matchLine('lined0e1284');">
+                     <div class="linenumber">62</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3 a4">ISLAND</span>
+                                       <span class="reading a1">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1299" onclick="matchLine('lined0e1299');">
+                     <div class="linenumber">63</div>
+                                 <span class="apparatus">
+                                       <span class="reading a4">
+                                             
+                           <del>BED</del>
+                                          </span>
+                                       <span class="reading a1 a2 a3 a4">BED</span>
+                                       <span class="reading a1">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                       <span class="reading a4">TO</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1323" onclick="matchLine('lined0e1323');">
+                     <div class="linenumber">64</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <del>FOR</del>
+                                          </span>
+                                       <span class="reading a1 a2 a3">TO</span>
+                                       <span class="reading a3">BEAR</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1341" onclick="matchLine('lined0e1341');">
+                     <div class="linenumber">65</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2">BEAR</span>
+                                       <span class="reading a1">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1356" onclick="matchLine('lined0e1356');">
+                     <div class="linenumber">66</div>
+                                 <span class="apparatus">
+                                       <span class="reading a6">FOR</span>
+                                       <span class="reading a1 a2 a3 a4 a6">SPECKELED</span>
+                                       <span class="reading a6">ORCHIDS GLARE</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1371" onclick="matchLine('lined0e1371');">
+                     <div class="linenumber">67</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a4">ORCHIDS</span>
+                                       <span class="reading a3">ORHID'S</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1383" onclick="matchLine('lined0e1383');">
+                     <div class="linenumber">68</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <del>DARK &#8212;</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1395" onclick="matchLine('lined0e1395');">
+                     <div class="linenumber">69</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <del>LIGHT</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1407" onclick="matchLine('lined0e1407');">
+                     <div class="linenumber">70</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3 a4">GLARE</span>
+                                       <span class="reading a1">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                       <span class="reading a3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DARK&#8212;LIGHT</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1425" onclick="matchLine('lined0e1425');">
+                     <div class="linenumber">71</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <ins>
+                                                   
+                              <del>HAS</del>
+                                                
+                           </ins>&nbsp;&nbsp;&nbsp;TO BEAR</span>
+                                       <span class="reading a4">
+                                             
+                           <del>DARK DARK</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                           
+                  <div class="line lined0e1446" onclick="matchLine('lined0e1446');">
+                     <div class="linenumber">72</div>
+                                 <span class="apparatus">
+                                       <span class="reading a4">
+                                             
+                           <del>LIGHT LIGHT</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1458" onclick="matchLine('lined0e1458');">
+                     <div class="linenumber">73</div>
+                                 <span class="apparatus">
+                                       <span class="reading a4">
+                                             
+                           <del>TO FLEW</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1470" onclick="matchLine('lined0e1470');">
+                     <div class="linenumber">74</div>
+                                 <span class="apparatus">
+                                       <span class="reading a4">
+                                             
+                           <del>BEAR</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1482" onclick="matchLine('lined0e1482');">
+                     <div class="linenumber">75</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2">HAS</span>
+                                       <span class="reading a2">
+                                             
+                           <del>FOUND</del>
+                                          </span>
+                                       <span class="reading a4">
+                                             
+                           <del>HAS</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1503" onclick="matchLine('lined0e1503');">
+                     <div class="linenumber">76</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <ins>HAS</ins>
+                                          </span>
+                                       <span class="reading a1 a2 a3">SITE</span>
+                                       <span class="reading a4">
+                                             
+                           <del>SITE</del>
+                                          </span>
+                                       <span class="reading a3">&nbsp;&nbsp;&nbsp;
+                           <del>FINDS FOUND</del>
+                                          </span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1532" onclick="matchLine('lined0e1532');">
+                     <div class="linenumber">77</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <del>ON</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1544" onclick="matchLine('lined0e1544');">
+                     <div class="linenumber">78</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <del>EARTH</del>
+                                          </span>
+                                       <span class="reading a2">
+                                             
+                           <del>NOWHERE</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  
+                  
+                  			
+                           
+                  <div class="line lined0e1562" onclick="matchLine('lined0e1562');">
+                     <div class="linenumber">79</div>
+                                 <span class="apparatus">
+                                       <span class="reading a6">IS IT </span>
+                                       <span class="reading a1 a2 a4 a6">NOWHERE</span>
+                                       <span class="reading a1 a2 a4">!</span>
+                                       <span class="reading a3">NxWHERE?
+                           <ins class="rend-subscript">RIGHT</ins>
+                                             <span class="noteicon">p
+                              <div class="note"><strong>Physical note:</strong> There is a gray oval from this line to the bottom of the page.  
+                                 		See the image.
+                              </div></span>
+                                          </span>
+                                       <span class="reading a4">
+                                             
+                           <ins class="rend-subscript">
+                                                   
+                              <del>ON EARTH</del>
+                                                
+                           </ins>
+                                             
+                           <del>ILL WILL</del>
+                                             <span class="noteicon">n
+                              <div class="note"><strong>Note:</strong> 
+                                 		There are three rewritten attempts about this part.  
+                                 		In the space on the left hand side of the column, there is the rewriting, &#8220;SUN WILL 
+                                 		EARTH BEARS" ("EARTH" and "BEARS" are crossed out).  On the righthad side of the column, 
+                                 		there are two revising attempts. One is &#8220;SH WE IS ARE
+                                 		NIL ILL" ("WE," "ARE," and "NIL" are crossed out).
+                                 		Another is &#8220;SUN WILLED ILL MOTHER RIGHT BIRTH" 
+                                 		(This part is actually closed out with the zigzag line).  
+                                 		See the image.
+                              </div></span>
+                                          </span>
+                                       <span class="reading a6">
+                                             
+                           <del>?</del>
+                                             
+                           <del>ON EARTH</del>
+                                          </span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1615" onclick="matchLine('lined0e1615');">
+                     <div class="linenumber">80</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2">SUN</span>
+                                       <span class="reading a3">
+                                             
+                           <del>MOTHER</del>&nbsp;xxGHT</span>
+                                    </span>
+                              
+                  </div>
+                           
+                  <div class="line lined0e1633" onclick="matchLine('lined0e1633');">
+                     <div class="linenumber">81</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2">WILL</span>
+                                       <span class="reading a3">
+                                             
+                           <del>NIL</del>!</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1648" onclick="matchLine('lined0e1648');">
+                     <div class="linenumber">82</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2">ILL !</span>
+                                       <span class="reading a4">
+                                             
+                           <del>BIRTH RIGHT</del>
+                                          </span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  	
+                  
+                  			
+                           
+                  <div class="line lined0e1665" onclick="matchLine('lined0e1665');">
+                     <div class="linenumber">83</div>
+                                 <span class="apparatus">
+                                       <span class="reading a6">BUT</span>
+                                       <span class="reading a4">NIL</span>
+                                       <span class="reading a1 a2 a3 a4 a6">BIRTH</span>
+                                       <span class="reading a4"> &nbsp;&nbsp;&nbsp;
+                           <ins>
+                              <del>EARTH</del>
+                                                
+                           </ins>
+                                          </span>
+                                       <span class="reading a1 a3 a6">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                       <span class="reading a3">
+                                             x
+                                             
+                           <del>RIGHT</del>
+                                          </span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1705" onclick="matchLine('lined0e1705');">
+                     <div class="linenumber">84</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3 a4">BLIGHT</span>
+                                       <span class="reading a6">
+                                             
+                           <del>BLIGHT</del>
+                                          </span>
+                                       <span class="reading a1">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  	
+                  
+                  			
+                           
+                  <div class="line lined0e1728" onclick="matchLine('lined0e1728');">
+                     <div class="linenumber">85</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a4">THISTLEDOWNFLIGHT</span>
+                                       <span class="reading a1">!<span class="noteicon">n
+                              <div class="note"><strong>Note:</strong> 
+                                 		The original layout is diagonal (up-down-up); see the image.  
+                                 		
+                              </div></span>
+                                          </span>
+                                       <span class="reading a2">!<span class="noteicon">n
+                              <div class="note"><strong>Note:</strong> 
+                                 		The original layout is diagonal; see the image.  
+                                 		
+                              </div></span>
+                                          </span>
+                                       <span class="reading a3">THISTLExxWNFLIGHT</span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1757" onclick="matchLine('lined0e1757');">
+                     <div class="linenumber">86</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 ">CHINGHA" FOR "DJUNA"</span>
+                                       <span class="reading a6">FOR MOTHER 
+                           <del>ME</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1772" onclick="matchLine('lined0e1772');">
+                     <div class="linenumber">87</div>
+                                 <span class="apparatus">
+                                       <span class="reading a6">OUR NAME &#8212;</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1781" onclick="matchLine('lined0e1781');">
+                     <div class="linenumber">88</div>
+                                 <span class="apparatus">
+                                       <span class="reading a6">GINGA &#8212; BROTHER</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1790" onclick="matchLine('lined0e1790');">
+                     <div class="linenumber">89</div>
+                                 <span class="apparatus">
+                                       <span class="reading a6">FLAME?</span>
+                                    </span>
+                              
+                  </div>
+                  
+                  		
+                        
+               </div>
+            </div>
+            <div class="panel mssPanel">
+               <div class="panelBanner"><img class="closePanel" onclick="closePanel(this.parentNode.parentNode);" src="../src/images/closePanel.gif" alt="X">Witness <select class="witnessMenu" onchange="changeWitness(this.value,this.parentNode.parentNode);">
+                     <option value="a1">1: a1</option>
+                     <option selected value="a2">2: a2</option>
+                     <option value="a3">3: a3</option>
+                     <option value="a4">4: a4</option>
+                     <option value="a5">5: a5</option>
+                     <option value="a6">6: a6</option></select></div>
+               <div class="mssContent"><img src="../src/images/image.gif" class="imageLink a1" onclick="return showImgPanel(event, 'imageViewer','images/thistledown_1b.jpg','a1','-250','0');"><img src="../src/images/image.gif" class="imageLink a1" onclick="return showImgPanel(event, 'imageViewer','images/thistledown_1a.jpg','a1','-250','0');"><img src="../src/images/image.gif" class="imageLink a2" onclick="return showImgPanel(event, 'imageViewer','images/thistledown_3.jpg','a2','-250','0');"><img src="../src/images/image.gif" class="imageLink a2" onclick="return showImgPanel(event, 'imageViewer','images/thistledown_2.jpg','a2','-250','0');"><img src="../src/images/image.gif" class="imageLink a3" onclick="return showImgPanel(event, 'imageViewer','images/thistledown_4a.jpg','a3','-250','0');"><img src="../src/images/image.gif" class="imageLink a4" onclick="return showImgPanel(event, 'imageViewer','images/thistledown_4b.jpg','a4','-250','0');"><img src="../src/images/image.gif" class="imageLink a5" onclick="return showImgPanel(event, 'imageViewer','images/thistledown_5b.jpg','a5','-250','0');"><img src="../src/images/image.gif" class="imageLink a5" onclick="return showImgPanel(event, 'imageViewer','images/thistledown_5a.jpg','a5','-250','0');"><img src="../src/images/image.gif" class="imageLink a6" onclick="return showImgPanel(event, 'imageViewer','images/To Be-1.jpg','a6','-250','0');">
+                           
+                  <div class="head">
+                                 
+                                    <span class="apparatus app-d0e281 clickable" onclick="matchApp('app-d0e281');">
+                                          <span class="reading a1">Thistledownflight</span>
+                                          <span class="reading a2">Thistledownflight</span>
+                                          <span class="reading a3">Thistle down flight</span>
+                                          <span class="reading a4">Thistle down flight-Second half of Version 3 
+                           				<span class="noteicon">n
+                              <div class="note"><strong>Note:</strong> Baroness rewrote the second half (second column) of Version 3.  
+                                 				This part is separately encoded in order to enjoy advantages of 
+                                 				the Versioning Machine.
+                              </div></span>
+                                             </span>
+                                          <span class="reading a5 a6">GINGA</span>
+                                          <span class="reading a5">
+                                                <span class="noteicon">n
+                              <div class="note"><strong>Note:</strong> 
+                                 				Version4 (Witness5) was not encoded since there are too many 
+                                 				revisions (in this version) to apply parallel segmentation.
+                              </div></span>
+                                             </span>
+                                       </span>
+                                    <br class="stanzabreak">
+                                 
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e312" onclick="matchLine('lined0e312');">
+                     <div class="linenumber">1</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">GHINGHA </span>
+                                       <span class="reading a1 a3">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                       <span class="reading a3">(DJUNA)</span>
+                                       <span class="reading a6">GINGA</span>
+                        				
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e333" onclick="matchLine('lined0e333');">
+                     <div class="linenumber">2</div>
+                                 <span class="apparatus">
+                        					
+                                       <span class="reading a1 a2 a3">I</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e342" onclick="matchLine('lined0e342');">
+                     <div class="linenumber">3</div>
+                                 <span class="apparatus">
+                                       <span class="reading a6">
+                                             
+                           <del>MUST</del>I</span>
+                                       <span class="reading a1 a2 a3 a6">TREMBLE</span>
+                                       <span class="reading a1">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                    </span>
+                              
+                  </div>
+                  	
+                  	
+                  
+                  			
+                           
+                  <div class="line lined0e363" onclick="matchLine('lined0e363');">
+                     <div class="linenumber">4</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">DO</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e372" onclick="matchLine('lined0e372');">
+                     <div class="linenumber">5</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">NOT</span>
+                                    </span>
+                              
+                  </div>
+                  
+                  			
+                           
+                  <div class="line lined0e381" onclick="matchLine('lined0e381');">
+                     <div class="linenumber">6</div>
+                                 <span class="apparatus">
+                                       <span class="reading a6">MAY NOT</span>
+                                       <span class="reading a1 a2 a3 a6">LAUGH</span>
+                                       <span class="reading a1 a2 a3">!</span>
+                                       <span class="reading a6">&#8212;</span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e401" onclick="matchLine('lined0e401');">
+                     <div class="linenumber">7</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">BORN</span>
+                        				
+                                    </span>
+                              
+                  </div>
+                  	
+                  
+                  			
+                           
+                  <div class="line lined0e410" onclick="matchLine('lined0e410');">
+                     <div class="linenumber">8</div>
+                                 <span class="apparatus">
+                                       <span class="reading a6">MOTHER</span>
+                                       <span class="reading a1 a2 a3 a6">FINE</span>
+                                       <span class="reading a6">FLOWER</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e425" onclick="matchLine('lined0e425');">
+                     <div class="linenumber">9</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">FLOWER</span>
+                                       <span class="reading a1 a3">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                    </span>
+                              
+                  </div>
+                  
+                  			
+                           
+                  <div class="line lined0e440" onclick="matchLine('lined0e440');">
+                     <div class="linenumber">10</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">BY</span>
+                                    </span>
+                              
+                  </div>
+                  
+                  			
+                           
+                  <div class="line lined0e449" onclick="matchLine('lined0e449');">
+                     <div class="linenumber">11</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3 a6">ORCHID</span>
+                                       <span class="reading a6">SPPECKLED DARK-LIGHT</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e461" onclick="matchLine('lined0e461');">
+                     <div class="linenumber">13</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">SPECKLED</span>
+                                       <span class="reading a1">&#8212;</span>
+                                       <span class="reading a2">&#8211; </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e476" onclick="matchLine('lined0e476');">
+                     <div class="linenumber">14</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">DARK</span>
+                                       <span class="reading a1 a3">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                    </span>
+                              
+                  </div>
+                  
+                  			
+                           
+                  <div class="line lined0e491" onclick="matchLine('lined0e491');">
+                     <div class="linenumber">15</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">LIGHT</span>
+                                       <span class="reading a1">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  
+                  			
+                           
+                  <div class="line lined0e508" onclick="matchLine('lined0e508');">
+                     <div class="linenumber">16</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <del>DOOMED</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                           
+                  <div class="line lined0e520" onclick="matchLine('lined0e520');">
+                     <div class="linenumber">17</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">SHE</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e529" onclick="matchLine('lined0e529');">
+                     <div class="linenumber">18</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3 a6">WEPT</span>
+                                       <span class="reading a6">
+                                             
+                           <ins>AT</ins>
+                                             
+                           <del>MORN</del>NIGHT SUMPTUOUS
+                           <ins class="rend-superscript">MEAGER</ins>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e550" onclick="matchLine('lined0e550');">
+                     <div class="linenumber">19</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">AT</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e559" onclick="matchLine('lined0e559');">
+                     <div class="linenumber">20</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">NIGHT</span>
+                                       <span class="reading a1 a2">!</span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e573" onclick="matchLine('lined0e573');">
+                     <div class="linenumber">21</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">CURSED</span>
+                                       <span class="reading a6">CURSING</span>
+                                       <span class="reading a6">
+                                             
+                           <del>PROPER</del>
+                                             
+                           <ins class="place-superscript">SNARING</ins>
+                                             
+                           <ins class="place-infraliniar">SNARE OF AMPLE</ins>LIFE'S PURSE</span>
+                                    </span>
+                              
+                  </div>
+                  
+                  			
+                           
+                  <div class="line lined0e597" onclick="matchLine('lined0e597');">
+                     <div class="linenumber">22</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">TAUT</span>
+                        				
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e606" onclick="matchLine('lined0e606');">
+                     <div class="linenumber">23</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">SNARE</span>
+                                    </span>
+                              
+                  </div>
+                  	
+                  
+                  			
+                           
+                  <div class="line lined0e615" onclick="matchLine('lined0e615');">
+                     <div class="linenumber">24</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">OF</span>
+                                    </span>
+                              
+                  </div>
+                  
+                  			
+                           
+                  <div class="line lined0e624" onclick="matchLine('lined0e624');">
+                     <div class="linenumber">25</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">DULLARD'S</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e633" onclick="matchLine('lined0e633');">
+                     <div class="linenumber">26</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">AMPLE</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e642" onclick="matchLine('lined0e642');">
+                     <div class="linenumber">27</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">PURSE</span>
+                                       <span class="reading a1">&#8212;</span>
+                                       <span class="reading a2">&#8211;&#8211;</span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e659" onclick="matchLine('lined0e659');">
+                     <div class="linenumber">28</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">AT</span>
+                                    </span>
+                              
+                  </div>
+                  
+                  			
+                           
+                  <div class="line lined0e668" onclick="matchLine('lined0e668');">
+                     <div class="linenumber">29</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">SPIRITLEDGE</span>
+                                       <span class="reading a1">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                        				
+                                    </span>
+                              
+                  </div>
+                  
+                  			
+                           
+                  <div class="line lined0e683" onclick="matchLine('lined0e683');">
+                     <div class="linenumber">30</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">BRIGHT</span>
+                                    </span>
+                              
+                  </div>
+                           
+                  <div class="line lined0e692" onclick="matchLine('lined0e692');">
+                     <div class="linenumber">31</div>
+                                 <span class="apparatus">
+                                       <span class="reading a6">
+                                             
+                           <del>BRIGHT</del>
+                                          </span>
+                                       <span class="reading a1 a2 a3">YOUTH</span>
+                                       <span class="reading a6">OF HERS</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e710" onclick="matchLine('lined0e710');">
+                     <div class="linenumber">32</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">OF</span>
+                                       <span class="reading a6">TORN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SPIRIT BORN</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e722" onclick="matchLine('lined0e722');">
+                     <div class="linenumber">33</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">HER'S</span>
+                                       <span class="reading a1">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                       <span class="reading a6">
+                                             
+                           <del>AT AGE OF</del>
+                                             
+                           <ins>AT</ins>
+                                             
+                           <del>WSDOM WORN EDGE</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e749" onclick="matchLine('lined0e749');">
+                     <div class="linenumber">34</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2">BRIGHT</span>
+                                       <span class="reading a1">&#8212;</span>
+                                       <span class="reading a2">&#8211;&#8211;</span>
+                                       <span class="reading a3">
+                                             
+                           <del>BRIGHT</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                           <del>WORN</del>
+                                          </span>
+                                       <span class="reading a6">SOUL FORLORN</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e776" onclick="matchLine('lined0e776');">
+                     <div class="linenumber">35</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <del>WORN</del>
+                                          </span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  
+                  			
+                           
+                  <div class="line lined0e790" onclick="matchLine('lined0e790');">
+                     <div class="linenumber">36</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a3">AT</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e799" onclick="matchLine('lined0e799');">
+                     <div class="linenumber">37</div>
+                                 <span class="apparatus">
+                                       <span class="reading a2 a6">AT</span>
+                                       <span class="reading a1 a2 a3">WISDOMEDGE</span>
+                                       <span class="reading a1">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                       <span class="reading a6">WISDOM EDGE</span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  
+                  			
+                           
+                  <div class="line lined0e822" onclick="matchLine('lined0e822');">
+                     <div class="linenumber">38</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">TORN</span>
+                                       <span class="reading a1 a2">!</span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  
+                  			
+                           
+                  <div class="line lined0e836" onclick="matchLine('lined0e836');">
+                     <div class="linenumber">39</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <del>BLIGHT</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  
+                  			
+                           
+                  <div class="line lined0e848" onclick="matchLine('lined0e848');">
+                     <div class="linenumber">40</div>
+                                 <span class="apparatus">
+                                       <span class="reading a6">WHY</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e857" onclick="matchLine('lined0e857');">
+                     <div class="linenumber">41</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3 a4">GHINGA</span>
+                                       <span class="reading a6">GINGA</span>
+                                       <span class="reading a1 a3">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                       <span class="reading a3">&nbsp;(DJUNA)</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e878" onclick="matchLine('lined0e878');">
+                     <div class="linenumber">42</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <del>WHY</del>&#8212;</span>
+                                       <span class="reading a4">
+                                             
+                           <del>THOUGH</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                           
+                  <div class="line lined0e896" onclick="matchLine('lined0e896');">
+                     <div class="linenumber">43</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3 a4">FROM</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e905" onclick="matchLine('lined0e905');">
+                     <div class="linenumber">44</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3">HER'S</span>
+                                       <span class="reading a3">&#8212;</span>
+                                       <span class="reading a4">HER
+                           <del>S</del>S</span>
+                                    </span>
+                              
+                  </div>
+                  
+                  			
+                           
+                  <div class="line lined0e923" onclick="matchLine('lined0e923');">
+                     <div class="linenumber">45</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3 a4">PATH</span>
+                                       <span class="reading a4">
+                                             
+                           <del>COURSE BED</del>
+                                          </span>
+                                       <span class="reading a1 a2 a4">CURVE</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e941" onclick="matchLine('lined0e941');">
+                     <div class="linenumber">46</div>
+                                 <span class="apparatus">
+                                       <span class="reading a6">PATH</span>
+                                       <span class="reading a1 a2 a3 a4 a6">DIVERGED</span>
+                                       <span class="reading a1 a3">&#8212;</span>
+                                       <span class="reading a2">&#8211;&#8211;</span>
+                                       <span class="reading a3">
+                                             
+                           <ins class="rend-superscript">YET</ins>
+                                          </span>
+                                       <span class="reading a6">
+                                             
+                           <del>FROM HERS</del>
+                                             
+                           <ins class="rend-superscript">AM I URGED</ins>
+                                             
+                           <ins class="rend-subscript">FROM HERS</ins>
+                                          </span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e979" onclick="matchLine('lined0e979');">
+                     <div class="linenumber">47</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">AM
+                           <ins class="rend-superscript">
+                              <del>WHY</del>
+                                                
+                           </ins>
+                                             <span class="noteicon">n
+                              <div class="note"><strong>Note:</strong> 
+                                 	This paragraph was revised several times. As well as the other parts of the Version 3, 
+                                 	all rewritten parts here are organized in a way of &#8220;a word in a line.&#8221;  
+                                 	See the image of Version 3 in order to acquire the actual locations and layouts.
+                                 	In the far left of the first column, there is rewritten paragraph &#8220;YET IS SHE URGED 
+                                 	D IN HEIR TO QUAKE ANEW VAGRANT FORLORAN SPILL&#8221; ("FORLORAN" is crossed out).  Next this paragraph, 
+                                 	there is another revised paragraph &#8220;YET WITHIN HEIR SHE QUAKES ANEW&#8221;("YET" is crossed out).  
+                                 	Left side of the second column, there are another revisions.  
+                                 	&#8220;YET IS SHE URGED TO," &#8220;QUAKE ANEW IN HEIR,&#8221; &#8220;TOO VGRANT SPILL.&#8221;
+                                 
+                              </div></span>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e996" onclick="matchLine('lined0e996');">
+                     <div class="linenumber">48</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a4">WITHIN</span>
+                                       <span class="reading a3">I</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1008" onclick="matchLine('lined0e1008');">
+                     <div class="linenumber">49</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <del>F</del>URGED
+                           	</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1020" onclick="matchLine('lined0e1020');">
+                     <div class="linenumber">50</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a4">HEIR</span>
+                                       <span class="reading a2">HERE &nbsp;
+                           <ins>HEIR</ins>
+                                          </span>
+                                       <span class="reading a3">
+                                             
+                           <del>TO TO WITH</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1041" onclick="matchLine('lined0e1041');">
+                     <div class="linenumber">51</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a4">SHE</span>
+                                    </span>
+                              
+                  </div>
+                  	
+                  
+                  			
+                           
+                  <div class="line lined0e1050" onclick="matchLine('lined0e1050');">
+                     <div class="linenumber">52</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1">SOB'S</span>
+                                       <span class="reading a2">SOBS</span>
+                                       <span class="reading a4">
+                                             
+                           <del>QUAKE</del>&nbsp;
+                           <del>WEPS</del>
+                                          </span>
+                                       <span class="reading a3">QUAKE</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1074" onclick="matchLine('lined0e1074');">
+                     <div class="linenumber">53</div>
+                                 <span class="apparatus">
+                                       <span class="reading a6">TO MUST I QUAKE</span>
+                                       <span class="reading a1 a2 a3 a4 a6">ANEW</span>
+                                       <span class="reading a1 a2">:</span>
+                                       <span class="reading a3">!</span>
+                                       <span class="reading a4">&nbsp;&nbsp;&nbsp;SOBS</span>
+                                       <span class="reading a6">
+                                             
+                           <ins class="rend-subscript">
+                                                   
+                              <del>FRESH</del>
+                                                
+                           </ins>
+                                          </span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  	
+                  
+                  			
+                           
+                  <div class="line lined0e1106" onclick="matchLine('lined0e1106');">
+                     <div class="linenumber">54</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <del>IS</del>&nbsp;
+                           <del>FOR</del>&nbsp;
+                           <del>IS</del>
+                                             
+                           <ins class="rend-superscript">FOR</ins>
+                                          </span>
+                                       <span class="reading a4">
+                                             
+                           <del>IN</del>
+                                          </span>
+                                       <span class="reading a6">
+                                             
+                           <del>IS</del>HER SPARK WITHIN
+                           <del>MY HORSE HOUSE</del>
+                                             
+                           <ins class="rend-subscript">YOUNG SHELL</ins>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1145" onclick="matchLine('lined0e1145');">
+                     <div class="linenumber">55</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a4">VAGRANT</span>
+                                       <span class="reading a3">
+                                             
+                           <del>HEIR BULB</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                           <del>VAGRANT</del>
+                                          </span>
+                        				
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1163" onclick="matchLine('lined0e1163');">
+                     <div class="linenumber">56</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <del>DOOMED DOOMED</del>
+                                          </span>
+                        				
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1175" onclick="matchLine('lined0e1175');">
+                     <div class="linenumber">57</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <del>VAGRANCY</del>
+                                             
+                           <ins class="rend-superscript">FOR</ins>
+                                          </span>
+                                       <span class="reading a1 a2 a3 a4">SPILL</span>
+                                       <span class="reading a1 a2">!</span>
+                                       <span class="reading a3">
+                                             
+                           <del>DOOM</del>
+                                          </span>
+                                       <span class="reading a6">
+                                             
+                           <del>IS IT</del>&nbsp; 
+                           <del>IS IT</del>CURSED TOO?</span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                           
+                  <div class="line lined0e1213" onclick="matchLine('lined0e1213');">
+                     <div class="linenumber">58</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">TOO
+                           <ins class="rend-superscript">
+                              <del>DOOMED</del>
+                                                
+                           </ins>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                           <del>LIGHT</del>
+                                          </span>
+                                       <span class="reading a6">
+                                             
+                           <del>IS THERE NO</del>ISLE HOT BEDSTEAD</span>
+                                    </span>
+                              
+                  </div>
+                           
+                  <div class="line lined0e1236" onclick="matchLine('lined0e1236');">
+                     <div class="linenumber">59</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">BLOOD &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                           <del>VAGRANT</del>HEIR
+                           <del>ESS</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                           
+                  <div class="line lined0e1251" onclick="matchLine('lined0e1251');">
+                     <div class="linenumber">60</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <del>HAS</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1263" onclick="matchLine('lined0e1263');">
+                     <div class="linenumber">61</div>
+                                 <span class="apparatus">
+                                       <span class="reading a6">HAS
+                           <ins>IS</ins>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                       <span class="reading a1 a2 a3 a4 a6">BEACON</span>
+                                       <span class="reading a1">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1284" onclick="matchLine('lined0e1284');">
+                     <div class="linenumber">62</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3 a4">ISLAND</span>
+                                       <span class="reading a1">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1299" onclick="matchLine('lined0e1299');">
+                     <div class="linenumber">63</div>
+                                 <span class="apparatus">
+                                       <span class="reading a4">
+                                             
+                           <del>BED</del>
+                                          </span>
+                                       <span class="reading a1 a2 a3 a4">BED</span>
+                                       <span class="reading a1">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                       <span class="reading a4">TO</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1323" onclick="matchLine('lined0e1323');">
+                     <div class="linenumber">64</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <del>FOR</del>
+                                          </span>
+                                       <span class="reading a1 a2 a3">TO</span>
+                                       <span class="reading a3">BEAR</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1341" onclick="matchLine('lined0e1341');">
+                     <div class="linenumber">65</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2">BEAR</span>
+                                       <span class="reading a1">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1356" onclick="matchLine('lined0e1356');">
+                     <div class="linenumber">66</div>
+                                 <span class="apparatus">
+                                       <span class="reading a6">FOR</span>
+                                       <span class="reading a1 a2 a3 a4 a6">SPECKELED</span>
+                                       <span class="reading a6">ORCHIDS GLARE</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1371" onclick="matchLine('lined0e1371');">
+                     <div class="linenumber">67</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a4">ORCHIDS</span>
+                                       <span class="reading a3">ORHID'S</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1383" onclick="matchLine('lined0e1383');">
+                     <div class="linenumber">68</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <del>DARK &#8212;</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1395" onclick="matchLine('lined0e1395');">
+                     <div class="linenumber">69</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <del>LIGHT</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1407" onclick="matchLine('lined0e1407');">
+                     <div class="linenumber">70</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3 a4">GLARE</span>
+                                       <span class="reading a1">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                       <span class="reading a3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DARK&#8212;LIGHT</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1425" onclick="matchLine('lined0e1425');">
+                     <div class="linenumber">71</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <ins>
+                                                   
+                              <del>HAS</del>
+                                                
+                           </ins>&nbsp;&nbsp;&nbsp;TO BEAR</span>
+                                       <span class="reading a4">
+                                             
+                           <del>DARK DARK</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                           
+                  <div class="line lined0e1446" onclick="matchLine('lined0e1446');">
+                     <div class="linenumber">72</div>
+                                 <span class="apparatus">
+                                       <span class="reading a4">
+                                             
+                           <del>LIGHT LIGHT</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1458" onclick="matchLine('lined0e1458');">
+                     <div class="linenumber">73</div>
+                                 <span class="apparatus">
+                                       <span class="reading a4">
+                                             
+                           <del>TO FLEW</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1470" onclick="matchLine('lined0e1470');">
+                     <div class="linenumber">74</div>
+                                 <span class="apparatus">
+                                       <span class="reading a4">
+                                             
+                           <del>BEAR</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1482" onclick="matchLine('lined0e1482');">
+                     <div class="linenumber">75</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2">HAS</span>
+                                       <span class="reading a2">
+                                             
+                           <del>FOUND</del>
+                                          </span>
+                                       <span class="reading a4">
+                                             
+                           <del>HAS</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1503" onclick="matchLine('lined0e1503');">
+                     <div class="linenumber">76</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <ins>HAS</ins>
+                                          </span>
+                                       <span class="reading a1 a2 a3">SITE</span>
+                                       <span class="reading a4">
+                                             
+                           <del>SITE</del>
+                                          </span>
+                                       <span class="reading a3">&nbsp;&nbsp;&nbsp;
+                           <del>FINDS FOUND</del>
+                                          </span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1532" onclick="matchLine('lined0e1532');">
+                     <div class="linenumber">77</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <del>ON</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1544" onclick="matchLine('lined0e1544');">
+                     <div class="linenumber">78</div>
+                                 <span class="apparatus">
+                                       <span class="reading a3">
+                                             
+                           <del>EARTH</del>
+                                          </span>
+                                       <span class="reading a2">
+                                             
+                           <del>NOWHERE</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  
+                  
+                  			
+                           
+                  <div class="line lined0e1562" onclick="matchLine('lined0e1562');">
+                     <div class="linenumber">79</div>
+                                 <span class="apparatus">
+                                       <span class="reading a6">IS IT </span>
+                                       <span class="reading a1 a2 a4 a6">NOWHERE</span>
+                                       <span class="reading a1 a2 a4">!</span>
+                                       <span class="reading a3">NxWHERE?
+                           <ins class="rend-subscript">RIGHT</ins>
+                                             <span class="noteicon">p
+                              <div class="note"><strong>Physical note:</strong> There is a gray oval from this line to the bottom of the page.  
+                                 		See the image.
+                              </div></span>
+                                          </span>
+                                       <span class="reading a4">
+                                             
+                           <ins class="rend-subscript">
+                                                   
+                              <del>ON EARTH</del>
+                                                
+                           </ins>
+                                             
+                           <del>ILL WILL</del>
+                                             <span class="noteicon">n
+                              <div class="note"><strong>Note:</strong> 
+                                 		There are three rewritten attempts about this part.  
+                                 		In the space on the left hand side of the column, there is the rewriting, &#8220;SUN WILL 
+                                 		EARTH BEARS" ("EARTH" and "BEARS" are crossed out).  On the righthad side of the column, 
+                                 		there are two revising attempts. One is &#8220;SH WE IS ARE
+                                 		NIL ILL" ("WE," "ARE," and "NIL" are crossed out).
+                                 		Another is &#8220;SUN WILLED ILL MOTHER RIGHT BIRTH" 
+                                 		(This part is actually closed out with the zigzag line).  
+                                 		See the image.
+                              </div></span>
+                                          </span>
+                                       <span class="reading a6">
+                                             
+                           <del>?</del>
+                                             
+                           <del>ON EARTH</del>
+                                          </span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1615" onclick="matchLine('lined0e1615');">
+                     <div class="linenumber">80</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2">SUN</span>
+                                       <span class="reading a3">
+                                             
+                           <del>MOTHER</del>&nbsp;xxGHT</span>
+                                    </span>
+                              
+                  </div>
+                           
+                  <div class="line lined0e1633" onclick="matchLine('lined0e1633');">
+                     <div class="linenumber">81</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2">WILL</span>
+                                       <span class="reading a3">
+                                             
+                           <del>NIL</del>!</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1648" onclick="matchLine('lined0e1648');">
+                     <div class="linenumber">82</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2">ILL !</span>
+                                       <span class="reading a4">
+                                             
+                           <del>BIRTH RIGHT</del>
+                                          </span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  	
+                  
+                  			
+                           
+                  <div class="line lined0e1665" onclick="matchLine('lined0e1665');">
+                     <div class="linenumber">83</div>
+                                 <span class="apparatus">
+                                       <span class="reading a6">BUT</span>
+                                       <span class="reading a4">NIL</span>
+                                       <span class="reading a1 a2 a3 a4 a6">BIRTH</span>
+                                       <span class="reading a4"> &nbsp;&nbsp;&nbsp;
+                           <ins>
+                              <del>EARTH</del>
+                                                
+                           </ins>
+                                          </span>
+                                       <span class="reading a1 a3 a6">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                       <span class="reading a3">
+                                             x
+                                             
+                           <del>RIGHT</del>
+                                          </span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1705" onclick="matchLine('lined0e1705');">
+                     <div class="linenumber">84</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a3 a4">BLIGHT</span>
+                                       <span class="reading a6">
+                                             
+                           <del>BLIGHT</del>
+                                          </span>
+                                       <span class="reading a1">&#8212;</span>
+                                       <span class="reading a2">&#8211;</span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  	
+                  
+                  			
+                           
+                  <div class="line lined0e1728" onclick="matchLine('lined0e1728');">
+                     <div class="linenumber">85</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 a2 a4">THISTLEDOWNFLIGHT</span>
+                                       <span class="reading a1">!<span class="noteicon">n
+                              <div class="note"><strong>Note:</strong> 
+                                 		The original layout is diagonal (up-down-up); see the image.  
+                                 		
+                              </div></span>
+                                          </span>
+                                       <span class="reading a2">!<span class="noteicon">n
+                              <div class="note"><strong>Note:</strong> 
+                                 		The original layout is diagonal; see the image.  
+                                 		
+                              </div></span>
+                                          </span>
+                                       <span class="reading a3">THISTLExxWNFLIGHT</span>
+                                    </span>
+                                 <br class="stanzabreak">
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1757" onclick="matchLine('lined0e1757');">
+                     <div class="linenumber">86</div>
+                                 <span class="apparatus">
+                                       <span class="reading a1 ">CHINGHA" FOR "DJUNA"</span>
+                                       <span class="reading a6">FOR MOTHER 
+                           <del>ME</del>
+                                          </span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1772" onclick="matchLine('lined0e1772');">
+                     <div class="linenumber">87</div>
+                                 <span class="apparatus">
+                                       <span class="reading a6">OUR NAME &#8212;</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1781" onclick="matchLine('lined0e1781');">
+                     <div class="linenumber">88</div>
+                                 <span class="apparatus">
+                                       <span class="reading a6">GINGA &#8212; BROTHER</span>
+                                    </span>
+                              
+                  </div>
+                  			
+                           
+                  <div class="line lined0e1790" onclick="matchLine('lined0e1790');">
+                     <div class="linenumber">89</div>
+                                 <span class="apparatus">
+                                       <span class="reading a6">FLAME?</span>
+                                    </span>
+                              
+                  </div>
+                  
+                  		
+                        
+               </div>
+            </div>
+         </div>
+         <div class="panel" id="notesPanel" style="display: none;">
+            <div class="panelBanner"><img class="closePanel" onclick="hideNotesPanel();" alt="X" src="../src/images/closePanel.gif">
+               Textual Notes
+               
+            </div>
+            <div class="noteContent a4">
+               <div class="witnesses">a4</div><strong>Note: </strong>Baroness rewrote the second half (second column) of Version 3.  
+               				This part is separately encoded in order to enjoy advantages of 
+               				the Versioning Machine.
+            </div>
+            <div class="noteContent a5">
+               <div class="witnesses">a5</div><strong>Note: </strong>
+               				Version4 (Witness5) was not encoded since there are too many 
+               				revisions (in this version) to apply parallel segmentation.
+            </div>
+            <div class="noteContent a3">
+               <div class="witnesses">a3</div>
+               <div class="position" onclick="matchLine('lined0e979');">Line number 47</div><strong>Note: </strong>
+               	This paragraph was revised several times. As well as the other parts of the Version 3, 
+               	all rewritten parts here are organized in a way of &#8220;a word in a line.&#8221;  
+               	See the image of Version 3 in order to acquire the actual locations and layouts.
+               	In the far left of the first column, there is rewritten paragraph &#8220;YET IS SHE URGED 
+               	D IN HEIR TO QUAKE ANEW VAGRANT FORLORAN SPILL&#8221; ("FORLORAN" is crossed out).  Next this paragraph, 
+               	there is another revised paragraph &#8220;YET WITHIN HEIR SHE QUAKES ANEW&#8221;("YET" is crossed out).  
+               	Left side of the second column, there are another revisions.  
+               	&#8220;YET IS SHE URGED TO," &#8220;QUAKE ANEW IN HEIR,&#8221; &#8220;TOO VGRANT SPILL.&#8221;
+               
+            </div>
+            <div class="noteContent a3">
+               <div class="witnesses">a3</div>
+               <div class="position" onclick="matchLine('lined0e1562');">Line number 79</div><strong>Physical note: </strong>There is a gray oval from this line to the bottom of the page.  
+               		See the image.
+            </div>
+            <div class="noteContent a4">
+               <div class="witnesses">a4</div>
+               <div class="position" onclick="matchLine('lined0e1562');">Line number 79</div><strong>Note: </strong>
+               		There are three rewritten attempts about this part.  
+               		In the space on the left hand side of the column, there is the rewriting, &#8220;SUN WILL 
+               		EARTH BEARS" ("EARTH" and "BEARS" are crossed out).  On the righthad side of the column, 
+               		there are two revising attempts. One is &#8220;SH WE IS ARE
+               		NIL ILL" ("WE," "ARE," and "NIL" are crossed out).
+               		Another is &#8220;SUN WILLED ILL MOTHER RIGHT BIRTH" 
+               		(This part is actually closed out with the zigzag line).  
+               		See the image.
+            </div>
+            <div class="noteContent a1">
+               <div class="witnesses">a1</div>
+               <div class="position" onclick="matchLine('lined0e1728');">Line number 85</div><strong>Note: </strong>
+               		The original layout is diagonal (up-down-up); see the image.  
+               		
+            </div>
+            <div class="noteContent a2">
+               <div class="witnesses">a2</div>
+               <div class="position" onclick="matchLine('lined0e1728');">Line number 85</div><strong>Note: </strong>
+               		The original layout is diagonal; see the image.  
+               		
+            </div>
+            <div id="noNotesFound" class="noteContent">
+               Sorry, but there are no notes associated with
+               any currently displayed witness.
+               
+            </div>
+         </div><br class="clear"></div>
+      <div class="viewerRoot" id="panel_imageViewer">
+         <div title="Click to drag panel." class="viewerHandle" id="handle_imageViewer"><span class="viewerHandleLt" id="title_imageViewer">Image Viewer</span><img class="viewerHandleRt" onclick="return hidePanel('imageViewer');" alt="X" src="../src/images/closePanel.gif"></div>
+         <div class="viewerContent" id="content_imageViewer"></div>
+      </div>
+   </body>
+</html>

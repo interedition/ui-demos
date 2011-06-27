@@ -1,0 +1,2375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+<?xml-stylesheet type="text/xsl" href="../src/vmachine.xsl"?>
+
+
+
+
+<?oxygen RNGSchema="../src/herbert.rng" type="xml"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+   <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title>Affliction [1]</title>
+            <respStmt>
+               <resp>transcribed, encoded, and edited by</resp>
+               <persName>Robert Whalen</persName>
+            </respStmt>
+            <sponsor>
+               <orgName>Northern Michigan University</orgName>
+            </sponsor>
+            <funder>
+               <orgName>Northern Michigan University</orgName>
+            </funder>
+            <principal>
+               <persName>Robert Whalen</persName>
+            </principal>
+         </titleStmt>
+
+         <editionStmt>
+            <edition n="1"/>
+            <respStmt>
+               <resp>Transcription, encoding, transformations, and notes</resp>
+               <persName>Robert Whalen</persName>
+               <orgName>Northern Michigan University</orgName>
+            </respStmt>
+         </editionStmt>
+
+         <extent/>
+
+         <publicationStmt>
+            <publisher>Robert Whalen for demonstration purposes only. May not be reproduced without permission.</publisher>
+            <address>
+               <addrLine/>
+            </address>
+            <idno type="ISBN"/>
+            <availability>
+               <p/>
+            </availability>
+            <distributor/>
+         </publicationStmt>
+
+         <notesStmt>
+            <note/>
+         </notesStmt>
+
+         <sourceDesc>
+            <listBibl>
+               <msDesc xml:id="williamsMSjonesB62">
+                  <msIdentifier>
+                     <repository>See witness list.</repository>
+                  </msIdentifier>
+               </msDesc>
+            </listBibl>
+         </sourceDesc>
+      </fileDesc>
+
+      <encodingDesc>
+         <projectDesc>
+            <p>"Affliction [1]" is part of a comprehensive edition of George Herbert's English
+               verse, <hi rend="italics">The Digital Temple</hi>. This larger project includes
+               computer-readable transcriptions, in both original- and modern-spelling versions, of
+               Williams MS. Jones B62, Bodleian MS. Tanner 307, and a British Library copy of <hi
+                  rend="italics">The Temple: Sacred Poems and Private Ejaculations</hi>, first
+               edition (Cambridge, 1633); high-resolution digital images of the sources (excepting
+               the Latin verse in Williams); an apparatus that includes critical, textual, and
+               technical introductions and annotations; and a user interface with which to navigate
+               these materials.</p>
+         </projectDesc>
+         <p>Transcriptions are encoded in TEI(P5)-conformant XML.</p>
+         <samplingDecl>
+            <p>Currently, only the Williams images and transcriptions are captured directly from the
+               source. Images and transcriptions of the Bodleian MS. and first edition are captured
+               from Scolar black-and-white facsimiles.</p>
+         </samplingDecl>
+         <editorialDecl>
+            <correction>
+               <p>Apparent errors are preserved and editorial corrections provided using SIC and
+                  CORR tags, but only where the editor conjectures that the original scribe or
+                  compositor would have recognized the instance as an error. For example, what
+                  according to modern usage is incorrect subject/verb agreement might have been
+                  deemed acceptable to a seventeenth-century scribe or compositor. All such
+                  instances are treated instead as normalizations. (See below.) </p>
+            </correction>
+            <normalization>
+               <p>Original spellings, abbreviations, and orthography are preserved and
+                  normalizations provided. Where in the manuscripts a character's status as
+                  majuscule or miniscule is ambiguous, the editor has silently chosen one or the
+                  other based on context and judgment (i.e., does not register such ambiguity in the
+                  notes).</p>
+            </normalization>
+            <quotation>
+               <p>Original quotation marks, if any, are preserved.</p>
+            </quotation>
+            <hyphenation>
+               <p>Original hyphenation is preserved.</p>
+            </hyphenation>
+         </editorialDecl>
+
+         <charDecl>
+            <!-- Ligature combinations for which there are currently no corresponding Unicode codepoints. -->
+            <glyph xml:id="ctlig">
+               <glyphName>LATIN LIGATURE SMALL C AND SMALL T</glyphName>
+            </glyph>
+
+            <glyph xml:id="ftlig">
+               <glyphName>LATIN LIGATURE SMALL F AND SMALL T</glyphName>
+            </glyph>
+
+            <glyph xml:id="shlig">
+               <glyphName>LATIN LIGATURE SMALL LONG S AND SMALL H</glyphName>
+            </glyph>
+
+            <glyph xml:id="silig">
+               <glyphName>LATIN LIGATURE SMALL LONG S AND SMALL I</glyphName>
+            </glyph>
+
+            <glyph xml:id="sllig">
+               <glyphName>LATIN LIGATURE SMALL LONG S AND SMALL L</glyphName>
+            </glyph>
+
+            <glyph xml:id="sslig">
+               <glyphName>LATIN LIGATURE SMALL LONG S AND SMALL LONG S</glyphName>
+            </glyph>
+
+            <glyph xml:id="ssilig">
+               <glyphName>LATIN LIGATURE SMALL LONG S, SMALL LONG S, AND SMALL I</glyphName>
+            </glyph>
+
+            <glyph xml:id="ssllig">
+               <glyphName>LATIN LIGATURE SMALL LONG S, SMALL LONG S, AND SMALL L</glyphName>
+            </glyph>
+         </charDecl>
+
+         <classDecl>
+            <taxonomy xml:id="DDC22">
+               <bibl>
+                  <title>Dewey Decimal Classification</title>
+                  <edition/>
+                  <publisher/>
+                  <pubPlace/>
+               </bibl>
+            </taxonomy>
+         </classDecl>
+
+      </encodingDesc>
+
+      <profileDesc>
+         <langUsage>
+            <language ident="en">English</language>
+            <language ident="fr">French</language>
+            <language ident="lat">Latin</language>
+         </langUsage>
+
+         <textClass>
+            <classCode scheme="DDC22">006</classCode>
+         </textClass>
+      </profileDesc>
+
+   </teiHeader>
+
+
+   <facsimile>
+      <graphic/>
+      <!-- Images currently unavailable. -->
+   </facsimile>
+
+   <text>
+      <front>
+         <div>
+            <listWit>
+               <witness xml:id="w">Williams MS. Jones B62</witness>
+               <witness xml:id="b">Bodleian MS. Tanner 307</witness>
+               <witness xml:id="p">The Temple: Sacred Poems and Private Ejaculations, first edition (Cambridge,
+                  1633)</witness>
+            </listWit>
+         </div>
+      </front>
+      <body>
+
+         <div type="poem" xml:id="affliction1">
+
+            <pb ed="#w" facs="#w48v"/>
+            <fw xml:base="#w" type="header" place="margin-top">The <choice>
+                  <orig>church</orig>
+                  <reg>Church</reg>
+               </choice>.</fw>
+
+            <!-- The first of five poems in #b and #p and the first of two in #w entitled "Affliction". -->
+
+            <head>
+               <note type="textual">The first of five poems in #b and #p and the first of two in #w
+                  entitled "Affliction".</note>
+               <app>
+                  <rdg wit="#w">Affliction <supplied>[<num type="title">1</num>]</supplied>.</rdg>
+                  <rdg wit="#b">Affliction <supplied>[<num type="title">1</num>]</supplied></rdg>
+                  <rdg wit="#p"><choice>
+                        <orig>Aﬄi<g ref="#ctlig">ct</g>ion</orig>
+                        <reg>Affliction</reg>
+                     </choice><supplied>[<num type="title">1</num>]</supplied>.</rdg>
+               </app>
+            </head>
+
+            <lg type="stanza" n="1">
+               <l n="1">
+                  <app>
+                     <rdg wit="#w">When first <choice>
+                           <orig>thou</orig>
+                           <reg>you</reg>
+                        </choice>
+                        <choice>
+                           <orig>didst</orig>
+                           <reg>did</reg>
+                        </choice>
+                        <choice>
+                           <orig>intice</orig>
+                           <reg>entice</reg>
+                        </choice> to <choice>
+                           <orig>thee</orig>
+                           <reg>you</reg>
+                        </choice> my <choice>
+                           <orig>hart</orig>
+                           <reg>heart</reg>
+                        </choice><choice>
+                           <orig/>
+                           <reg>,</reg>
+                        </choice></rdg>
+                     <rdg wit="#b">When first <choice>
+                           <orig>thou</orig>
+                           <reg>you</reg>
+                        </choice>
+                        <choice>
+                           <orig>didst</orig>
+                           <reg>did</reg>
+                        </choice> entice to <choice>
+                           <orig>thee</orig>
+                           <reg>you</reg>
+                        </choice> my heart,</rdg>
+                     <rdg wit="#p"><choice>
+                           <orig>WHen</orig>
+                           <reg>when</reg>
+                        </choice>
+                        <choice>
+                           <orig>ﬁrﬅ</orig>
+                           <reg>first</reg>
+                        </choice>
+                        <choice>
+                           <orig>thou</orig>
+                           <reg>you</reg>
+                        </choice>
+                        <choice>
+                           <orig>didst</orig>
+                           <reg>did</reg>
+                        </choice> entice to <choice>
+                           <orig>thee</orig>
+                           <reg>you</reg>
+                        </choice> my heart,</rdg>
+                  </app>
+               </l>
+
+               <l n="2">
+                  <app>
+                     <rdg wit="#w">I thought <choice>
+                           <abbr>y<hi rend="superscript">e</hi></abbr>
+                           <ex>the</ex>
+                        </choice> service <choice>
+                           <orig>braue</orig>
+                           <reg>brave</reg>
+                        </choice>:</rdg>
+                     <rdg wit="#b">I thought <choice>
+                           <abbr>y<hi rend="superscript">e</hi></abbr>
+                           <ex>the</ex>
+                        </choice>
+                        <choice>
+                           <orig>seruice</orig>
+                           <reg>service</reg>
+                        </choice>
+                        <choice>
+                           <orig>braue</orig>
+                           <reg>brave</reg>
+                        </choice>.</rdg>
+                     <rdg wit="#p">I thought the <choice>
+                           <orig>ſervice</orig>
+                           <reg>service</reg>
+                        </choice> brave:</rdg>
+                  </app>
+               </l>
+
+               <l n="3">
+                  <app>
+                     <rdg wit="#w">So many <choice>
+                           <orig>ioyes</orig>
+                           <reg>joys</reg>
+                        </choice> I <choice>
+                           <orig>writt</orig>
+                           <reg>writ</reg>
+                        </choice>
+                        <choice>
+                           <orig>downe</orig>
+                           <reg>down</reg>
+                        </choice> for my part</rdg>
+                     <rdg wit="#b">So many <choice>
+                           <orig>Joyes</orig>
+                           <reg>Joys</reg>
+                        </choice> I writ <choice>
+                           <orig>downe</orig>
+                           <reg>down</reg>
+                        </choice> for my part</rdg>
+                     <rdg wit="#p">So many <choice>
+                           <orig>joyes</orig>
+                           <reg>joys</reg>
+                        </choice> I writ down for my part,</rdg>
+                  </app>
+               </l>
+
+               <l n="4">
+                  <app>
+                     <rdg wit="#w">Besides what I might <choice>
+                           <orig>haue</orig>
+                           <reg>have</reg>
+                        </choice></rdg>
+                     <rdg wit="#b">Besides what I might <choice>
+                           <orig>haue</orig>
+                           <reg>have</reg>
+                        </choice></rdg>
+                     <rdg wit="#p"><choice>
+                           <orig>Be<g ref="#silig">ſi</g>des</orig>
+                           <reg/>
+                        </choice> what I might have</rdg>
+                  </app>
+               </l>
+
+               <l n="5">
+                  <app>
+                     <rdg wit="#w">Out of my stock of natural <choice>
+                           <orig>delytes</orig>
+                           <reg>delights</reg>
+                        </choice></rdg>
+                     <rdg wit="#b">Out of my stock of natural <choice>
+                           <orig>delites</orig>
+                           <reg>delights</reg>
+                        </choice>,</rdg>
+                     <rdg wit="#p">Out of my <choice>
+                           <orig>ﬅock</orig>
+                           <reg>stock</reg>
+                        </choice> of <choice>
+                           <orig>naturall</orig>
+                           <reg>natural</reg>
+                        </choice> delights,</rdg>
+                  </app>
+               </l>
+
+               <l n="6">
+                  <app>
+                     <rdg wit="#w">Augmented <choice>
+                           <abbr>w<hi rend="superscript">th</hi></abbr>
+                           <ex>with</ex>
+                        </choice>
+                        <choice>
+                           <orig>thy</orig>
+                           <reg>your</reg>
+                        </choice>
+                        <choice>
+                           <orig>graces</orig>
+                           <reg>graces'</reg>
+                        </choice> perquisites.</rdg>
+                     <rdg wit="#b">Augmented with <choice>
+                           <orig>thy</orig>
+                           <reg>your</reg>
+                        </choice> gracious <choice>
+                           <orig>benefites</orig>
+                           <reg>benefits</reg>
+                        </choice>.</rdg>
+                     <rdg wit="#p">Augmented with <choice>
+                           <orig>thy</orig>
+                           <reg>your</reg>
+                        </choice> gracious <choice>
+                           <orig>beneﬁts</orig>
+                           <reg>benefits</reg>
+                        </choice>.</rdg>
+                  </app>
+               </l>
+            </lg>
+
+            <lg type="stanza" n="2">
+               <l n="7">
+                  <app>
+                     <rdg wit="#w">I looked on <choice>
+                           <orig>thy</orig>
+                           <reg>your</reg>
+                        </choice> furniture so rich,</rdg>
+                     <rdg wit="#b">I looked on <choice>
+                           <orig>thy</orig>
+                           <reg>your</reg>
+                        </choice> furniture so fine,</rdg>
+                     <rdg wit="#p">I looked on <choice>
+                           <orig>thy</orig>
+                           <reg>your</reg>
+                        </choice> furniture <choice>
+                           <orig>ſo</orig>
+                           <reg>so</reg>
+                        </choice>
+                        <choice>
+                           <orig>ﬁne</orig>
+                           <reg>fine</reg>
+                        </choice>,</rdg>
+                  </app>
+                  <note type="critical"><hi rend="italics">furniture</hi>: equipment; intellectual
+                     faculties. Here, as elsewhere, the idea is a variation on the man-as-microcosm
+                     trope.</note>
+               </l>
+
+               <l n="8">
+                  <app>
+                     <rdg wit="#w">And made it rich to <choice>
+                           <orig>mee</orig>
+                           <reg>me</reg>
+                        </choice>:</rdg>
+                     <rdg wit="#b">And made it fine to <choice>
+                           <orig>mee</orig>
+                           <reg>me</reg>
+                        </choice>.</rdg>
+                     <rdg wit="#p">And made it <choice>
+                           <orig>ﬁne</orig>
+                           <reg>fine</reg>
+                        </choice> to me:</rdg>
+                  </app>
+               </l>
+
+               <l n="9">
+                  <app>
+                     <rdg wit="#w"><choice>
+                           <orig>Thy</orig>
+                           <reg>Your</reg>
+                        </choice> glorious <choice>
+                           <orig>houſhold</orig>
+                           <reg>household</reg>
+                        </choice> stuff did <choice>
+                           <orig>mee</orig>
+                           <reg>me</reg>
+                        </choice> bewitch</rdg>
+                     <rdg wit="#b"><choice>
+                           <orig>Thy</orig>
+                           <reg>Your</reg>
+                        </choice> glorious household-stuff did <choice>
+                           <orig>mee</orig>
+                           <reg>me</reg>
+                        </choice>
+                        <choice>
+                           <orig>intwine</orig>
+                           <reg>entwine</reg>
+                        </choice>,</rdg>
+                     <rdg wit="#p"><choice>
+                           <orig>Thy</orig>
+                           <reg>Your</reg>
+                        </choice> glorious <choice>
+                           <orig>hou<g ref="#shlig">ſh</g>old</orig>
+                           <reg>household</reg>
+                        </choice>-<choice>
+                           <orig>ﬅuﬀe</orig>
+                           <reg>stuff</reg>
+                        </choice> did me entwine,</rdg>
+                  </app>
+                  <note type="textual-critical">Compare #w's <hi rend="italics">bewitch</hi> to #b's
+                     and #p's <hi rend="italics">entwine [intwine]</hi>. The revision removes what
+                     in hindsight is a foreboding of woes to come, as well as the suggestion that
+                     life's pleasures are a cunning distraction.</note>
+               </l>
+
+               <l n="10">
+                  <app>
+                     <rdg wit="#w">Into <choice>
+                           <orig>thy</orig>
+                           <reg>your</reg>
+                        </choice>
+                        <choice>
+                           <orig>familie</orig>
+                           <reg>family</reg>
+                        </choice><choice>
+                           <orig/>
+                           <reg>.</reg>
+                        </choice></rdg>
+                     <rdg wit="#b">And <choice>
+                           <abbr>'tice</abbr>
+                           <ex>entice</ex>
+                        </choice>
+                        <choice>
+                           <orig>mee</orig>
+                           <reg>me</reg>
+                        </choice>
+                        <choice>
+                           <orig>vnto</orig>
+                           <reg>unto</reg>
+                        </choice>
+                        <choice>
+                           <orig>thee</orig>
+                           <reg>you</reg>
+                        </choice>.</rdg>
+                     <rdg wit="#p">And <choice>
+                           <abbr>'tice</abbr>
+                           <ex>entice</ex>
+                        </choice> me unto <choice>
+                           <orig>thee</orig>
+                           <reg>you</reg>
+                        </choice>.</rdg>
+                  </app>
+               </l>
+
+               <l n="11">
+                  <app>
+                     <rdg wit="#w">Such <choice>
+                           <orig>starres</orig>
+                           <reg>stars</reg>
+                        </choice> I counted mine; both Heaven <choice>
+                           <orig>&amp;</orig>
+                           <reg>and</reg>
+                        </choice> Earth</rdg>
+                     <rdg wit="#b">Such <choice>
+                           <orig>starres</orig>
+                           <reg>stars</reg>
+                        </choice> I counted mine: both <choice>
+                           <orig>Heauen</orig>
+                           <reg>Heaven</reg>
+                        </choice>
+                        <choice>
+                           <orig>&amp;</orig>
+                           <reg>and</reg>
+                        </choice> earth</rdg>
+                     <rdg wit="#p">Such <choice>
+                           <orig>ﬅarres</orig>
+                           <reg>stars</reg>
+                        </choice> I counted mine: both <choice>
+                           <abbr>heav'n</abbr>
+                           <ex>heaven</ex>
+                        </choice> and earth</rdg>
+                  </app>
+               </l>
+
+               <l n="12">
+                  <app>
+                     <rdg wit="#w"><choice>
+                           <orig>Payd</orig>
+                           <reg>Paid</reg>
+                        </choice> me my wages in a world of mirth.</rdg>
+                     <rdg wit="#b"><choice>
+                           <orig>Payd</orig>
+                           <reg>Paid</reg>
+                        </choice>
+                        <choice>
+                           <orig>mee</orig>
+                           <reg>me</reg>
+                        </choice> my wages in a world of mirth.</rdg>
+                     <rdg wit="#p"><choice>
+                           <orig>Payd</orig>
+                           <reg>Paid</reg>
+                        </choice> me my wages in a world of mirth.</rdg>
+                  </app>
+               </l>
+            </lg>
+
+            <lg type="stanza" n="3">
+               <l n="13">
+                  <app>
+                     <rdg wit="#w">What pleasures could I want, whose King I served<choice>
+                           <orig>?</orig>
+                           <reg>,</reg>
+                        </choice></rdg>
+                     <rdg wit="#b">What pleasures could I want, whose King I <choice>
+                           <orig>serued</orig>
+                           <reg>served</reg>
+                        </choice><choice>
+                           <orig>?</orig>
+                           <reg>,</reg>
+                        </choice></rdg>
+                     <rdg wit="#p">What <choice>
+                           <orig>pleaſures</orig>
+                           <reg>pleasures</reg>
+                        </choice> could I want, <choice>
+                           <orig>whoſe</orig>
+                           <reg>whose</reg>
+                        </choice> King I <choice>
+                           <orig>ſerved</orig>
+                           <reg>served</reg>
+                        </choice><choice>
+                           <orig>?</orig>
+                           <reg>,</reg>
+                        </choice></rdg>
+                  </app>
+               </l>
+
+               <l n="14">
+                  <app>
+                     <rdg wit="#w">Where <choice>
+                           <orig>ioyes</orig>
+                           <reg>joys</reg>
+                        </choice> my <choice>
+                           <orig>fellowes</orig>
+                           <reg>fellows</reg>
+                        </choice> were?</rdg>
+                     <rdg wit="#b">Where <choice>
+                           <orig>joyes</orig>
+                           <reg>joys</reg>
+                        </choice> my fellows were<choice>
+                           <orig>:</orig>
+                           <reg>?</reg>
+                        </choice></rdg>
+                     <rdg wit="#p">Where <choice>
+                           <orig>joyes</orig>
+                           <reg>joys</reg>
+                        </choice> my fellows were<choice>
+                           <orig>.</orig>
+                           <reg>?</reg>
+                        </choice></rdg>
+                  </app>
+               </l>
+
+               <l n="15">
+                  <app>
+                     <rdg wit="#w">Thus <choice>
+                           <orig>argude</orig>
+                           <reg>argued</reg>
+                        </choice> into hopes, I was preserved</rdg>
+                     <rdg wit="#b">Thus argued into hopes, my thoughts <choice>
+                           <orig>reserued</orig>
+                           <reg>reserved</reg>
+                        </choice></rdg>
+                     <rdg wit="#p">Thus <choice>
+                           <abbr>argu'd</abbr>
+                           <ex>argued</ex>
+                        </choice> into hopes, my thoughts <choice>
+                           <orig>reſerved</orig>
+                           <reg>reserved</reg>
+                        </choice></rdg>
+                  </app>
+               </l>
+
+               <l n="16">
+                  <app>
+                     <rdg wit="#w">Before <choice>
+                           <abbr>y<hi rend="superscript">t</hi></abbr>
+                           <ex>that</ex>
+                        </choice> I could <choice>
+                           <orig>feare</orig>
+                           <reg>fear</reg>
+                        </choice>.</rdg>
+                     <rdg wit="#b">No place for <choice>
+                           <orig>greif</orig>
+                           <reg>grief</reg>
+                        </choice> or <choice>
+                           <orig>feare</orig>
+                           <reg>fear</reg>
+                        </choice>.</rdg>
+                     <rdg wit="#p">No place for grief or fear.</rdg>
+                  </app>
+               </l>
+
+               <l n="17">
+                  <app>
+                     <rdg wit="#w">Therefore my <choice>
+                           <orig>suddain</orig>
+                           <reg>sudden</reg>
+                        </choice>
+                        <choice>
+                           <orig>soule</orig>
+                           <reg>soul</reg>
+                        </choice> caught at <choice>
+                           <abbr>y<hi rend="superscript">e</hi></abbr>
+                           <ex>the</ex>
+                        </choice> place</rdg>
+                     <rdg wit="#b">Therefore my <choice>
+                           <orig>suddaine</orig>
+                           <reg>sudden</reg>
+                        </choice>
+                        <choice>
+                           <orig>soule</orig>
+                           <reg>soul</reg>
+                        </choice> caught at <choice>
+                           <abbr>y<hi rend="superscript">e</hi></abbr>
+                           <ex>the</ex>
+                        </choice> place,</rdg>
+                     <rdg wit="#p">Therefore my <choice>
+                           <orig>ſudden</orig>
+                           <reg>sudden</reg>
+                        </choice>
+                        <choice>
+                           <orig>ſoul</orig>
+                           <reg>soul</reg>
+                        </choice> caught at the place,</rdg>
+                  </app>
+               </l>
+
+               <l n="18">
+                  <app>
+                     <rdg wit="#w">And made her youth <choice>
+                           <orig>&amp;</orig>
+                           <reg>and</reg>
+                        </choice>
+                        <choice>
+                           <orig>fiercenes</orig>
+                           <reg>fierceness</reg>
+                        </choice> seek <choice>
+                           <orig>thy</orig>
+                           <reg>your</reg>
+                        </choice> face.</rdg>
+                     <rdg wit="#b">And made her youth <choice>
+                           <orig>&amp;</orig>
+                           <reg>and</reg>
+                        </choice>
+                        <choice>
+                           <orig>fiercenes</orig>
+                           <reg>fierceness</reg>
+                        </choice>
+                        <choice>
+                           <orig>seeke</orig>
+                           <reg>seek</reg>
+                        </choice>
+                        <choice>
+                           <orig>thy</orig>
+                           <reg>your</reg>
+                        </choice> face.</rdg>
+                     <rdg wit="#p">And made her youth and <choice>
+                           <orig>ﬁercene<g ref="#sslig">ſſ</g>e</orig>
+                           <reg>fierceness</reg>
+                        </choice>
+                        <choice>
+                           <orig>ſeek</orig>
+                           <reg>seek</reg>
+                        </choice>
+                        <choice>
+                           <orig>thy</orig>
+                           <reg>your</reg>
+                        </choice> face.</rdg>
+                  </app>
+                  <note type="critical"><hi rend="italics">fierceness [fiercenes, ﬁercene<g
+                           ref="#sslig">ſſ</g>e]</hi>: bold presumption</note>
+               </l>
+            </lg>
+
+            <pb ed="#w" facs="#w49r"/>
+            <fw xml:base="#w" type="header" place="margin-top">The <choice>
+                  <orig>church</orig>
+                  <reg>Church</reg>
+               </choice>.</fw>
+            <fw xml:base="#w" type="folioNum" place="margin-right">49</fw>
+
+            <lg type="stanza" n="4">
+               <l n="19">
+                  <app>
+                     <rdg wit="#w">At first <choice>
+                           <orig>thou</orig>
+                           <reg>you</reg>
+                        </choice>
+                        <choice>
+                           <orig>gau'st</orig>
+                           <reg>gave</reg>
+                           <ex>gavest</ex>
+                        </choice>
+                        <choice>
+                           <orig>mee</orig>
+                           <reg>me</reg>
+                        </choice> milk <choice>
+                           <orig>&amp;</orig>
+                           <reg>and</reg>
+                        </choice>
+                        <choice>
+                           <orig>sweetneſses</orig>
+                           <reg>sweetnesses</reg>
+                        </choice><choice>
+                           <orig/>
+                           <reg>;</reg>
+                        </choice></rdg>
+                     <rdg wit="#b">At first <choice>
+                           <orig>thou</orig>
+                           <reg>you</reg>
+                        </choice>
+                        <choice>
+                           <orig>gau'st</orig>
+                           <reg>gave</reg>
+                           <ex>gavest</ex>
+                        </choice>
+                        <choice>
+                           <orig>mee</orig>
+                           <reg>me</reg>
+                        </choice> milk <choice>
+                           <orig>&amp;</orig>
+                           <reg>and</reg>
+                        </choice> sweetnesses<choice>
+                           <orig>,</orig>
+                           <reg>;</reg>
+                        </choice></rdg>
+                     <rdg wit="#p">At <choice>
+                           <orig>ﬁrﬅ</orig>
+                           <reg>first</reg>
+                        </choice>
+                        <choice>
+                           <orig>thou</orig>
+                           <reg>you</reg>
+                        </choice>
+                        <choice>
+                           <orig>gav'ﬅ</orig>
+                           <reg>gave</reg>
+                           <ex>gavest</ex>
+                        </choice> me milk and <choice>
+                           <orig>ſweetne<g ref="#sslig">ſſ</g>es</orig>
+                           <reg>sweetnesses</reg>
+                        </choice>;</rdg>
+                  </app>
+               </l>
+
+               <l n="20">
+                  <app>
+                     <rdg wit="#w">I had my wish <choice>
+                           <orig>&amp;</orig>
+                           <reg>and</reg>
+                        </choice> way.</rdg>
+                     <rdg wit="#b">I had my wish <choice>
+                           <orig>&amp;</orig>
+                           <reg>and</reg>
+                        </choice> way.</rdg>
+                     <rdg wit="#p">I had my <choice>
+                           <orig>wi<g ref="#shlig">ſh</g></orig>
+                           <reg>wish</reg>
+                        </choice> and way:</rdg>
+                  </app>
+               </l>
+
+               <l n="21">
+                  <app>
+                     <rdg wit="#w">My days were <choice>
+                           <orig>strawd</orig>
+                           <reg>strawed</reg>
+                        </choice>
+                        <choice>
+                           <abbr>w<hi rend="superscript">th</hi></abbr>
+                           <ex>with</ex>
+                        </choice>
+                        <choice>
+                           <orig>flowrs</orig>
+                           <reg>flowers</reg>
+                        </choice>
+                        <choice>
+                           <orig>&amp;</orig>
+                           <reg>and</reg>
+                        </choice>
+                        <choice>
+                           <orig>happines</orig>
+                           <reg>happiness</reg>
+                        </choice>:</rdg>
+                     <rdg wit="#b">My <choice>
+                           <orig>dayes</orig>
+                           <reg>days</reg>
+                        </choice> were <choice>
+                           <abbr>straw'd</abbr>
+                           <ex>strawed</ex>
+                        </choice> with <choice>
+                           <orig>flowres</orig>
+                           <reg>flowers</reg>
+                        </choice>
+                        <choice>
+                           <orig>&amp;</orig>
+                           <reg>and</reg>
+                        </choice>
+                        <choice>
+                           <orig>happines</orig>
+                           <reg>happiness</reg>
+                        </choice>,</rdg>
+                     <rdg wit="#p">My <choice>
+                           <orig>dayes</orig>
+                           <reg>days</reg>
+                        </choice> were <choice>
+                           <orig>ﬅraw'd</orig>
+                           <reg>strawed</reg>
+                           <ex>ﬅrawed</ex>
+                        </choice> with <choice>
+                           <orig>ﬂow'rs</orig>
+                           <reg>flowers</reg>
+                           <ex>ﬂowers</ex>
+                        </choice> and <choice>
+                           <orig>happine<g ref="#sslig">ſſ</g>e</orig>
+                           <reg>happiness</reg>
+                        </choice>;</rdg>
+                  </app>
+                  <note type="critical"><hi rend="italics">strawed [strawd, straw'd, <g ref="#stlig"
+                           >ſt</g>raw'd]</hi>: strewn</note>
+               </l>
+
+               <l n="22">
+                  <app>
+                     <rdg wit="#w">There was no <choice>
+                           <orig>moneth</orig>
+                           <reg>month</reg>
+                        </choice> but May.</rdg>
+                     <rdg wit="#b">There was no month but May.</rdg>
+                     <rdg wit="#p">There was no <choice>
+                           <orig>moneth</orig>
+                           <reg>month</reg>
+                        </choice> but May.</rdg>
+                  </app>
+               </l>
+
+               <l n="23">
+                  <app>
+                     <rdg wit="#w">But <choice>
+                           <abbr>w<hi rend="superscript">th</hi></abbr>
+                           <ex>with</ex>
+                        </choice> my <choice>
+                           <orig>ye<del rend="overwrite">e</del><add rend="overwrite">a</add>rs</orig>
+                           <reg>years</reg>
+                        </choice> sorrows did twist <choice>
+                           <orig>&amp;</orig>
+                           <reg>and</reg>
+                        </choice> grow,</rdg>
+                     <rdg wit="#b">But with my <choice>
+                           <orig>yeares</orig>
+                           <reg>years</reg>
+                        </choice> sorrow did twist <choice>
+                           <orig>&amp;</orig>
+                           <reg>and</reg>
+                        </choice> grow,</rdg>
+                     <rdg wit="#p">But with my <choice>
+                           <orig>yeares</orig>
+                           <reg>years</reg>
+                        </choice>
+                        <choice>
+                           <orig>ſorrow</orig>
+                           <reg>sorrow</reg>
+                        </choice> did <choice>
+                           <orig>twiﬅ</orig>
+                           <reg>twist</reg>
+                        </choice> and grow,</rdg>
+                  </app>
+               </l>
+
+               <l n="24">
+                  <app>
+                     <rdg wit="#w">And made a party <choice>
+                           <orig>vnawares</orig>
+                           <reg>unawares</reg>
+                        </choice> for woe.</rdg>
+                     <rdg wit="#b">And made a party <choice>
+                           <orig>vnawares</orig>
+                           <reg>unawares</reg>
+                        </choice> for woe.</rdg>
+                     <rdg wit="#p">And made a <choice>
+                           <orig>partie</orig>
+                           <reg>party</reg>
+                        </choice> unawares for <choice>
+                           <orig>wo</orig>
+                           <reg>woe</reg>
+                        </choice>.</rdg>
+                  </app>
+                  <note type="critical"><hi rend="italics">party [partie]</hi>: participant; but
+                     also, ironically, celebration</note>
+               </l>
+            </lg>
+
+            <lg type="stanza" n="5">
+               <l n="25">
+                  <app>
+                     <rdg wit="#w">My flesh began <choice>
+                           <orig>vnto</orig>
+                           <reg>unto</reg>
+                        </choice> my <choice>
+                           <orig>soule</orig>
+                           <reg>soul</reg>
+                        </choice> in <choice>
+                           <orig>paine</orig>
+                           <reg>pain</reg>
+                        </choice>,</rdg>
+                     <rdg wit="#b">My flesh began <choice>
+                           <orig>vnto</orig>
+                           <reg>unto</reg>
+                        </choice> my <choice>
+                           <orig>soule</orig>
+                           <reg>soul</reg>
+                        </choice> in <choice>
+                           <orig>paine</orig>
+                           <reg>pain</reg>
+                        </choice><choice>
+                           <orig/>
+                           <reg>,</reg>
+                        </choice></rdg>
+                     <rdg wit="#p">My <choice>
+                           <orig>ﬂe<g ref="#shlig">ſh</g></orig>
+                           <reg>flesh</reg>
+                        </choice> began unto my <choice>
+                           <orig>ſoul</orig>
+                           <reg>soul</reg>
+                        </choice> in pain,</rdg>
+                  </app>
+                  <note type="critical"><hi rend="italics">began</hi>: spoke</note>
+               </l>
+
+               <l n="26">
+                  <app>
+                     <rdg wit="#w"><choice>
+                           <orig>Sickneſses</orig>
+                           <reg>Sicknesses</reg>
+                        </choice>
+                        <choice>
+                           <orig>cleaue</orig>
+                           <reg>cleave</reg>
+                        </choice> my bones:</rdg>
+                     <rdg wit="#b">Sicknesses <choice>
+                           <orig>cleaue</orig>
+                           <reg>cleave</reg>
+                        </choice> my bones.</rdg>
+                     <rdg wit="#p"><choice>
+                           <orig>Sickne<g ref="#sslig">ſſ</g>es</orig>
+                           <reg>Sicknesses</reg>
+                        </choice> cleave my bones;</rdg>
+                  </app>
+               </l>
+
+               <l n="27">
+                  <app>
+                     <rdg wit="#w">Consuming Agues dwell in <choice>
+                           <orig>eu'ry</orig>
+                           <reg>every</reg>
+                           <ex>euery</ex>
+                        </choice>
+                        <choice>
+                           <orig>vaine</orig>
+                           <reg>vein</reg>
+                        </choice></rdg>
+                     <rdg wit="#b">Consuming Agues dwell in <choice>
+                           <orig>euery</orig>
+                           <reg>every</reg>
+                        </choice>
+                        <choice>
+                           <orig>vaine</orig>
+                           <reg>vein</reg>
+                        </choice>,</rdg>
+                     <rdg wit="#p"><choice>
+                           <orig>Conſuming</orig>
+                           <reg/>
+                        </choice> agues dwell in <choice>
+                           <abbr>ev'ry</abbr>
+                           <ex>every</ex>
+                        </choice> vein,</rdg>
+                  </app>
+               </l>
+
+               <l n="28">
+                  <app>
+                     <rdg wit="#w">And tune my breath to <choice>
+                           <orig>grones</orig>
+                           <reg>groans</reg>
+                        </choice>.</rdg>
+                     <rdg wit="#b">And tune my breath to <choice>
+                           <orig>grones</orig>
+                           <reg>groans</reg>
+                        </choice>.</rdg>
+                     <rdg wit="#p">And tune my breath to <choice>
+                           <orig>grones</orig>
+                           <reg>groans</reg>
+                        </choice>,</rdg>
+                  </app>
+               </l>
+
+               <l n="29">
+                  <app>
+                     <rdg wit="#w">Sorrow was all my <choice>
+                           <orig>soule</orig>
+                           <reg>soul</reg>
+                        </choice><choice>
+                           <orig/>
+                           <reg>;</reg>
+                        </choice> I did not know</rdg>
+                     <rdg wit="#b">Sorrow was all my <choice>
+                           <orig>soule</orig>
+                           <reg>soul</reg>
+                        </choice><choice>
+                           <orig>,</orig>
+                           <reg>;</reg>
+                        </choice> I scarce <choice>
+                           <orig>beleiued</orig>
+                           <reg>believed</reg>
+                        </choice>,</rdg>
+                     <rdg wit="#p">Sorrow was all my <choice>
+                           <orig>ſoul</orig>
+                           <reg>soul</reg>
+                        </choice>; I <choice>
+                           <orig>ſcarce</orig>
+                           <reg>scarce</reg>
+                        </choice>
+                        <choice>
+                           <orig>beleeved</orig>
+                           <reg>believed</reg>
+                        </choice>,</rdg>
+                  </app>
+               </l>
+
+               <l n="30">
+                  <app>
+                     <rdg wit="#w">That I did live, but by a pang of woe.</rdg>
+                     <rdg wit="#b"><choice>
+                           <abbr>Till</abbr>
+                           <ex>Until</ex>
+                        </choice>
+                        <choice>
+                           <orig>greif</orig>
+                           <reg>grief</reg>
+                        </choice> did tell <choice>
+                           <orig>mee</orig>
+                           <reg>me</reg>
+                        </choice> roundly, <choice>
+                           <abbr>y<hi rend="superscript">t</hi></abbr>
+                           <ex>that</ex>
+                        </choice> I <choice>
+                           <orig>liued</orig>
+                           <reg>lived</reg>
+                        </choice>.</rdg>
+                     <rdg wit="#p"><choice>
+                           <abbr>Till</abbr>
+                           <ex>Until</ex>
+                        </choice> grief did tell me roundly, that I lived.</rdg>
+                  </app>
+               </l>
+            </lg>
+
+            <lg type="stanza" n="6">
+               <l n="31">
+                  <app>
+                     <rdg wit="#w">When I <choice>
+                           <orig>gott</orig>
+                           <reg>got</reg>
+                        </choice> health, <choice>
+                           <orig>thou</orig>
+                           <reg>you</reg>
+                        </choice>
+                        <choice>
+                           <orig>tookst</orig>
+                           <reg>took</reg>
+                        </choice> away my life</rdg>
+                     <rdg wit="#b">When I <choice>
+                           <orig>gott</orig>
+                           <reg>got</reg>
+                        </choice> health, <choice>
+                           <orig>thou</orig>
+                           <reg>you</reg>
+                        </choice>
+                        <choice>
+                           <orig>took'st</orig>
+                           <reg>took</reg>
+                           <ex>tookest</ex>
+                        </choice> away my life</rdg>
+                     <rdg wit="#p">When I got health, <choice>
+                           <orig>thou</orig>
+                           <reg>you</reg>
+                        </choice>
+                        <choice>
+                           <orig>took'ﬅ</orig>
+                           <reg>took</reg>
+                           <ex>tookeﬅ</ex>
+                        </choice> away my life,</rdg>
+                  </app>
+               </l>
+
+               <l n="32">
+                  <app>
+                     <rdg wit="#w">And more, for my friends <choice>
+                           <orig>dye</orig>
+                           <reg>die</reg>
+                        </choice>.</rdg>
+                     <rdg wit="#b">And more, for my <choice>
+                           <orig>freinds</orig>
+                           <reg>friends</reg>
+                        </choice>
+                        <choice>
+                           <orig>dy</orig>
+                           <reg>die</reg>
+                        </choice>:</rdg>
+                     <rdg wit="#p">And more; for my friends die:</rdg>
+                  </app>
+               </l>
+
+               <l n="33">
+                  <app>
+                     <rdg wit="#w">My mirth <choice>
+                           <orig>&amp;</orig>
+                           <reg>and</reg>
+                        </choice> edge was lost<choice>
+                           <orig>,</orig>
+                           <reg>;</reg>
+                        </choice> a blunted knife</rdg>
+                     <rdg wit="#b">My mirth <choice>
+                           <orig>&amp;</orig>
+                           <reg>and</reg>
+                        </choice> edge was lost; a blunted knife</rdg>
+                     <rdg wit="#p">My mirth and edge was <choice>
+                           <orig>loﬅ</orig>
+                           <reg/>
+                        </choice>; a blunted knife</rdg>
+                  </app>
+               </l>
+
+               <l n="34">
+                  <app>
+                     <rdg wit="#w">Was of more <choice>
+                           <orig>vſe</orig>
+                           <reg>use</reg>
+                        </choice>
+                        <choice>
+                           <orig>then</orig>
+                           <reg>than</reg>
+                        </choice> I.</rdg>
+                     <rdg wit="#b">Was of more <choice>
+                           <orig>vse</orig>
+                           <reg>use</reg>
+                        </choice>, <choice>
+                           <orig>then</orig>
+                           <reg>than</reg>
+                        </choice> I.</rdg>
+                     <rdg wit="#p">Was of more <choice>
+                           <orig>uſe</orig>
+                           <reg>use</reg>
+                        </choice>, <choice>
+                           <orig>then</orig>
+                           <reg>than</reg>
+                        </choice> I.</rdg>
+                  </app>
+               </l>
+
+               <l n="35">
+                  <app>
+                     <rdg wit="#w">Thus <choice>
+                           <orig>thinn</orig>
+                           <reg>thin</reg>
+                        </choice>
+                        <choice>
+                           <orig>&amp;</orig>
+                           <reg>and</reg>
+                        </choice>
+                        <choice>
+                           <orig>leane</orig>
+                           <reg>lean</reg>
+                        </choice>, <choice>
+                           <abbr>w<hi rend="superscript">th</hi>out</abbr>
+                           <ex>without</ex>
+                        </choice> a fence or friend<choice>
+                           <orig/>
+                           <reg>,</reg>
+                        </choice></rdg>
+                     <rdg wit="#b">Thus <choice>
+                           <orig>thinne</orig>
+                           <reg>thin</reg>
+                        </choice>
+                        <choice>
+                           <orig>&amp;</orig>
+                           <reg>and</reg>
+                        </choice>
+                        <choice>
+                           <orig>leane</orig>
+                           <reg>lean</reg>
+                        </choice> without a fence or <choice>
+                           <orig>freind</orig>
+                           <reg>friend</reg>
+                        </choice></rdg>
+                     <rdg wit="#p">Thus <choice>
+                           <orig>thinne</orig>
+                           <reg>thin</reg>
+                        </choice> and lean without a fence or friend,</rdg>
+                  </app>
+                  <note type="critical"><hi rend="italics">fence</hi>: barrier; bulwark,
+                  defence</note>
+               </l>
+
+               <l n="36">
+                  <app>
+                     <rdg wit="#w">I was <choice>
+                           <orig>blowne</orig>
+                           <reg>blown</reg>
+                        </choice>
+                        <choice>
+                           <abbr>tho'rough</abbr>
+                           <ex>thorough</ex>
+                        </choice>
+                        <choice>
+                           <abbr>w<hi rend="superscript">th</hi></abbr>
+                           <ex>with</ex>
+                        </choice>
+                        <choice>
+                           <orig>euery</orig>
+                           <reg>every</reg>
+                        </choice>
+                        <choice>
+                           <orig>storme</orig>
+                           <reg>storm</reg>
+                        </choice>
+                        <choice>
+                           <orig>&amp;</orig>
+                           <reg>and</reg>
+                        </choice> wind.</rdg>
+                     <rdg wit="#b">I was <choice>
+                           <orig>blowne</orig>
+                           <reg>blown</reg>
+                        </choice> through <choice>
+                           <abbr>w<hi rend="superscript">th</hi></abbr>
+                           <ex>with</ex>
+                        </choice>
+                        <choice>
+                           <orig>euery</orig>
+                           <reg>every</reg>
+                        </choice>
+                        <choice>
+                           <orig>storme</orig>
+                           <reg>storm</reg>
+                        </choice> and wind.</rdg>
+                     <rdg wit="#p">I was blown through with <choice>
+                           <abbr>ev'ry</abbr>
+                           <ex>every</ex>
+                        </choice>
+                        <choice>
+                           <orig>ﬅorm</orig>
+                           <reg>storm</reg>
+                        </choice> and <choice>
+                           <orig>winde</orig>
+                           <reg>wind</reg>
+                        </choice>.</rdg>
+                  </app>
+               </l>
+            </lg>
+
+            <pb ed="#w" facs="#w49v"/>
+            <fw xml:base="#w" type="header" place="margin-top">The <choice>
+                  <orig>church</orig>
+                  <reg>Church</reg>
+               </choice></fw>
+
+            <lg type="stanza" n="7">
+               <l n="37">
+                  <app>
+                     <rdg wit="#w">Whereas my birth <choice>
+                           <orig>&amp;</orig>
+                           <reg>and</reg>
+                        </choice>
+                        <choice>
+                           <orig>spiritt</orig>
+                           <reg>spirit</reg>
+                        </choice><choice>
+                           <orig>,</orig>
+                           <reg/>
+                        </choice> rather took</rdg>
+                     <rdg wit="#b">Whereas my birth <choice>
+                           <orig>&amp;</orig>
+                           <reg>and</reg>
+                        </choice> spirit rather <choice>
+                           <orig>tooke</orig>
+                           <reg>took</reg>
+                        </choice></rdg>
+                     <rdg wit="#p">Whereas my birth and <choice>
+                           <orig>ſpirit</orig>
+                           <reg/>
+                        </choice> rather took</rdg>
+                  </app>
+               </l>
+
+               <l n="38">
+                  <app>
+                     <rdg wit="#w">The way <choice>
+                           <abbr>y<hi rend="superscript">t</hi></abbr>
+                           <ex>that</ex>
+                        </choice> takes the <choice>
+                           <orig>Towne</orig>
+                           <reg>Town</reg>
+                        </choice><choice>
+                           <orig>:</orig>
+                           <reg>,</reg>
+                        </choice></rdg>
+                     <rdg wit="#b">The way<choice>
+                           <orig>,</orig>
+                           <reg/>
+                        </choice>
+                        <choice>
+                           <abbr>y<hi rend="superscript">t</hi></abbr>
+                           <ex>that</ex>
+                        </choice> takes <choice>
+                           <abbr>y<hi rend="superscript">e</hi></abbr>
+                           <ex>the</ex>
+                        </choice>
+                        <choice>
+                           <orig>towne</orig>
+                           <reg>town</reg>
+                        </choice><choice>
+                           <orig/>
+                           <reg>,</reg>
+                        </choice></rdg>
+                     <rdg wit="#p">The way that takes the town<choice>
+                           <orig>;</orig>
+                           <reg>,</reg>
+                        </choice></rdg>
+                  </app>
+               </l>
+
+               <l n="39">
+                  <app>
+                     <rdg wit="#w">Thou <choice>
+                           <orig>didst</orig>
+                           <reg>did</reg>
+                        </choice> betray <choice>
+                           <orig>mee</orig>
+                           <reg>me</reg>
+                        </choice> to a <choice>
+                           <orig>lingring</orig>
+                           <reg>lingering</reg>
+                        </choice> book</rdg>
+                     <rdg wit="#b">Thou <choice>
+                           <orig>didst</orig>
+                           <reg>did</reg>
+                        </choice> betray <choice>
+                           <orig>mee</orig>
+                           <reg>me</reg>
+                        </choice> to a <choice>
+                           <orig>lingring</orig>
+                           <reg>lingering</reg>
+                        </choice>
+                        <choice>
+                           <orig>booke</orig>
+                           <reg>book</reg>
+                        </choice></rdg>
+                     <rdg wit="#p">Thou <choice>
+                           <orig>didﬅ</orig>
+                           <reg>did</reg>
+                        </choice> betray me to a <choice>
+                           <orig>lingring</orig>
+                           <reg>lingering</reg>
+                        </choice> book,</rdg>
+                  </app>
+               </l>
+
+               <l n="40">
+                  <app>
+                     <rdg wit="#w">And wrap me in a <choice>
+                           <orig>gowne</orig>
+                           <reg>gown</reg>
+                        </choice>.</rdg>
+                     <rdg wit="#b">And wrap <choice>
+                           <orig>mee</orig>
+                           <reg>me</reg>
+                        </choice> in a <choice>
+                           <orig>gowne</orig>
+                           <reg>gown</reg>
+                        </choice>.</rdg>
+                     <rdg wit="#p">And wrap me in a gown.</rdg>
+                  </app>
+               </l>
+
+               <l n="41">
+                  <app>
+                     <rdg wit="#w">I was <choice>
+                           <orig>intangled</orig>
+                           <reg>entangled</reg>
+                        </choice> in the world of strife,</rdg>
+                     <rdg wit="#b">I was <choice>
+                           <orig>Intangled</orig>
+                           <reg>Entangled</reg>
+                        </choice> in <choice>
+                           <abbr>y<hi rend="superscript">e</hi></abbr>
+                           <ex>the</ex>
+                        </choice> world of strife,</rdg>
+                     <rdg wit="#p">I was entangled in the world of <choice>
+                           <orig>ﬅrife</orig>
+                           <reg>strife</reg>
+                        </choice>,</rdg>
+                  </app>
+               </l>
+
+               <l n="42">
+                  <app>
+                     <rdg wit="#w">Before I had <choice>
+                           <abbr>y<hi rend="superscript">e</hi></abbr>
+                           <ex>the</ex>
+                        </choice>
+                        <choice>
+                           <orig>powre</orig>
+                           <reg>power</reg>
+                        </choice> to change my life.</rdg>
+                     <rdg wit="#b">Before I had <choice>
+                           <abbr>y<hi rend="superscript">e</hi></abbr>
+                           <ex>the</ex>
+                        </choice>
+                        <choice>
+                           <orig>powre</orig>
+                           <reg>power</reg>
+                        </choice> to change my life.</rdg>
+                     <rdg wit="#p">Before I had the power to change my life.</rdg>
+                  </app>
+                  <note type="critical">"Though my natural inclinations were for worldly pursuits
+                     and creature comforts, you directed me instead toward the scholarly life." That
+                     this was a betrayal (because also but another "entanglement" in the "world of
+                     strife") suggests the apparently cruel but necessary and ultimately merciful
+                     path to salvation.</note>
+               </l>
+            </lg>
+
+            <lg type="stanza" n="8">
+               <l n="43">
+                  <app>
+                     <rdg wit="#w">Yet for I <choice>
+                           <orig>threatned</orig>
+                           <reg>threatened</reg>
+                        </choice> oft<choice>
+                           <orig>,</orig>
+                           <reg/>
+                        </choice> the <choice>
+                           <orig>seege</orig>
+                           <reg>siege</reg>
+                        </choice> to <choice>
+                           <orig>raiſe</orig>
+                           <reg cert="low">raise</reg>
+                           <reg cert="medium">raze</reg>
+                        </choice><choice>
+                           <orig/>
+                           <reg>,</reg>
+                        </choice></rdg>
+                     <rdg wit="#b">Yet for I <choice>
+                           <orig>threatned</orig>
+                           <reg>threatened</reg>
+                        </choice> oft <choice>
+                           <abbr>y<hi rend="superscript">e</hi></abbr>
+                           <ex>the</ex>
+                        </choice>
+                        <choice>
+                           <orig>seege</orig>
+                           <reg>siege</reg>
+                        </choice> to raise,</rdg>
+                     <rdg wit="#p">Yet, for I <choice>
+                           <orig>threatned</orig>
+                           <reg>threatened</reg>
+                        </choice> oft the <choice>
+                           <orig><g ref="#silig">ſi</g>ege</orig>
+                           <reg>siege</reg>
+                        </choice> to <choice>
+                           <orig>raiſe</orig>
+                           <reg>raise</reg>
+                        </choice>,</rdg>
+                  </app>
+               </l>
+
+               <l n="44">
+                  <app>
+                     <rdg wit="#w">Not <choice>
+                           <orig>simpring</orig>
+                           <reg>simpering</reg>
+                        </choice> all <choice>
+                           <orig>my<add rend="infralinear">‸</add><add rend="supralinear">ne</add></orig>
+                           <reg>my</reg>
+                        </choice> age<choice>
+                           <orig/>
+                           <reg>,</reg>
+                        </choice></rdg>
+                     <rdg wit="#b">Not <choice>
+                           <orig>simpring</orig>
+                           <reg>simpering</reg>
+                        </choice> all <choice>
+                           <orig>mine</orig>
+                           <reg>my</reg>
+                        </choice> age,</rdg>
+                     <rdg wit="#p">Not <choice>
+                           <orig><g ref="#silig">ſi</g>mpring </orig>
+                           <reg>simpering</reg>
+                        </choice> all <choice>
+                           <orig>mine</orig>
+                           <reg>my</reg>
+                        </choice> age,</rdg>
+                  </app>
+                  <note type="critical"><hi rend="italics">simpering [simpring, <g ref="#silig"
+                        >ſi</g>mpring]</hi>: smiling affectedly, smirking</note>
+               </l>
+
+               <l n="45">
+                  <app>
+                     <rdg wit="#w"><choice>
+                           <orig>Thou</orig>
+                           <reg>You</reg>
+                        </choice> often <choice>
+                           <orig>didst</orig>
+                           <reg>did</reg>
+                        </choice>
+                        <choice>
+                           <abbr>w<hi rend="superscript">th</hi></abbr>
+                           <ex>with</ex>
+                        </choice>
+                        <choice>
+                           <orig>Academick</orig>
+                           <reg>Academic</reg>
+                        </choice>
+                        <choice>
+                           <orig>praiſe</orig>
+                           <reg>praise</reg>
+                        </choice></rdg>
+                     <rdg wit="#b"><choice>
+                           <orig>Thou</orig>
+                           <reg>You</reg>
+                        </choice> often <choice>
+                           <orig>didst</orig>
+                           <reg>did</reg>
+                        </choice> with <choice>
+                           <orig>Academick</orig>
+                           <reg>Academic</reg>
+                        </choice> praise</rdg>
+                     <rdg wit="#p"><choice>
+                           <orig>Thou</orig>
+                           <reg>You</reg>
+                        </choice> often <choice>
+                           <orig>didﬅ</orig>
+                           <reg>did</reg>
+                        </choice> with <choice>
+                           <orig>Academick</orig>
+                           <reg>Academic</reg>
+                        </choice>
+                        <choice>
+                           <orig>praiſe</orig>
+                           <reg>praise</reg>
+                        </choice></rdg>
+                  </app>
+               </l>
+
+               <l n="46">
+                  <app>
+                     <rdg wit="#w">Melt <choice>
+                           <orig>&amp;</orig>
+                           <reg>and</reg>
+                        </choice>
+                        <choice>
+                           <orig>diſsolue</orig>
+                           <reg>dissolve</reg>
+                        </choice> my rage.</rdg>
+                     <rdg wit="#b">Melt <choice>
+                           <orig>&amp;</orig>
+                           <reg>and</reg>
+                        </choice>
+                        <choice>
+                           <orig>dissolue</orig>
+                           <reg>dissolve</reg>
+                        </choice> my rage.</rdg>
+                     <rdg wit="#p">Melt and <choice>
+                           <orig>di<g ref="#sslig">ſſ</g>olve</orig>
+                           <reg>dissolve</reg>
+                        </choice> my rage.</rdg>
+                  </app>
+               </l>
+
+               <l n="47">
+                  <app>
+                     <rdg wit="#w">I took <choice>
+                           <orig>thy</orig>
+                           <reg>your</reg>
+                        </choice>
+                        <choice>
+                           <orig>sweetned</orig>
+                           <reg>sweetened</reg>
+                        </choice> pill, <choice>
+                           <abbr>till</abbr>
+                           <ex>until</ex>
+                        </choice> I came<choice>
+                           <orig>,</orig>
+                           <reg/>
+                        </choice> where</rdg>
+                     <rdg wit="#b">I <choice>
+                           <orig>tooke</orig>
+                           <reg>took</reg>
+                        </choice>
+                        <choice>
+                           <orig>thy</orig>
+                           <reg>your</reg>
+                        </choice>
+                        <choice>
+                           <orig>sweetned</orig>
+                           <reg>sweetened</reg>
+                        </choice> pill, <choice>
+                           <abbr>till</abbr>
+                           <ex>until</ex>
+                        </choice> I came <choice>
+                           <orig>
+                              <choice>
+                                 <orig>neere</orig>
+                                 <reg>near</reg>
+                              </choice>
+                              <add rend="supralinear">where</add>
+                           </orig>
+                           <reg>where</reg>
+                        </choice><choice>
+                           <orig>,</orig>
+                           <reg cert="medium">;</reg>
+                        </choice><note type="textual"><hi rend="italics">where</hi> is written above
+                              <hi rend="italics">neere</hi> which is underlined but not
+                        struck.</note></rdg>
+                     <rdg wit="#p">I took <choice>
+                           <orig>thy</orig>
+                           <reg>your</reg>
+                        </choice>
+                        <choice>
+                           <orig>ſweetned</orig>
+                           <reg>sweetened</reg>
+                        </choice> pill, <choice>
+                           <abbr>till</abbr>
+                           <ex>until</ex>
+                        </choice> I came <choice>
+                           <orig>neare</orig>
+                           <reg>near</reg>
+                        </choice>;</rdg>
+                  </app>
+               </l>
+
+               <l n="48">
+                  <app>
+                     <rdg wit="#w">I could not <choice>
+                           <orig>goe</orig>
+                           <reg>go</reg>
+                        </choice> away, nor <choice>
+                           <orig>perseuere</orig>
+                           <reg>persevere</reg>
+                        </choice>.</rdg>
+                     <rdg wit="#b">I could not <choice>
+                           <orig>goe</orig>
+                           <reg>go</reg>
+                        </choice> away, nor <choice>
+                           <orig>perseuere</orig>
+                           <reg>persevere</reg>
+                        </choice>.</rdg>
+                     <rdg wit="#p">I could not go away, nor <choice>
+                           <orig>perſevere</orig>
+                           <reg>persevere</reg>
+                        </choice>.</rdg>
+                  </app>
+                  <note type="critical">Threatening either to "raze" the "siege" erected against him
+                     or to "raise" his own in self-defence, the smirking speaker was temporarily
+                     assuaged by scholarly prestige and notoriety. Not unlike Macbeth, "Stept in so
+                     farre, that should I wade no more,/ Returning were as tedious as go ore"
+                     (3.3.1420-21), he seemed to have little choice but to persist in a career for
+                     which he no longer cared (and even, perhaps, of which he had grown
+                     contemptuous).</note>
+               </l>
+            </lg>
+
+            <lg type="stanza" n="9">
+               <l n="49">
+                  <app>
+                     <rdg wit="#w">Yet <choice>
+                           <orig>least</orig>
+                           <reg>lest</reg>
+                        </choice> perchance<choice>
+                           <orig>,</orig>
+                           <reg/>
+                        </choice> I should too happy <choice>
+                           <orig>bee</orig>
+                           <reg>be</reg>
+                        </choice></rdg>
+                     <rdg wit="#b">Yet <choice>
+                           <orig>least</orig>
+                           <reg>lest</reg>
+                        </choice> perchance I should too happy <choice>
+                           <orig>bee</orig>
+                           <reg>be</reg>
+                        </choice></rdg>
+                     <rdg wit="#p">Yet <choice>
+                           <orig>leﬅ</orig>
+                           <reg>lest</reg>
+                        </choice> perchance I <choice>
+                           <orig><g ref="#shlig">ſh</g>ould</orig>
+                           <reg>should</reg>
+                        </choice> too <choice>
+                           <orig>happie</orig>
+                           <reg>happy</reg>
+                        </choice> be</rdg>
+                  </app>
+               </l>
+
+               <l n="50">
+                  <app>
+                     <rdg wit="#w">In my <choice>
+                           <orig>vnhappines</orig>
+                           <reg>unhappiness</reg>
+                        </choice><choice>
+                           <orig/>
+                           <reg>,</reg>
+                        </choice></rdg>
+                     <rdg wit="#b">In my <choice>
+                           <orig>vnhappines</orig>
+                           <reg>unhappiness</reg>
+                        </choice>,</rdg>
+                     <rdg wit="#p">In my <choice>
+                           <orig>unhappine<g ref="#sslig">ſſ</g>e</orig>
+                           <reg>unhappiness</reg>
+                        </choice>,</rdg>
+                  </app>
+               </l>
+
+               <l n="51">
+                  <app>
+                     <rdg wit="#w">Turning my purge to food<choice>
+                           <orig>:</orig>
+                           <reg>,</reg>
+                        </choice>
+                        <choice>
+                           <orig>thou</orig>
+                           <reg>you</reg>
+                        </choice>
+                        <choice>
+                           <orig>throw<add rend="infralinear"/><add rend="supralinear">e</add>st</orig>
+                           <reg>throw</reg>
+                        </choice>
+                        <choice>
+                           <orig>mee</orig>
+                           <reg>me</reg>
+                        </choice></rdg>
+                     <rdg wit="#b">Turning my purge to food, <choice>
+                           <orig>thou</orig>
+                           <reg>you</reg>
+                        </choice>
+                        <choice>
+                           <orig>throwest</orig>
+                           <reg>throw</reg>
+                        </choice>
+                        <choice>
+                           <orig>mee</orig>
+                           <reg>me</reg>
+                        </choice></rdg>
+                     <rdg wit="#p">Turning my purge to food, <choice>
+                           <orig>thou</orig>
+                           <reg>you</reg>
+                        </choice>
+                        <choice>
+                           <orig>throweﬅ</orig>
+                           <reg>throw</reg>
+                        </choice> me</rdg>
+                  </app>
+               </l>
+
+               <l n="52">
+                  <app>
+                     <rdg wit="#w">Into more <choice>
+                           <orig>sickneſses</orig>
+                           <reg>sicknesses</reg>
+                        </choice>.</rdg>
+                     <rdg wit="#b">Into more sicknesses:</rdg>
+                     <rdg wit="#p">Into more <choice>
+                           <orig><g ref="#silig">ſi</g>ckne<g ref="#sslig">ſſ</g>es</orig>
+                           <reg>sicknesses</reg>
+                        </choice>.</rdg>
+                  </app>
+               </l>
+
+               <l n="53">
+                  <app>
+                     <rdg wit="#w">Thus <choice>
+                           <orig>doth</orig>
+                           <reg>does</reg>
+                        </choice>
+                        <choice>
+                           <orig>thy</orig>
+                           <reg>your</reg>
+                        </choice>
+                        <choice>
+                           <orig>powre</orig>
+                           <reg>power</reg>
+                        </choice>
+                        <choice>
+                           <orig>croſs-bias</orig>
+                           <reg>cross-bias</reg>
+                        </choice>
+                        <choice>
+                           <orig>mee</orig>
+                           <reg>me</reg>
+                        </choice><choice>
+                           <orig>:</orig>
+                           <reg>,</reg>
+                        </choice> not making</rdg>
+                     <rdg wit="#b">Thus <choice>
+                           <orig>doth</orig>
+                           <reg>does</reg>
+                        </choice>
+                        <choice>
+                           <orig>thy</orig>
+                           <reg>your</reg>
+                        </choice> Power <choice>
+                           <orig>crosse-bias</orig>
+                           <reg>cross-bias</reg>
+                        </choice>
+                        <choice>
+                           <orig>mee</orig>
+                           <reg>me</reg>
+                        </choice>, not making</rdg>
+                     <rdg wit="#p">Thus <choice>
+                           <orig>doth</orig>
+                           <reg>does</reg>
+                        </choice>
+                        <choice>
+                           <orig>thy</orig>
+                           <reg>your</reg>
+                        </choice> power <choice>
+                           <orig>cro<g ref="#sslig">ſſ</g>e-bias</orig>
+                           <reg>cross-bias</reg>
+                        </choice> me, not making</rdg>
+                  </app>
+                  <note type="critical"><hi rend="italics">cross-bias [croſs-bias, crosse-bias,
+                           cro<g ref="#sslig">ſſ</g>e-bias]</hi>: counter-tendency, one force moving
+                     contrary to another</note>
+               </l>
+
+               <l n="54">
+                  <app>
+                     <rdg wit="#w"><choice>
+                           <orig>Thine</orig>
+                           <reg>your</reg>
+                        </choice>
+                        <choice>
+                           <orig>owne</orig>
+                           <reg>own</reg>
+                        </choice>
+                        <choice>
+                           <orig>guift</orig>
+                           <reg>gift</reg>
+                        </choice> good, yet me from my <choice>
+                           <orig>wayes</orig>
+                           <reg>ways</reg>
+                        </choice> taking<choice>
+                           <orig/>
+                           <reg>.</reg>
+                        </choice></rdg>
+                     <rdg wit="#b"><choice>
+                           <orig>Thine</orig>
+                           <reg>your</reg>
+                        </choice>
+                        <choice>
+                           <orig>owne</orig>
+                           <reg>own</reg>
+                        </choice>
+                        <choice>
+                           <orig>guift</orig>
+                           <reg>gift</reg>
+                        </choice> good, yet <choice>
+                           <orig>mee</orig>
+                           <reg>me</reg>
+                        </choice> from my <choice>
+                           <orig>waies</orig>
+                           <reg>ways</reg>
+                        </choice> taking.</rdg>
+                     <rdg wit="#p"><choice>
+                           <orig>Thine</orig>
+                           <reg>your</reg>
+                        </choice> own gift good, yet me from my <choice>
+                           <orig>wayes</orig>
+                           <reg>ways</reg>
+                        </choice> taking.</rdg>
+                  </app>
+                  <note type="critical"><hi rend="italics">Lines 53-54</hi>: "Though the diverting
+                     'gift' saves me from my disobedient ways, yet I am far from content."</note>
+               </l>
+            </lg>
+
+            <pb ed="#w" facs="#w50r"/>
+            <fw xml:base="#w" type="header" place="margin-top">The Church</fw>
+            <fw xml:base="#w" type="folioNum" place="margin-right">50</fw>
+
+            <lg type="stanza" n="10">
+               <l n="55">
+                  <app>
+                     <rdg wit="#w">Now I am <choice>
+                           <orig>heere</orig>
+                           <reg>here</reg>
+                        </choice>, what <choice>
+                           <orig>thou</orig>
+                           <reg>you</reg>
+                        </choice>
+                        <choice>
+                           <orig>wilt</orig>
+                           <reg>will</reg>
+                        </choice>
+                        <choice>
+                           <orig>doe</orig>
+                           <reg>do</reg>
+                        </choice>
+                        <choice>
+                           <abbr>w<hi rend="superscript">th</hi></abbr>
+                           <ex>with</ex>
+                        </choice>
+                        <choice>
+                           <orig>mee</orig>
+                           <reg>me</reg>
+                        </choice></rdg>
+                     <rdg wit="#b">Now I am <choice>
+                           <orig>heere</orig>
+                           <reg>here</reg>
+                        </choice>, what <choice>
+                           <orig>thou</orig>
+                           <reg>you</reg>
+                        </choice>
+                        <choice>
+                           <orig>wilt</orig>
+                           <reg>will</reg>
+                        </choice>
+                        <choice>
+                           <orig>doe</orig>
+                           <reg>do</reg>
+                        </choice> with <choice>
+                           <orig>mee</orig>
+                           <reg>me</reg>
+                        </choice>,</rdg>
+                     <rdg wit="#p">Now I am here, what <choice>
+                           <orig>thou</orig>
+                           <reg>you</reg>
+                        </choice>
+                        <choice>
+                           <orig>wilt</orig>
+                           <reg>will</reg>
+                        </choice> do with me</rdg>
+                  </app>
+               </l>
+
+               <l n="56">
+                  <app>
+                     <rdg wit="#w">None of my Books <choice>
+                           <orig>wilt</orig>
+                           <reg>will</reg>
+                        </choice> show:</rdg>
+                     <rdg wit="#b">None of my <choice>
+                           <orig>bookes</orig>
+                           <reg>books</reg>
+                        </choice> will show:</rdg>
+                     <rdg wit="#p">None of my books will <choice>
+                           <orig><g ref="#shlig">ſh</g>ow</orig>
+                           <reg>show</reg>
+                        </choice>:</rdg>
+                  </app>
+               </l>
+
+               <l n="57">
+                  <app>
+                     <rdg wit="#w">I read and sigh <choice>
+                           <orig>&amp;</orig>
+                           <reg>and</reg>
+                        </choice> wish I were a tree,</rdg>
+                     <rdg wit="#b">I read, <choice>
+                           <orig>&amp;</orig>
+                           <reg>and</reg>
+                        </choice> sigh, <choice>
+                           <orig>&amp;</orig>
+                           <reg>and</reg>
+                        </choice> wish, I were a tree;</rdg>
+                     <rdg wit="#p">I <choice>
+                           <orig>reade</orig>
+                           <reg>read</reg>
+                        </choice>, and <choice>
+                           <orig><g ref="#silig">ſi</g>gh</orig>
+                           <reg/>
+                        </choice>, and <choice>
+                           <orig>wi<g ref="#shlig">ſh</g></orig>
+                           <reg/>
+                        </choice> I were a tree;</rdg>
+                  </app>
+               </l>
+
+               <l n="58">
+                  <app>
+                     <rdg wit="#w"><choice>
+                           <orig>ffor</orig>
+                           <reg>For</reg>
+                        </choice> sure, then I should grow</rdg>
+                     <rdg wit="#b">For sure then I should grow</rdg>
+                     <rdg wit="#p">For <choice>
+                           <orig>ſure</orig>
+                           <reg>sure</reg>
+                        </choice> then I <choice>
+                           <orig><g ref="#shlig">ſh</g>ould</orig>
+                           <reg>should</reg>
+                        </choice> grow</rdg>
+                  </app>
+               </l>
+
+               <l n="59">
+                  <app>
+                     <rdg wit="#w">To fruit or shade: at least some bird would trust</rdg>
+                     <rdg wit="#b">To fruit or shade: at least <choice>
+                           <orig>
+                              <add rend="infralinear">‸</add>
+                              <add rend="supralinear">some</add>
+                           </orig>
+                           <reg>some</reg>
+                        </choice> bird would trust</rdg>
+                     <rdg wit="#p">To fruit or <choice>
+                           <orig><g ref="#shlig">ſh</g>ade</orig>
+                           <reg>shade</reg>
+                        </choice>: at <choice>
+                           <orig>leaﬅ</orig>
+                           <reg>least</reg>
+                        </choice>
+                        <choice>
+                           <orig>ſome</orig>
+                           <reg>some</reg>
+                        </choice> bird would <choice>
+                           <orig>truﬅ</orig>
+                           <reg>trust</reg>
+                        </choice></rdg>
+                  </app>
+               </l>
+
+               <l n="60">
+                  <app>
+                     <rdg wit="#w">Her <choice>
+                           <orig>houſhold</orig>
+                           <reg>household</reg>
+                        </choice> to <choice>
+                           <orig>mee</orig>
+                           <reg>me</reg>
+                        </choice>, <choice>
+                           <orig>&amp;</orig>
+                           <reg>and</reg>
+                        </choice> I should <choice>
+                           <orig>bee</orig>
+                           <reg>be</reg>
+                        </choice>
+                        <choice>
+                           <orig>iust</orig>
+                           <reg>just</reg>
+                        </choice>.</rdg>
+                     <rdg wit="#b">Her household to <choice>
+                           <orig>mee</orig>
+                           <reg>me</reg>
+                        </choice>, <choice>
+                           <orig>&amp;</orig>
+                           <reg>and</reg>
+                        </choice> I should be Iust.</rdg>
+                     <rdg wit="#p">Her <choice>
+                           <orig>hou<g ref="#shlig">ſh</g>old</orig>
+                           <reg>household</reg>
+                        </choice> to me, and I <choice>
+                           <orig><g ref="#shlig">ſh</g>ould</orig>
+                           <reg>should</reg>
+                        </choice> be <choice>
+                           <orig>juﬅ</orig>
+                           <reg/>
+                        </choice>.</rdg>
+                  </app>
+                  <note type="critical"><hi rend="italics">Lines 57-60</hi>: cf. Donne, "Nocturnal
+                     Upon St. Lucy's Day": <l>I should prefer,</l>
+                     <l>If I were any beast,</l>
+                     <l>Some ends, some means; yea plants, yea stones detest,</l>
+                     <l>And love all, all some properties invest.</l>
+                     <l>If I an ordinary nothing were,</l>
+                     <l>As shadow, a light and body must be here.</l> (31-36)</note>
+               </l>
+            </lg>
+
+            <lg type="stanza" n="11">
+               <l n="61">
+                  <app>
+                     <rdg wit="#w">Yet though <choice>
+                           <orig>thou</orig>
+                           <reg>you</reg>
+                        </choice>
+                        <choice>
+                           <orig>troublest</orig>
+                           <reg>trouble</reg>
+                        </choice>
+                        <choice>
+                           <orig>mee</orig>
+                           <reg>me</reg>
+                        </choice>, I must be meek:</rdg>
+                     <rdg wit="#b">Yet though <choice>
+                           <orig>thou</orig>
+                           <reg>you</reg>
+                        </choice>
+                        <choice>
+                           <orig>troublest</orig>
+                           <reg>trouble</reg>
+                        </choice>
+                        <choice>
+                           <orig>mee</orig>
+                           <reg>me</reg>
+                        </choice>, I must be <choice>
+                           <orig>meeke</orig>
+                           <reg>meek</reg>
+                        </choice>:</rdg>
+                     <rdg wit="#p">Yet though <choice>
+                           <orig>thou</orig>
+                           <reg>you</reg>
+                        </choice>
+                        <choice>
+                           <orig>troubleﬅ</orig>
+                           <reg>trouble</reg>
+                        </choice> me, I <choice>
+                           <orig>muﬅ</orig>
+                           <reg>must</reg>
+                        </choice> be meek;</rdg>
+                  </app>
+               </l>
+
+               <l n="62">
+                  <app>
+                     <rdg wit="#w"><choice>
+                           <orig>I<del cert="low" rend="strike">[?]</del><add rend="supralinear"
+                              >n</add></orig>
+                           <reg>In</reg>
+                        </choice>
+                        <choice>
+                           <orig>weaknes</orig>
+                           <reg>weakness</reg>
+                        </choice> must <choice>
+                           <orig>bee</orig>
+                           <reg>be</reg>
+                        </choice> stout.</rdg>
+                     <rdg wit="#b">In <choice>
+                           <orig>weaknes</orig>
+                           <reg>weakness</reg>
+                        </choice> must be stout.</rdg>
+                     <rdg wit="#p">In <choice>
+                           <orig>weakne<g ref="#sslig">ſſ</g>e</orig>
+                           <reg>weakness</reg>
+                        </choice>
+                        <choice>
+                           <orig>muﬅ</orig>
+                           <reg>must</reg>
+                        </choice> be <choice>
+                           <orig>ﬅout</orig>
+                           <reg>stout</reg>
+                        </choice>.</rdg>
+                  </app>
+               </l>
+
+               <l n="63">
+                  <app>
+                     <rdg wit="#w">Well, I will change <choice>
+                           <abbr>y<hi rend="superscript">e</hi></abbr>
+                           <ex>the</ex>
+                        </choice> service and <choice>
+                           <orig>goe</orig>
+                           <reg>go</reg>
+                        </choice> seek</rdg>
+                     <rdg wit="#b">Well, I will change <choice>
+                           <abbr>y<hi rend="superscript">e</hi></abbr>
+                           <ex>the</ex>
+                        </choice> service, <choice>
+                           <orig>&amp;</orig>
+                           <reg>and</reg>
+                        </choice>
+                        <choice>
+                           <orig>goe</orig>
+                           <reg>go</reg>
+                        </choice>
+                        <choice>
+                           <orig>seeke</orig>
+                           <reg>seek</reg>
+                        </choice></rdg>
+                     <rdg wit="#p">Well, I will change the <choice>
+                           <orig>ſervice</orig>
+                           <reg>service</reg>
+                        </choice>, and go <choice>
+                           <orig>ſeek</orig>
+                           <reg>seek</reg>
+                        </choice></rdg>
+                  </app>
+               </l>
+
+               <l n="64">
+                  <app>
+                     <rdg wit="#w">Some other Master out.</rdg>
+                     <rdg wit="#b">Some other Master out.</rdg>
+                     <rdg wit="#p">Some other <choice>
+                           <orig>maﬅer</orig>
+                           <reg>master</reg>
+                        </choice> out.</rdg>
+                  </app>
+               </l>
+
+               <l n="65">
+                  <app>
+                     <rdg wit="#w">Ah my <choice>
+                           <orig>deere</orig>
+                           <reg>dear</reg>
+                        </choice> King, though I am clean <choice>
+                           <orig>forgott</orig>
+                           <reg>forgot</reg>
+                        </choice>,</rdg>
+                     <rdg wit="#b">Ah my <choice>
+                           <orig>Deare</orig>
+                           <reg>Dear</reg>
+                        </choice> God, though I am <choice>
+                           <orig>cleane</orig>
+                           <reg>clean</reg>
+                        </choice>
+                        <choice>
+                           <orig>forgott</orig>
+                           <reg>forgot</reg>
+                        </choice>,</rdg>
+                     <rdg wit="#p">Ah my <choice>
+                           <orig>deare</orig>
+                           <reg>dear</reg>
+                        </choice> God! though I am clean forgot,</rdg>
+                  </app>
+               </l>
+
+               <l n="66">
+                  <app>
+                     <rdg wit="#w"><choice>
+                           <orig>Lett</orig>
+                           <reg>Let</reg>
+                        </choice> me not <choice>
+                           <orig>loue</orig>
+                           <reg>love</reg>
+                        </choice>
+                        <choice>
+                           <orig>Thee</orig>
+                           <reg>You</reg>
+                        </choice>, if I love <choice>
+                           <orig>Thee</orig>
+                           <reg>You</reg>
+                        </choice>
+                        <choice>
+                           <orig>nott</orig>
+                           <reg>not</reg>
+                        </choice>.</rdg>
+                     <rdg wit="#b">Let me not <choice>
+                           <orig>loue</orig>
+                           <reg>love</reg>
+                        </choice>
+                        <choice>
+                           <orig>thee</orig>
+                           <reg>you</reg>
+                        </choice>, if I <choice>
+                           <orig>loue</orig>
+                           <reg>love</reg>
+                        </choice>
+                        <choice>
+                           <orig>thee</orig>
+                           <reg>you</reg>
+                        </choice> not.</rdg>
+                     <rdg wit="#p">Let me not love <choice>
+                           <orig>thee</orig>
+                           <reg>you</reg>
+                        </choice>, if I love <choice>
+                           <orig>thee</orig>
+                           <reg>you</reg>
+                        </choice> not.</rdg>
+                  </app>
+                  <note type="critical"><hi rend="italics">Lines 65-66</hi>: "Even though it would
+                     mean ceasing to be in any meaningful sense, I would rather you not prod me to
+                     love you at all if, as it seems, I fail continuously to do so&#x2014;or do
+                     so poorly." (A pun on the second <hi rend="italics">not</hi>, i.e., <hi
+                        rend="italics">naught</hi>, is supported by its alternative spelling in #w,
+                        <hi rend="italics">nott</hi>.) The rapid <hi rend="italics">volte face</hi>
+                     in lines 61-64 captures in miniature the poem's larger movement; it is in these
+                     final lines, however, that the speaker steps back and succinctly analyzes his
+                     dilemma even while maintaining a rhetorical stance that challenges his
+                     interlocutor. The repetition and reversal in the final line (what Wilcox
+                     identifies as antimetabole) might also be a moment, rare in Herbert, of
+                     predestinarian exasperation in which is implied a rhetorical question
+                     (erotema): "Why bother puttting me through this if I am not in the end one of
+                     the fortunate who <hi rend="italics">really</hi> love you (as opposed to those
+                     who only <hi rend="italics">think</hi> they do)?" One possible answer, a
+                     projection of the speaker's "simpering" side, is that there is no good reason
+                     for his pains and that the fate of the reprobate is an impenetrable mystery.
+                     The more favorable (and no less mysterious) answer is that the speaker's love
+                     for God is entirely inadequate yet made sufficient through grace.</note>
+               </l>
+            </lg>
+         </div>
+
+      </body>
+   </text>
+
+</TEI>
