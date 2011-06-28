@@ -1,6 +1,7 @@
 import simplejson as json
 from google.appengine.api import users
 from google.appengine.ext import blobstore
+from google.appengine.ext.blobstore import BlobKey
 from google.appengine.ext import db
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import blobstore_handlers
@@ -25,7 +26,7 @@ class UploadURLHandler( webapp.RequestHandler ):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.out.write( '"' + upload_url + '"' )
 
-class FileUploadHandler( webapp.RequestHandler ):
+class FileUploadHandler( blobstore_handlers.BlobstoreUploadHandler ):
     def get( self ):
         '''Return information on file blobs that are here'''
         owner_files = db.GqlQuery( "SELECT * FROM BlobOwner WHERE user = USER('%s')" % users.get_current_user() )
@@ -43,10 +44,10 @@ class FileUploadHandler( webapp.RequestHandler ):
         for blob_info in uploaded_files:
             # Associate the blob with the user who uploaded it
             b = BlobOwner( user = users.get_current_user(),
-                           blobkey = blob_info.key() )
+                           blobkey = str( blob_info.key() ) )
             # Push the blob key onto the query string for the JSON response
             b.put()
-            query_files.append( "key=" + blob_info.key() )
+            query_files.append( "key=" + str( blob_info.key() ) )
         ## Return a redirect to a JSON respose for the file(s) uploaded.
         self.redirect( '/uploadjson?%s' % '&'.join( query_files ) )
 
@@ -55,7 +56,7 @@ class UploadJSONResponse( webapp.RequestHandler ):
         '''Return a JSON object with file info for each of the passed blobs'''
         answer = []
         for blob_key in self.request.get( 'key' ):
-            answer.append( GetUIData( blob_key ) )
+            answer.append( GetUIData( BlobKey( blob_key ) ) )
         self.response.headers['Content-Type'] = 'application/json'
         self.response.out.write( json.dumps( answer, ensure_ascii=False ).encode( 'utf-8' ) )  # TODO json encode this
 
