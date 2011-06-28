@@ -48,17 +48,19 @@ class FileUploadHandler( blobstore_handlers.BlobstoreUploadHandler ):
                            blobkey = str( blob_info.key() ) )
             # Push the blob key onto the query string for the JSON response
             b.put()
-            query_files.append( "key=" + str( blob_info.key() ) )
+            query_files.append( str( blob_info.key() ) )
         ## Return a redirect to a JSON respose for the file(s) uploaded.
-        query_string = '&'.join( query_files )
-        logging.debug( 'Redirecting with query string %s' % query_string )
-        self.redirect( '/uploadjson?%s' % '&'.join( query_files ) )
+        query_string = '/'.join( query_files )
+        logging.info( 'Redirecting with query string %s' % query_string )
+        self.redirect( '/uploadjson/%s' % query_string )
 
 class UploadJSONResponse( webapp.RequestHandler ):
-    def get( self ):
-        '''Return a JSON object with file info for each of the passed blobs'''
+    def get( self, resource ):
+        '''Return a JSON object with file info for each of the blobs passed as
+        part of the URL resource.'''
+        blob_keys = resource.split('/')
         answer = []
-        for blob_key in self.request.get( 'key' ):
+        for blob_key in blob_keys:
             answer.append( GetUIData( BlobKey( blob_key ) ) )
         self.response.headers['Content-Type'] = 'application/json'
         self.response.out.write( json.dumps( answer, ensure_ascii=False ).encode( 'utf-8' ) )  # TODO json encode this
@@ -85,7 +87,7 @@ application = webapp.WSGIApplication(
                                       ('/getUploadURL', UploadURLHandler),
                                       ('/fileupload', FileUploadHandler),
                                       ('/serve/([^/]+)?', ServeHandler),
-                                      ('/uploadjson', UploadJSONResponse),
+                                      ('/uploadjson/(.*)', UploadJSONResponse),
                                       ],
                                      debug=True)
 
