@@ -5,18 +5,18 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import blobstore_handlers
 from google.appengine.ext.webapp.util import run_wsgi_app
 
+def GetUIData( blob_key ):
+    blob_info = blobstore.BlobInfo.get( blob_key )
+    data_struct = { 'name': blob_info.filename,
+                    'size': blob_info.size,
+                    'url': "//%s/serve/%s" % ( hostname, blob_info.filename ),
+                    'delete_url': "//%s/delete/%s" % ( hostname, blob_info.filename ),
+                    }
+    return data_struct
+
 class BlobOwner( db.Model ):
     user = db.UserProperty()
     blobkey = db.StringProperty()
-
-class IndexPage( webapp.RequestHandler ):
-    def get( self ):
-        user = users.get_current_user()
-        if user:
-            main_page = open( 'html/fileupload.html' )
-            self.response.out.write( main_page.read() )
-        else:
-            self.redirect(users.create_login_url(self.request.uri))
 
 class UploadURLHandler( webapp.RequestHandler ):
     def get( self ):
@@ -25,6 +25,15 @@ class UploadURLHandler( webapp.RequestHandler ):
         self.response.out.write( '"' + upload_url + '"' )
 
 class FileUploadHandler( webapp.RequestHandler ):
+    def get( self ):
+        '''Return information on file blobs that are here'''
+        owner_files = db.GqlQuery( "SELECT * FROM BlobOwner WHERE user = USER('%s')" % users.get_current_user() )
+        answer = []
+        for file in owner_files:
+            answer.append( GetUIData( file.blobkey ) )
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.out.write( answer )
+    
     def post( self ):
         '''Handle the upload of file blobs'''
         ## self.request has a reference to the blob(s) uploaded.
@@ -35,6 +44,7 @@ class FileUploadHandler( webapp.RequestHandler ):
             b = BlobOwner( user = users.get_current_user(),
                            blobkey = blob_info.key() )
             # Push the blob key onto the query string for the JSON response
+            b.put()
             query_files.append( "key=" + blob_info.key() )
         ## Return a redirect to a JSON respose for the file(s) uploaded.
         self.redirect( '/uploadjson?%s' % '&'.join( query_files ) )
@@ -44,14 +54,9 @@ class UploadJSONResponse( webapp.RequestHandler ):
         '''Return a JSON object with file info for each of the passed blobs'''
         answer = []
         for blob_key in self.request.get( 'key' ):
-            blob_info = blobstore.BlobInfo.get( blob_key )
-            answer.append( { 'name': blob_info.filename,
-                             'size': blob_info.size,
-                             'url': "//%s/serve/%s" % ( hostname, blob_info.filename ),
-                             'delete_url': "//%s/delete/%s" % ( hostname, blob_info.filename ),
-                             } )
+            answer.append( GetUIData( blob_key ) )
         self.response.headers['Content-Type'] = 'application/json'
-        self.response.out.write( answer )
+        self.response.out.write( answer )  # TODO json encode this
 
 class ServeHandler( blobstore_handlers.BlobstoreDownloadHandler ):
     def get( self, resource ):
@@ -71,11 +76,12 @@ class DeleteHandler( webapp.RequestHandler ):
 
 
 application = webapp.WSGIApplication(
-                                     [('/', IndexPage),
+                                     [
                                       ('/getUploadURL', UploadURLHandler),
                                       ('/fileupload', FileUploadHandler),
                                       ('/serve/([^/]+)?', ServeHandler),
-                                      ('/uploadjson', UploadJSONResponse)],
+                                      ('/uploadjson', UploadJSONResponse),
+                                      ],
                                      debug=True)
 
 def main():
