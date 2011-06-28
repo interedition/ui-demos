@@ -1,3 +1,4 @@
+import logging
 import simplejson as json
 from google.appengine.api import users
 from google.appengine.ext import blobstore
@@ -49,6 +50,8 @@ class FileUploadHandler( blobstore_handlers.BlobstoreUploadHandler ):
             b.put()
             query_files.append( "key=" + str( blob_info.key() ) )
         ## Return a redirect to a JSON respose for the file(s) uploaded.
+        query_string = '&'.join( query_files )
+        logging.debug( 'Redirecting with query string %s' % query_string )
         self.redirect( '/uploadjson?%s' % '&'.join( query_files ) )
 
 class UploadJSONResponse( webapp.RequestHandler ):
