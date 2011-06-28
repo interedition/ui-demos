@@ -1,3 +1,4 @@
+import simplejson as json
 from google.appengine.api import users
 from google.appengine.ext import blobstore
 from google.appengine.ext import db
@@ -32,7 +33,7 @@ class FileUploadHandler( webapp.RequestHandler ):
         for file in owner_files:
             answer.append( GetUIData( file.blobkey ) )
         self.response.headers['Content-Type'] = 'application/json'
-        self.response.out.write( answer )
+        self.response.out.write( json.dumps( answer, ensure_ascii=False ).encode( 'utf-8' ) )
     
     def post( self ):
         '''Handle the upload of file blobs'''
@@ -56,7 +57,7 @@ class UploadJSONResponse( webapp.RequestHandler ):
         for blob_key in self.request.get( 'key' ):
             answer.append( GetUIData( blob_key ) )
         self.response.headers['Content-Type'] = 'application/json'
-        self.response.out.write( answer )  # TODO json encode this
+        self.response.out.write( json.dumps( answer, ensure_ascii=False ).encode( 'utf-8' ) )  # TODO json encode this
 
 class ServeHandler( blobstore_handlers.BlobstoreDownloadHandler ):
     def get( self, resource ):
