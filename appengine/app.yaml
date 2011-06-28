@@ -37,6 +37,18 @@ handlers:
 - url: /graphmldisplay
   script: graphmlResult.py
 
+- url: /getUploadURL
+  script: fileupload.py
+
+- url: /fileupload
+  script: fileupload.py
+
+- url: /serve/*
+  script: fileupload.py
+
+- url: /uploadjson
+  script: fileupload.py
+
 - url: /test.*
   login: admin
   script: gaeunit.py
