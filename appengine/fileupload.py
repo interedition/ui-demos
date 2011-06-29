@@ -82,7 +82,10 @@ class DeleteHandler( webapp.RequestHandler ):
         this_blob_owner = db.GqlQuery( "SELECT * FROM BlobOwner WHERE blobkey = '%s'" % resource )
         for b in this_blob_owner:
             db.delete( b )
-        self.response.out.write( "Deleted %s" % resource )
+        answer = []
+        answer.append( "Deleted %s" % resource )
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.out.write( json.dumps( answer, ensure_ascii=False ).encode( 'utf-8' ) )  # TODO json encode this
 
 
 application = webapp.WSGIApplication(

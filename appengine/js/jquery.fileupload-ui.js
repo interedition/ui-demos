@@ -24,7 +24,7 @@
             // By default, files added to the widget are uploaded as soon
             // as the user clicks on the start buttons. To enable automatic
             // uploads, set the following option to true:
-            autoUpload: true,
+            autoUpload: false,
             // The following option limits the number of files that are
             // allowed to be uploaded using this widget:
             maxNumberOfFiles: undefined,
@@ -190,8 +190,7 @@
                 var that = $(this).data('fileupload');
                 if (data.url) {
                     $.ajax(data)
-                        .success(function () {
-                            that._adjustMaxNumberOfFiles(1);
+                        .success(function() {
                             $(this).fadeOut(function () {
                                 $(this).remove();
                             });
@@ -541,7 +540,7 @@
                 .button({icons: {primary: 'ui-icon-cancel'}})
                 .bind('click.' + ns, function (e) {
                     e.preventDefault();
-                    filesList.find('.cancel button').click();
+                    filesList.find('.cancel button').each( function(){ $(this).click(); });
                 });
             fileUploadButtonBar.find('.delete')
                 .button({icons: {primary: 'ui-icon-trash'}})

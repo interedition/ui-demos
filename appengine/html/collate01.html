@@ -15,7 +15,7 @@
 <script src="/js/jquery.fileupload-ui.js"></script>
 
 <!--script language="JavaScript" type="application/javascript" src="/js/jquery-1.4.2.min.js"></script-->
-<script language="JavaScript" type="text/JavaScript" src="/js/collatex.js"></script>
+<!--script language="JavaScript" type="text/JavaScript" src="/js/collatex.js"></script-->
 
 </head>
 <body>
@@ -23,30 +23,14 @@
 <div class="intro">This a CollateX based text collation client to show the strength of web   services based pipeline workflow as an interoperability mechanism   between digital and computational textual scholarship tools. This client   is using the CollateX collation engine (running on a different server   than this client). CollateX is a powerfull fully automatic baseless text   collation engine for multiple witnesses.</div>
 
 <div class="col01 coll">
-  <form id="choosefile" enctype="multipart/form-data" method="post" action="/uploadfile" name="choosefile">
+
     <h1><span class="nmr">1</span> Files</h1>
     <h2>Select files</h2>
-    <p>Select the files on your local drive, or provide one or more URLs, that contain the texts that you would like to collate.</p>
-    <div id="allFiles"></div>
-		<div id="addAnother" class="divLink">Add Another</div>
-    <p>&nbsp;</p>
-    <p>Or type the URL to the online text:</p>
-	<div id="allUrls">
-    
- 	</div>
-	<div id="addAnotherUrl" class="divLink">Add Another</div>
-	   </p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <p><div onclick="submitForm()" class="button"><span>Upload and configure</span></div></p>
-    <p>&nbsp;</p><p>&nbsp;</p>
-    
-  </form>
+    <p>Select and upload the files on your local drive that contain the texts that you would like to collate.</p>
 
   <div id="fileupload">
     <form action="/fileupload" method="POST" enctype="multipart/form-data">
         <div class="fileupload-buttonbar">
-
             <label class="fileinput-button">
                 <span>Add files...</span>
                 <input type="file" name="files[]" multiple>
@@ -62,37 +46,39 @@
         <div class="fileupload-progressbar"></div>
     </div>
   </div>
-  <script id="template-upload" type="text/x-jquery-tmpl">
+
+<script id="template-upload" type="text/x-jquery-tmpl">
     <tr class="template-upload{{if error}} ui-state-error{{/if}}">
-        <td class="name"><div class="name_div">${name}</div></td>
-        <td class="size" colspan="2"><div class="size_div">${sizef}</div></td>
-    </tr>
-    <tr>
+      <td>
+        <div class="upper">
+          <div class="name"><div class="name_div">${name}</div></div>
+          <div class="size"><div class="size_div">${sizef}</div></div>
+        </div>
+        <div class="lower">
         {{if error}}
-            <td class="error" colspan="2">Error:
+            <div class="error">Error:
                 {{if error === 'maxFileSize'}}File is too big
                 {{else error === 'minFileSize'}}File is too small
                 {{else error === 'acceptFileTypes'}}Filetype not allowed
                 {{else error === 'maxNumberOfFiles'}}Max number of files exceeded
                 {{else}}${error}
                 {{/if}}
-            </td>
+            </div>
         {{else}}
-            <td class="progress"><div></div></td>
-            <td class="start"><button>Start</button></td>
+            <div class="progress"><div></div></div>
+            <div class="start"><button>Start</button></div>
         {{/if}}
-        <td class="cancel"><button>Cancel</button></td>
+          <div class="cancel"><button>Cancel</button></div>
+        </div>
+      </td>
     </tr>
-  </script>
-  <script id="template-download" type="text/x-jquery-tmpl">
+</script>
+<script id="template-download" type="text/x-jquery-tmpl">
     <tr class="template-download{{if error}} ui-state-error{{/if}}">
+      <td>
         {{if error}}
-            <td></td>
-            <td class="name"><div class="name_div">${name}</div></td>
-            <td class="size"><div class="size_div">${sizef}</div></td>
-          </tr>
-          <tr>
-            <td class="error" colspan="2">Error:
+          <div class="upper">
+            <div class="error">Error:
                 {{if error === 1}}File exceeds upload_max_filesize (php.ini directive)
                 {{else error === 2}}File exceeds MAX_FILE_SIZE (HTML form directive)
                 {{else error === 3}}File was only partially uploaded
@@ -108,19 +94,21 @@
                 {{else error === 'emptyResult'}}Empty file upload result
                 {{else}}${error}
                 {{/if}}
-            </td>
-        {{else}}
-            <td class="name">
-                <div class="name_div"><a href="${url}">${name}</a></div>
-            </td>
-            <td class="size"><div class="size_div">${sizef}</div></td>
+            </div>
+          </div>
         {{/if}}
-        <td class="delete">
+        <div class="lower">
+          <div class="name"><div class="name_div">${name}</div></div>
+          <div class="size"><div class="size_div">${sizef}</div></div>
+          <div class="delete">
             <button data-type="${delete_type}" data-url="${delete_url}">Delete</button>
-        </td>
+          </div>
+        </div>
+      </td>
     </tr>
-  </script>
-  <script src="/js/application.js"></script>
+</script>
+
+<script src="/js/application.js"></script>
 
 </div>
 
