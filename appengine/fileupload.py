@@ -12,8 +12,8 @@ def GetUIData( blob_key ):
     blob_info = blobstore.BlobInfo.get( blob_key )
     data_struct = { 'name': blob_info.filename,
                     'size': blob_info.size,
-                    'url': "//%s/serve/%s" % ( hostname, blob_info.filename ),
-                    'delete_url': "//%s/delete/%s" % ( hostname, blob_info.filename ),
+                    'url': "/serve/%s" % blob_info.filename,
+                    'delete_url': "/delete/%s" % blob_info.filename,
                     }
     return data_struct
 
