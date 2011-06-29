@@ -1,5 +1,6 @@
 import logging
 import simplejson as json
+import urllib
 from google.appengine.api import users
 from google.appengine.ext import blobstore
 from google.appengine.ext.blobstore import BlobKey
@@ -59,10 +60,11 @@ class UploadJSONResponse( webapp.RequestHandler ):
     def get( self, resource ):
         '''Return a JSON object with file info for each of the blobs passed as
         part of the URL resource.'''
+        logging.info( 'Got resource %s' % resource )
         blob_keys = resource.split('/')
         answer = []
         for blob_key in blob_keys:
-            answer.append( GetUIData( BlobKey( blob_key ) ) )
+            answer.append( GetUIData( BlobKey( urllib.unquote( blob_key ) ) ) )
         self.response.headers['Content-Type'] = 'application/json'
         self.response.out.write( json.dumps( answer, ensure_ascii=False ).encode( 'utf-8' ) )  # TODO json encode this
 
