@@ -53,16 +53,17 @@
 }
 
 .fileupload-content .ui-progressbar {
-  width: 180px;
-  height: 7px;
+    height: 7px;
+    width: 193px;
+    float: left;
+    margin-top: 7px;
 }
-
 .fileupload-content .ui-progressbar-value {
   background: url(pbar-ani.gif);
 }
 
 .fileupload-content .fileupload-progressbar {
-  width: 400px;
+  width: 270px;
   margin: 10px 0;
 }
 
@@ -84,20 +85,37 @@
   padding: 0 10px 0 6px;
 }
 
+.upper, .lower {
+	width: 270px;
+}
+
 .files .name .name_div {
   width: 186px;
   overflow: hidden;
+  float: left;
+}
+
+.files .lower .name .name_div {
+  width: 165px;
+  margin-right: 10px;
 }
 
 .files .size {
-  padding: 0 10px 0 0;
+  padding: 0 10px 0 0px;
   text-align: right;
   white-space: nowrap;
 }
 
 .files .size .size_div {
-  width: 56px;
+  width: 58px;
   overflow: hidden;
+  float: left;
+  margin-left: 8px;
+}
+
+.files .lower .size .size_div {
+  margin-right: 4px;	
+  margin-left: 4px;	
 }
 
 .ui-state-disabled .ui-state-disabled {
@@ -107,4 +125,26 @@
 
 .ui-state-disabled input {
   cursor: default;
+}
+
+.start {
+  float: left;
+  margin-right:  5px;
+}
+
+.cancel button {
+  float: left;
+}
+
+button.delete {
+  margin-top: 3px;
+}
+
+div.delete {
+  top: -5px;
+  float: right;
+}
+
+div.delete button {
+  top: -5px;
 }
