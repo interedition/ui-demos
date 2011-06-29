@@ -9,12 +9,12 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import blobstore_handlers
 from google.appengine.ext.webapp.util import run_wsgi_app
 
-def GetUIData( blob_key ):
-    blob_info = blobstore.BlobInfo.get( blob_key )
+def GetUIData( blob_info ):
     data_struct = { 'name': blob_info.filename,
                     'size': blob_info.size,
                     'url': "/serve/%s" % blob_info.filename,
-                    'delete_url': "/delete/%s" % blob_info.filename,
+                    'delete_url': "/delete/%s" % ( urllib.quote( str( blob_info.key() ) ) ),
+                    'delete_type': 'DELETE',
                     }
     return data_struct
 
@@ -34,7 +34,7 @@ class FileUploadHandler( blobstore_handlers.BlobstoreUploadHandler ):
         owner_files = db.GqlQuery( "SELECT * FROM BlobOwner WHERE user = USER('%s')" % users.get_current_user() )
         answer = []
         for file in owner_files:
-            answer.append( GetUIData( file.blobkey ) )
+            answer.append( GetUIData( blobstore.BlobInfo.get( file.blobkey ) ) )
         self.response.headers['Content-Type'] = 'application/json'
         self.response.out.write( json.dumps( answer, ensure_ascii=False ).encode( 'utf-8' ) )
     
@@ -64,7 +64,7 @@ class UploadJSONResponse( webapp.RequestHandler ):
         blob_keys = resource.split('/')
         answer = []
         for blob_key in blob_keys:
-            answer.append( GetUIData( BlobKey( urllib.unquote( blob_key ) ) ) )
+            answer.append( GetUIData( blobstore.BlobInfo.get( str( urllib.unquote( blob_key ) ) ) ) )
         self.response.headers['Content-Type'] = 'application/json'
         self.response.out.write( json.dumps( answer, ensure_ascii=False ).encode( 'utf-8' ) )  # TODO json encode this
 
@@ -75,11 +75,11 @@ class ServeHandler( blobstore_handlers.BlobstoreDownloadHandler ):
         self.send_blob(blob_info)
 
 class DeleteHandler( webapp.RequestHandler ):
-    def get( self, resource ):
+    def delete( self, resource ):
         resource = str(urllib.unquote(resource))
         blob_info = blobstore.BlobInfo.get(resource)
         blob_info.delete()
-        this_blob_owner = db.GqlQuery( "SELECT * FROM BlobOwner WHERE blobkey = %s" % blob_info.key() )
+        this_blob_owner = db.GqlQuery( "SELECT * FROM BlobOwner WHERE blobkey = '%s'" % resource )
         for b in this_blob_owner:
             db.delete( b )
         self.response.out.write( "Deleted %s" % resource )
@@ -90,6 +90,7 @@ application = webapp.WSGIApplication(
                                       ('/getUploadURL', UploadURLHandler),
                                       ('/fileupload', FileUploadHandler),
                                       ('/serve/([^/]+)?', ServeHandler),
+                                      ('/delete/([^/]+)?', DeleteHandler),
                                       ('/uploadjson/(.*)', UploadJSONResponse),
                                       ],
                                      debug=True)
