@@ -535,7 +535,6 @@
                 .button({icons: {primary: 'ui-icon-circle-arrow-e'}})
                 .bind('click.' + ns, function (e) {
                     e.preventDefault();
-console.log( 'clicked' );
                     filesList.find('.start button').click();
                 });
             fileUploadButtonBar.find('.cancel')
