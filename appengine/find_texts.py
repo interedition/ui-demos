@@ -49,9 +49,13 @@ class FindTexts( webapp.RequestHandler ):
         # that is a hash of parameter keys, where the value of each
         # key is an array of texts.
         textlist = {}
-        for param in files.keys():
+        as_ctr = 65  # ascii A
+        fileids = files.keys()
+        fileids.sort()
+        for param in fileids:
             content = files[param]
             #errormsg.append( 'Content for %s is %s' % ( param, content ) )
+            autosigil = chr(as_ctr)
             try:
                 filetype = handleInput.filetype( content )
             except xml.parsers.expat.ExpatError:
@@ -62,7 +66,8 @@ class FindTexts( webapp.RequestHandler ):
             else:
                 if( filetype == 'plaintext' ):
                     textlist[param] = [ { 'content': content,
-                                          'type': filetype } ]
+                                          'type': filetype,
+                                          'autosigil': autosigil } ]
                 elif( filetype == 'teixml' ):
                     rootnode = handleInput.get_tei_document_node( content )
                     teiTexts = handleInput.find_text_children( rootnode )
@@ -72,6 +77,7 @@ class FindTexts( webapp.RequestHandler ):
                 else:
                     errormsg.append( 'Unsupported filetype %s for %s' 
                                      % ( filetype, param ) )
+            as_ctr += 1
         # Do we have errors?
         if( len( errormsg ) > 0 ):
             self.response.out.write( 'Got errors: %s' % "\n".join( errormsg ) )

@@ -19,7 +19,7 @@ class MSDispatcher( webapp.RequestHandler ):
     
     resultactions = { 'application/xhtml+xml': { 'formaction': '/htmldisplay', 'buttons': [ 'Render the HTML' ] },
                       'application/xml': { 'formaction': '/teidisplay', 'buttons': [ 'Display in Versioning Machine' ] }, 
-                      'application/graphml+xml': { 'formaction': '/graphml', 'buttons': [ 'Send to lemmatizer' ] },
+                      'application/graphml+xml': { 'formaction': 'http://eccentricity.org:3000', 'buttons': [ 'Send to lemmatizer' ] },
                       }
     
     def post( self ):
@@ -28,6 +28,16 @@ class MSDispatcher( webapp.RequestHandler ):
             return( x.startswith( 'file' ) or x.startswith( 'url' ) )
         text_ids = filter( is_text, self.request.arguments() )
         tokenized_texts = { 'witnesses': [] }
+        ## Use provided sigla iff a unique sigil is provided for each text.
+        use_sigla = False
+        sigla = {}
+        for ti in text_ids:
+            text = json.loads( self.request.get( ti ) )
+            sigil = text['sigil']
+            if sigil:
+                sigla[sigil] = ti
+        if len( sigla.keys() ) == len( text_ids ):
+            use_sigla = True;
         for ti in text_ids:
             tokenizer_args = {}
             text = json.loads( self.request.get( ti ) )
@@ -42,8 +52,11 @@ class MSDispatcher( webapp.RequestHandler ):
                                             payload=form_data,
                                             method='POST' )
                 if urlresult.status_code == 200:
+                    textid = ti
+                    if use_sigla:
+                        textid = text['sigil']
                     tokens = json.loads( urlresult.content )
-                    tokenized_texts['witnesses'].append( { 'id': ti,
+                    tokenized_texts['witnesses'].append( { 'id': textid,
                                                            'tokens': tokens } )
                 else:
                     raise ServiceNotOKError( 'Service %s returned status code %d' 

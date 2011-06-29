@@ -36,13 +36,18 @@ sub index :Path :Args(0) {
     # First we need to generate the SVG from the GraphML, and also keep track
     # of the GraphML nodes.
 
-    # For now, we use a static GraphML.
-    my $dummy_file = "t/data/Collatex-16.xml";
-    open( GRAPHFILE, $dummy_file ) or die "Could not open $dummy_file";
-    my @lines = <GRAPHFILE>;
-    close GRAPHFILE;
+    # Hacky hacky to make this work with the interedition-tools interface:
+    # accept XML in a parameter called 'result'.
+    my $origin_data = $c->request->params->{'result'};
+    unless( $origin_data ) {	
+	my $dummy_file = "t/data/Collatex-16.xml";
+	open( GRAPHFILE, $dummy_file ) or die "Could not open $dummy_file";
+	my @lines = <GRAPHFILE>;
+	close GRAPHFILE;
+	$origin_data = join( '', @lines );
+    }
     my $tradition = Text::Tradition->new( 
-	'CollateX' => join( '', @lines ),
+	'CollateX' => $origin_data,
 	'name' => 'Collatex_16', );
     $graph = $tradition->collation;
     my $svg_str = $graph->as_svg;
