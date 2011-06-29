@@ -48,27 +48,28 @@
   </div>
 
 <script id="template-upload" type="text/x-jquery-tmpl">
-    <tr class="template-upload{{if error}} ui-state-error{{/if}}">
+    <tr class="template-upload">
       <td>
-        <div class="upper">
+        <div class="upper {{if error}} ui-state-error{{/if}}">
           <div class="name"><div class="name_div">${name}</div></div>
           <div class="size"><div class="size_div">${sizef}</div></div>
         </div>
         <div class="lower">
         {{if error}}
-            <div class="error">Error:
+            <div class="error {{if error}} ui-state-error{{/if}}">Error:
                 {{if error === 'maxFileSize'}}File is too big
                 {{else error === 'minFileSize'}}File is too small
                 {{else error === 'acceptFileTypes'}}Filetype not allowed
                 {{else error === 'maxNumberOfFiles'}}Max number of files exceeded
                 {{else}}${error}
                 {{/if}}
+	            <div class="cancel"><button>Cancel</button></div>
             </div>
         {{else}}
             <div class="progress"><div></div></div>
             <div class="start"><button>Start</button></div>
+            <div class="cancel"><button>Cancel</button></div>
         {{/if}}
-          <div class="cancel"><button>Cancel</button></div>
         </div>
       </td>
     </tr>
@@ -78,7 +79,7 @@
       <td>
         {{if error}}
           <div class="upper">
-            <div class="error">Error:
+            <div class="error {{if error}} ui-state-error{{/if}}">Error:
                 {{if error === 1}}File exceeds upload_max_filesize (php.ini directive)
                 {{else error === 2}}File exceeds MAX_FILE_SIZE (HTML form directive)
                 {{else error === 3}}File was only partially uploaded
@@ -94,9 +95,10 @@
                 {{else error === 'emptyResult'}}Empty file upload result
                 {{else}}${error}
                 {{/if}}
+              <div class="error ui-state-error"><div class="name_div">${name}</div></div>
             </div>
           </div>
-        {{/if}}
+        {{else}}
         <div class="lower">
           <div class="name"><div class="name_div">${name}</div></div>
           <div class="size"><div class="size_div">${sizef}</div></div>
@@ -104,6 +106,7 @@
             <button data-type="${delete_type}" data-url="${delete_url}">Delete</button>
           </div>
         </div>
+        {{/if}}
       </td>
     </tr>
 </script>

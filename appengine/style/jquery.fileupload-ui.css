@@ -148,3 +148,12 @@ div.delete {
 div.delete button {
   top: -5px;
 }
+
+.lower .error {
+  padding-left: 6px;
+  border: 1px solid #f7bfc9;
+}
+
+.lower .error .cancel {
+  display: none;
+}
