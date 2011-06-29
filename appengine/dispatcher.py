@@ -77,6 +77,7 @@ class MSDispatcher( webapp.RequestHandler ):
                 raise ServiceNotOKError( 'Service %s returned status code %d' 
                                     % ( service, urlresult.status_code ) )
         
+        # Run the collation.  Hacky hacky, do it with RPC for the longer timeout.
         service = self.collators.get( self.request.get( 'collator' ) )
         output = self.request.get( 'output' )
         if( service ):
@@ -88,16 +89,22 @@ class MSDispatcher( webapp.RequestHandler ):
             if( output == 'text/html' ):
                 del collation_headers['Accept']
             
-            urlresult = urlfetch.fetch( url=service,
-                                        headers=collation_headers,
-                                        payload=payload,
-                                        method='POST' )
-            if urlresult.status_code == 200:
-                payload = urlresult.content  ## Could be one of several formats now
-                payload = payload.decode("utf-8")
-            else:
-                raise ServiceNotOKError( 'Service %s returned status code %d, content %s' 
-                                    % ( service, urlresult.status_code, urlresult.content ) )
+            rpc = urlfetch.create_rpc()
+            urlresult = urlfetch.make_fetch_call( rpc,
+                                                  url=service,
+                                                  headers=collation_headers,
+                                                  payload=payload,
+                                                  method='POST' )
+            try: 
+                result = rpc.get_result()
+                if result.status_code == 200:
+                    payload = result.content  ## Could be one of several formats now
+                    payload = payload.decode("utf-8")
+                else:
+                    raise ServiceNotOKError( 'Service %s returned status code %d, content %s' 
+                                             % ( service, urlresult.status_code, urlresult.content ) )
+            except urlfetch.DownloadError:
+                raise ServiceNotOKError( 'Service %s errored or timed out' % service )
         else: 
             raise NoServiceError( 'No defined collator %s' 
                              % self.request.get( collator ) )
