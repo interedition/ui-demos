@@ -40,7 +40,8 @@ class FileUploadHandler( blobstore_handlers.BlobstoreUploadHandler ):
     def post( self ):
         '''Handle the upload of file blobs'''
         ## self.request has a reference to the blob(s) uploaded.
-        uploaded_files = self.get_uploads('file')
+        uploaded_files = self.get_uploads('files[]')
+        logging.info( 'Have %d uploaded files' % len( uploaded_files ) )
         query_files = []
         for blob_info in uploaded_files:
             # Associate the blob with the user who uploaded it

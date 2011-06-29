@@ -46,7 +46,7 @@ handlers:
 - url: /serve/*
   script: fileupload.py
 
-- url: /uploadjson
+- url: /uploadjson/*
   script: fileupload.py
 
 - url: /test.*

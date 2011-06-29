@@ -24,7 +24,7 @@
             // By default, files added to the widget are uploaded as soon
             // as the user clicks on the start buttons. To enable automatic
             // uploads, set the following option to true:
-            autoUpload: false,
+            autoUpload: true,
             // The following option limits the number of files that are
             // allowed to be uploaded using this widget:
             maxNumberOfFiles: undefined,
@@ -535,6 +535,7 @@
                 .button({icons: {primary: 'ui-icon-circle-arrow-e'}})
                 .bind('click.' + ns, function (e) {
                     e.preventDefault();
+console.log( 'clicked' );
                     filesList.find('.start button').click();
                 });
             fileUploadButtonBar.find('.cancel')

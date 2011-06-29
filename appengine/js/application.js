@@ -22,8 +22,7 @@ $(function () {
 		var that = this;
 		$.getJSON('/getUploadURL', function (url) {
 			data.url = url;
-			$.blueimpUI.fileupload.prototype
-			    .options.add.call(that, e, data);
+			$.blueimpUI.fileupload.prototype.options.add.call(that, e, data);
 		    });
 	    }
 	});
