@@ -50,7 +50,7 @@ li {
   list-style-image:url("/images/arrow.gif");
 }
 
-#submittedLabel{
+#submitted_div{
   display: none;
 }
 
