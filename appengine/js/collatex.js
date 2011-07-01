@@ -42,6 +42,9 @@
         $('#Resultform').attr( 'action', resp.formaction );
         $.each( resp.buttons, function( index, value ) {
           $('#resultButton').append( '<input type="submit" name="' + index + '" value="' + value + '">');
+		<div class="button" onclick="getTokens()">
+		<span>Collate..</span>
+		</div>
         });
       }
     });
