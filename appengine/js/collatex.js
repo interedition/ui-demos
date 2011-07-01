@@ -58,9 +58,13 @@
 			xmlDoc.loadXML(txt);
 		}
 	}
-	function listTexts(name,val,txtjson,targetId){
+        function listTexts(name,val,txtjson,targetId){
 			
-		$("#"+targetId).append("<li id='li_"+name+"'><input type='checkbox' value='"+name+"' name='sel_li_"+name+"' id='sel_li_"+name+"'></input>"+val+"</li>");
+	        var sig = txtjson["autosigil"];
+		if (!sig) {
+		    sig = 'A';
+		}
+		$("#"+targetId).append("<li id='li_"+name+"'><input type='checkbox' checked='true' value='"+name+"' name='sel_li_"+name+"' id='sel_li_"+name+"'></input><input type='text' class='textfieldX sigil' name='"+name+"_sigil' id='"+name+"_sigil' value='"+sig+"'/><span class='text_name'>"+val+"</span></li>");
 		//txtContent = txtStr.substring(txtStr.indexOf("<text"));
 		//var teiTexts = txtContent.split("</text>");
 		var lastli = $("#li_"+name);
@@ -68,7 +72,7 @@
 		if ((txtjson)&&(txtjson["subtexts"])) {
 			$("#li_" + name).append("<ul></ul>");
 			for (var j = 0; j < txtjson["subtexts"].length; j++) {
-				$("#li_" + name).find("ul").append("<li id='li_" + name + "_" + j + "'><input type='checkbox' value='"+name+"_"+j+"' name='sel_li_" + name + "_" + j + "' id='sel_li_" + name + "_" + j + "'></input>text " + (j+1) + "</li>");
+				$("#li_" + name).find("ul").append("<li id='li_" + name + "_" + j + "'><input type='checkbox' checked='true' value='"+name+"_"+j+"' name='sel_li_" + name + "_" + j + "' id='sel_li_" + name + "_" + j + "'></input>text " + (j+1) + "</li>");
 			}
 		}
 		
@@ -100,11 +104,11 @@
 				
 				$("#submittedFileList").html("");
 				if ((uriNames.length > 0) || (fileContents.length > 0)) {
-					$("#submittedLabel").show();
+					$("#submitted_div").show();
 					if (uriNames.length > 0) {
 						for (var i = 0; i < uriNames.length; i++) {
 							for (var j = 0; j < response["" + uriNames[i]].length; j++) {
-								listTexts(uriNames[i]+"_"+j, uriVals[i]+" "+j+" ", response["" + uriNames[i]][j], "submittedFileList");
+							    listTexts(uriNames[i]+"_"+j, uriVals[i]+" "+j+" ", response["" + uriNames[i]][j], "submittedFileList");
 							}
 						}
 					}
@@ -133,12 +137,15 @@
 			var thisUrl = firstResponse[""+textParts[0]]; 
 			
 			if (textParts.length > 2) {
-				thisUrl = thisUrl[parseInt(textParts[1])].subtexts[parseInt(textParts[1])];
-				// TODO This needs to pass the entire JSON object, not just the text content!
-				query = query + "&" + $(texts[i]).val() + "=" + JSON.stringify(thisUrl);
+			    thisUrl = thisUrl[parseInt(textParts[1])].subtexts[parseInt(textParts[1])];
+			    query = query + "&" + $(texts[i]).val() + "=" + JSON.stringify(thisUrl);
 			}
 			else {
-				query = query + "&" + $(texts[i]).val() + "=" + JSON.stringify(thisUrl[parseInt(textParts[1])]);
+			    var fieldName = "#" + textName + "_sigil";
+			    var sigil = $(fieldName).val();
+			    thisUrl = thisUrl[parseInt(textParts[1])];
+			    thisUrl["sigil"] = sigil;
+			    query = query + "&" + $(texts[i]).val() + "=" + JSON.stringify(thisUrl);
 			}
 		}
 		

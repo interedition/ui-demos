@@ -101,6 +101,18 @@ h2 .nmr {
   width:256px;  
 }
 
+.sigil {
+    width: 25px;
+    font-size: 8pt;
+    position: absolute;
+    padding: 1px;
+    margin-left: 5px;
+}
+
+.text_name {
+    padding-left: 40px;
+}
+
 .divLink {
   color:#0099FF;
   cursor: pointer;
