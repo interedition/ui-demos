@@ -16,9 +16,6 @@ handlers:
 - url: /v-machine
   static_dir: v-machine
 
-- url: /frames
-  static_dir: frames
-
 - url: /plaintext_tokenize
   script: plaintext_tokenize.py
 
@@ -57,4 +54,5 @@ handlers:
   script: gaeunit.py
 
 - url: /.*
+  login: required
   script: index.py
