@@ -30,7 +30,21 @@
   }
   
   function getTokens(){
-    $('#Configureform').submit();
+    query = $('#Configureform').serialize();
+    $.ajax({
+      url: '/run_toolchain',
+      data: query,
+      type: 'POST',
+      async: false,
+      dataType: 'json',
+      success: function(resp){
+        $('#collatedResult').val( resp.result );
+        $('#Resultform').attr( 'action', resp.formaction );
+        $.each( resp.buttons, function( index, value ) {
+          $('#resultButton').append( '<input type="submit" name="' + index + '" value="' + value + '">');
+        });
+      }
+    });
   }
 
   $(document).ready(function(e){
