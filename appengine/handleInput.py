@@ -30,7 +30,7 @@ def parse_file( content ):
         elif( type == 'collatexinput' ):
             textlist = find_collatex_witnesses( content )
         else:
-            logging.error( 'Do not support file type %s' % filetype )
+            logging.error( 'Do not support file type %s' % type )
             raise UnsupportedFiletypeException
     return textlist
     
@@ -45,7 +45,7 @@ def filetype( xmlstr ):
         if( xmlfile.documentElement.getAttribute( 'xmlns' ) == TEI_NS ):
             type = 'teixml'
         # Add here any other types of file we learn how to parse.
-        elif( xmlfile.documentElement.nodeName() == 'example' ):
+        elif( xmlfile.documentElement.nodeName == 'examples' ):
             # it is a CollateX lightweight witness file
             type = 'collatexinput'
         else:
@@ -102,8 +102,8 @@ def get_tei_document_node( xmlstr ):
         raise NoTEIDocumentElement( 'Document element is ' 
                                     + teifile.documentElement.tagName )
 
-def find_witnesses( xmlstr ):
-    doc = minidom.parsestring( xmlstr )
+def find_collatex_witnesses( xmlstr ):
+    doc = minidom.parseString( xmlstr )
     examples = doc.documentElement.getElementsByTagName( 'example' )
     sequence = 0
     textlist = []
@@ -117,7 +117,6 @@ def find_witnesses( xmlstr ):
             wit_info = { 'id': wit_id,
                          'offset': xmlstr.find( witstr ),
                          'length': len( witstr ),
-                         'parent': None,   # collatex input doesn't have subtexts
                          'type': 'collatexinput' }
             textlist.append( wit_info )
         sequence += 1

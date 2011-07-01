@@ -1,7 +1,11 @@
+from __future__ import with_statement
+
 import handleInput
 import logging
 import simplejson as json
 import urllib
+from google.appengine.api import files
+from google.appengine.api import urlfetch
 from google.appengine.api import users
 from google.appengine.ext import blobstore
 from google.appengine.ext import db
@@ -9,6 +13,20 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import blobstore_handlers
 from google.appengine.ext.webapp.util import run_wsgi_app
 
+#### Datastore classes
+class FileInfo( db.Model ):
+    blobkey = db.StringProperty()  # file ID: key
+    user = db.UserProperty()       # who uploaded the thing
+    type = db.StringProperty()     # plaintxt, teixml, collatexinput, etc.
+
+class FileText( db.Model ):
+    blobkey = db.StringProperty()  # file ID
+    id = db.StringProperty()       # unique text ID
+    offset = db.IntegerProperty()  # where in the file I start
+    length = db.IntegerProperty()  # how long I am
+    sigil = db.StringProperty()    # the eventual sigil for this text
+
+#### Utility functions
 def GetUIData( blob_info ):
     '''Return information about the file blob in a form expected by the
     jQuery UI.'''
@@ -20,18 +38,47 @@ def GetUIData( blob_info ):
                     }
     return data_struct
 
-#### Datastore classes
-class FileInfo( db.Model ):
-    blobkey = db.StringProperty()  # file ID: key
-    user = db.UserProperty()       # who uploaded the thing
-    type = db.StringProperty()     # plaintxt, teixml, collatexinput, etc.
+def ProcessBlob( blob_info ):
+    '''Populate the datastores with the appropriate meta-information about
+    the given blob.'''
+    # Parse out the texts from the blob.
+    reader = blobstore.BlobReader( blob_info )
+    # Associate the blob with the user who uploaded it
+    b = FileInfo( user = users.get_current_user(),
+                  blobkey = str( blob_info.key() ) )
+    # Find the texts in this blob
+    ### BIG TODO exception handling!
+    file_type = None
+    ft_records = []
+    file_texts = handleInput.parse_file( reader.read() )
+    for text in file_texts:
+        logging.info( "Found text %s in file %s at offset %s, length %s" 
+                      % ( text['id'], blob_info.filename, text['offset'], text['length'] ) )
+        ft = FileText( blobkey = str( blob_info.key() ),
+                       id = text['id'],
+                       offset = text['offset'],
+                       length = text['length'] )
+        file_type = text['type']    # This can be taken from any record
+        ft_records.append( ft )
+    # Record the file type as determined by parse_file
+    b.type = file_type
+    b.put()
+    # Write all this to the datastore
+    for ft in ft_records:
+        ft.put()
 
-class FileText( db.Model ):
-    blobkey = db.StringProperty()  # file ID
-    id = db.StringProperty()       # unique text ID
-    textparent = db.StringProperty()   # parent text of this subtext
-    offset = db.IntegerProperty()  # where in the file I start
-    length = db.IntegerProperty()  # how long I am
+def DeleteBlob( blob_info ):
+    key = str( blob_info.key() )
+    blob_info.delete()
+    this_file_info = db.GqlQuery( "SELECT * FROM FileInfo WHERE blobkey = '%s'" % key )
+    for b in this_file_info:
+        db.delete( b )
+    this_file_texts = db.GqlQuery( "SELECT * FROM FileText WHERE blobkey = '%s'" % key )
+    for t in this_file_texts:
+        db.delete( t )
+    answer = [ "Deleted %s" % key ]
+    return answer
+
 
 #### Web request handler classes
 class UploadURLHandler( webapp.RequestHandler ):
@@ -58,28 +105,8 @@ class FileUploadHandler( blobstore_handlers.BlobstoreUploadHandler ):
         logging.info( 'Have %d uploaded files' % len( uploaded_files ) )
         query_files = []
         for blob_info in uploaded_files:
-            # Parse out the texts from the blob.
-            reader = blobstore.BlobReader( blob_info )
-            ### BIG TODO exception handling!
-            file_texts = handleInput.parse_file( reader.read() )
-            file_type = None
-            for text in file_texts:
-                logging.info( "Found text %s in file %s at offset %s, length %s" 
-                               % ( text['id'], blob_info.filename, text['offset'], text['length'] ) )
-                ft = FileText( blobkey = str( blob_info.key() ),
-                               id = text['id'],
-                               offset = text['offset'],
-                               length = text['length'] )
-                if 'parent' in text:
-                    ft.textparent = text['parent']
-                file_type = text['type']    # This can be taken from any record
-                ft.put()
-            # Associate the blob with the user who uploaded it
-            b = FileInfo( user = users.get_current_user(),
-                           type = file_type,
-                           blobkey = str( blob_info.key() ) )
+            ProcessBlob( blob_info )
             # Push the blob key onto the query string for the JSON response
-            b.put()
             query_files.append( str( blob_info.key() ) )
         ## Return a redirect to a JSON respose for the file(s) uploaded.
         query_string = '/'.join( query_files )
@@ -108,25 +135,36 @@ class DeleteHandler( webapp.RequestHandler ):
     def delete( self, resource ):
         resource = str(urllib.unquote(resource))
         blob_info = blobstore.BlobInfo.get(resource)
-        blob_info.delete()
-        this_file_info = db.GqlQuery( "SELECT * FROM FileInfo WHERE blobkey = '%s'" % resource )
-        for b in this_file_info:
-            db.delete( b )
-        this_file_texts = db.GqlQuery( "SELECT * FROM FileText WHERE blobkey = '%s'" % resource )
-        for t in this_file_texts:
-            db.delete( t )
-        answer = []
-        answer.append( "Deleted %s" % resource )
+        answer = DeleteBlob( blob_info )
         self.response.headers['Content-Type'] = 'application/json'
         self.response.out.write( json.dumps( answer, ensure_ascii=False ).encode( 'utf-8' ) )
 
 class ReturnTexts( webapp.RequestHandler ):
     def post( self ):
-        return get( self )
+        return self.get
 
     def get( self ):
-        '''Return a JSON response that is the list of texts and default sigla
-        that occur in the files uploaded by the user.'''
+        '''Fetch any provided URLs into the blobstore, then return a JSON
+        response that is the list of texts and default sigla that
+        occur in the files uploaded by the user.'''
+        geturlfields = lambda x: x.startswith( 'url' )
+        urlkeys = filter( geturlfields, self.request.arguments() )
+        for urlkey in urlkeys:
+            url = self.request.get( urlkey )
+            if url == None or url == '':
+                continue
+            result = urlfetch.fetch( url )
+            if result.status_code == 200:
+                # Stick the content in the blobstore, detect texts, etc.
+                url_parts = url.split( '/' )
+                remote_filename = url_parts[-1]
+                url_file = files.blobstore.create( mime_type=result.headers['Content-Type'],
+                                                   _blobinfo_uploaded_filename=remote_filename )
+                with files.open( url_file, 'a' ) as f:
+                    f.write( result.content )
+                files.finalize( url_file )
+                blob_key = files.blobstore.get_blob_key( url_file )
+                ProcessBlob( blobstore.BlobInfo.get( blob_key ) )
         answer = {}
         owner_files = db.GqlQuery( "SELECT * FROM FileInfo WHERE user = USER('%s')" % users.get_current_user() )
         sequence = 0
@@ -138,17 +176,16 @@ class ReturnTexts( webapp.RequestHandler ):
             for st in stored_texts:
                 logging.info( "...found text %s for file %s" % ( st.id, fileblob.filename ) )
                 answer[fileblob.filename].append( { 'text': file.blobkey + '-' + st.id,
-                                                    'parent': st.textparent,
                                                     'autosigil': self.autosigil( file.type, st.id, sequence ) } )
                 sequence += 1
         self.response.headers['Content-Type'] = 'application/json'
         self.response.out.write( json.dumps( answer, ensure_ascii=False ).encode( 'utf-8' ) )
     
-    def autosigil( self, filename, textid, autosig_sequence ):
+    def autosigil( self, filetype, textid, autosig_sequence ):
         '''Assigns a default sigil for a text, depending on its order and its
         type.'''
         sigil = None
-        if type == 'collatexinput':
+        if filetype == 'collatexinput':
             sigil = textid
         else:
             sigil = chr( autosig_sequence + 65 )

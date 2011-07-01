@@ -20,7 +20,14 @@
 </head>
 <body>
 <div class="header"><img src="/images/interedition.gif" alt="Collate X" width="91" height="50" align="right" id="logoL"/><img src="images/CollateX.gif" alt="Collate X" width="127" height="50" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-<div class="intro">This a CollateX based text collation client to show the strength of web   services based pipeline workflow as an interoperability mechanism   between digital and computational textual scholarship tools. This client   is using the CollateX collation engine (running on a different server   than this client). CollateX is a powerfull fully automatic baseless text   collation engine for multiple witnesses.</div>
+<div class="usermgmt">Hello, __USERNAME__  | <a href="__LOGOUT__">Log out</a></div>
+<div class="intro">This is a CollateX-based text collation client to
+show the strength of a web serviced pipeline workflow as an
+interoperability mechanism between digital and computational textual
+scholarship tools. This client uses an instance of the CollateX
+collation engine that runs independently on a different
+server. CollateX is a powerful, fully automatic, baseless text
+collation engine for multiple witnesses.</div>
 
 <div class="col01 coll">
 
@@ -134,7 +141,7 @@
     <h1><span class="nmr">2</span> Configure</h1>
     <div id="submitted_div">
       <h2 id="submittedLabel">Submitted files</h2>
-      <p>Select the texts you want to include in the collation. You can overwrite the default sigla provided in front of the file names.</p>
+      <p>Select the texts you want to include in the collation. You can overwrite the default sigla provided in the text boxes in front of the file names.</p>
       <ul id="submittedFileList">
       </ul>
     </div>
@@ -143,7 +150,9 @@
 	<br/>
 	
 	<div><h2>Fuzzy Matching</h2>
-	<p>Guesses which words should be matched even if they are spelled differently. Useful for example in older texts with non unified spelling.</h2>
+	<p>Guesses which words should be matched even if they are
+	spelled differently. Useful for example in older texts without
+	regularized spelling.</h2>
 		<ul id="fuzzymatchUL">
 			<li><input id="fuzzymatch" name="fuzzymatch" type="checkbox">&nbsp;Yes please, my corrector sux.</input></li>
 		</ul>
@@ -152,6 +161,7 @@
 	<div><h2>Collator</h2></div>
 	<ul id="collatorUL">
 		<li>Collatex <input name="collator" value="collatex" checked="yes" type="radio"></input></li>
+		<!-- TODO reference to Text::Tradition::Collate here someday, maybe even nmerge -->
 		<li>Other [not available] <input name="collator" value="other" type="radio"></input></li>
 	</ul>
 	<br/>
@@ -161,6 +171,7 @@
 		<li>TEI <input name="output" checked="yes" value="application/xml" type="radio"></input></li>
 		<li>JSON <input name="output" value="application/json" type="radio"></input></li>
 		<li>HTML <input name="output" value="application/xhtml" type="radio"></input></li>
+		<!-- TODO should return SVG here someday -->
 	</ul>
 	<p>&nbsp;</p>
 	<p><div onclick="getTokens()" class="button"><span>Collate..</span></div></p>
