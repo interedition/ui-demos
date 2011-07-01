@@ -30,47 +30,7 @@
   }
   
   function getTokens(){
-    fuzzymatch = $("#fuzzymatch").is(':checked');
-    collator = $("#collatorUL input:radio:checked").val();
-    output = $("#outputUL input:radio:checked").val();
-    texts = $("#submittedFileList input:checkbox:checked");
-    query = "fuzzymatch="+fuzzymatch+"&output="+output+"&collator="+collator;
-    
-    for(var i=0;i<texts.length;i++){
-      var textName = $(texts[i]).val();
-      var textParts = textName.split("_");
-      
-      var thisUrl = firstResponse[""+textParts[0]]; 
-      
-      if (textParts.length > 2) {
-          thisUrl = thisUrl[parseInt(textParts[1])].subtexts[parseInt(textParts[1])];
-          query = query + "&" + $(texts[i]).val() + "=" + JSON.stringify(thisUrl);
-      }
-      else {
-          var fieldName = "#" + textName + "_sigil";
-          var sigil = $(fieldName).val();
-          thisUrl = thisUrl[parseInt(textParts[1])];
-          thisUrl["sigil"] = sigil;
-          query = query + "&" + $(texts[i]).val() + "=" + JSON.stringify(thisUrl);
-      }
-    }
-    
-      $.ajax({
-        "url": "/run_toolchain",
-        "data": query,
-        "type": "POST",
-        "async": false,
-        "dataType": "json",
-        "success": function(resp){
-                $("#collatedResult").val(resp.result);
-          $("#Resultform").attr("action", resp.formaction);
-          for (var i=0; i < resp.buttons.length; i++) {
-              $("#resultButton").append("<input type='submit' name='" + i + "' value='" + resp.buttons[i] + "'>");
-          }
-        }
-      });
-    
-    
+    $('#Configureform').submit();
   }
 
   $(document).ready(function(e){
