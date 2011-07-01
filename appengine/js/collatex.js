@@ -22,7 +22,7 @@
           text_id = properties.text;
           auto_sigil = properties.autosigil;
           // properties.parent -> ignored for now
-          text_form_item = '<li><input type="checkbox" checked="true" value="' + text_id + '"></input><input type="text" class="textfieldX sigil" name="sigil_' + text_id + '" id="sigil_' + text_id + '" value="' + auto_sigil + '"/><span class="text_name">' + file_name + ' (' + text_nr + ')</span></li>';
+          text_form_item = '<li><input type="checkbox" checked="true" name="text" value="' + text_id + '"></input><input type="text" class="textfieldX sigil" name="sigil_' + text_id + '" id="sigil_' + text_id + '" value="' + auto_sigil + '"/><span class="text_name">' + file_name + ' (' + text_nr + ')</span></li>';
           $('#submittedFileList').append( text_form_item );
         }); 
       });

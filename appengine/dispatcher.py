@@ -1,15 +1,46 @@
+import logging
 import re
 import simplejson as json
 import urllib
+from fileupload import FileInfo, FileText
 from google.appengine.api import urlfetch
+from google.appengine.ext import blobstore
+from google.appengine.ext import db
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
+
+def load_text_from_id( text_id ):
+    '''Given a text ID, return its content and its type.'''
+    text_id = str( urllib.unquote( text_id ) )
+    id_parts = text_id.split( '-' )
+    text_record = list( db.GqlQuery( "SELECT * FROM FileText WHERE id = '%s'" % id_parts[1] ) )
+    if text_record == None:
+        logging.error( "No record found for text ID %s" % text_id )
+        raise TextNotFoundError
+    text_record = text_record[0]
+    parent_file = list( db.GqlQuery( "SELECT * FROM FileInfo WHERE blobkey = '%s'" % id_parts[0] ) )
+    parent_file = parent_file[0]
+    reader = blobstore.BlobReader( blobstore.BlobKey( id_parts[0] ) )
+    reader.seek( text_record.offset )
+    content = reader.read( text_record.length )
+    answer = { 'content': content,
+               'type': parent_file.type }
+    return answer
+
+def strip_tags( tstr ):
+    cxtextmatch = re.match( r"\<witness[^\>]*\>(.*)\</witness\>", tstr )
+    if cxtextmatch:
+        logging.info( 'Matched' )
+        return cxtextmatch.group(1)
+    else:
+        return tstr
 
 class MSDispatcher( webapp.RequestHandler ):
     def get( self ):
         self.response.out.write( '<html><head><title>Another post-only page</title></head><body>You should not be navigating here via GET.</body></html>' )
     
     tokenizers = { 'plaintext': 'http://interedition-tools.appspot.com/plaintext_tokenize',
+                   'collatexinput': 'http://interedition-tools.appspot.com/plaintext_tokenize',
                    'teixml': 'http://www.eccentricity.org/teitokenizer/form_tokenize',
                    # 'lucene': 'maybe someday',
                    }
@@ -23,26 +54,23 @@ class MSDispatcher( webapp.RequestHandler ):
                       }
     
     def post( self ):
+        '''Run the collation toolchain on the selected texts with the selected
+        options; return a collation result in the end.'''
     	errormsg = []
-        def is_text( x ):
-            return( x.startswith( 'file' ) or x.startswith( 'url' ) )
-        text_ids = filter( is_text, self.request.arguments() )
         tokenized_texts = { 'witnesses': [] }
-        ## Use provided sigla iff a unique sigil is provided for each text.
-        use_sigla = False
-        sigla = {}
+        ## Get the texts that we plan to collate.
+        text_ids = self.request.get_all( 'text' )
+        
+         # Tokenize those texts.
         for ti in text_ids:
-            text = json.loads( self.request.get( ti ) )
-            sigil = text['sigil']
-            if sigil:
-                sigla[sigil] = ti
-        if len( sigla.keys() ) == len( text_ids ):
-            use_sigla = True;
-        for ti in text_ids:
+            logging.info( "Processing text %s" % ti )
             tokenizer_args = {}
-            text = json.loads( self.request.get( ti ) )
+            text = load_text_from_id( ti )
+            sigil = self.request.get( 'sigil_' + ti )
             if( text['type'] == 'plaintext' ):
                 tokenizer_args['text'] = text['content']
+            elif( text['type'] == 'collatexinput' ):
+                tokenizer_args['text'] = strip_tags( text['content'] )
             elif( text['type'] == 'teixml' ):
                 tokenizer_args['xmltext'] = text['content']
             service = self.tokenizers.get( text['type'] )
@@ -52,11 +80,8 @@ class MSDispatcher( webapp.RequestHandler ):
                                             payload=form_data,
                                             method='POST' )
                 if urlresult.status_code == 200:
-                    textid = ti
-                    if use_sigla:
-                        textid = text['sigil']
                     tokens = json.loads( urlresult.content )
-                    tokenized_texts['witnesses'].append( { 'id': textid,
+                    tokenized_texts['witnesses'].append( { 'id': sigil,
                                                            'tokens': tokens } )
                 else:
                     raise ServiceNotOKError( 'Service %s returned status code %d' 
@@ -122,6 +147,7 @@ class MSDispatcher( webapp.RequestHandler ):
 
 class NoServiceError( Exception ): pass
 class ServiceNotOKError( Exception ): pass
+class TextNotFoundError( Exception ): pass
 
 application = webapp.WSGIApplication(
                                       [('/run_toolchain', MSDispatcher),],
