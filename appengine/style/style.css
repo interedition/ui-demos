@@ -39,9 +39,11 @@ h2 {
 	margin: 0px 0px 5px 0px;
 }
 
+/* MERGE START */
 p {
-	margin: 0px 0px 10px 0px;	
+	margin: 0px 10px 10px 0px;	
 }
+/* MERGE END */
 
 ul {
 	margin: 20px 0px 10px 0px;
@@ -51,7 +53,7 @@ li {
 	margin: 0px 0px 5px 15px;
 	list-style-image:url("/images/arrow.gif");
 }
-#submittedLabel{
+#submitted_div{
 	display: none;
 }
 .header {
@@ -96,6 +98,19 @@ li {
 	width:260px;	
 }
 
+/* MERGE START */
+.sigil {
+    width: 25px;
+    font-size: 8pt;
+    position: absolute;
+    padding: 1px;
+    margin-left: 5px;
+}
+
+.text_name {
+    padding-left: 40px;
+}
+/* MERGE END */
 
 .divLink {
 color:#0099FF;

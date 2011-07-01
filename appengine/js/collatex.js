@@ -64,7 +64,7 @@
 		if (!sig) {
 		    sig = 'A';
 		}
-		$("#"+targetId).append("<li id='li_"+name+"'><input type='checkbox' checked='true' value='"+name+"' name='sel_li_"+name+"' id='sel_li_"+name+"'></input>"+val+"<input type='text' size='4' name='"+name+"_sigil' id='"+name+"_sigil' value='"+sig+"'/></li>");
+		$("#"+targetId).append("<li id='li_"+name+"'><input type='checkbox' checked='true' value='"+name+"' name='sel_li_"+name+"' id='sel_li_"+name+"'></input><input type='text' class='textfieldX sigil' name='"+name+"_sigil' id='"+name+"_sigil' value='"+sig+"'/><span class='text_name'>"+val+"</span></li>");
 		//txtContent = txtStr.substring(txtStr.indexOf("<text"));
 		//var teiTexts = txtContent.split("</text>");
 		var lastli = $("#li_"+name);
@@ -104,7 +104,7 @@
 				
 				$("#submittedFileList").html("");
 				if ((uriNames.length > 0) || (fileContents.length > 0)) {
-					$("#submittedLabel").show();
+					$("#submitted_div").show();
 					if (uriNames.length > 0) {
 						for (var i = 0; i < uriNames.length; i++) {
 							for (var j = 0; j < response["" + uriNames[i]].length; j++) {
