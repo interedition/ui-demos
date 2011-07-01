@@ -107,7 +107,7 @@ class MSDispatcher( webapp.RequestHandler ):
                 raise ServiceNotOKError( 'Service %s errored or timed out' % service )
         else: 
             raise NoServiceError( 'No defined collator %s' 
-                             % self.request.get( collator ) )
+                             % self.request.get( 'collator' ) )
         
         if( len( errormsg ) > 0 ):
             self.response.out.write( 'Got errors: %s' % "\n".join( errormsg ) )
