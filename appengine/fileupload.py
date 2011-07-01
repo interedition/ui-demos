@@ -145,6 +145,8 @@ class ReturnTexts( webapp.RequestHandler ):
         urlkeys = filter( geturlfields, self.request.arguments() )
         for urlkey in urlkeys:
             url = self.request.get( urlkey )
+            if url == None or url == '':
+                continue
             result = urlfetch.fetch( url )
             if result.status_code == 200:
                 # Stick the content in the blobstore, detect texts, etc.
