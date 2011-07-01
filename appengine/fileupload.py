@@ -24,6 +24,7 @@ class FileText( db.Model ):
     id = db.StringProperty()       # unique text ID
     offset = db.IntegerProperty()  # where in the file I start
     length = db.IntegerProperty()  # how long I am
+    sigil = db.StringProperty()    # the eventual sigil for this text
 
 #### Utility functions
 def GetUIData( blob_info ):
@@ -65,6 +66,19 @@ def ProcessBlob( blob_info ):
     # Write all this to the datastore
     for ft in ft_records:
         ft.put()
+
+def DeleteBlob( blob_info ):
+    key = str( blob_info.key() )
+    blob_info.delete()
+    this_file_info = db.GqlQuery( "SELECT * FROM FileInfo WHERE blobkey = '%s'" % key )
+    for b in this_file_info:
+        db.delete( b )
+    this_file_texts = db.GqlQuery( "SELECT * FROM FileText WHERE blobkey = '%s'" % key )
+    for t in this_file_texts:
+        db.delete( t )
+    answer = [ "Deleted %s" % key ]
+    return answer
+
 
 #### Web request handler classes
 class UploadURLHandler( webapp.RequestHandler ):
@@ -121,15 +135,7 @@ class DeleteHandler( webapp.RequestHandler ):
     def delete( self, resource ):
         resource = str(urllib.unquote(resource))
         blob_info = blobstore.BlobInfo.get(resource)
-        blob_info.delete()
-        this_file_info = db.GqlQuery( "SELECT * FROM FileInfo WHERE blobkey = '%s'" % resource )
-        for b in this_file_info:
-            db.delete( b )
-        this_file_texts = db.GqlQuery( "SELECT * FROM FileText WHERE blobkey = '%s'" % resource )
-        for t in this_file_texts:
-            db.delete( t )
-        answer = []
-        answer.append( "Deleted %s" % resource )
+        answer = DeleteBlob( blob_info )
         self.response.headers['Content-Type'] = 'application/json'
         self.response.out.write( json.dumps( answer, ensure_ascii=False ).encode( 'utf-8' ) )
 
@@ -175,11 +181,11 @@ class ReturnTexts( webapp.RequestHandler ):
         self.response.headers['Content-Type'] = 'application/json'
         self.response.out.write( json.dumps( answer, ensure_ascii=False ).encode( 'utf-8' ) )
     
-    def autosigil( self, filename, textid, autosig_sequence ):
+    def autosigil( self, filetype, textid, autosig_sequence ):
         '''Assigns a default sigil for a text, depending on its order and its
         type.'''
         sigil = None
-        if type == 'collatexinput':
+        if filetype == 'collatexinput':
             sigil = textid
         else:
             sigil = chr( autosig_sequence + 65 )

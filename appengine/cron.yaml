@@ -1,0 +1,4 @@
+cron:
+- description: clear outdated files
+  url: /cleanup
+  schedule: every 24 hours
