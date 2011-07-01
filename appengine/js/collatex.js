@@ -97,8 +97,7 @@
 		
 		$.ajax({
 			url: "/return_texts",
-			data: allData,
-			type: "POST",
+			type: "GET",
 			success: function(response){
 				firstResponse = response;
 				
