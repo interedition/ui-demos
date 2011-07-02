@@ -9,18 +9,23 @@ from google.appengine.ext import db
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 
-def load_text_from_id( text_id ):
+def load_text_from_id( textid_str ):
     '''Given a text ID, return its content and its type.'''
-    text_id = str( urllib.unquote( text_id ) )
-    id_parts = text_id.split( '-' )
-    text_record = list( db.GqlQuery( "SELECT * FROM FileText WHERE id = '%s'" % id_parts[1] ) )
+    textid_str = str( urllib.unquote( textid_str ) )
+    id_parts = textid_str.split( '-' )
+    text_id = id_parts.pop()
+    blob_id = '-'.join( id_parts )
+    text_record = list( db.GqlQuery( "SELECT * FROM FileText WHERE blobkey = '%s' AND id = '%s'" 
+                                     % ( blob_id, text_id ) ) )
     if text_record == None:
-        logging.error( "No record found for text ID %s" % text_id )
+        logging.error( "No record found for text ID %s" % textid_str )
         raise TextNotFoundError
     text_record = text_record[0]
-    parent_file = list( db.GqlQuery( "SELECT * FROM FileInfo WHERE blobkey = '%s'" % id_parts[0] ) )
+    parent_file = list( db.GqlQuery( "SELECT * FROM FileInfo WHERE blobkey = '%s'" % blob_id ) )
     parent_file = parent_file[0]
-    reader = blobstore.BlobReader( blobstore.BlobKey( id_parts[0] ) )
+    logging.info( "About to read %s at offset %s for length %s, text %s"
+                  %( parent_file.blobkey, text_record.offset, text_record.length, text_record.id ) )
+    reader = blobstore.BlobReader( blobstore.BlobKey( blob_id ) )
     reader.seek( text_record.offset )
     content = reader.read( text_record.length )
     answer = { 'content': content,
@@ -30,7 +35,6 @@ def load_text_from_id( text_id ):
 def strip_tags( tstr ):
     cxtextmatch = re.match( r"\<witness[^\>]*\>(.*)\</witness\>", tstr )
     if cxtextmatch:
-        logging.info( 'Matched' )
         return cxtextmatch.group(1)
     else:
         return tstr
