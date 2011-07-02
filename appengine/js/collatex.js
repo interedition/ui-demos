@@ -30,6 +30,7 @@
   }
   
   function getTokens(){
+    $('#ajax-loader').css( 'visibility', 'visible' );
     query = $('#Configureform').serialize();
     $.ajax({
       url: '/run_toolchain',
@@ -41,13 +42,17 @@
         $('#collatedResult').val( resp.result );
         $('#Resultform').attr( 'action', resp.formaction );
         $.each( resp.buttons, function( index, value ) {
-          $('#resultButton').append( '<input type="submit" name="' + index + '" value="' + value + '">');
-		<div class="button" onclick="getTokens()">
-		<span>Collate..</span>
-		</div>
+          $('#resultButton').append( '<div class="button" onclick="submitresult(\'' + index + '\', \'' + value + '\');"><span>' + value + '</span></div>');
         });
+        $('#ajax-loader').css( 'visibility', 'hidden' );
       }
     });
+  }
+
+  function submitresult(name, value) {
+    $('#result_submit_button').attr( 'name', name );
+    $('#result_submit_button').attr( 'value', value );
+    $('#Resultform').submit();
   }
 
   $(document).ready(function(e){
