@@ -41,6 +41,7 @@
       success: function(resp){
         $('#collatedResult').val( resp.result );
         $('#Resultform').attr( 'action', resp.formaction );
+	$('#resultButton').html('');
         $.each( resp.buttons, function( index, value ) {
           $('#resultButton').append( '<div class="button" onclick="submitresult(\'' + index + '\', \'' + value + '\');"><span>' + value + '</span></div>');
         });
