@@ -203,22 +203,35 @@ class ReturnTexts( webapp.RequestHandler ):
             self.response.set_status( 500 )
             self.response.out.write( errormsg )
         else:
-            answer = {}
+            answer = []
             owner_files = db.GqlQuery( "SELECT * FROM FileInfo WHERE user = USER('%s')" % users.get_current_user() )
             sequence = 0
             for file in owner_files:
                 fileblob = blobstore.BlobInfo.get( file.blobkey )  # use this to get filename
                 logging.info( "Retrieving text(s) in file %s" % fileblob.filename )
-                answer[fileblob.filename] = []
                 stored_texts = db.GqlQuery( "SELECT * FROM FileText WHERE blobkey = '%s' ORDER BY id" % file.blobkey )
                 for st in stored_texts:
                     logging.info( "...found text %s for file %s" % ( st.id, fileblob.filename ) )
+                    ## What should the text's sigil be?
                     sigil = st.sigil
                     if st.sigil == None:
                         sigil = self.autosigil( file.type, st.id, sequence )
-                    answer[fileblob.filename].append( { 'text': file.blobkey + '-' + st.id,
-                                                        'autosigil': sigil } )
+                    ## What should we entitle the text?
+                    text_title = None
+                    if file.type == 'plaintext':
+                        text_title = fileblob.filename
+                    elif file.type == 'collatexinput':
+                        text_title = fileblob.filename + ' wit ' + st.id
+                    elif file.type == 'teixml' and len( list( stored_texts ) ) == 1:
+                        text_title = fileblob.filename
+                    else:  # a TEI file with multiple texts
+                        text_title = fileblob.filename + ' text ' + str( int( st.id ) + 1 )
+                    answer.append( { 'text': file.blobkey + '-' + st.id,
+                                     'title': text_title,
+                                     'autosigil': sigil } )
                     sequence += 1
+            sigcmp = lambda x, y: cmp( x['autosigil'], y['autosigil'] )
+            answer.sort( cmp=sigcmp )
             self.response.headers['Content-Type'] = 'application/json'
             self.response.out.write( json.dumps( answer, ensure_ascii=False ).encode( 'utf-8' ) )
     

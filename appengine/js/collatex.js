@@ -19,17 +19,11 @@ function submitForm() {
             $('#submitted_div').show();
         }
         $.each(data,
-        function(file_name, texts) {
-            text_nr = 0;
-            $.each(texts,
-            function(index, properties) {
-                text_nr++;
-                text_id = properties.text;
-                auto_sigil = properties.autosigil;
-                // properties.parent -> ignored for now
-                text_form_item = '<li><input type="checkbox" checked="true" name="text" value="' + text_id + '"></input><input type="text" class="textfieldX sigil" name="sigil_' + text_id + '" id="sigil_' + text_id + '" value="' + auto_sigil + '"/><span class="text_name">' + file_name + ' (' + text_nr + ')</span></li>';
-                $('#submittedFileList').append(text_form_item);
-            });
+	function(index, properties) {
+            text_id = properties.text;
+            auto_sigil = properties.autosigil;
+            text_form_item = '<li><input type="checkbox" checked="true" name="text" value="' + text_id + '"></input><input type="text" class="textfieldX sigil" name="sigil_' + text_id + '" id="sigil_' + text_id + '" value="' + auto_sigil + '"/><span class="text_name">' + properties.title + '</span></li>';
+            $('#submittedFileList').append(text_form_item);
         });
     });
 }
