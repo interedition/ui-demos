@@ -3,6 +3,7 @@ import re
 import simplejson as json
 import urllib
 from fileupload import FileInfo, FileText
+from handleInput import xml_regularize
 from teiResult import add_witnesses
 from google.appengine.api import urlfetch
 from google.appengine.ext import blobstore
@@ -29,8 +30,14 @@ def load_text_from_id( textid_str, sigil ):
     logging.info( "About to read %s at offset %s for length %s, text %s"
                   %( text_record.file, text_record.offset, text_record.length, text_record.id ) )
     reader = blobstore.BlobReader( blobstore.BlobKey( blob_id ) )
-    reader.seek( text_record.offset )
-    content = reader.read( text_record.length )
+    if text_record.filetype == 'teixml':
+        start = text_record.offset
+        end = text_record.offset + text_record.length
+        xmlfile = xml_regularize( reader.read() )
+        content = xmlfile[start:end]
+    else: 
+        reader.seek( text_record.offset )
+        content = reader.read( text_record.length )
     answer = { 'entity': text_record,
                'content': content,
                'type': text_record.filetype }

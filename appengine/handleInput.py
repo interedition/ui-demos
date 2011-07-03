@@ -26,8 +26,10 @@ def parse_file( content ):
                                'id': '0',
                                } )
         elif( type == 'teixml' ):
+            content = xml_regularize( content )
             textlist = find_tei_texts( content )
         elif( type == 'collatexinput' ):
+            content = xml_regularize( content )
             textlist = find_collatex_witnesses( content )
         else:
             logging.error( 'Do not support file type %s' % type )
@@ -42,7 +44,8 @@ def filetype( xmlstr ):
     try:
         xmlfile = minidom.parseString( xmlstr )
         # So it is an XML file; is it TEI?
-        if( xmlfile.documentElement.getAttribute( 'xmlns' ) == TEI_NS ):
+        if( xmlfile.documentElement.getAttribute( 'xmlns' ) == TEI_NS 
+            or xmlfile.documentElement.tagName == 'TEI.2' ):
             type = 'teixml'
         # Add here any other types of file we learn how to parse.
         elif( xmlfile.documentElement.nodeName == 'examples' ):
@@ -60,6 +63,12 @@ def filetype( xmlstr ):
             raise
     return( type )
 
+def xml_regularize( xmlstr ):
+    '''Parses the XML and returns its string representation.  Need this to
+    be able to reliably find element offsets.'''
+    xmldoc = minidom.parseString( xmlstr )
+    return xmldoc.toxml( 'utf-8' )
+
 def find_tei_texts( teistr ):
     '''Returns the set of available texts in a TEI-encoded file.'''
     teiElement = get_tei_document_node( teistr )
@@ -75,17 +84,21 @@ def find_tei_texts( teistr ):
     textlist = []
     for teinode in teinodes:
         ## Should return a dict of offset, length, id.
+        logging.info( 'Looking at TEI node %s' % teinode.nodeName )
         sequence = len( textlist )
         topchildren = teinode.childNodes
         for c in topchildren:
+            logging.info( 'Looking at child node %s' % c.nodeName )
             if( c.nodeType == ELEMENT_NODE and c.localName == 'text' ):
                 childinfo = {}
                 childstr = c.toxml( 'utf-8' )
                 childid = str( sequence )
+                logging.info( 'Child string is %s' % childstr )
                 childinfo['offset'] = teistr.find( childstr )
                 childinfo['length'] = len( childstr )
                 childinfo['type'] = 'teixml'
                 childinfo['id'] = childid
+                logging.info( 'Found text with info %s' % childinfo )
                 textlist.append( childinfo )
     return textlist
 
