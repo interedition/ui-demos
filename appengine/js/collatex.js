@@ -43,6 +43,7 @@ function validateSigla() {
 }
 
 function getTokens() {
+    $('#collatedResult').val('');
     $('#ajax-loader').css('visibility', 'visible');
     if( validateSigla()==true ) {
         query = $('#Configureform').serialize();
@@ -82,6 +83,7 @@ function showErrorConsole( error_text ) {
 }
 
 $(document).ready(function(e) {
+    $('#collatedResult').val('');
     newUrl();
     $("#addAnotherUrl").click(function(e) {
         newUrl();

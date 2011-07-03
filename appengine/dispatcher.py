@@ -108,7 +108,8 @@ class MSDispatcher( webapp.RequestHandler ):
         
         payload = json.dumps( tokenized_texts, ensure_ascii=False ).encode( 'utf-8' )
         
-        if( self.request.get( 'fuzzymatch' ) == 'true' ):
+        if( self.request.get( 'fuzzymatch' ) == 'on' ):
+            logging.info( "About to fuzzy match" );
             service = self.regularizers.get( 'fuzzymatch' )
             urlresult = urlfetch.fetch( url=service,
                                         payload=payload,
