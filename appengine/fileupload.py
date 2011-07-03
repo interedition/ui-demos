@@ -192,6 +192,14 @@ class ReturnTexts( webapp.RequestHandler ):
             autosig_sequence += 1
         return sigil
 
+class ReturnError( webapp.RequestHandler ):
+    def post( self ):
+        return self.get
+
+    def get( self ):
+        self.response.set_status(500);
+        self.response.out.write( "This is just an error message." )
+
 application = webapp.WSGIApplication(
                                      [
                                       ('/getUploadURL', UploadURLHandler),
