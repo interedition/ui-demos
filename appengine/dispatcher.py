@@ -30,7 +30,7 @@ def load_text_from_id( textid_str, sigil ):
     logging.info( "About to read %s at offset %s for length %s, text %s"
                   %( text_record.file, text_record.offset, text_record.length, text_record.id ) )
     reader = blobstore.BlobReader( blobstore.BlobKey( blob_id ) )
-    if text_record.filetype == 'teixml':
+    if text_record.filetype == 'teixml' or text_record.filetype == 'collatexinput':
         start = text_record.offset
         end = text_record.offset + text_record.length
         xmlfile = xml_regularize( reader.read() )

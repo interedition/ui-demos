@@ -9,7 +9,6 @@ class IndexPage( webapp.RequestHandler ):
         username = user.nickname()
         if username == None:
             username = user.user_id()
-        logging.info( "Got user %s" % username )
         main_page = open( 'html/collate01.html' )
         ## We have to use our own very rudimentary templating methods,
         ## because Django syntax conflicts with jquery template
