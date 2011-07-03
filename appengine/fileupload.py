@@ -90,6 +90,12 @@ def DeleteBlob( blob_info ):
     answer = [ "Deleted %s" % key ]
     return answer
 
+def sigilcmp( x, y ):
+    if x.isdigit() and y.isdigit():
+        return cmp( int( x ), int( y ) )
+    else:
+        return cmp( x, y )
+
 
 #### Web request handler classes
 class UploadURLHandler( webapp.RequestHandler ):
@@ -230,8 +236,7 @@ class ReturnTexts( webapp.RequestHandler ):
                                      'title': text_title,
                                      'autosigil': sigil } )
                     sequence += 1
-            sigcmp = lambda x, y: cmp( x['autosigil'], y['autosigil'] )
-            answer.sort( cmp=sigcmp )
+            answer.sort( cmp=lambda x, y: sigilcmp( x['autosigil'], y['autosigil'] ) )
             self.response.headers['Content-Type'] = 'application/json'
             self.response.out.write( json.dumps( answer, ensure_ascii=False ).encode( 'utf-8' ) )
     
