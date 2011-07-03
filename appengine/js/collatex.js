@@ -1,36 +1,41 @@
-  var curUrl=1;
+var curUrl = 1;
 
-  function removeUrl(fileRemove){
+function removeUrl(fileRemove) {
     $(fileRemove).parent().remove();
-  }
+}
 
-  function newUrl(){
-    var urlLine = "<div><input type='text' name='url"+curUrl+"' id='url"+curUrl+"' class='textfieldX'/><div id='removeUrl' onclick='removeUrl(this)' class='divLink ui-button-icon-primary ui-icon ui-icon-cancel' style='float: right; margin-right: 15px; margin-top:2px;'></div></div>";
+function newUrl() {
+    var urlLine = "<div><input type='text' name='url" + curUrl + "' id='url" + curUrl + "' class='textfieldX'/><div id='removeUrl' onclick='removeUrl(this)' class='divLink ui-button-icon-primary ui-icon ui-icon-cancel' style='float: right; margin-right: 15px; margin-top:2px;'></div></div>";
     $("#allUrls").append($(urlLine));
     curUrl++;
-  }
+}
 
-  function submitForm(){
+function submitForm() {
     urls = $('#choosefile').serialize();
-    $.getJSON('/return_texts', urls, function(data) {
-      $('#submittedFileList').html('');
-      if( data ) { $('#submitted_div').show(); }
-      $.each( data, function( file_name, texts ) {
-        text_nr = 0;
-        $.each( texts, function( index, properties ) {
-          text_nr++;
-          text_id = properties.text;
-          auto_sigil = properties.autosigil;
-          // properties.parent -> ignored for now
-          text_form_item = '<li><input type="checkbox" checked="true" name="text" value="' + text_id + '"></input><input type="text" class="textfieldX sigil" name="sigil_' + text_id + '" id="sigil_' + text_id + '" value="' + auto_sigil + '"/><span class="text_name">' + file_name + ' (' + text_nr + ')</span></li>';
-          $('#submittedFileList').append( text_form_item );
-        }); 
-      });
+    $.getJSON('/return_texts', urls,
+    function(data) {
+        $('#submittedFileList').html('');
+        if (data) {
+            $('#submitted_div').show();
+        }
+        $.each(data,
+        function(file_name, texts) {
+            text_nr = 0;
+            $.each(texts,
+            function(index, properties) {
+                text_nr++;
+                text_id = properties.text;
+                auto_sigil = properties.autosigil;
+                // properties.parent -> ignored for now
+                text_form_item = '<li><input type="checkbox" checked="true" name="text" value="' + text_id + '"></input><input type="text" class="textfieldX sigil" name="sigil_' + text_id + '" id="sigil_' + text_id + '" value="' + auto_sigil + '"/><span class="text_name">' + file_name + ' (' + text_nr + ')</span></li>';
+                $('#submittedFileList').append(text_form_item);
+            });
+        });
     });
-  }
-  
-  function getTokens(){
-    $('#ajax-loader').css( 'visibility', 'visible' );
+}
+
+function getTokens() {
+    $('#ajax-loader').css('visibility', 'visible');
     query = $('#Configureform').serialize();
     $.ajax({
       url: '/run_toolchain',
@@ -41,24 +46,30 @@
       success: function(resp){
         $('#collatedResult').val( resp.result );
         $('#Resultform').attr( 'action', resp.formaction );
-	$('#resultButton').html('');
+        $('#resultButton').html('');
         $.each( resp.buttons, function( index, value ) {
           $('#resultButton').append( '<div class="button" onclick="submitresult(\'' + index + '\', \'' + value + '\');"><span>' + value + '</span></div>');
         });
         $('#ajax-loader').css( 'visibility', 'hidden' );
       }
     });
-  }
+}
 
-  function submitresult(name, value) {
-    $('#result_submit_button').attr( 'name', name );
-    $('#result_submit_button').attr( 'value', value );
+function submitresult(name, value) {
+    $('#result_submit_button').attr('name', name);
+    $('#result_submit_button').attr('value', value);
     $('#Resultform').submit();
-  }
+}
 
-  $(document).ready(function(e){
+$(document).ready(function(e) {
     newUrl();
-    $("#addAnotherUrl").click(function(e){
-      newUrl();
+    $("#addAnotherUrl").click(function(e) {
+        newUrl();
     });
-  });
+    $("#error_console").ajaxError(function(event, request, settings){
+        $(this).empty().show();
+        $(this).append('<div class="ajax_error">Uhoh, the service returned an error&hellip;<br/> ' + request.responseText + '</div>');
+        $(this).delay(8000).fadeOut(1000);
+    });
+});
+

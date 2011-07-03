@@ -198,3 +198,16 @@ div.button:hover span {
   margin-right: 22px;
   visibility: hidden;
 }
+
+#error_console {
+    display: none;
+    padding: 8px;
+    border: 2px solid #bf0a2c;
+    background-color: #f7bfc9;
+    color: #762534;
+    position: fixed;
+    font-size: 80%;
+    top: 1em;
+    right: 1em;
+    width: 200px;
+}
