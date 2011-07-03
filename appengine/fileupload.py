@@ -120,6 +120,11 @@ class FileUploadHandler( blobstore_handlers.BlobstoreUploadHandler ):
                 ProcessBlob( blob_info )
             except FileParseError as f:
                 query_files.append( 'ERROR=%s' % f.msg )
+            except:
+                ## Not sure yet what else might go wrong.
+                exc_info = sys.exc_info()
+                query_files.append( 'ERROR=unknown exception %s for %s' 
+                                    % ( exc_info[0], blob_info.filename ) )
             else:
                 # Push the blob key onto the query string for the JSON response
                 query_files.append( str( blob_info.key() ) )
@@ -169,40 +174,53 @@ class ReturnTexts( webapp.RequestHandler ):
         occur in the files uploaded by the user.'''
         geturlfields = lambda x: x.startswith( 'url' )
         urlkeys = filter( geturlfields, self.request.arguments() )
+        errormsg = None
         for urlkey in urlkeys:
             url = self.request.get( urlkey )
             if url == None or url == '':
                 continue
-            result = urlfetch.fetch( url )
-            if result.status_code == 200:
-                # Stick the content in the blobstore, detect texts, etc.
-                url_parts = url.split( '/' )
-                remote_filename = url_parts[-1]
-                url_file = files.blobstore.create( mime_type=result.headers['Content-Type'],
-                                                   _blobinfo_uploaded_filename=remote_filename )
-                with files.open( url_file, 'a' ) as f:
-                    f.write( result.content )
-                files.finalize( url_file )
-                blob_key = files.blobstore.get_blob_key( url_file )
-                ProcessBlob( blobstore.BlobInfo.get( blob_key ) )
-        answer = {}
-        owner_files = db.GqlQuery( "SELECT * FROM FileInfo WHERE user = USER('%s')" % users.get_current_user() )
-        sequence = 0
-        for file in owner_files:
-            fileblob = blobstore.BlobInfo.get( file.blobkey )  # use this to get filename
-            logging.info( "Retrieving text(s) in file %s" % fileblob.filename )
-            answer[fileblob.filename] = []
-            stored_texts = db.GqlQuery( "SELECT * FROM FileText WHERE blobkey = '%s' ORDER BY id" % file.blobkey )
-            for st in stored_texts:
-                logging.info( "...found text %s for file %s" % ( st.id, fileblob.filename ) )
-                sigil = st.sigil
-                if st.sigil == None:
-                    sigil = self.autosigil( file.type, st.id, sequence )
-                answer[fileblob.filename].append( { 'text': file.blobkey + '-' + st.id,
-                                                    'autosigil': sigil } )
-                sequence += 1
-        self.response.headers['Content-Type'] = 'application/json'
-        self.response.out.write( json.dumps( answer, ensure_ascii=False ).encode( 'utf-8' ) )
+            try:
+                result = urlfetch.fetch( url )
+            except:
+                exc_info = sys.exc_info()
+                errormsg = "Error fetching %s: %s" % ( url, exc_info[0] )
+            else:
+                if result.status_code == 200:
+                    # Stick the content in the blobstore, detect texts, etc.
+                    url_parts = url.split( '/' )
+                    remote_filename = url_parts[-1]
+                    url_file = files.blobstore.create( mime_type=result.headers['Content-Type'],
+                                                       _blobinfo_uploaded_filename=remote_filename )
+                    with files.open( url_file, 'a' ) as f:
+                        f.write( result.content )
+                    files.finalize( url_file )
+                    blob_key = files.blobstore.get_blob_key( url_file )
+                    ProcessBlob( blobstore.BlobInfo.get( blob_key ) )
+                else:
+                    errormsg = "HTTP error fetching %s: %s" % ( url, result.status_code )
+        if errormsg:
+            self.response.clear()
+            self.response.set_status( 500 )
+            self.response.out.write( errormsg )
+        else:
+            answer = {}
+            owner_files = db.GqlQuery( "SELECT * FROM FileInfo WHERE user = USER('%s')" % users.get_current_user() )
+            sequence = 0
+            for file in owner_files:
+                fileblob = blobstore.BlobInfo.get( file.blobkey )  # use this to get filename
+                logging.info( "Retrieving text(s) in file %s" % fileblob.filename )
+                answer[fileblob.filename] = []
+                stored_texts = db.GqlQuery( "SELECT * FROM FileText WHERE blobkey = '%s' ORDER BY id" % file.blobkey )
+                for st in stored_texts:
+                    logging.info( "...found text %s for file %s" % ( st.id, fileblob.filename ) )
+                    sigil = st.sigil
+                    if st.sigil == None:
+                        sigil = self.autosigil( file.type, st.id, sequence )
+                    answer[fileblob.filename].append( { 'text': file.blobkey + '-' + st.id,
+                                                        'autosigil': sigil } )
+                    sequence += 1
+            self.response.headers['Content-Type'] = 'application/json'
+            self.response.out.write( json.dumps( answer, ensure_ascii=False ).encode( 'utf-8' ) )
     
     def autosigil( self, filetype, textid, autosig_sequence ):
         '''Assigns a default sigil for a text, depending on its order and its
@@ -214,14 +232,6 @@ class ReturnTexts( webapp.RequestHandler ):
             sigil = chr( autosig_sequence + 65 )
             autosig_sequence += 1
         return sigil
-
-class ReturnError( webapp.RequestHandler ):
-    def post( self ):
-        return self.get
-
-    def get( self ):
-        self.response.set_status(500);
-        self.response.out.write( "This is just an error message." )
 
 class FileParseError( Exception ):
     def __init__( self, msg ):
