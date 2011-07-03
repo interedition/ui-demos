@@ -65,12 +65,12 @@ function getTokens() {
             $.each( resp.buttons, function( index, value ) {
               $('#resultButton').append( '<div class="button" onclick="submitresult(\'' + index + '\', \'' + value + '\');"><span>' + value + '</span></div>');
             });
-            $('#ajax-loader').css( 'visibility', 'hidden' );
           }
         });
     } else {
         showErrorConsole( 'The sigla provide are not unique. Please correct and try again.')
     }
+    $('#ajax-loader').css( 'visibility', 'hidden' );
 }
 
 function submitresult(name, value) {
