@@ -34,25 +34,43 @@ function submitForm() {
     });
 }
 
+function validateSigla() {
+    seenValues = [];
+    valid = true;
+    $.each( $('.sigil'), function( key, value ) {
+        sigilValue = $(this).val();
+        if( $.inArray( sigilValue, seenValues ) > -1 ){
+            valid = false;
+        } else {
+            seenValues.push( sigilValue )
+        }
+    } );
+    return valid;
+}
+
 function getTokens() {
     $('#ajax-loader').css('visibility', 'visible');
-    query = $('#Configureform').serialize();
-    $.ajax({
-      url: '/run_toolchain',
-      data: query,
-      type: 'POST',
-      async: false,
-      dataType: 'json',
-      success: function(resp){
-        $('#collatedResult').val( resp.result );
-        $('#Resultform').attr( 'action', resp.formaction );
-        $('#resultButton').html('');
-        $.each( resp.buttons, function( index, value ) {
-          $('#resultButton').append( '<div class="button" onclick="submitresult(\'' + index + '\', \'' + value + '\');"><span>' + value + '</span></div>');
+    if( validateSigla()==true ) {
+        query = $('#Configureform').serialize();
+        $.ajax({
+          url: '/run_toolchain',
+          data: query,
+          type: 'POST',
+          async: false,
+          dataType: 'json',
+          success: function(resp){
+            $('#collatedResult').val( resp.result );
+            $('#Resultform').attr( 'action', resp.formaction );
+            $('#resultButton').html('');
+            $.each( resp.buttons, function( index, value ) {
+              $('#resultButton').append( '<div class="button" onclick="submitresult(\'' + index + '\', \'' + value + '\');"><span>' + value + '</span></div>');
+            });
+            $('#ajax-loader').css( 'visibility', 'hidden' );
+          }
         });
-        $('#ajax-loader').css( 'visibility', 'hidden' );
-      }
-    });
+    } else {
+        showErrorConsole( 'The sigla provide are not unique. Please correct and try again.')
+    }
 }
 
 function submitresult(name, value) {
@@ -61,15 +79,21 @@ function submitresult(name, value) {
     $('#Resultform').submit();
 }
 
+function showErrorConsole( error_text ) {
+    error_console = $("#error_console");
+    error_console.empty(); 
+    error_console.show();
+    error_console.append('<div class="ajax_error">Uhoh, the service returned an error&hellip;<br/> ' + error_text + '</div>');
+    error_console.delay(8000).fadeOut(1000);
+}
+
 $(document).ready(function(e) {
     newUrl();
     $("#addAnotherUrl").click(function(e) {
         newUrl();
     });
     $("#error_console").ajaxError(function(event, request, settings){
-        $(this).empty().show();
-        $(this).append('<div class="ajax_error">Uhoh, the service returned an error&hellip;<br/> ' + request.responseText + '</div>');
-        $(this).delay(8000).fadeOut(1000);
+        showErrorConsole( request.responseText );
     });
 });
 
