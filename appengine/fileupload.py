@@ -17,7 +17,7 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 class FileInfo( db.Model ):
     blobkey = db.StringProperty()  # file ID: key
     user = db.UserProperty()       # who uploaded the thing
-    type = db.StringProperty()     # plaintxt, teixml, collatexinput, etc.
+    type = db.StringProperty()     # plaintxt, teixml, collatexinput, etc. // TODO do we use this?
 
 class FileText( db.Model ):
     blobkey = db.StringProperty()  # file ID
@@ -25,6 +25,8 @@ class FileText( db.Model ):
     offset = db.IntegerProperty()  # where in the file I start
     length = db.IntegerProperty()  # how long I am
     sigil = db.StringProperty()    # the eventual sigil for this text
+    file = db.StringProperty()     # the name of the parent file
+    filetype = db.StringProperty() # the type of the parent file
 
 #### Utility functions
 def GetUIData( blob_info ):
@@ -52,10 +54,12 @@ def ProcessBlob( blob_info ):
     ft_records = []
     file_texts = handleInput.parse_file( reader.read() )
     for text in file_texts:
-        logging.info( "Found text %s in file %s at offset %s, length %s" 
-                      % ( text['id'], blob_info.filename, text['offset'], text['length'] ) )
+        logging.info( "Found text %s of type %s in file %s at offset %s, length %s" 
+                      % ( text['id'], text['type'], blob_info.filename, text['offset'], text['length'] ) )
         ft = FileText( blobkey = str( blob_info.key() ),
                        id = text['id'],
+                       file = blob_info.filename,
+                       filetype = text['type'],
                        offset = text['offset'],
                        length = text['length'] )
         file_type = text['type']    # This can be taken from any record
@@ -175,8 +179,11 @@ class ReturnTexts( webapp.RequestHandler ):
             stored_texts = db.GqlQuery( "SELECT * FROM FileText WHERE blobkey = '%s' ORDER BY id" % file.blobkey )
             for st in stored_texts:
                 logging.info( "...found text %s for file %s" % ( st.id, fileblob.filename ) )
+                sigil = st.sigil
+                if st.sigil == None:
+                    sigil = self.autosigil( file.type, st.id, sequence )
                 answer[fileblob.filename].append( { 'text': file.blobkey + '-' + st.id,
-                                                    'autosigil': self.autosigil( file.type, st.id, sequence ) } )
+                                                    'autosigil': sigil } )
                 sequence += 1
         self.response.headers['Content-Type'] = 'application/json'
         self.response.out.write( json.dumps( answer, ensure_ascii=False ).encode( 'utf-8' ) )

@@ -3,34 +3,42 @@ import re
 import simplejson as json
 import urllib
 from fileupload import FileInfo, FileText
+from teiResult import add_witnesses
 from google.appengine.api import urlfetch
 from google.appengine.ext import blobstore
 from google.appengine.ext import db
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 
-def load_text_from_id( text_id ):
-    '''Given a text ID, return its content and its type.'''
-    text_id = str( urllib.unquote( text_id ) )
-    id_parts = text_id.split( '-' )
-    text_record = list( db.GqlQuery( "SELECT * FROM FileText WHERE id = '%s'" % id_parts[1] ) )
+def load_text_from_id( textid_str, sigil ):
+    '''Given a text ID, save the user-specified sigil and return its
+    content and its type.'''
+    textid_str = str( urllib.unquote( textid_str ) )
+    id_parts = textid_str.split( '-' )
+    text_id = id_parts.pop()
+    blob_id = '-'.join( id_parts )
+    text_record = list( db.GqlQuery( "SELECT * FROM FileText WHERE blobkey = '%s' AND id = '%s'" 
+                                     % ( blob_id, text_id ) ) )
     if text_record == None:
-        logging.error( "No record found for text ID %s" % text_id )
+        logging.error( "No record found for text ID %s" % textid_str )
         raise TextNotFoundError
     text_record = text_record[0]
-    parent_file = list( db.GqlQuery( "SELECT * FROM FileInfo WHERE blobkey = '%s'" % id_parts[0] ) )
-    parent_file = parent_file[0]
-    reader = blobstore.BlobReader( blobstore.BlobKey( id_parts[0] ) )
+    if text_record.sigil != sigil:
+        text_record.sigil = sigil
+        text_record.put()
+    logging.info( "About to read %s at offset %s for length %s, text %s"
+                  %( text_record.file, text_record.offset, text_record.length, text_record.id ) )
+    reader = blobstore.BlobReader( blobstore.BlobKey( blob_id ) )
     reader.seek( text_record.offset )
     content = reader.read( text_record.length )
-    answer = { 'content': content,
-               'type': parent_file.type }
+    answer = { 'entity': text_record,
+               'content': content,
+               'type': text_record.filetype }
     return answer
 
 def strip_tags( tstr ):
     cxtextmatch = re.match( r"\<witness[^\>]*\>(.*)\</witness\>", tstr )
     if cxtextmatch:
-        logging.info( 'Matched' )
         return cxtextmatch.group(1)
     else:
         return tstr
@@ -62,17 +70,19 @@ class MSDispatcher( webapp.RequestHandler ):
         text_ids = self.request.get_all( 'text' )
         
          # Tokenize those texts.
+        sigilmap = {}
         for ti in text_ids:
             logging.info( "Processing text %s" % ti )
             tokenizer_args = {}
-            text = load_text_from_id( ti )
             sigil = self.request.get( 'sigil_' + ti )
+            text = load_text_from_id( ti, sigil )
             if( text['type'] == 'plaintext' ):
                 tokenizer_args['text'] = text['content']
             elif( text['type'] == 'collatexinput' ):
                 tokenizer_args['text'] = strip_tags( text['content'] )
             elif( text['type'] == 'teixml' ):
                 tokenizer_args['xmltext'] = text['content']
+            sigilmap[sigil] = text['entity']
             service = self.tokenizers.get( text['type'] )
             if service:
                 form_data = urllib.urlencode( tokenizer_args )
@@ -124,7 +134,6 @@ class MSDispatcher( webapp.RequestHandler ):
                 result = rpc.get_result()
                 if result.status_code == 200:
                     payload = result.content  ## Could be one of several formats now
-                    payload = payload.decode("utf-8")
                 else:
                     raise ServiceNotOKError( 'Service %s returned status code %d, content %s' 
                                              % ( service, urlresult.status_code, urlresult.content ) )
@@ -137,7 +146,8 @@ class MSDispatcher( webapp.RequestHandler ):
         if( len( errormsg ) > 0 ):
             self.response.out.write( 'Got errors: %s' % "\n".join( errormsg ) )
         else:
-            answer = { 'result': payload,
+            result = add_witnesses( payload, sigilmap ).decode( 'utf-8' )
+            answer = { 'result': result,
                        'output': output,
                        'formaction': self.resultactions.get( output ).get( 'formaction' ),
                        'buttons': self.resultactions.get( output ).get( 'buttons' ),

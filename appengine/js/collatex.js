@@ -38,20 +38,20 @@ function getTokens() {
     $('#ajax-loader').css('visibility', 'visible');
     query = $('#Configureform').serialize();
     $.ajax({
-        url: '/run_toolchain',
-        data: query,
-        type: 'POST',
-        async: false,
-        dataType: 'json',
-        success: function(resp) {
-            $('#collatedResult').val(resp.result);
-            $('#Resultform').attr('action', resp.formaction);
-            $.each(resp.buttons,
-            function(index, value) {
-                $('#resultButton').append('<div class="button" onclick="submitresult(\'' + index + '\', \'' + value + '\');"><span>' + value + '</span></div>');
-            });
-            $('#ajax-loader').css('visibility', 'hidden');
-        }
+      url: '/run_toolchain',
+      data: query,
+      type: 'POST',
+      async: false,
+      dataType: 'json',
+      success: function(resp){
+        $('#collatedResult').val( resp.result );
+        $('#Resultform').attr( 'action', resp.formaction );
+        $('#resultButton').html('');
+        $.each( resp.buttons, function( index, value ) {
+          $('#resultButton').append( '<div class="button" onclick="submitresult(\'' + index + '\', \'' + value + '\');"><span>' + value + '</span></div>');
+        });
+        $('#ajax-loader').css( 'visibility', 'hidden' );
+      }
     });
 }
 
