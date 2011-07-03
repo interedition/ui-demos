@@ -4,6 +4,7 @@ import handleInput
 import logging
 import simplejson as json
 import urllib
+import xml
 from google.appengine.api import files
 from google.appengine.api import urlfetch
 from google.appengine.api import users
@@ -49,10 +50,16 @@ def ProcessBlob( blob_info ):
     b = FileInfo( user = users.get_current_user(),
                   blobkey = str( blob_info.key() ) )
     # Find the texts in this blob
-    ### BIG TODO exception handling!
-    file_type = None
     ft_records = []
-    file_texts = handleInput.parse_file( reader.read() )
+    file_type = None
+    error_msg = None
+    try:
+        file_texts = handleInput.parse_file( reader.read() )
+    except xml.parsers.expat.ExpatError:
+        raise FileParseError( 'XML parsing failed for %s' % blob_info.filename )
+    except handleInput.UnsupportedFiletypeException:
+        raise FileParseError( 'Cannot collate filetype of %s' % blob_info.filename )
+    
     for text in file_texts:
         logging.info( "Found text %s of type %s in file %s at offset %s, length %s" 
                       % ( text['id'], text['type'], blob_info.filename, text['offset'], text['length'] ) )
@@ -109,9 +116,13 @@ class FileUploadHandler( blobstore_handlers.BlobstoreUploadHandler ):
         logging.info( 'Have %d uploaded files' % len( uploaded_files ) )
         query_files = []
         for blob_info in uploaded_files:
-            ProcessBlob( blob_info )
-            # Push the blob key onto the query string for the JSON response
-            query_files.append( str( blob_info.key() ) )
+            try:
+                ProcessBlob( blob_info )
+            except FileParseError as f:
+                query_files.append( 'ERROR=%s' % f.msg )
+            else:
+                # Push the blob key onto the query string for the JSON response
+                query_files.append( str( blob_info.key() ) )
         ## Return a redirect to a JSON respose for the file(s) uploaded.
         query_string = '/'.join( query_files )
         logging.info( 'Redirecting with query string %s' % query_string )
@@ -125,7 +136,12 @@ class UploadJSONResponse( webapp.RequestHandler ):
         blob_keys = resource.split('/')
         answer = []
         for blob_key in blob_keys:
-            answer.append( GetUIData( blobstore.BlobInfo.get( str( urllib.unquote( blob_key ) ) ) ) )
+            blob_key = str( urllib.unquote( blob_key ) )
+            if( blob_key.startswith( 'ERROR' ) ):
+                errorstr = blob_key[6:]
+                answer.append( { 'error': errorstr } )
+            else:
+                answer.append( GetUIData( blobstore.BlobInfo.get( blob_key ) ) )
         self.response.headers['Content-Type'] = 'application/json'
         self.response.out.write( json.dumps( answer, ensure_ascii=False ).encode( 'utf-8' ) )
 
@@ -206,6 +222,13 @@ class ReturnError( webapp.RequestHandler ):
     def get( self ):
         self.response.set_status(500);
         self.response.out.write( "This is just an error message." )
+
+class FileParseError( Exception ):
+    def __init__( self, msg ):
+        self.msg = msg
+    def __str__( self ):
+        return repr( self.msg )
+
 
 application = webapp.WSGIApplication(
                                      [
