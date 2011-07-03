@@ -83,9 +83,7 @@ class VMachineRender( webapp.RequestHandler ):
                                     deadline=10,
                                     payload=cxoutput,
                                     method='POST' )
-        if urlresult.status_code == 200:
-            logging.info( 'Got back HTML %s' % urlresult.content )
-        else:
+        if urlresult.status_code != 200:
             raise ServiceNotOKError( 'Service %s returned status code %d' 
                                      % ( service, urlresult.status_code ) )
         self.response.headers.__setitem__( 'content-type', 'text/html' )

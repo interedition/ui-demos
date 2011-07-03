@@ -61,8 +61,6 @@ def ProcessBlob( blob_info ):
         raise FileParseError( 'Cannot collate filetype of %s' % blob_info.filename )
     
     for text in file_texts:
-        logging.info( "Found text %s of type %s in file %s at offset %s, length %s" 
-                      % ( text['id'], text['type'], blob_info.filename, text['offset'], text['length'] ) )
         ft = FileText( blobkey = str( blob_info.key() ),
                        id = text['id'],
                        file = blob_info.filename,
@@ -119,7 +117,6 @@ class FileUploadHandler( blobstore_handlers.BlobstoreUploadHandler ):
         belongs, and find the constituent texts in the blob'''
         ## self.request has a reference to the blob(s) uploaded.
         uploaded_files = self.get_uploads('files[]')
-        logging.info( 'Have %d uploaded files' % len( uploaded_files ) )
         query_files = []
         for blob_info in uploaded_files:
             try:
@@ -136,14 +133,12 @@ class FileUploadHandler( blobstore_handlers.BlobstoreUploadHandler ):
                 query_files.append( str( blob_info.key() ) )
         ## Return a redirect to a JSON respose for the file(s) uploaded.
         query_string = '/'.join( query_files )
-        logging.info( 'Redirecting with query string %s' % query_string )
         self.redirect( '/uploadjson/%s' % query_string )
 
 class UploadJSONResponse( webapp.RequestHandler ):
     def get( self, resource ):
         '''Return a JSON object with file info for each of the blobs passed as
         part of the URL resource.'''
-        logging.info( 'Got resource %s' % resource )
         blob_keys = resource.split('/')
         answer = []
         for blob_key in blob_keys:

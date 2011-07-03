@@ -93,12 +93,10 @@ def find_tei_texts( teistr ):
                 childinfo = {}
                 childstr = c.toxml( 'utf-8' )
                 childid = str( sequence )
-                logging.info( 'Child string is %s' % childstr )
                 childinfo['offset'] = teistr.find( childstr )
                 childinfo['length'] = len( childstr )
                 childinfo['type'] = 'teixml'
                 childinfo['id'] = childid
-                logging.info( 'Found text with info %s' % childinfo )
                 textlist.append( childinfo )
     return textlist
 
