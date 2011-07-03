@@ -22,12 +22,20 @@ def add_witnesses( xmlstr, wits ):
     FileText info, and returns well-formed TEI that includes the
     witness descriptions.'''
     ## First, replace the collatex-apparatus tag with a p tag, because
-    ## that is what we will insert into this document.
+    ## that is what we will insert into this document.  This is a 
+    ## horrible hack made necessary by the limitations of minidom.
     xmlstr = xmlstr.replace( 'collatex:apparatus', 'p' )
+    xmlstr = xmlstr.replace( 'xmlns="http://www.tei-c.org/ns/1.0"', '' )
+    xmlstr = xmlstr.replace( 'xmlns:collatex="http://interedition.eu/collatex/ns/1.0"', '' )
     apparatus = minidom.parseString( xmlstr )
     
+    ## Create the new TEI document
     impl = minidom.getDOMImplementation()
     teidoc = impl.createDocument( TEI_NS, 'TEI', None )
+    # would have thought minidom would do this, but evidently not.
+    teidoc.documentElement.setAttribute( 'xmlns', TEI_NS )
+    # xslpi = teidoc.createProcessingInstruction( 'xml-stylesheet', 'href="/v-machine/src/vmachine.xsl type="text/xsl"' )
+    # teidoc.insertBefore( xslpi, teidoc.documentElement )
     teiHeader = teidoc.createElementNS( TEI_NS, 'teiHeader' )
     fileDesc = teidoc.createElementNS( TEI_NS, 'fileDesc' )
     teidoc.documentElement.appendChild( teiHeader ).appendChild( fileDesc )
@@ -83,7 +91,7 @@ class VMachineRender( webapp.RequestHandler ):
         self.response.headers.__setitem__( 'content-type', 'text/html' )
         self.response.out.write( urlresult.content )
 
-class NoServiceError( Exception ): pass
+
 class ServiceNotOKError( Exception ): pass
 
 application = webapp.WSGIApplication(
