@@ -3,7 +3,7 @@
 use lib 'lib';
 use strict;
 use warnings;
-use Text::Tradition::Graph;
+use Text::Tradition;
 
 # First: read the base. Make a graph, but also note which
 # nodes represent line beginnings.
@@ -13,9 +13,9 @@ my @lines = <GRAPH>;
 close GRAPH;
 my $graphml_str = join( '', @lines );
 
-my $collation_graph = Text::Tradition::Graph->new(
-    'GraphML' => $graphml_str,
+my $tradition = Text::Tradition->new(
+    'CollateX' => $graphml_str,
     );
 
-print $collation_graph->as_svg();
+print $tradition->collation->as_svg();
 print STDERR "DONE\n";

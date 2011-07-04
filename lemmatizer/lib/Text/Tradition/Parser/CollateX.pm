@@ -50,7 +50,7 @@ sub parse {
 	my %node_data = %$n;
 	my $nodeid = delete $node_data{$IDKEY};
 	my $token = delete $node_data{$CONTENTKEY};
-	unless( $nodeid && $token ) {
+	unless( defined $nodeid && defined $token ) {
 	    warn "Did not find an ID or token for graph node, can't add it";
 	    next;
 	}
@@ -88,7 +88,6 @@ sub parse {
     foreach my $nodeid ( keys %$extra_data ) {
 	my $ed = $extra_data->{$nodeid};
 	if( exists $ed->{$TRANSKEY} ) {
-	    
 	    my $tn_reading = $collation->reading( $nodeid );
 	    my $main_reading = $collation->reading( $ed->{$TRANSKEY} );
 	    if( $collation->linear ) {

@@ -41,6 +41,7 @@ sub index :Path :Args(0) {
     my $origin_data = $c->request->params->{'result'};
     unless( $origin_data ) {	
 	my $dummy_file = "t/data/Collatex-16.xml";
+	# my $dummy_file = "t/data/karinatext.xml";
 	open( GRAPHFILE, $dummy_file ) or die "Could not open $dummy_file";
 	my @lines = <GRAPHFILE>;
 	close GRAPHFILE;
@@ -56,6 +57,18 @@ sub index :Path :Args(0) {
     my @initial_nodes = $graph->lemma_readings();
     $c->stash->{initial_text} = join( ' ', map { $_->[1] ? $graph->reading( $_->[0] )->label : '...' } @initial_nodes );
     $c->stash->{template} = 'testsvg.tt2';
+}
+
+# Utility function to render SVG from a graph input.
+sub renderSVG :Global {
+    my( $self, $c ) = @_;
+    my $origin_data = $c->request->params->{'data'};
+    my $type = $c->request->params->{'type'};
+    my $tradition = Text::Tradition->new( $type => $origin_data );
+    my $svg_str = $tradition->collation->as_svg;
+    $c->response->content_type( 'application/svg+xml' );
+    $c->response->content_encoding( 'UTF-8' );
+    $c->response->body( $svg_str );
 }
 
 sub node_click :Global {

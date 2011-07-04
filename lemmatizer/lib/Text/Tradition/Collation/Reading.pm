@@ -59,7 +59,7 @@ sub text {
     if( @_ ) {
 	$self->set_attribute( 'label', $_[0] );
     }
-    return $self->get_attribute( 'label' );
+    return $self->label;
 }
 
 sub merge_from {
