@@ -121,7 +121,7 @@ class FileUploadHandler( blobstore_handlers.BlobstoreUploadHandler ):
         for blob_info in uploaded_files:
             try:
                 ProcessBlob( blob_info )
-            except FileParseError as f:
+            except FileParseError, f:
                 query_files.append( 'ERROR=%s' % f.msg )
             except:
                 ## Not sure yet what else might go wrong.

@@ -57,5 +57,4 @@ handlers:
   script: datacleanup.py
 
 - url: /.*
-  login: required
   script: index.py
