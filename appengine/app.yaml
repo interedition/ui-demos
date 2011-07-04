@@ -16,14 +16,11 @@ handlers:
 - url: /v-machine
   static_dir: v-machine
 
-- url: /frames
-  static_dir: frames
-
 - url: /plaintext_tokenize
   script: plaintext_tokenize.py
 
 - url: /return_texts
-  script: find_texts.py
+  script: fileupload.py
 
 - url: /run_toolchain
   script: dispatcher.py
@@ -55,6 +52,9 @@ handlers:
 - url: /test.*
   login: admin
   script: gaeunit.py
+
+- url: /cleanup
+  script: datacleanup.py
 
 - url: /.*
   script: index.py

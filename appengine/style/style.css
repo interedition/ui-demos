@@ -50,7 +50,7 @@ li {
   list-style-image:url("/images/arrow.gif");
 }
 
-#submittedLabel{
+#submitted_div{
   display: none;
 }
 
@@ -69,6 +69,12 @@ li {
   padding: 30px 0px 30px 30px;
   width:580px;
   line-height:20px;  
+}
+
+.usermgmt {
+  float:right;
+  padding: 30px 0px 30px 30px;
+  width: 260px;
 }
 
 .coll {
@@ -99,6 +105,18 @@ h2 .nmr {
   border:1px solid #dddddd;
   margin-bottom: 3px;
   width:256px;  
+}
+
+.sigil {
+    width: 25px;
+    font-size: 8pt;
+    position: absolute;
+    padding: 1px;
+    margin-left: 5px;
+}
+
+.text_name {
+    padding-left: 40px;
 }
 
 .divLink {
@@ -171,4 +189,25 @@ div.button:hover span {
   border: none;
   margin-left:4px;
   padding-left: 4px;
+}
+
+#ajax-loader {
+  float: right;
+  position: relative;
+  top: 4px; 
+  margin-right: 22px;
+  visibility: hidden;
+}
+
+#error_console {
+    display: none;
+    padding: 8px;
+    border: 2px solid #bf0a2c;
+    background-color: #f7bfc9;
+    color: #762534;
+    position: fixed;
+    font-size: 80%;
+    top: 1em;
+    right: 1em;
+    width: 200px;
 }
