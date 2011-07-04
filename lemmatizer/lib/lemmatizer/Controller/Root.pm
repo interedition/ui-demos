@@ -41,6 +41,7 @@ sub index :Path :Args(0) {
     my $origin_data = $c->request->params->{'result'};
     unless( $origin_data ) {	
 	my $dummy_file = "t/data/Collatex-16.xml";
+	# my $dummy_file = "t/data/karinatext.xml";
 	open( GRAPHFILE, $dummy_file ) or die "Could not open $dummy_file";
 	my @lines = <GRAPHFILE>;
 	close GRAPHFILE;
