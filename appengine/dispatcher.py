@@ -63,7 +63,8 @@ class MSDispatcher( webapp.RequestHandler ):
                      }
     collators = { 'collatex': 'http://gregor.middell.net/collatex/api/collate' }
     
-    resultactions = { 'application/xhtml+xml': { 'formaction': '/htmldisplay', 'buttons': [ 'Render the HTML' ] },
+    resultactions = { 'application/xhtml+xml': { 'formaction': '/display', 'buttons': [ 'Render the HTML' ] },
+                      'image/svg+xml': { 'formaction': '/display', 'buttons': [ 'Render as SVG' ] },
                       'application/xml': { 'formaction': '/teidisplay', 'buttons': [ 'Display in Versioning Machine' ] }, 
                       'application/graphml+xml': { 'formaction': 'http://eccentricity.org:3000', 'buttons': [ 'Send to lemmatizer' ] },
                       }
