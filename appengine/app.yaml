@@ -7,6 +7,9 @@ handlers:
 - url: /style
   static_dir: style
 
+- url: /collatex/css
+  static_dir: style
+
 - url: /js
   static_dir: js
 

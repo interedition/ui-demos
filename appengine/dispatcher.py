@@ -154,7 +154,9 @@ class MSDispatcher( webapp.RequestHandler ):
         if( len( errormsg ) > 0 ):
             self.response.out.write( 'Got errors: %s' % "\n".join( errormsg ) )
         else:
-            result = add_witnesses( payload, sigilmap ).decode( 'utf-8' )
+            result = payload.decode( 'utf-8' )
+            if output == 'application/xml':
+                result = add_witnesses( payload, sigilmap ).decode( 'utf-8' )
             answer = { 'result': result,
                        'output': output,
                        'formaction': self.resultactions.get( output ).get( 'formaction' ),
