@@ -105,7 +105,8 @@ class UploadURLHandler( webapp.RequestHandler ):
 class FileUploadHandler( blobstore_handlers.BlobstoreUploadHandler ):
     def get( self ):
         '''Return information on file blobs that are here'''
-        owner_files = db.GqlQuery( "SELECT * FROM FileInfo WHERE user = USER('%s')" % users.get_current_user() )
+        owner_files = db.GqlQuery( "SELECT * FROM FileInfo WHERE user = :1", 
+                                   users.get_current_user() )
         answer = []
         for file in owner_files:
             answer.append( GetUIData( blobstore.BlobInfo.get( file.blobkey ) ) )
@@ -205,7 +206,7 @@ class ReturnTexts( webapp.RequestHandler ):
             self.response.out.write( errormsg )
         else:
             answer = []
-            owner_files = db.GqlQuery( "SELECT * FROM FileInfo WHERE user = USER('%s')" % users.get_current_user() )
+            owner_files = db.GqlQuery( "SELECT * FROM FileInfo WHERE user = :1", users.get_current_user() )
             sequence = 0
             for file in owner_files:
                 fileblob = blobstore.BlobInfo.get( file.blobkey )  # use this to get filename
