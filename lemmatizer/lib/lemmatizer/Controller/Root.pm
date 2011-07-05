@@ -40,8 +40,7 @@ sub index :Path :Args(0) {
     # accept XML in a parameter called 'result'.
     my $origin_data = $c->request->params->{'result'};
     unless( $origin_data ) {	
-	my $dummy_file = "t/data/Collatex-16.xml";
-	# my $dummy_file = "t/data/karinatext.xml";
+	my $dummy_file = $c->path_to( 't', 'data', 'Collatex-16.xml' );
 	open( GRAPHFILE, $dummy_file ) or die "Could not open $dummy_file";
 	my @lines = <GRAPHFILE>;
 	close GRAPHFILE;
