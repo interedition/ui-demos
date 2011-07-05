@@ -66,7 +66,7 @@ class MSDispatcher( webapp.RequestHandler ):
     resultactions = { 'application/xhtml+xml': { 'formaction': '/display', 'buttons': [ 'Render the HTML' ] },
                       'image/svg+xml': { 'formaction': '/display', 'buttons': [ 'Render as SVG' ] },
                       'application/xml': { 'formaction': '/teidisplay', 'buttons': [ 'Display in Versioning Machine' ] }, 
-                      'application/graphml+xml': { 'formaction': 'http://eccentricity.org:3000', 'buttons': [ 'Send to lemmatizer' ] },
+                      'application/graphml+xml': { 'formaction': 'http://eccentricity.org/lemmatizer', 'buttons': [ 'Send to lemmatizer' ] },
                       }
     
     def post( self ):
