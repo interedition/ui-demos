@@ -11,29 +11,25 @@ def parse_file( content ):
     '''Takes a string that is the contents of a file, and determines the
     individual texts within it.  ID is of the form X-Y-Z, dependent on
     number of levels of subtexts.'''
-    try:
-        type = filetype( content )
-    except xml.parsers.expat.ExpatError:
-        raise  ## It was an XML document but it failed to parse
+    type = filetype( content )
+    ## Either it parsed, or it wasn't an XML doc at all.
+    textlist = []
+    if( type == 'plaintext' ):
+        textlist.append( { 'offset': 0,
+                           'length': len( content ),
+                           'parent': None,
+                           'type': type,
+                           'id': '0',
+                           } )
+    elif( type == 'teixml' ):
+        content = xml_regularize( content )
+        textlist = find_tei_texts( content )
+    elif( type == 'collatexinput' ):
+        content = xml_regularize( content )
+        textlist = find_collatex_witnesses( content )
     else:
-        ## Either it parsed, or it wasn't an XML doc at all.
-        textlist = []
-        if( type == 'plaintext' ):
-            textlist.append( { 'offset': 0,
-                               'length': len( content ),
-                               'parent': None,
-                               'type': type,
-                               'id': '0',
-                               } )
-        elif( type == 'teixml' ):
-            content = xml_regularize( content )
-            textlist = find_tei_texts( content )
-        elif( type == 'collatexinput' ):
-            content = xml_regularize( content )
-            textlist = find_collatex_witnesses( content )
-        else:
-            logging.error( 'Do not support file type %s' % type )
-            raise UnsupportedFiletypeException
+        logging.error( 'Do not support file type %s' % type )
+        raise UnsupportedFiletypeException
     return textlist
     
 
@@ -41,7 +37,9 @@ def filetype( xmlstr ):
     '''Takes an XML string and looks at its contents to make a guess as to
     how it should be tokenized.'''
     type = 'unknown'
-    try:
+    xmlstr = xmlstr.lstrip()
+    if xmlstr.startswith( '<?xml' ):
+        # This might raise a parsing error; we catch it upstream.
         xmlfile = minidom.parseString( xmlstr )
         # So it is an XML file; is it TEI?
         if( xmlfile.documentElement.getAttribute( 'xmlns' ) == TEI_NS 
@@ -54,13 +52,8 @@ def filetype( xmlstr ):
         else:
             type = 'otherxml'
         xmlfile.unlink()
-    except xml.parsers.expat.ExpatError, inst:
-        if( re.match( 'syntax error: line \d+, column 0', inst.args[0] ) ):
-            # Assume it should be tokenized as plain text.
-            type = 'plaintext'
-        else:
-            # It was XML but failed to parse for some other reason.
-            raise
+    else:
+        type = 'plaintext'
     return( type )
 
 def xml_regularize( xmlstr ):

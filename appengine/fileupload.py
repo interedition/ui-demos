@@ -4,6 +4,7 @@ import handleInput
 import logging
 import simplejson as json
 import urllib
+import sys
 import xml
 from google.appengine.api import files
 from google.appengine.api import urlfetch
@@ -52,11 +53,10 @@ def ProcessBlob( blob_info ):
     # Find the texts in this blob
     ft_records = []
     file_type = None
-    error_msg = None
     try:
         file_texts = handleInput.parse_file( reader.read() )
-    except xml.parsers.expat.ExpatError:
-        raise FileParseError( 'XML parsing failed for %s' % blob_info.filename )
+    except xml.parsers.expat.ExpatError, e:
+        raise FileParseError( 'XML parsing failed for %s: %s' % ( blob_info.filename, e.__str__() ) )
     except handleInput.UnsupportedFiletypeException:
         raise FileParseError( 'Cannot collate filetype of %s' % blob_info.filename )
     
