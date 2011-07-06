@@ -84,8 +84,8 @@ class VMachineRender( webapp.RequestHandler ):
                                     payload=cxoutput,
                                     method='POST' )
         if urlresult.status_code != 200:
-            raise ServiceNotOKError( 'Service %s returned status code %d' 
-                                     % ( service, urlresult.status_code ) )
+            raise ServiceNotOKError( 'Service %s returned status code %d: %s' 
+                                     % ( self.XSLTransformService, urlresult.status_code, urlresult.content ) )
         self.response.headers.__setitem__( 'content-type', 'text/html' )
         self.response.out.write( urlresult.content )
 

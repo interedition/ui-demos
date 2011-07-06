@@ -76,15 +76,17 @@ def ProcessBlob( blob_info ):
     for ft in ft_records:
         ft.put()
 
-def DeleteBlob( blob_info ):
-    key = str( blob_info.key() )
-    blob_info.delete()
+def DeleteBlob( key ):
     this_file_info = db.GqlQuery( "SELECT * FROM FileInfo WHERE blobkey = '%s'" % key )
     for b in this_file_info:
         db.delete( b )
     this_file_texts = db.GqlQuery( "SELECT * FROM FileText WHERE blobkey = '%s'" % key )
     for t in this_file_texts:
         db.delete( t )
+    blob_info = blobstore.BlobInfo.get(key)
+    if blob_info == None:
+        raise FileMissingError( 'Cannot delete non-existent file %s' % key )
+    blob_info.delete()
     answer = [ "Deleted %s" % key ]
     return answer
 
@@ -161,8 +163,7 @@ class ServeHandler( blobstore_handlers.BlobstoreDownloadHandler ):
 class DeleteHandler( webapp.RequestHandler ):
     def delete( self, resource ):
         resource = str(urllib.unquote(resource))
-        blob_info = blobstore.BlobInfo.get(resource)
-        answer = DeleteBlob( blob_info )
+        answer = DeleteBlob( resource )
         self.response.headers['Content-Type'] = 'application/json'
         self.response.out.write( json.dumps( answer, ensure_ascii=False ).encode( 'utf-8' ) )
 
@@ -248,6 +249,11 @@ class ReturnTexts( webapp.RequestHandler ):
         return sigil
 
 class FileParseError( Exception ):
+    def __init__( self, msg ):
+        self.msg = msg
+    def __str__( self ):
+        return repr( self.msg )
+class FileMissingError( Exception ):
     def __init__( self, msg ):
         self.msg = msg
     def __str__( self ):
