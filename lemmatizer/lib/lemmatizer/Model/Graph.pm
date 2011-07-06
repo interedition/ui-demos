@@ -43,14 +43,13 @@ sub node_collapse {
     my $global = $params->{'global'};
     $global = 1 if $global; # make it a Bool for Moose
     my $response = {};
-
+    $DB::single = 1;
     my $opts = { 'type' => $reason,
 		 'global' => $global };
     my( $status, @nodes ) = $self->collation->add_relationship( $node, $target, $opts );
 
     if( $status ) {
 	# TODO work
-	$response->{'status'} = 200;
 	foreach my $pair ( @nodes ) {
 	    my( $ps, $pt ) = @$pair;
 	    $response->{$ps} = { 'target' => $pt };
@@ -66,6 +65,7 @@ sub node_collapse {
 	    my $collapsed_edges = $self->find_dup_edges( $n, $response->{$n}->{'target'} );
 	    $response->{$n}->{'edges'} = $collapsed_edges;
 	}
+	$response->{'status'} = 200;
     } else {
 	$response->{'status'} = 403;
 	$response->{'error'} = "@nodes";

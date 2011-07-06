@@ -143,7 +143,7 @@ collapsed onto each other.
 sub node_collapse :Global {
     my( $self, $c ) = @_;
 
-    my $response = $graph->node_collapse( $c->response->params );
+    my $response = $graph->node_collapse( $c->request->params );
     my $status = delete $response->{'status'};
     $c->response->status( $status );
 
