@@ -81,7 +81,7 @@ class VMachineRender( webapp.RequestHandler ):
         # as the answer.
         urlresult = urlfetch.fetch( url=self.XSLTransformService,
                                     deadline=10,
-                                    payload=cxoutput,
+                                    payload=cxoutput.encode( 'utf-8' ),
                                     method='POST' )
         if urlresult.status_code != 200:
             raise ServiceNotOKError( 'Service %s returned status code %d: %s' 
