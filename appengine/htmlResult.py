@@ -10,15 +10,18 @@ class HTMLRender( webapp.RequestHandler ):
     def post( self ):
         '''Need a single parameter, which is the HTML file that was the output
         of the collation run.'''
-        
-        self.response.headers.__setitem__( 'content-type', 'text/html' )
+        ## Which button did we have?
+        type = 'text/html'
+        if self.request.get( 'Render as SVG' ):
+            type = 'image/svg+xml'
+        self.response.headers.__setitem__( 'content-type', type )
         self.response.out.write( self.request.get('result') )
 
 class NoServiceError( Exception ): pass
 class ServiceNotOKError( Exception ): pass
 
 application = webapp.WSGIApplication(
-                                      [('/htmldisplay', HTMLRender),],
+                                      [('/display', HTMLRender),],
                                       debug=True)
 
 def main():

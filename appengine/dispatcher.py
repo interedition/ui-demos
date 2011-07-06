@@ -63,9 +63,11 @@ class MSDispatcher( webapp.RequestHandler ):
                      }
     collators = { 'collatex': 'http://gregor.middell.net/collatex/api/collate' }
     
-    resultactions = { 'application/xhtml+xml': { 'formaction': '/htmldisplay', 'buttons': [ 'Render the HTML' ] },
+    resultactions = { 'application/xhtml+xml': { 'formaction': '/display', 'buttons': [ 'Render the HTML' ] },
+                      'image/svg+xml': { 'formaction': '/display', 'buttons': [ 'Render as SVG' ] },
+                      'application/json': { 'formaction': '', 'buttons': [] },
                       'application/xml': { 'formaction': '/teidisplay', 'buttons': [ 'Display in Versioning Machine' ] }, 
-                      'application/graphml+xml': { 'formaction': 'http://eccentricity.org:3000', 'buttons': [ 'Send to lemmatizer' ] },
+                      'application/graphml+xml': { 'formaction': 'http://eccentricity.org/lemmatizer', 'buttons': [ 'Send to lemmatizer' ] },
                       }
     
     def post( self ):
@@ -144,7 +146,7 @@ class MSDispatcher( webapp.RequestHandler ):
                     payload = result.content  ## Could be one of several formats now
                 else:
                     raise ServiceNotOKError( 'Service %s returned status code %d, content %s' 
-                                             % ( service, urlresult.status_code, urlresult.content ) )
+                                             % ( service, result.status_code, result.content ) )
             except urlfetch.DownloadError:
                 raise ServiceNotOKError( 'Service %s errored or timed out' % service )
         else: 
