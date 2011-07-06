@@ -9,7 +9,8 @@ function getRelativePath( action ) {
 
 function svgLoaded() {
   $('ellipse').attr( {stroke:'black', fill:'#fff'} );
-  var jqjson = $.getJSON( getRelativePath( 'node_click' ), 'node_id=null', function(data) {
+  ncpath = getRelativePath( 'node_click' );
+  var jqjson = $.getJSON( ncpath, 'node_id=null', function(data) {
     $.each( data, function(item, node_id_and_state) {
       if( node_id_and_state[1] == 1 ) {
         node_ellipse = $('.node').children('title').filter( function(index) {
@@ -60,7 +61,8 @@ function node_obj(ellipse) {
 
   this.dblclick_listener = function(evt) {
     node_id = self.ellipse.siblings('title').text();
-    var jqjson = $.getJSON( getRelativePath( 'node_click' ), 'node_id=' + node_id, function(data) {
+    ncpath = getRelativePath( 'node_click' );
+    var jqjson = $.getJSON( ncpath, 'node_id=' + node_id, function(data) {
       $('#constructedtext').empty();
       $.each( data, function(item, node_id_and_state) {
         node = get_node_obj( node_id_and_state[0] );
@@ -276,7 +278,8 @@ $(document).ready(function () {
     buttons: {
       "Ok": function() {
         form_values = $('#collapse_node_form').serialize()
-        var jqjson = $.getJSON( getRelativePath( 'node_collapse'), form_values, function(data) {
+	ncpath = getRelativePath( 'node_collapse' );
+        var jqjson = $.getJSON( ncpath, form_values, function(data) {
           $.each( data, function(item, collapse_info) { 
             get_node_obj( item ).stack_behind( collapse_info );
           });
