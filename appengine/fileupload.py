@@ -77,13 +77,19 @@ def ProcessBlob( blob_info ):
         ft.put()
 
 def DeleteBlob( key ):
+    if isinstance( key, blobstore.BlobInfo ):
+        blob_info = key
+        key = blob_info.key()
+    else:
+        blob_info = blobstore.BlobInfo.get(key)
+    
     this_file_info = db.GqlQuery( "SELECT * FROM FileInfo WHERE blobkey = '%s'" % key )
     for b in this_file_info:
         db.delete( b )
     this_file_texts = db.GqlQuery( "SELECT * FROM FileText WHERE blobkey = '%s'" % key )
     for t in this_file_texts:
         db.delete( t )
-    blob_info = blobstore.BlobInfo.get(key)
+    
     if blob_info == None:
         raise FileMissingError( 'Cannot delete non-existent file %s' % key )
     blob_info.delete()
