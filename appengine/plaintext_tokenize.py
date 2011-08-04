@@ -15,7 +15,8 @@ def tokenize_plaintext( textstring, delimiter = None ):
         if len( punct ):
             wtoken['punctuation'] = punct
         tokens.append( wtoken )
-    return tokens
+    answer = { 'tokens': tokens }
+    return answer
 
 def strip_punct( wordstring ):
     posixpunct = re.compile( r"[!\"#$%&'()*+,\./:;<=>?@[\\\]^_`{|}~]" )

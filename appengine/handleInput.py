@@ -17,13 +17,18 @@ def parse_file( content ):
     if( type == 'plaintext' ):
         textlist.append( { 'offset': 0,
                            'length': len( content ),
-                           'parent': None,
                            'type': type,
                            'id': '0',
                            } )
     elif( type == 'teixml' ):
         content = xml_regularize( content )
-        textlist = find_tei_texts( content )
+        # Do not split apart texts at this point
+        # textlist = find_tei_texts( content )
+        textlist.append( { 'offset': 0,
+                           'length': len( content ),
+                           'type': type,
+                           'id': '0',
+                           } )
     elif( type == 'collatexinput' ):
         content = xml_regularize( content )
         textlist = find_collatex_witnesses( content )
