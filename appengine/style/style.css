@@ -218,3 +218,8 @@ div.button:hover span {
 #collatedResult {
     border: 1px solid #dddddd;
 }
+
+.collator_logo {
+    margin-bottom: 3px;
+    margin-left: 3px;
+}
