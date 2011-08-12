@@ -1,4 +1,5 @@
 var curUrl = 1;
+var help_items = {select_files: 'This is the help text that should tell you how to select files..'};
 
 function removeUrl(fileRemove) {
     $(fileRemove).parent().remove();
@@ -74,6 +75,11 @@ function submitresult(name, value) {
     $('#Resultform').submit();
 }
 
+function show_help( help_subject ) {
+    $('#dialog').empty().append( "<p>" + help_items[help_subject] + "</p>" );
+    $('#dialog').dialog( 'open' );
+}
+
 function showErrorConsole( error_text ) {
     error_console = $("#error_console");
     error_console.empty(); 
@@ -85,11 +91,12 @@ function showErrorConsole( error_text ) {
 $(document).ready(function(e) {
     $('#collatedResult').val('');
     newUrl();
-    $("#addAnotherUrl").click(function(e) {
+    $('#addAnotherUrl').click(function(e) {
         newUrl();
     });
-    $("#error_console").ajaxError(function(event, request, settings){
+    $('#error_console').ajaxError(function(event, request, settings){
         showErrorConsole( request.responseText );
     });
+    $('#dialog').dialog( { autoOpen:false } );
 });
 

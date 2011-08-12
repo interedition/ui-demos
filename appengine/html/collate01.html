@@ -4,11 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Collate X</title>
 <link rel="stylesheet" href="/style/style.css" type="text/css" />
-<link rel="stylesheet" href="/style/cupertino/jquery-ui-1.8.13.custom.css">
+<link rel="stylesheet" href="/style/cupertino/jquery-ui-1.8.14.custom.css">
 <link rel="stylesheet" href="/style/jquery.fileupload-ui.css">
 
 <script src="/js/jquery-1.6.js"></script>
-<script src="/js/jquery-ui-1.8.13.custom.min.js"></script>
+<script src="/js/jquery-ui-1.8.14.custom.min.js"></script>
 <script src="/js/jquery.tmpl.min.js"></script>
 <script src="/js/jquery.iframe-transport.js"></script>
 <script src="/js/jquery.fileupload.js"></script>
@@ -30,10 +30,18 @@ server. CollateX is a powerful, fully automatic, baseless text
 collation engine for multiple witnesses.</div>
 
 <div id="error_console"></div>
+<div id="dialog" title="Help">
+    <p>help text</p>
+</div>
+
+
+
+<div class="demo">
 
 <div class="col01 coll">
   <h1><span class="nmr">1</span>&nbsp;Sources</h1>
   <h2><span class="nmr">1.1</span>&nbsp;Select files</h2>
+  <span class="help-button ui-button-icon-primary ui-icon ui-icon-help" onclick="show_help('select_files')"></span>
   <p>Select and upload the files on your local drive that contain the texts that you would like to collate.</p>
 
   <div id="fileupload">
@@ -155,7 +163,7 @@ collation engine for multiple witnesses.</div>
 	spelled differently. Useful for example in older texts without
 	regularized spelling.</h2>
 		<ul id="fuzzymatchUL">
-			<li><input id="fuzzymatch" name="fuzzymatch" type="checkbox">&nbsp;Yes please, my corrector sux.</input></li>
+			<li><input id="fuzzymatch" name="fuzzymatch" type="checkbox">&nbsp;Pre-normalize spelling.</input></li>
 		</ul>
 	</div>
 	<br/>

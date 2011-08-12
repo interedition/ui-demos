@@ -32,17 +32,20 @@ h1 {
 }
 
 h2 {
+  float: left;
   font-size:18px;
   font-weight:100;  
   margin: 0px 0px 5px 0px;
 }
 
 p {
-  margin: 0px 0px 10px 0px;  
+  margin: 0px 0px 10px 0px;
+  clear: left;
 }
 
 ul {
   margin: 20px 0px 10px 0px;
+  clear: left;
 }
 
 li {
@@ -210,4 +213,8 @@ div.button:hover span {
     top: 1em;
     right: 1em;
     width: 200px;
+}
+
+#collatedResult {
+    border: 1px solid #dddddd;
 }
