@@ -20,17 +20,8 @@ class IndexPage( webapp.RequestHandler ):
         else:
             self.redirect( users.create_login_url( "/" ) )
 
-class FileUploadHandler( webapp.RequestHandler ):
-    def post( self ):
-        contents = None
-        if( self.request.get( 'inputfile' ) ):
-            contents = self.request.get( 'inputfile' )
-        if( contents ):
-            self.response.out.write( contents )
-
 application = webapp.WSGIApplication(
-                                     [('/', IndexPage),
-                                      ('/uploadfile', FileUploadHandler)],
+                                     [('/', IndexPage)],
                                      debug=True)
 
 def main():

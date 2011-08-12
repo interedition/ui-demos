@@ -17,14 +17,6 @@ class Cleanup( webapp.RequestHandler ):
             logging.info( answer[0] )
 
 
-class FileUploadHandler( webapp.RequestHandler ):
-    def post( self ):
-        contents = None
-        if( self.request.get( 'inputfile' ) ):
-            contents = self.request.get( 'inputfile' )
-        if( contents ):
-            self.response.out.write( contents )
-
 application = webapp.WSGIApplication( [('/cleanup', Cleanup)],
                                       debug=True )
 
