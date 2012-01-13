@@ -303,7 +303,7 @@ sub as_dot {
     # TODO consider making some of these things configurable
     my $dot = sprintf( "digraph %s {\n", $self->tradition->name );
     $dot .= "\tedge [ arrowhead=open ];\n";
-    $dot .= "\tgraph [ rankdir=LR ];\n";
+    $dot .= "\tgraph [ rankdir=LR,bgcolor=none ];\n";
     $dot .= sprintf( "\tnode [ fontsize=%d, fillcolor=%s, style=%s, shape=%s ];\n",
 		     11, "white", "filled", $self->graph->get_attribute( 'node', 'shape' ) );
 
