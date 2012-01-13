@@ -8,6 +8,13 @@ function getRelativePath( action ) {
 }
 
 function svgLoaded() {
+  // some initial scaling cause we can't control GraphViz's way of scaling
+  var svg_element = $('#svgbasics').children('svg');
+  var svg_graph = svg_element.svg().svg('get').root()
+  svg_width = svg_graph.viewBox.baseVal.width;
+  $('#svgbasics').width( svg_width );
+  svg_element.width( svg_width );
+  //
   $('ellipse').attr( {stroke:'black', fill:'#fff'} );
   ncpath = getRelativePath( 'node_click' );
   var jqjson = $.getJSON( ncpath, 'node_id=null', function(data) {
