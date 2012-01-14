@@ -16,26 +16,6 @@ function svgLoaded() {
   svg_element.width( svg_width );
   //
   $('ellipse').attr( {stroke:'black', fill:'#fff'} );
-  ncpath = getRelativePath( 'node_click' );
-  var jqjson = $.getJSON( ncpath, 'node_id=null', function(data) {
-    $.each( data, function(item, node_id_and_state) {
-      if( node_id_and_state[1] == 1 ) {
-        node_ellipse = $('.node').children('title').filter( function(index) {
-          return $(this).text() == node_id_and_state[0];
-        }).siblings('ellipse');
-        node_ellipse.attr( {stroke:'green', fill:'#b3f36d'} );
-        $('#constructedtext').append( node_ellipse.siblings('text').text() + '&#32;' );
-      } else {
-        if( node_id_and_state[1] == null ) {
-          $('#constructedtext').append( ' &hellip; ' );
-        }
-      }
-    });
-    add_node_objs();
-  });
-}
-
-function add_node_objs() {
   $('ellipse[fill="#fff"]').each( function() {
       $(this).data( 'node_obj', new node_obj( $(this) ) );
     }
@@ -70,33 +50,6 @@ function node_obj(ellipse) {
     return self.ellipse.siblings('title').text()
   }
   
-  this.dblclick_listener = function(evt) {
-    var node_id = self.get_id();
-    ncpath = getRelativePath( 'node_click' );
-    var jqjson = $.getJSON( ncpath, 'node_id=' + node_id, function(data) {
-      $('#constructedtext').empty();
-      $.each( data, function(item, node_id_and_state) {
-        node = get_node_obj( node_id_and_state[0] );
-        // 1 -> turn the associated SVG node on, put in the associate word in the text box.
-        // 0 -> turn SVG node off.
-        // null -> turn node off, put in ellipsis in text box at the corresponding place.
-        if( node_id_and_state[1] == 1 ) {
-//TODO: create test suite en refactor this in to more OO! (node and node_ellipse are 'conflated')
-          node_ellipse = $('.node').children('title').filter( function(index) {
-            return $(this).text() == node_id_and_state[0];
-          }).siblings('ellipse');
-          $('#constructedtext').append( node_ellipse.siblings('text').text() + '&#32;' );
-          if( node ) { node.set_draggable( false ) }
-        } else {
-          if( node ) { node.set_draggable( true ) };
-          if( node_id_and_state[1] == null ) {
-            $('#constructedtext').append( ' &hellip; ' );
-          }
-        }
-      });
-    });
-  }
-
   this.set_draggable = function( draggable ) {
     if( draggable ) {
       self.ellipse.attr( {stroke:'black', fill:'#fff'} );
@@ -186,7 +139,7 @@ function node_obj(ellipse) {
 
   this.enter_node = function(evt) {
     self.ellipse.attr( 'fill', '#ffccff' );
-    reportSomeIntersect();
+    reportSomeIntersect(self.get_id);
   }
 
   this.leave_node = function(evt) {
@@ -205,7 +158,6 @@ function node_obj(ellipse) {
     });
   }
 
-  this.ellipse.dblclick( this.dblclick_listener );
   self.set_draggable( true );
 }
 
@@ -323,21 +275,29 @@ $(window).mouseout(function (event) {
 // Spiking below
 
 function reportSomeIntersect() {
+    console.log( "0" );
+    var svgWidth = parseInt( $('#svgbasics').children('svg').svg().svg('get').root().viewBox.baseVal.width );
+    toPixelDim = $('#svgbasics').width() / svgWidth;
+    console.log( "1" );
+    scrollOffset = parseInt( $('#graph').scrollLeft() );
     var xs = '';
+    console.log( "2" );
     $('ellipse').each( function( index ) {
-        xs = xs + $(this).attr('cx') + ', ';
+        xs = xs + (parseInt( $(this).attr('cx') ) - scrollOffset) + ', ';
     });
-    
-    console.log( $('#graph').scrollLeft() );
-    var svg_element = $('#svgbasics').children('svg');
-    var svgroot = svg_element.svg().svg('get').root();
-    var vbParts = svgroot.getAttribute("viewBox").split(" ");
-    var vbxu = parseInt(vbParts[2]);
-    var svgWidth = parseInt( svgroot.viewBox.baseVal.width );
-    var svgzoomfactor = vbxu / svgWidth;
-    dims = { 'vbxu':vbxu, 'svgWidth':svgWidth, 'svgzoomfactor':svgzoomfactor };
+    console.log( xs );
+    console.log( $('#visor').position.left() );
+    //console.log( $('#graph').scrollLeft() );
+    // var svg_element = $('#svgbasics').children('svg');
+    // var svgroot = svg_element.svg().svg('get').root();
+    // var vbParts = svgroot.getAttribute("viewBox").split(" ");
+    // var vbxu = parseInt(vbParts[2]);
+    // var svgWidth = parseInt( svgroot.viewBox.baseVal.width );
+    // console.log( svgWidth );
+    // var svgzoomfactor = vbxu / svgWidth;
+    // dims = { 'vbxu':vbxu, 'svgWidth':svgWidth, 'svgzoomfactor':svgzoomfactor };
 
-  console.log(dims);
+  //console.log(dims);
   // 
   // // For real life the g parent element suffices probably
   // var node_ellipse = $('.node').children('title').filter( function(index) {
