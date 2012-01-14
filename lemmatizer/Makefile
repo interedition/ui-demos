@@ -1,58 +1,61 @@
 # This Makefile is for the lemmatizer extension to perl.
 #
 # It was generated automatically by MakeMaker version
-# 6.54 (Revision: 65400) from the contents of
+# 6.62 (Revision: 66200) from the contents of
 # Makefile.PL. Don't edit this file, edit Makefile.PL instead.
 #
 #       ANY CHANGES MADE HERE WILL BE LOST!
 #
 #   MakeMaker ARGV: ()
 #
+
 #   MakeMaker Parameters:
 
 #     ABSTRACT => q[Catalyst based application]
-#     AUTHOR => q[Tara Andrews]
+#     AUTHOR => [q[Tara Andrews]]
+#     BUILD_REQUIRES => {  }
+#     CONFIGURE_REQUIRES => {  }
 #     DIR => []
 #     DISTNAME => q[lemmatizer]
 #     EXE_FILES => [q[script/lemmatizer_cgi.pl], q[script/lemmatizer_create.pl], q[script/lemmatizer_fastcgi.pl], q[script/lemmatizer_server.pl], q[script/lemmatizer_test.pl]]
 #     NAME => q[lemmatizer]
 #     NO_META => q[1]
 #     PL_FILES => {  }
-#     PREREQ_PM => { parent=>q[0], Catalyst::Plugin::Static::Simple=>q[0], Config::General=>q[0], Catalyst::Plugin::ConfigLoader=>q[0], ExtUtils::MakeMaker=>q[6.42], Catalyst::Runtime=>q[5.80032], Catalyst::Action::RenderView=>q[0] }
+#     PREREQ_PM => { parent=>q[0], Catalyst::Plugin::Static::Simple=>q[0], ExtUtils::MakeMaker=>q[6.42], Catalyst::Plugin::ConfigLoader=>q[0], Config::General=>q[0], Catalyst::Runtime=>q[5.80032], Catalyst::Action::RenderView=>q[0] }
 #     VERSION => q[0.01]
-#     dist => { PREOP=>q[$(PERL) -I. "-MModule::Install::Admin" -e "dist_preop(q($(DISTVNAME)))"] }
+#     dist => {  }
 #     realclean => { FILES=>q[MYMETA.yml] }
-#     test => { TESTS=>q[t/01app.t t/02pod.t t/03podcoverage.t] }
+#     test => { TESTS=>q[t/01app.t t/02pod.t t/03podcoverage.t t/graph.t] }
 
 # --- MakeMaker post_initialize section:
 
 
 # --- MakeMaker const_config section:
 
-# These definitions are from config.sh (via /usr/lib/perl/5.10/Config.pm).
+# These definitions are from config.sh (via /opt/local/lib/perl5/5.12.3/darwin-multi-2level/Config.pm).
 # They may have been overridden via Makefile.PL or on the command line.
 AR = ar
-CC = cc
-CCCDLFLAGS = -fPIC
-CCDLFLAGS = -Wl,-E
-DLEXT = so
+CC = /usr/bin/gcc-4.2
+CCCDLFLAGS =  
+CCDLFLAGS =  
+DLEXT = bundle
 DLSRC = dl_dlopen.xs
 EXE_EXT = 
 FULL_AR = /usr/bin/ar
-LD = cc
-LDDLFLAGS = -shared -O2 -g -L/usr/local/lib
-LDFLAGS =  -L/usr/local/lib
-LIBC = /lib/libc-2.9.so
+LD = env MACOSX_DEPLOYMENT_TARGET=10.6 /usr/bin/gcc-4.2
+LDDLFLAGS = -L/opt/local/lib -arch x86_64 -bundle -undefined dynamic_lookup -fstack-protector
+LDFLAGS = -L/opt/local/lib -arch x86_64 -fstack-protector
+LIBC = 
 LIB_EXT = .a
 OBJ_EXT = .o
-OSNAME = linux
-OSVERS = 2.6.24-23-server
-RANLIB = :
-SITELIBEXP = /usr/local/share/perl/5.10.0
-SITEARCHEXP = /usr/local/lib/perl/5.10.0
-SO = so
-VENDORARCHEXP = /usr/lib/perl5
-VENDORLIBEXP = /usr/share/perl5
+OSNAME = darwin
+OSVERS = 10.8.0
+RANLIB = ranlib
+SITELIBEXP = /opt/local/lib/perl5/site_perl/5.12.3
+SITEARCHEXP = /opt/local/lib/perl5/site_perl/5.12.3/darwin-multi-2level
+SO = dylib
+VENDORARCHEXP = /opt/local/lib/perl5/vendor_perl/5.12.3/darwin-multi-2level
+VENDORLIBEXP = /opt/local/lib/perl5/vendor_perl/5.12.3
 
 
 # --- MakeMaker constants section:
@@ -74,60 +77,60 @@ INST_BIN = blib/bin
 INST_LIB = blib/lib
 INST_MAN1DIR = blib/man1
 INST_MAN3DIR = blib/man3
-MAN1EXT = 1p
+MAN1EXT = 1pm
 MAN3EXT = 3pm
 INSTALLDIRS = site
 DESTDIR = 
 PREFIX = $(SITEPREFIX)
-PERLPREFIX = /usr
-SITEPREFIX = /usr/local
-VENDORPREFIX = /usr
-INSTALLPRIVLIB = /usr/share/perl/5.10
+PERLPREFIX = /opt/local
+SITEPREFIX = /opt/local
+VENDORPREFIX = /opt/local
+INSTALLPRIVLIB = /opt/local/lib/perl5/5.12.3
 DESTINSTALLPRIVLIB = $(DESTDIR)$(INSTALLPRIVLIB)
-INSTALLSITELIB = /usr/local/share/perl/5.10.0
+INSTALLSITELIB = /opt/local/lib/perl5/site_perl/5.12.3
 DESTINSTALLSITELIB = $(DESTDIR)$(INSTALLSITELIB)
-INSTALLVENDORLIB = /usr/share/perl5
+INSTALLVENDORLIB = /opt/local/lib/perl5/vendor_perl/5.12.3
 DESTINSTALLVENDORLIB = $(DESTDIR)$(INSTALLVENDORLIB)
-INSTALLARCHLIB = /usr/lib/perl/5.10
+INSTALLARCHLIB = /opt/local/lib/perl5/5.12.3/darwin-multi-2level
 DESTINSTALLARCHLIB = $(DESTDIR)$(INSTALLARCHLIB)
-INSTALLSITEARCH = /usr/local/lib/perl/5.10.0
+INSTALLSITEARCH = /opt/local/lib/perl5/site_perl/5.12.3/darwin-multi-2level
 DESTINSTALLSITEARCH = $(DESTDIR)$(INSTALLSITEARCH)
-INSTALLVENDORARCH = /usr/lib/perl5
+INSTALLVENDORARCH = /opt/local/lib/perl5/vendor_perl/5.12.3/darwin-multi-2level
 DESTINSTALLVENDORARCH = $(DESTDIR)$(INSTALLVENDORARCH)
-INSTALLBIN = /usr/bin
+INSTALLBIN = /opt/local/bin
 DESTINSTALLBIN = $(DESTDIR)$(INSTALLBIN)
-INSTALLSITEBIN = /usr/local/bin
+INSTALLSITEBIN = /opt/local/bin
 DESTINSTALLSITEBIN = $(DESTDIR)$(INSTALLSITEBIN)
-INSTALLVENDORBIN = /usr/bin
+INSTALLVENDORBIN = /opt/local/bin
 DESTINSTALLVENDORBIN = $(DESTDIR)$(INSTALLVENDORBIN)
-INSTALLSCRIPT = /usr/bin
+INSTALLSCRIPT = /opt/local/bin
 DESTINSTALLSCRIPT = $(DESTDIR)$(INSTALLSCRIPT)
-INSTALLSITESCRIPT = /usr/local/bin
+INSTALLSITESCRIPT = /opt/local/bin
 DESTINSTALLSITESCRIPT = $(DESTDIR)$(INSTALLSITESCRIPT)
-INSTALLVENDORSCRIPT = /usr/bin
+INSTALLVENDORSCRIPT = /opt/local/bin
 DESTINSTALLVENDORSCRIPT = $(DESTDIR)$(INSTALLVENDORSCRIPT)
-INSTALLMAN1DIR = /usr/share/man/man1
+INSTALLMAN1DIR = /opt/local/share/man/man1p
 DESTINSTALLMAN1DIR = $(DESTDIR)$(INSTALLMAN1DIR)
-INSTALLSITEMAN1DIR = /usr/local/man/man1
+INSTALLSITEMAN1DIR = /opt/local/share/man/man1
 DESTINSTALLSITEMAN1DIR = $(DESTDIR)$(INSTALLSITEMAN1DIR)
-INSTALLVENDORMAN1DIR = /usr/share/man/man1
+INSTALLVENDORMAN1DIR = /opt/local/share/man/man1
 DESTINSTALLVENDORMAN1DIR = $(DESTDIR)$(INSTALLVENDORMAN1DIR)
-INSTALLMAN3DIR = /usr/share/man/man3
+INSTALLMAN3DIR = /opt/local/share/man/man3p
 DESTINSTALLMAN3DIR = $(DESTDIR)$(INSTALLMAN3DIR)
-INSTALLSITEMAN3DIR = /usr/local/man/man3
+INSTALLSITEMAN3DIR = /opt/local/share/man/man3
 DESTINSTALLSITEMAN3DIR = $(DESTDIR)$(INSTALLSITEMAN3DIR)
-INSTALLVENDORMAN3DIR = /usr/share/man/man3
+INSTALLVENDORMAN3DIR = /opt/local/share/man/man3
 DESTINSTALLVENDORMAN3DIR = $(DESTDIR)$(INSTALLVENDORMAN3DIR)
 PERL_LIB =
-PERL_ARCHLIB = /usr/lib/perl/5.10
+PERL_ARCHLIB = /opt/local/lib/perl5/5.12.3/darwin-multi-2level
 LIBPERL_A = libperl.a
 FIRST_MAKEFILE = Makefile
 MAKEFILE_OLD = Makefile.old
 MAKE_APERL_FILE = Makefile.aperl
 PERLMAINCC = $(CC)
-PERL_INC = /usr/lib/perl/5.10/CORE
-PERL = /usr/bin/perl "-Iinc"
-FULLPERL = /usr/bin/perl "-Iinc"
+PERL_INC = /opt/local/lib/perl5/5.12.3/darwin-multi-2level/CORE
+PERL = /opt/local/bin/perl "-Iinc"
+FULLPERL = /opt/local/bin/perl "-Iinc"
 ABSPERL = $(PERL)
 PERLRUN = $(PERL)
 FULLPERLRUN = $(FULLPERL)
@@ -140,9 +143,9 @@ PERM_DIR = 755
 PERM_RW = 644
 PERM_RWX = 755
 
-MAKEMAKER   = /usr/local/share/perl/5.10.0/ExtUtils/MakeMaker.pm
-MM_VERSION  = 6.54
-MM_REVISION = 65400
+MAKEMAKER   = /opt/local/lib/perl5/5.12.3/ExtUtils/MakeMaker.pm
+MM_VERSION  = 6.62
+MM_REVISION = 66200
 
 # FULLEXT = Pathname for extension directory (eg Foo/Bar/Oracle).
 # BASEEXT = Basename part of FULLEXT. May be just equal FULLEXT. (eg Oracle)
@@ -169,8 +172,16 @@ MAN1PODS = script/lemmatizer_cgi.pl \
 	script/lemmatizer_fastcgi.pl \
 	script/lemmatizer_server.pl \
 	script/lemmatizer_test.pl
-MAN3PODS = lib/lemmatizer.pm \
-	lib/lemmatizer/Controller/Root.pm
+MAN3PODS = lib/Text/Tradition/Collation.pm \
+	lib/Text/Tradition/Parser/BaseText.pm \
+	lib/Text/Tradition/Parser/CSV.pm \
+	lib/Text/Tradition/Parser/CollateX.pm \
+	lib/Text/Tradition/Parser/GraphML.pm \
+	lib/Text/Tradition/Parser/Self.pm \
+	lib/Text/Tradition/Parser/TEI.pm \
+	lib/lemmatizer.pm \
+	lib/lemmatizer/Controller/Root.pm \
+	lib/lemmatizer/View/TT.pm
 
 # Where is the Config information that we are using/depend on
 CONFIGDEP = $(PERL_ARCHLIB)$(DFSEP)Config.pm $(PERL_INC)$(DFSEP)config.h
@@ -192,17 +203,71 @@ PERL_ARCHIVE       =
 PERL_ARCHIVE_AFTER = 
 
 
-TO_INST_PM = lib/lemmatizer.pm \
-	lib/lemmatizer/Controller/Root.pm
-
-PM_TO_BLIB = lib/lemmatizer/Controller/Root.pm \
-	blib/lib/lemmatizer/Controller/Root.pm \
+TO_INST_PM = lib/.DS_Store \
+	lib/Text/Tradition.pm \
+	lib/Text/Tradition/Collation.pm \
+	lib/Text/Tradition/Collation/Path.pm \
+	lib/Text/Tradition/Collation/Position.pm \
+	lib/Text/Tradition/Collation/Reading.pm \
+	lib/Text/Tradition/Collation/Relationship.pm \
+	lib/Text/Tradition/Collation/Segment.pm \
+	lib/Text/Tradition/Parser/BaseText.pm \
+	lib/Text/Tradition/Parser/CSV.pm \
+	lib/Text/Tradition/Parser/CollateX.pm \
+	lib/Text/Tradition/Parser/GraphML.pm \
+	lib/Text/Tradition/Parser/Self.pm \
+	lib/Text/Tradition/Parser/TEI.pm \
+	lib/Text/Tradition/Witness.pm \
 	lib/lemmatizer.pm \
-	blib/lib/lemmatizer.pm
+	lib/lemmatizer/.DS_Store \
+	lib/lemmatizer/Controller/Root.pm \
+	lib/lemmatizer/View/TT.pm \
+	make_svg.pl
+
+PM_TO_BLIB = lib/Text/Tradition/Parser/Self.pm \
+	blib/lib/Text/Tradition/Parser/Self.pm \
+	lib/Text/Tradition/Parser/CSV.pm \
+	blib/lib/Text/Tradition/Parser/CSV.pm \
+	lib/Text/Tradition.pm \
+	blib/lib/Text/Tradition.pm \
+	lib/Text/Tradition/Parser/BaseText.pm \
+	blib/lib/Text/Tradition/Parser/BaseText.pm \
+	lib/Text/Tradition/Collation/Reading.pm \
+	blib/lib/Text/Tradition/Collation/Reading.pm \
+	lib/lemmatizer/View/TT.pm \
+	blib/lib/lemmatizer/View/TT.pm \
+	lib/Text/Tradition/Parser/GraphML.pm \
+	blib/lib/Text/Tradition/Parser/GraphML.pm \
+	lib/lemmatizer/.DS_Store \
+	blib/lib/lemmatizer/.DS_Store \
+	lib/.DS_Store \
+	blib/lib/.DS_Store \
+	lib/Text/Tradition/Collation/Position.pm \
+	blib/lib/Text/Tradition/Collation/Position.pm \
+	lib/Text/Tradition/Parser/TEI.pm \
+	blib/lib/Text/Tradition/Parser/TEI.pm \
+	lib/Text/Tradition/Collation.pm \
+	blib/lib/Text/Tradition/Collation.pm \
+	lib/lemmatizer/Controller/Root.pm \
+	blib/lib/lemmatizer/Controller/Root.pm \
+	lib/Text/Tradition/Collation/Relationship.pm \
+	blib/lib/Text/Tradition/Collation/Relationship.pm \
+	lib/lemmatizer.pm \
+	blib/lib/lemmatizer.pm \
+	lib/Text/Tradition/Witness.pm \
+	blib/lib/Text/Tradition/Witness.pm \
+	make_svg.pl \
+	$(INST_LIB)/make_svg.pl \
+	lib/Text/Tradition/Collation/Segment.pm \
+	blib/lib/Text/Tradition/Collation/Segment.pm \
+	lib/Text/Tradition/Parser/CollateX.pm \
+	blib/lib/Text/Tradition/Parser/CollateX.pm \
+	lib/Text/Tradition/Collation/Path.pm \
+	blib/lib/Text/Tradition/Collation/Path.pm
 
 
 # --- MakeMaker platform_constants section:
-MM_Unix_VERSION = 6.54
+MM_Unix_VERSION = 6.62
 PERL_MALLOC_DEF = -DPERL_EXTMALLOC_DEF -Dmalloc=Perl_malloc -Dfree=Perl_mfree -Drealloc=Perl_realloc -Dcalloc=Perl_calloc
 
 
@@ -252,14 +317,14 @@ makemakerdflt : all
 
 
 # --- MakeMaker dist section:
-TAR = tar
+TAR = COPY_EXTENDED_ATTRIBUTES_DISABLE=1 COPYFILE_DISABLE=1 tar
 TARFLAGS = cvf
 ZIP = zip
 ZIPFLAGS = -r
 COMPRESS = gzip --best
 SUFFIX = .gz
 SHAR = shar
-PREOP = $(PERL) -I. "-MModule::Install::Admin" -e "dist_preop(q($(DISTVNAME)))"
+PREOP = $(NOECHO) $(NOOP)
 POSTOP = $(NOECHO) $(NOOP)
 TO_UNIX = $(NOECHO) $(NOOP)
 CI = ci -u
@@ -425,8 +490,16 @@ manifypods : pure_all  \
 	script/lemmatizer_test.pl \
 	script/lemmatizer_fastcgi.pl \
 	script/lemmatizer_cgi.pl \
+	lib/Text/Tradition/Parser/Self.pm \
+	lib/Text/Tradition/Parser/CSV.pm \
+	lib/Text/Tradition/Parser/BaseText.pm \
+	lib/lemmatizer/View/TT.pm \
+	lib/Text/Tradition/Parser/TEI.pm \
+	lib/Text/Tradition/Collation.pm \
 	lib/lemmatizer/Controller/Root.pm \
-	lib/lemmatizer.pm
+	lib/Text/Tradition/Parser/GraphML.pm \
+	lib/lemmatizer.pm \
+	lib/Text/Tradition/Parser/CollateX.pm
 	$(NOECHO) $(POD2MAN) --section=1 --perm_rw=$(PERM_RW) \
 	  script/lemmatizer_server.pl $(INST_MAN1DIR)/lemmatizer_server.pl.$(MAN1EXT) \
 	  script/lemmatizer_create.pl $(INST_MAN1DIR)/lemmatizer_create.pl.$(MAN1EXT) \
@@ -434,8 +507,16 @@ manifypods : pure_all  \
 	  script/lemmatizer_fastcgi.pl $(INST_MAN1DIR)/lemmatizer_fastcgi.pl.$(MAN1EXT) \
 	  script/lemmatizer_cgi.pl $(INST_MAN1DIR)/lemmatizer_cgi.pl.$(MAN1EXT) 
 	$(NOECHO) $(POD2MAN) --section=3 --perm_rw=$(PERM_RW) \
+	  lib/Text/Tradition/Parser/Self.pm $(INST_MAN3DIR)/Text::Tradition::Parser::Self.$(MAN3EXT) \
+	  lib/Text/Tradition/Parser/CSV.pm $(INST_MAN3DIR)/Text::Tradition::Parser::CSV.$(MAN3EXT) \
+	  lib/Text/Tradition/Parser/BaseText.pm $(INST_MAN3DIR)/Text::Tradition::Parser::BaseText.$(MAN3EXT) \
+	  lib/lemmatizer/View/TT.pm $(INST_MAN3DIR)/lemmatizer::View::TT.$(MAN3EXT) \
+	  lib/Text/Tradition/Parser/TEI.pm $(INST_MAN3DIR)/Text::Tradition::Parser::TEI.$(MAN3EXT) \
+	  lib/Text/Tradition/Collation.pm $(INST_MAN3DIR)/Text::Tradition::Collation.$(MAN3EXT) \
 	  lib/lemmatizer/Controller/Root.pm $(INST_MAN3DIR)/lemmatizer::Controller::Root.$(MAN3EXT) \
-	  lib/lemmatizer.pm $(INST_MAN3DIR)/lemmatizer.$(MAN3EXT) 
+	  lib/Text/Tradition/Parser/GraphML.pm $(INST_MAN3DIR)/Text::Tradition::Parser::GraphML.$(MAN3EXT) \
+	  lib/lemmatizer.pm $(INST_MAN3DIR)/lemmatizer.$(MAN3EXT) \
+	  lib/Text/Tradition/Parser/CollateX.pm $(INST_MAN3DIR)/Text::Tradition::Parser::CollateX.$(MAN3EXT) 
 
 
 
@@ -507,14 +588,15 @@ clean :: clean_subdirs
 	  *$(LIB_EXT) core \
 	  core.[0-9] $(INST_ARCHAUTODIR)/extralibs.all \
 	  core.[0-9][0-9] $(BASEEXT).bso \
-	  pm_to_blib.ts core.[0-9][0-9][0-9][0-9] \
+	  pm_to_blib.ts MYMETA.json \
+	  core.[0-9][0-9][0-9][0-9] MYMETA.yml \
 	  $(BASEEXT).x $(BOOTSTRAP) \
 	  perl$(EXE_EXT) tmon.out \
 	  *$(OBJ_EXT) pm_to_blib \
 	  $(INST_ARCHAUTODIR)/extralibs.ld blibdirs.ts \
 	  core.[0-9][0-9][0-9][0-9][0-9] *perl.core \
 	  core.*perl.*.? $(MAKE_APERL_FILE) \
-	  perl $(BASEEXT).def \
+	  $(BASEEXT).def perl \
 	  core.[0-9][0-9][0-9] mon.out \
 	  lib$(BASEEXT).def perlmain.c \
 	  perl.exe so_locations \
@@ -632,8 +714,12 @@ ci :
 
 # --- MakeMaker distmeta section:
 distmeta : create_distdir metafile
-	$(NOECHO) cd $(DISTVNAME) && $(ABSPERLRUN) -MExtUtils::Manifest=maniadd -e 'eval { maniadd({q{META.yml} => q{Module meta-data (added by MakeMaker)}}) } ' \
+	$(NOECHO) cd $(DISTVNAME) && $(ABSPERLRUN) -MExtUtils::Manifest=maniadd -e 'exit unless -e q{META.yml};' \
+	  -e 'eval { maniadd({q{META.yml} => q{Module YAML meta-data (added by MakeMaker)}}) }' \
 	  -e '    or print "Could not add META.yml to MANIFEST: $${'\''@'\''}\n"' --
+	$(NOECHO) cd $(DISTVNAME) && $(ABSPERLRUN) -MExtUtils::Manifest=maniadd -e 'exit unless -f q{META.json};' \
+	  -e 'eval { maniadd({q{META.json} => q{Module JSON meta-data (added by MakeMaker)}}) }' \
+	  -e '    or print "Could not add META.json to MANIFEST: $${'\''@'\''}\n"' --
 
 
 
@@ -786,7 +872,7 @@ $(FIRST_MAKEFILE) : Makefile.PL $(CONFIGDEP)
 
 # --- MakeMaker makeaperl section ---
 MAP_TARGET    = perl
-FULLPERL      = /usr/bin/perl
+FULLPERL      = /opt/local/bin/perl
 
 $(MAP_TARGET) :: static $(MAKE_APERL_FILE)
 	$(MAKE) $(USEMAKEFILE) $(MAKE_APERL_FILE) $@
@@ -804,7 +890,7 @@ $(MAKE_APERL_FILE) : $(FIRST_MAKEFILE) pm_to_blib
 TEST_VERBOSE=0
 TEST_TYPE=test_$(LINKTYPE)
 TEST_FILE = test.pl
-TEST_FILES = t/01app.t t/02pod.t t/03podcoverage.t
+TEST_FILES = t/01app.t t/02pod.t t/03podcoverage.t t/graph.t
 TESTDB_SW = -d
 
 testdb :: testdb_$(LINKTYPE)
@@ -841,7 +927,7 @@ ppd :
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Config::General" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="ExtUtils::MakeMaker" VERSION="6.42" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="parent::" />' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="i486-linux-gnu-thread-multi-5.10" />' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="darwin-multi-2level-5.12" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <CODEBASE HREF="" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    </IMPLEMENTATION>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '</SOFTPKG>' >> $(DISTNAME).ppd
@@ -851,8 +937,26 @@ ppd :
 
 pm_to_blib : $(FIRST_MAKEFILE) $(TO_INST_PM)
 	$(NOECHO) $(ABSPERLRUN) -MExtUtils::Install -e 'pm_to_blib({@ARGV}, '\''$(INST_LIB)/auto'\'', q[$(PM_FILTER)], '\''$(PERM_DIR)'\'')' -- \
+	  lib/Text/Tradition/Parser/Self.pm blib/lib/Text/Tradition/Parser/Self.pm \
+	  lib/Text/Tradition/Parser/CSV.pm blib/lib/Text/Tradition/Parser/CSV.pm \
+	  lib/Text/Tradition.pm blib/lib/Text/Tradition.pm \
+	  lib/Text/Tradition/Parser/BaseText.pm blib/lib/Text/Tradition/Parser/BaseText.pm \
+	  lib/Text/Tradition/Collation/Reading.pm blib/lib/Text/Tradition/Collation/Reading.pm \
+	  lib/lemmatizer/View/TT.pm blib/lib/lemmatizer/View/TT.pm \
+	  lib/Text/Tradition/Parser/GraphML.pm blib/lib/Text/Tradition/Parser/GraphML.pm \
+	  lib/lemmatizer/.DS_Store blib/lib/lemmatizer/.DS_Store \
+	  lib/.DS_Store blib/lib/.DS_Store \
+	  lib/Text/Tradition/Collation/Position.pm blib/lib/Text/Tradition/Collation/Position.pm \
+	  lib/Text/Tradition/Parser/TEI.pm blib/lib/Text/Tradition/Parser/TEI.pm \
+	  lib/Text/Tradition/Collation.pm blib/lib/Text/Tradition/Collation.pm \
 	  lib/lemmatizer/Controller/Root.pm blib/lib/lemmatizer/Controller/Root.pm \
-	  lib/lemmatizer.pm blib/lib/lemmatizer.pm 
+	  lib/Text/Tradition/Collation/Relationship.pm blib/lib/Text/Tradition/Collation/Relationship.pm \
+	  lib/lemmatizer.pm blib/lib/lemmatizer.pm \
+	  lib/Text/Tradition/Witness.pm blib/lib/Text/Tradition/Witness.pm \
+	  make_svg.pl $(INST_LIB)/make_svg.pl \
+	  lib/Text/Tradition/Collation/Segment.pm blib/lib/Text/Tradition/Collation/Segment.pm \
+	  lib/Text/Tradition/Parser/CollateX.pm blib/lib/Text/Tradition/Parser/CollateX.pm \
+	  lib/Text/Tradition/Collation/Path.pm blib/lib/Text/Tradition/Collation/Path.pm 
 	$(NOECHO) $(TOUCH) pm_to_blib
 
 
@@ -864,25 +968,6 @@ pm_to_blib : $(FIRST_MAKEFILE) $(TO_INST_PM)
 
 # End.
 # Postamble by Module::Install 0.91
-# --- Module::Install::Admin::Makefile section:
-
-realclean purge ::
-	$(RM_F) $(DISTVNAME).tar$(SUFFIX)
-	$(RM_F) MANIFEST.bak _build
-	$(PERL) "-Ilib" "-MModule::Install::Admin" -e "remove_meta()"
-	$(RM_RF) inc
-
-reset :: purge
-
-upload :: test dist
-	cpan-upload -verbose $(DISTVNAME).tar$(SUFFIX)
-
-grok ::
-	perldoc Module::Install
-
-distsign ::
-	cpansign -s
-
 catalyst_par :: all
 	$(NOECHO) $(PERL) -Ilib -Minc::Module::Install -MModule::Install::Catalyst -e"Catalyst::Module::Install::_catalyst_par( '', 'lemmatizer', { CLASSES => [], CORE => 0, ENGINE => 'CGI', MULTIARCH => 0, SCRIPT => '', USAGE => q## } )"
 # --- Module::Install::AutoInstall section:

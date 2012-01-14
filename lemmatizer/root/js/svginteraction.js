@@ -66,8 +66,12 @@ function node_obj(ellipse) {
   this.sub_nodes = [];
   this.super_node = null;
 
+  this.get_id = function() {
+    return self.ellipse.siblings('title').text()
+  }
+  
   this.dblclick_listener = function(evt) {
-    node_id = self.ellipse.siblings('title').text();
+    var node_id = self.get_id();
     ncpath = getRelativePath( 'node_click' );
     var jqjson = $.getJSON( ncpath, 'node_id=' + node_id, function(data) {
       $('#constructedtext').empty();
@@ -182,6 +186,7 @@ function node_obj(ellipse) {
 
   this.enter_node = function(evt) {
     self.ellipse.attr( 'fill', '#ffccff' );
+    reportSomeIntersect();
   }
 
   this.leave_node = function(evt) {
@@ -315,3 +320,54 @@ $(window).mouseout(function (event) {
 });
 
 
+// Spiking below
+
+function reportSomeIntersect() {
+    var xs = '';
+    $('ellipse').each( function( index ) {
+        xs = xs + $(this).attr('cx') + ', ';
+    });
+    
+    console.log( $('#graph').scrollLeft() );
+    var svg_element = $('#svgbasics').children('svg');
+    var svgroot = svg_element.svg().svg('get').root();
+    var vbParts = svgroot.getAttribute("viewBox").split(" ");
+    var vbxu = parseInt(vbParts[2]);
+    var svgWidth = parseInt( svgroot.viewBox.baseVal.width );
+    var svgzoomfactor = vbxu / svgWidth;
+    dims = { 'vbxu':vbxu, 'svgWidth':svgWidth, 'svgzoomfactor':svgzoomfactor };
+
+  console.log(dims);
+  // 
+  // // For real life the g parent element suffices probably
+  // var node_ellipse = $('.node').children('title').filter( function(index) {
+  //   return $(this).text() == "n18";
+  // }).siblings('ellipse');
+  // 
+  // var scale = svgroot.currentScale;
+  // var vbParts = svgroot.getAttribute("viewBox").split(" ");
+  // var vbx = parseInt(vbParts[0]);
+  // var vby = parseInt(vbParts[1]);
+  // var vbxu = parseInt(vbParts[2]);
+  // var vbyu = parseInt(vbParts[3]);
+  // 
+  // var tx = svgroot.currentTranslate.x;
+  // var ty = svgroot.currentTranslate.y;
+  // var svgWidth = parseInt( svgroot.viewBox.baseVal.width );
+  // var svgHeight = parseInt( svgroot.viewBox.baseVal.height );
+  // var svgzoomfactor = vbxu / svgWidth;
+  // var vpRect = svgroot.createSVGRect();
+  // vpRect.x = parseFloat(vbx + (-tx) * (svgzoomfactor) / scale);
+  // vpRect.y = parseFloat(vby + (-ty) * (svgzoomfactor) / scale);
+  // vpRect.width = parseFloat(svgWidth * svgzoomfactor / scale);
+  // vpRect.height = parseFloat(svgHeight * svgzoomfactor / scale);
+  // console.log( vpRect );
+  // console.log( svgroot.getEnclosureList );
+  // console.log( '++'+svgroot.getEnclosureList(vpRect) );
+  //       if (svgroot.checkIntersection(node_ellipse, vpRect)) {
+  //   console.log( 'sure it does!' );
+  // } else {
+  //     console.log( 'duh!' );
+  //     
+  // }
+}

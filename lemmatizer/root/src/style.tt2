@@ -5,14 +5,27 @@ body {
     font: 1em "Trebuchet MS", verdana, arial, sans-serif; 
     font-size: 85%; 
 }
-#graph {
-    height: 402px;
+#graph_container {
+    height: 404px;
     width: 90%;
     margin-top: 10px;
+    border: 2px solid #D9E4FF;
+}
+#visor {
+    height: 400px; 
+    width: 30%; 
+    background-color: #DFA6ED; 
+    opacity: 0.2; 
+    position: relative;
+    left: 35%; 
+    z-index: -300;
+    border: 2px solid #D9E4FF;
+}
+#graph {
+    position: relative; top: -400px;
     padding: 0px;
     overflow: auto;
     /* cursor: -moz-grab !important; */ /* should this be applied with JS? */
-    border: 2px solid #D9E4FF;
 }
 #constructedtext {
     height: 300px;

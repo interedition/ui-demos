@@ -16,12 +16,15 @@ $(function() {
 [% END %]
 
 	<div id="constructedtext">
-	</div>	
-	<div id="graph">
-		<!-- width seems to need to be as wide as the graph -->
-		<!-- a translation of -487 in the svg itself was needed to adjust the graph to the left of the div -->
-		<!-- unclear how to cope with height that doesn't fit box -->
-		<div id="svgbasics" style="height: 400px; width: 0px; background-color: white; border: 1px solid white;"></div>
+	</div>
+	<div id="graph_container">	
+	    <div id="visor">hi</div>
+	    <div id="graph">
+		    <!-- width seems to need to be as wide as the graph -->
+		    <!-- a translation of -487 in the svg itself was needed to adjust the graph to the left of the div -->
+		    <!-- unclear how to cope with height that doesn't fit box -->
+		    <div id="svgbasics" style="height: 400px; width: 0px;"></div>
+		</div>
 	</div>
 	
 	<div id="dialog-form" title="Equate readings..">
