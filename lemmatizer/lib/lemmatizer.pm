@@ -16,6 +16,7 @@ use Catalyst::Runtime 5.80;
 use parent qw/Catalyst/;
 use Catalyst qw/-Debug
                 ConfigLoader
+                Unicode::Encoding
                 Static::Simple/;
 our $VERSION = '0.01';
 

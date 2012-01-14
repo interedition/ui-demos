@@ -9,6 +9,7 @@ all_from 'lib/lemmatizer.pm';
 requires 'Catalyst::Runtime' => '5.80032';
 requires 'Catalyst::Plugin::ConfigLoader';
 requires 'Catalyst::Plugin::Static::Simple';
+requires 'Catalyst::Plugin::Unicode::Encoding';
 requires 'Catalyst::Action::RenderView';
 requires 'Text::Tradition';
 requires 'parent';
