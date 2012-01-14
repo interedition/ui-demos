@@ -139,7 +139,6 @@ function node_obj(ellipse) {
 
   this.enter_node = function(evt) {
     self.ellipse.attr( 'fill', '#ffccff' );
-    reportSomeIntersect(self.get_id);
   }
 
   this.leave_node = function(evt) {
@@ -230,6 +229,7 @@ $(document).ready(function () {
     }
   }).mousewheel(function (event, delta) {
       this.scrollLeft -= (delta * 30);
+      colorVisored();
   }).css({
     'overflow' : 'hidden',
     'cursor' : '-moz-grab'
@@ -274,60 +274,19 @@ $(window).mouseout(function (event) {
 
 // Spiking below
 
-function reportSomeIntersect() {
-    console.log( "0" );
+function colorVisored() {
     var svgWidth = parseInt( $('#svgbasics').children('svg').svg().svg('get').root().viewBox.baseVal.width );
-    toPixelDim = $('#svgbasics').width() / svgWidth;
-    console.log( "1" );
-    scrollOffset = parseInt( $('#graph').scrollLeft() );
-    var xs = '';
-    console.log( "2" );
+    zoomfactor = $('#svgbasics').width() / svgWidth;
+    scrollOffset = parseInt( $('#graph').scrollLeft() ) - $('#graph').offset().left;
+    visor_left = $('#visor').offset().left;
+    visor_right = visor_left + $('#visor').width();
     $('ellipse').each( function( index ) {
-        xs = xs + (parseInt( $(this).attr('cx') ) - scrollOffset) + ', ';
+        cpos = ( parseInt( $(this).attr('cx') ) * ( zoomfactor ) ) - scrollOffset;
+        if ( cpos > visor_left && cpos < visor_right ) {
+            $(this).attr( {stroke:'green', fill:'#b3f36d'} );
+        } else {
+            $(this).attr( {stroke:'black', fill:'#fff'} );
+        }
     });
-    console.log( xs );
-    console.log( $('#visor').position.left() );
-    //console.log( $('#graph').scrollLeft() );
-    // var svg_element = $('#svgbasics').children('svg');
-    // var svgroot = svg_element.svg().svg('get').root();
-    // var vbParts = svgroot.getAttribute("viewBox").split(" ");
-    // var vbxu = parseInt(vbParts[2]);
-    // var svgWidth = parseInt( svgroot.viewBox.baseVal.width );
-    // console.log( svgWidth );
-    // var svgzoomfactor = vbxu / svgWidth;
-    // dims = { 'vbxu':vbxu, 'svgWidth':svgWidth, 'svgzoomfactor':svgzoomfactor };
-
-  //console.log(dims);
-  // 
-  // // For real life the g parent element suffices probably
-  // var node_ellipse = $('.node').children('title').filter( function(index) {
-  //   return $(this).text() == "n18";
-  // }).siblings('ellipse');
-  // 
-  // var scale = svgroot.currentScale;
-  // var vbParts = svgroot.getAttribute("viewBox").split(" ");
-  // var vbx = parseInt(vbParts[0]);
-  // var vby = parseInt(vbParts[1]);
-  // var vbxu = parseInt(vbParts[2]);
-  // var vbyu = parseInt(vbParts[3]);
-  // 
-  // var tx = svgroot.currentTranslate.x;
-  // var ty = svgroot.currentTranslate.y;
-  // var svgWidth = parseInt( svgroot.viewBox.baseVal.width );
-  // var svgHeight = parseInt( svgroot.viewBox.baseVal.height );
-  // var svgzoomfactor = vbxu / svgWidth;
-  // var vpRect = svgroot.createSVGRect();
-  // vpRect.x = parseFloat(vbx + (-tx) * (svgzoomfactor) / scale);
-  // vpRect.y = parseFloat(vby + (-ty) * (svgzoomfactor) / scale);
-  // vpRect.width = parseFloat(svgWidth * svgzoomfactor / scale);
-  // vpRect.height = parseFloat(svgHeight * svgzoomfactor / scale);
-  // console.log( vpRect );
-  // console.log( svgroot.getEnclosureList );
-  // console.log( '++'+svgroot.getEnclosureList(vpRect) );
-  //       if (svgroot.checkIntersection(node_ellipse, vpRect)) {
-  //   console.log( 'sure it does!' );
-  // } else {
-  //     console.log( 'duh!' );
-  //     
-  // }
+    
 }
