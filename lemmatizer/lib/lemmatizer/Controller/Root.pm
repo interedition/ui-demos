@@ -38,13 +38,15 @@ sub index :Path :Args(0) {
 
 	# Hacky hacky to make this work with the interedition-tools interface:
 	# accept XML in a parameter called 'result'.
-	my $datatype = $c->request->param('type') || 'Self';
+	my $datatype = $c->request->param('type') || 'CollateX';
 	my $informat = $c->request->param('format') || 'string';
 	my $input = $c->request->param('result');
 	unless( $input ) {
+		my $testdata = $c->request->param('test') || 'Collatex-16.xml';
 		# Default testing stuff.
 		$informat = 'file';
-		$input = $c->path_to( 't', 'data', 'john.xml' );
+		$input = $c->path_to( 't', 'data', $testdata );
+		$datatype = 'Self' if $testdata eq 'john.xml';
 	}
 	$tradition = Text::Tradition->new( 
     	'name'  => 'inline', 
