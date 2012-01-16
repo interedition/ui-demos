@@ -13,7 +13,7 @@ body {
 }
 #enlargement_container {
     height: 404px;
-    width: 42%;
+    width: 45%;
     margin-top: 10px;
     border: 2px solid #D9E4FF;
 }

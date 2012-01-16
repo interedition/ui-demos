@@ -1,3 +1,7 @@
+graph_width = 0;
+elargement_width = 0;
+//scroll_ratio = 0;
+
 function getRelativePath( action ) {
     path_elements = window.location.pathname.split('/'); 
     if( path_elements[1].length > 0 ) {
@@ -15,7 +19,10 @@ function svgLoaded() {
   svg_vbheight = svg_graph.viewBox.baseVal.height;
   scroll_padding = $('#graph_container').width();
   // (Use attr('width') to set width attr, otherwise style="width: npx;" is set.)
-  svg_element.attr( 'width', ( ( parseInt(svg_vbwidth/svg_vbheight) * parseInt(svg_element.attr('height')) ) + scroll_padding ) );
+  svg_element_width = svg_vbwidth/svg_vbheight * parseInt(svg_element.attr('height'));
+  svg_element_width += scroll_padding;
+  svg_element.attr( 'width', svg_element_width );
+  graph_width = svg_element_width;
   $('ellipse').attr( {stroke:'black', fill:'#fff'} );
   
   // Next would turn all ellipses into node objects..
@@ -33,15 +40,13 @@ function svgEnlargementLoaded() {
   svg_vbheight = svg_graph.viewBox.baseVal.height;
   scroll_padding = $('#enlargement_container').width();
   // (Use attr('width') to set width attr, otherwise style="width: npx;" is set.)
-  svg_element.attr( 'width', ( ( parseInt(svg_vbwidth/svg_vbheight) * parseInt(svg_element.attr('height')) ) + scroll_padding ) );
+  svg_element_width = svg_vbwidth/svg_vbheight * parseInt(svg_element.attr('height'));
+  svg_element_width += scroll_padding;
+  svg_element.attr( 'width', svg_element_width );
+  enlargement_width = svg_element_width;
   $('ellipse').attr( {stroke:'black', fill:'#fff'} );
-  
-  // Next would turn all ellipses into node objects..
-  // $('ellipse[fill="#fff"]').each( function() {
-  //     $(this).data( 'node_obj', new node_obj( $(this) ) );
-  //   }
-  // );
 }
+
 function get_node_obj( node_id ) {
   return $('.node').children('title').filter( function(index) {
     return $(this).text() == node_id;
@@ -232,6 +237,7 @@ function get_edge_elements_for( ellipse ) {
 } 
 
 $(document).ready(function () {
+  scroll_ratio = $('#graph_container').width() / $('#enlargement_container').width();
   $('#graph').mousedown(function (event) {
     $(this)
       .data('down', true)
@@ -244,16 +250,17 @@ $(document).ready(function () {
     if ($(this).data('down') == true ) {
       var scroll_left = $(this).data('scrollLeft') + $(this).data('x') - event.clientX;
       this.scrollLeft = scroll_left;
-      $('#enlargement').scrollLeft( (scroll_left * (parseInt( $('#graph_container').width() ) / parseInt( $('#enlargement_container').width() ) ) ) );
-      colorVisored();
-      
+      enlarged_scroll_left = scroll_left * scroll_ratio; 
+      $('#enlargement').scrollLeft( enlarged_scroll_left );
+      //colorVisored();
     }
   }).mousewheel(function (event, delta) {
-      this.scrollLeft -= (delta * 30);
-      enl_scrollLeft = $('#enlargement').scrollLeft();
-      enl_scrollLeft -= ( delta * (30 * (parseInt( $('#graph_container').width() ) / parseInt( $('#enlargement_container').width() ) ) ) );
-      $('#enlargement').scrollLeft( enl_scrollLeft );
-      colorVisored();
+      scroll_left = delta * 30;
+      this.scrollLeft -= scroll_left;
+      enlarged_scroll_left = $('#enlargement').scrollLeft();
+      enlarged_scroll_left -= scroll_left * scroll_ratio; 
+      $('#enlargement').scrollLeft( enlarged_scroll_left );
+      //colorVisored();      
   }).css({
     'overflow' : 'hidden',
     'cursor' : '-moz-grab'
