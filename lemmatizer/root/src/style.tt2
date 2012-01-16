@@ -6,13 +6,19 @@ body {
     font-size: 85%; 
 }
 #graph_container {
-    height: 404px;
+    height: 204px;
     width: 90%;
     margin-top: 10px;
     border: 2px solid #D9E4FF;
 }
+#enlargement_container {
+    height: 404px;
+    width: 42%;
+    margin-top: 10px;
+    border: 2px solid #D9E4FF;
+}
 #visor {
-    height: 400px; 
+    height: 200px; 
     width: 30%; 
     background-color: #DFA6ED; 
     opacity: 0.2; 
@@ -22,18 +28,13 @@ body {
     border: 2px solid #D9E4FF;
 }
 #graph {
-    position: relative; top: -400px;
+    position: relative; top: -200px;
     padding: 0px;
     overflow: auto;
     /* cursor: -moz-grab !important; */ /* should this be applied with JS? */
 }
-#constructedtext {
-    height: 300px;
-    width: 490px;
-    margin-top: 10px;
-    padding: 5px;
-    overflow: auto;
-    /* cursor: -moz-grab !important; */ /* should this be applied with JS? */
-    border: 2px solid #D9E4FF;
+#enlargement {
+    padding: 0px;
+    overflow: hidden;
 }
 </style>

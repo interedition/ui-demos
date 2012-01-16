@@ -8,20 +8,40 @@ function getRelativePath( action ) {
 }
 
 function svgLoaded() {
-  // some initial scaling cause we can't control GraphViz's way of scaling
+  // some initial scaling
   var svg_element = $('#svgbasics').children('svg');
   var svg_graph = svg_element.svg().svg('get').root()
-  svg_width = svg_graph.viewBox.baseVal.width;
-  $('#svgbasics').width( svg_width );
-  svg_element.width( svg_width );
-  //
+  svg_vbwidth = svg_graph.viewBox.baseVal.width;
+  svg_vbheight = svg_graph.viewBox.baseVal.height;
+  scroll_padding = $('#graph_container').width();
+  // (Use attr('width') to set width attr, otherwise style="width: npx;" is set.)
+  svg_element.attr( 'width', ( ( parseInt(svg_vbwidth/svg_vbheight) * parseInt(svg_element.attr('height')) ) + scroll_padding ) );
   $('ellipse').attr( {stroke:'black', fill:'#fff'} );
-  $('ellipse[fill="#fff"]').each( function() {
-      $(this).data( 'node_obj', new node_obj( $(this) ) );
-    }
-  );
+  
+  // Next would turn all ellipses into node objects..
+  // $('ellipse[fill="#fff"]').each( function() {
+  //     $(this).data( 'node_obj', new node_obj( $(this) ) );
+  //   }
+  // );
 }
 
+function svgEnlargementLoaded() {
+  // some initial scaling
+  var svg_element = $('#svgenlargement').children('svg');
+  var svg_graph = svg_element.svg().svg('get').root()
+  svg_vbwidth = svg_graph.viewBox.baseVal.width;
+  svg_vbheight = svg_graph.viewBox.baseVal.height;
+  scroll_padding = $('#enlargement_container').width();
+  // (Use attr('width') to set width attr, otherwise style="width: npx;" is set.)
+  svg_element.attr( 'width', ( ( parseInt(svg_vbwidth/svg_vbheight) * parseInt(svg_element.attr('height')) ) + scroll_padding ) );
+  $('ellipse').attr( {stroke:'black', fill:'#fff'} );
+  
+  // Next would turn all ellipses into node objects..
+  // $('ellipse[fill="#fff"]').each( function() {
+  //     $(this).data( 'node_obj', new node_obj( $(this) ) );
+  //   }
+  // );
+}
 function get_node_obj( node_id ) {
   return $('.node').children('title').filter( function(index) {
     return $(this).text() == node_id;
@@ -212,9 +232,6 @@ function get_edge_elements_for( ellipse ) {
 } 
 
 $(document).ready(function () {
-  $('#graph').ajaxError(function() {
-    console.log( 'Oops.. something went wrong with trying to save this change. Please try again...' );
-  });
   $('#graph').mousedown(function (event) {
     $(this)
       .data('down', true)
@@ -225,10 +242,17 @@ $(document).ready(function () {
     $(this).data('down', false);
   }).mousemove(function (event) {
     if ($(this).data('down') == true ) {
-      this.scrollLeft = $(this).data('scrollLeft') + $(this).data('x') - event.clientX;
+      var scroll_left = $(this).data('scrollLeft') + $(this).data('x') - event.clientX;
+      this.scrollLeft = scroll_left;
+      $('#enlargement').scrollLeft( (scroll_left * (parseInt( $('#graph_container').width() ) / parseInt( $('#enlargement_container').width() ) ) ) );
+      colorVisored();
+      
     }
   }).mousewheel(function (event, delta) {
       this.scrollLeft -= (delta * 30);
+      enl_scrollLeft = $('#enlargement').scrollLeft();
+      enl_scrollLeft -= ( delta * (30 * (parseInt( $('#graph_container').width() ) / parseInt( $('#enlargement_container').width() ) ) ) );
+      $('#enlargement').scrollLeft( enl_scrollLeft );
       colorVisored();
   }).css({
     'overflow' : 'hidden',
