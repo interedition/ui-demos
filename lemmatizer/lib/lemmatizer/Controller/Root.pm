@@ -76,6 +76,17 @@ sub renderSVG :Global {
 	$c->forward('View::SVG');
 }
 
+sub render_subgraph :Global {
+	my( $self, $c ) = @_;
+	my $collation = $tradition->collation;
+	my $from = $c->request->param('from');
+	my $to = $c->request->param('to');
+	
+	$c->stash->{'result'} = $collation->svg_subgraph( 
+		$collation->reading( $from )->rank, $collation->reading( $to )->rank );
+	$c->forward('View::SVG');
+}
+
 sub node_collapse :Global {
 	my( $self, $c ) = @_;
 	my $collation = $tradition->collation;
