@@ -29,7 +29,8 @@ our $VERSION = '0.01';
 # with an external configuration file acting as an override for
 # local deployment.
 
-__PACKAGE__->config( name => 'lemmatizer' );
+__PACKAGE__->config( name => 'lemmatizer',
+					 default_view => 'View::TT', );
 
 # Start the application
 __PACKAGE__->setup();
