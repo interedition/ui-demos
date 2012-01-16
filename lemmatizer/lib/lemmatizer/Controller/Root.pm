@@ -82,7 +82,7 @@ sub node_collapse :Global {
 	my $target = $c->request->param('target_id');
 	my $relation = $c->request->param('reason');
 	my $note = $c->request->param('note');
-	my $scope = $c->request->param('scope'); # TODO change to scope
+	my $scope = $c->request->param('global') ? 'global' : 'local';
 	my $response = {};
 
 	# TODO all the work.  For now hardcode a test case.
@@ -125,7 +125,6 @@ sub find_dup_edges {
 	my @shared_origin = union( \@source_origin, \@target_origin );
 	my @shared_dest = union( \@source_dest, \@target_dest );
 	my $result = {};
-	$DB::single = 1;
 	foreach my $n ( @shared_origin ) {
 		# This is a hardcoded hack that will break if GraphViz changes its
 		# SVG rendering logic.
