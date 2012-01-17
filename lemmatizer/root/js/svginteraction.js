@@ -8,18 +8,39 @@ function getRelativePath( action ) {
 }
 
 function svgLoaded() {
-  // some initial scaling cause we can't control GraphViz's way of scaling
+  // some initial scaling
   var svg_element = $('#svgbasics').children('svg');
   var svg_graph = svg_element.svg().svg('get').root()
-  svg_width = svg_graph.viewBox.baseVal.width;
-  $('#svgbasics').width( svg_width );
-  svg_element.width( svg_width );
-  //
+  var svg_vbwidth = svg_graph.viewBox.baseVal.width;
+  var svg_vbheight = svg_graph.viewBox.baseVal.height;
+  var scroll_padding = $('#graph_container').width();
+  // (Use attr('width') to set width attr, otherwise style="width: npx;" is set.)
+  var svg_element_width = svg_vbwidth/svg_vbheight * parseInt(svg_element.attr('height'));
+  svg_element_width += scroll_padding;
+  svg_element.attr( 'width', svg_element_width );
   $('ellipse').attr( {stroke:'black', fill:'#fff'} );
-  $('ellipse[fill="#fff"]').each( function() {
-      $(this).data( 'node_obj', new node_obj( $(this) ) );
-    }
-  );
+  
+  // Next would turn all ellipses into node objects..
+  // $('ellipse[fill="#fff"]').each( function() {
+  //     $(this).data( 'node_obj', new node_obj( $(this) ) );
+  //   }
+  // );
+}
+
+function svgEnlargementLoaded() {
+  // some initial scaling
+  var svg_element = $('#svgenlargement').children('svg');
+  var svg_graph = svg_element.svg().svg('get').root()
+  var svg_vbwidth = svg_graph.viewBox.baseVal.width;
+  var svg_vbheight = svg_graph.viewBox.baseVal.height;
+  var scroll_padding = $('#enlargement_container').width();
+  // (Use attr('width') to set width attr, otherwise style="width: npx;" is set.)
+  var svg_element_width = svg_vbwidth/svg_vbheight * parseInt(svg_element.attr('height'));
+  svg_element_width += scroll_padding;
+  svg_element.attr( 'width', svg_element_width );
+  $('ellipse').attr( {stroke:'black', fill:'#fff'} );
+  var svg_height = parseInt( $('#svgenlargement').height() );
+  scroll_enlargement_ratio = svg_height/svg_vbheight;
 }
 
 function get_node_obj( node_id ) {
@@ -212,9 +233,8 @@ function get_edge_elements_for( ellipse ) {
 } 
 
 $(document).ready(function () {
-  $('#graph').ajaxError(function() {
-    console.log( 'Oops.. something went wrong with trying to save this change. Please try again...' );
-  });
+  scroll_ratio =  $('#enlargement').height() / $('#graph').height();
+  
   $('#graph').mousedown(function (event) {
     $(this)
       .data('down', true)
@@ -225,11 +245,19 @@ $(document).ready(function () {
     $(this).data('down', false);
   }).mousemove(function (event) {
     if ($(this).data('down') == true ) {
-      this.scrollLeft = $(this).data('scrollLeft') + $(this).data('x') - event.clientX;
+      var scroll_left = $(this).data('scrollLeft') + $(this).data('x') - event.clientX;
+      this.scrollLeft = scroll_left;
+      var enlarged_scroll_left = scroll_left * scroll_ratio; 
+      $('#enlargement').scrollLeft( enlarged_scroll_left );
+      color_enlarged();
     }
   }).mousewheel(function (event, delta) {
-      this.scrollLeft -= (delta * 30);
-      colorVisored();
+      var scroll_left = delta * 30;
+      this.scrollLeft -= scroll_left;
+      var enlarged_scroll_left = $('#enlargement').scrollLeft();
+      enlarged_scroll_left -= (scroll_left * scroll_ratio); //getScrollRatio(); 
+      $('#enlargement').scrollLeft( enlarged_scroll_left );
+      color_enlarged();      
   }).css({
     'overflow' : 'hidden',
     'cursor' : '-moz-grab'
@@ -260,7 +288,6 @@ $(document).ready(function () {
   });
 });
 
-
 $(window).mouseout(function (event) {
   if ($('#graph').data('down')) {
     try {
@@ -271,22 +298,15 @@ $(window).mouseout(function (event) {
   }
 });
 
-
-// Spiking below
-
-function colorVisored() {
-    var svgWidth = parseInt( $('#svgbasics').children('svg').svg().svg('get').root().viewBox.baseVal.width );
-    zoomfactor = $('#svgbasics').width() / svgWidth;
-    scrollOffset = parseInt( $('#graph').scrollLeft() ) - $('#graph').offset().left;
-    visor_left = $('#visor').offset().left;
-    visor_right = visor_left + $('#visor').width();
+function color_enlarged() {
+    var scroll_offset = parseInt( $('#enlargement').scrollLeft() );
+    var scroll_padding = $('#enlargement_container').width()/2;
     $('ellipse').each( function( index ) {
-        cpos = ( parseInt( $(this).attr('cx') ) * ( zoomfactor ) ) - scrollOffset;
-        if ( cpos > visor_left && cpos < visor_right ) {
-            $(this).attr( {stroke:'green', fill:'#b3f36d'} );
+        var cpos_inscrollcoor = parseInt( $(this).attr('cx') ) * scroll_enlargement_ratio;
+        if ( ( cpos_inscrollcoor > (scroll_offset - scroll_padding) ) && ( cpos_inscrollcoor < ( scroll_offset + scroll_padding ) ) ) {
+           $(this).attr( {stroke:'green', fill:'#b3f36d'} );
         } else {
-            $(this).attr( {stroke:'black', fill:'#fff'} );
+           $(this).attr( {stroke:'black', fill:'#fff'} );
         }
-    });
-    
+    });   
 }
