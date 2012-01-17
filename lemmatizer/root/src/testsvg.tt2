@@ -17,18 +17,19 @@ $(function() {
 [% END %]
 
 	<div id="graph_container">	
+        <div id="graph_underlay"></div>
 	    <div id="visor"></div>
 	    <div id="graph">
 		    <!-- width seems to need to be as wide as the graph -->
 		    <!-- a translation of -487 in the svg itself was needed to adjust the graph to the left of the div -->
 		    <!-- unclear how to cope with height that doesn't fit box -->
-		    <div id="svgbasics" style="height: 200px;"></div>
+		    <div id="svgbasics" style="height: 100px;"></div>
 		</div>
 	</div>
 
 	<div id="enlargement_container">	
 		<div id="enlargement">
-	        <div id="svgenlargement" style="height: 400px;"></div>
+	        <div id="svgenlargement" style="height: 500px;"></div>
 		</div>
 	</div>
 	

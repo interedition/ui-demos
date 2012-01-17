@@ -4,31 +4,41 @@ body {
     padding: 0 20px; 
     font: 1em "Trebuchet MS", verdana, arial, sans-serif; 
     font-size: 85%; 
+    background: #EDF1FA;
 }
 #graph_container {
-    height: 204px;
+    height: 104px;
     width: 90%;
     margin-top: 10px;
-    border: 2px solid #D9E4FF;
+    border: 2px solid #B0C6F7;
 }
 #enlargement_container {
-    height: 404px;
+    height: 504px;
     width: 45%;
     margin-top: 10px;
-    border: 2px solid #D9E4FF;
+    border: 2px solid #B0C6F7;
+    background: #fff;
+}
+#graph_underlay {
+    height: 100%; 
+    width: 100%; 
+    background: #fff;
+    position: relative;
+    z-index: -2;
 }
 #visor {
-    height: 200px; 
-    width: 30%; 
+    height: 100px; 
+    width: 10%; 
     background-color: #DFA6ED; 
     opacity: 0.2; 
     position: relative;
-    left: 35%; 
-    z-index: -300;
+    left: 45%; 
+    top: -104px;
+    z-index: -1;
     border: 2px solid #D9E4FF;
 }
 #graph {
-    position: relative; top: -200px;
+    position: relative; top: -208px;
     padding: 0px;
     overflow: auto;
     /* cursor: -moz-grab !important; */ /* should this be applied with JS? */

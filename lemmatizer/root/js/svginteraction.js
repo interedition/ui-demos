@@ -1,6 +1,10 @@
-graph_width = 0;
-elargement_width = 0;
-//scroll_ratio = 0;
+overview_graph_width = 0;
+enlargementview_graph_width = 0;
+
+function getScrollRatio() {
+    scroll_ratio = enlargementview_graph_width / overview_graph_width;
+    return scroll_ratio;
+}
 
 function getRelativePath( action ) {
     path_elements = window.location.pathname.split('/'); 
@@ -21,8 +25,8 @@ function svgLoaded() {
   // (Use attr('width') to set width attr, otherwise style="width: npx;" is set.)
   svg_element_width = svg_vbwidth/svg_vbheight * parseInt(svg_element.attr('height'));
   svg_element_width += scroll_padding;
+  overview_graph_width = svg_element_width;
   svg_element.attr( 'width', svg_element_width );
-  graph_width = svg_element_width;
   $('ellipse').attr( {stroke:'black', fill:'#fff'} );
   
   // Next would turn all ellipses into node objects..
@@ -42,8 +46,8 @@ function svgEnlargementLoaded() {
   // (Use attr('width') to set width attr, otherwise style="width: npx;" is set.)
   svg_element_width = svg_vbwidth/svg_vbheight * parseInt(svg_element.attr('height'));
   svg_element_width += scroll_padding;
+  enlargementview_graph_width = svg_element_width;
   svg_element.attr( 'width', svg_element_width );
-  enlargement_width = svg_element_width;
   $('ellipse').attr( {stroke:'black', fill:'#fff'} );
 }
 
@@ -237,7 +241,9 @@ function get_edge_elements_for( ellipse ) {
 } 
 
 $(document).ready(function () {
-  scroll_ratio = $('#graph_container').width() / $('#enlargement_container').width();
+//  scroll_ratio = $('#graph_container').width() / $('#enlargement_container').width();
+  scroll_ratio =  $('#enlargement').height() / $('#graph').height();
+  console.log( scroll_ratio );
   $('#graph').mousedown(function (event) {
     $(this)
       .data('down', true)
@@ -258,7 +264,7 @@ $(document).ready(function () {
       scroll_left = delta * 30;
       this.scrollLeft -= scroll_left;
       enlarged_scroll_left = $('#enlargement').scrollLeft();
-      enlarged_scroll_left -= scroll_left * scroll_ratio; 
+      enlarged_scroll_left -= (scroll_left * scroll_ratio); //getScrollRatio(); 
       $('#enlargement').scrollLeft( enlarged_scroll_left );
       //colorVisored();      
   }).css({
