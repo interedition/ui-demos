@@ -1,11 +1,3 @@
-overview_graph_width = 0;
-enlargementview_graph_width = 0;
-
-function getScrollRatio() {
-    scroll_ratio = enlargementview_graph_width / overview_graph_width;
-    return scroll_ratio;
-}
-
 function getRelativePath( action ) {
     path_elements = window.location.pathname.split('/'); 
     if( path_elements[1].length > 0 ) {
@@ -19,13 +11,12 @@ function svgLoaded() {
   // some initial scaling
   var svg_element = $('#svgbasics').children('svg');
   var svg_graph = svg_element.svg().svg('get').root()
-  svg_vbwidth = svg_graph.viewBox.baseVal.width;
-  svg_vbheight = svg_graph.viewBox.baseVal.height;
-  scroll_padding = $('#graph_container').width();
+  var svg_vbwidth = svg_graph.viewBox.baseVal.width;
+  var svg_vbheight = svg_graph.viewBox.baseVal.height;
+  var scroll_padding = $('#graph_container').width();
   // (Use attr('width') to set width attr, otherwise style="width: npx;" is set.)
-  svg_element_width = svg_vbwidth/svg_vbheight * parseInt(svg_element.attr('height'));
+  var svg_element_width = svg_vbwidth/svg_vbheight * parseInt(svg_element.attr('height'));
   svg_element_width += scroll_padding;
-  overview_graph_width = svg_element_width;
   svg_element.attr( 'width', svg_element_width );
   $('ellipse').attr( {stroke:'black', fill:'#fff'} );
   
@@ -40,15 +31,16 @@ function svgEnlargementLoaded() {
   // some initial scaling
   var svg_element = $('#svgenlargement').children('svg');
   var svg_graph = svg_element.svg().svg('get').root()
-  svg_vbwidth = svg_graph.viewBox.baseVal.width;
-  svg_vbheight = svg_graph.viewBox.baseVal.height;
-  scroll_padding = $('#enlargement_container').width();
+  var svg_vbwidth = svg_graph.viewBox.baseVal.width;
+  var svg_vbheight = svg_graph.viewBox.baseVal.height;
+  var scroll_padding = $('#enlargement_container').width();
   // (Use attr('width') to set width attr, otherwise style="width: npx;" is set.)
-  svg_element_width = svg_vbwidth/svg_vbheight * parseInt(svg_element.attr('height'));
+  var svg_element_width = svg_vbwidth/svg_vbheight * parseInt(svg_element.attr('height'));
   svg_element_width += scroll_padding;
-  enlargementview_graph_width = svg_element_width;
   svg_element.attr( 'width', svg_element_width );
   $('ellipse').attr( {stroke:'black', fill:'#fff'} );
+  var svg_height = parseInt( $('#svgenlargement').height() );
+  scroll_enlargement_ratio = svg_height/svg_vbheight;
 }
 
 function get_node_obj( node_id ) {
@@ -241,9 +233,8 @@ function get_edge_elements_for( ellipse ) {
 } 
 
 $(document).ready(function () {
-//  scroll_ratio = $('#graph_container').width() / $('#enlargement_container').width();
   scroll_ratio =  $('#enlargement').height() / $('#graph').height();
-  console.log( scroll_ratio );
+  
   $('#graph').mousedown(function (event) {
     $(this)
       .data('down', true)
@@ -256,17 +247,17 @@ $(document).ready(function () {
     if ($(this).data('down') == true ) {
       var scroll_left = $(this).data('scrollLeft') + $(this).data('x') - event.clientX;
       this.scrollLeft = scroll_left;
-      enlarged_scroll_left = scroll_left * scroll_ratio; 
+      var enlarged_scroll_left = scroll_left * scroll_ratio; 
       $('#enlargement').scrollLeft( enlarged_scroll_left );
-      //colorVisored();
+      color_enlarged();
     }
   }).mousewheel(function (event, delta) {
-      scroll_left = delta * 30;
+      var scroll_left = delta * 30;
       this.scrollLeft -= scroll_left;
-      enlarged_scroll_left = $('#enlargement').scrollLeft();
+      var enlarged_scroll_left = $('#enlargement').scrollLeft();
       enlarged_scroll_left -= (scroll_left * scroll_ratio); //getScrollRatio(); 
       $('#enlargement').scrollLeft( enlarged_scroll_left );
-      //colorVisored();      
+      color_enlarged();      
   }).css({
     'overflow' : 'hidden',
     'cursor' : '-moz-grab'
@@ -297,7 +288,6 @@ $(document).ready(function () {
   });
 });
 
-
 $(window).mouseout(function (event) {
   if ($('#graph').data('down')) {
     try {
@@ -308,22 +298,15 @@ $(window).mouseout(function (event) {
   }
 });
 
-
-// Spiking below
-
-function colorVisored() {
-    var svgWidth = parseInt( $('#svgbasics').children('svg').svg().svg('get').root().viewBox.baseVal.width );
-    zoomfactor = $('#svgbasics').width() / svgWidth;
-    scrollOffset = parseInt( $('#graph').scrollLeft() ) - $('#graph').offset().left;
-    visor_left = $('#visor').offset().left;
-    visor_right = visor_left + $('#visor').width();
+function color_enlarged() {
+    var scroll_offset = parseInt( $('#enlargement').scrollLeft() );
+    var scroll_padding = $('#enlargement_container').width()/2;
     $('ellipse').each( function( index ) {
-        cpos = ( parseInt( $(this).attr('cx') ) * ( zoomfactor ) ) - scrollOffset;
-        if ( cpos > visor_left && cpos < visor_right ) {
-            $(this).attr( {stroke:'green', fill:'#b3f36d'} );
+        var cpos_inscrollcoor = parseInt( $(this).attr('cx') ) * scroll_enlargement_ratio;
+        if ( ( cpos_inscrollcoor > (scroll_offset - scroll_padding) ) && ( cpos_inscrollcoor < ( scroll_offset + scroll_padding ) ) ) {
+           $(this).attr( {stroke:'green', fill:'#b3f36d'} );
         } else {
-            $(this).attr( {stroke:'black', fill:'#fff'} );
+           $(this).attr( {stroke:'black', fill:'#fff'} );
         }
-    });
-    
+    });   
 }

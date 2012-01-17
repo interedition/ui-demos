@@ -29,13 +29,16 @@ body {
 #visor {
     height: 100px; 
     width: 10%; 
-    background-color: #DFA6ED; 
-    opacity: 0.2; 
+    background-color: #61EDAE; 
+    opacity: 0.15; 
     position: relative;
     left: 45%; 
     top: -104px;
     z-index: -1;
-    border: 2px solid #D9E4FF;
+    border-left: 2px solid #3C73FA;
+    border-right: 2px solid #3C73FA;
+    border-bottom: 2px solid #B0C6F7;
+    border-top: 2px solid #B0C6F7;
 }
 #graph {
     position: relative; top: -208px;
