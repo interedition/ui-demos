@@ -30,7 +30,7 @@ our $VERSION = '0.01';
 # local deployment.
 
 __PACKAGE__->config( name => 'lemmatizer',
-					 default_view => 'View::TT', );
+					 default_view => 'TT', );
 
 # Start the application
 __PACKAGE__->setup();
