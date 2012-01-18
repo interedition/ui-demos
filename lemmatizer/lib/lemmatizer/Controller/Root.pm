@@ -4,6 +4,7 @@ use strict;
 use warnings;
 use parent 'Catalyst::Controller';
 use JSON;
+use Data::Dumper;
 use Text::Tradition;
 
 #
@@ -38,21 +39,17 @@ sub index :Path :Args(0) {
 
 	# Hacky hacky to make this work with the interedition-tools interface:
 	# accept XML in a parameter called 'result'.
-	my $datatype = $c->request->param('type') || 'CollateX';
-	my $informat = $c->request->param('format') || 'string';
 	my $input = $c->request->param('result');
-	unless( $input ) {
-		my $testdata = $c->request->param('test') || 'Collatex-16.xml';
-		# Default testing stuff.
-		$informat = 'file';
-		$input = $c->path_to( 't', 'data', $testdata );
-		$datatype = 'Self' if $testdata eq 'john.xml';
-	}
-	$tradition = Text::Tradition->new( 
-    	'name'  => 'inline', 
-    	'input' => $datatype,
-    	$informat  => $input,
-    	);
+	if( $input ) {
+		my $datatype = $c->request->param('type') || 'CollateX';
+		$tradition = Text::Tradition->new( 
+			'name'  => 'inline', 
+			'input' => $datatype,
+			'string'  => $input,
+			);
+    } else {
+    	_test_tradition( $c );
+    }
 	my $collation = $tradition->collation;
 	my $svg_str = $collation->as_svg;
 	$svg_str =~ s/\n//gs;
@@ -78,6 +75,7 @@ sub renderSVG :Global {
 
 sub render_subgraph :Global {
 	my( $self, $c ) = @_;
+	_test_tradition( $c ) unless $tradition;
 	my $collation = $tradition->collation;
 	my $from = $c->request->param('from');
 	my $to = $c->request->param('to');
@@ -85,6 +83,27 @@ sub render_subgraph :Global {
 	$c->stash->{'result'} = $collation->svg_subgraph( 
 		$collation->reading( $from )->rank, $collation->reading( $to )->rank );
 	$c->forward('View::SVG');
+}
+
+sub render_alignment :Global {
+	my( $self, $c ) = @_;
+	_test_tradition( $c ) unless $tradition;
+	my $collation = $tradition->collation;
+	my $alignment = $collation->make_alignment_table;
+	
+	# Turn the table, so that witnesses are by column and the rows
+	# are by rank.
+	my $wits = [ map { $_->{'witness'} } @{$alignment->{'alignment'}} ];
+	my $rows;
+	foreach my $i ( 0 .. $alignment->{'length'} - 1 ) {
+		my @rankrdgs = map { $_->{'tokens'}->[$i]->{'t'} } 
+			@{$alignment->{'alignment'}};
+		push( @$rows, { 'rank' => $i+1, 'readings' => \@rankrdgs } );
+	}
+	$c->log->debug( Dumper( $rows ) );
+	$c->stash->{'witnesses'} = $wits;
+	$c->stash->{'table'} = $rows;
+	$c->stash->{'template'} = 'alignment_table.tt2';
 }
 
 sub node_collapse :Global {
@@ -180,6 +199,23 @@ sub default :Path {
 	my ( $self, $c ) = @_;
 	$c->response->body( 'Page not found' );
 	$c->response->status(404);
+}
+
+# Set a default tradition for testing
+sub _test_tradition {
+	my $c = shift;
+	my $testdata = $c->request->param('test') || 'Collatex-16.xml';
+	# Default testing stuff.
+	$tradition = Text::Tradition->new( 
+		'name'  => 'inline', 
+		'input' => $testdata eq 'john.xml' ? 'Self' : 'CollateX',
+		'file'  => $c->path_to( 't', 'data', $testdata ),
+	);
+	# Fix up the CX file
+	if( $testdata eq 'Collatex-16.xml' ) {
+		$tradition->collation->reading( 'n9' )->rank( 17 );
+		$tradition->collation->reading( 'n25' )->rank( 18 );
+	}
 }
 
 =head2 end
