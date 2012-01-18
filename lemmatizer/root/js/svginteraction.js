@@ -256,6 +256,28 @@ $(document).ready(function () {
     'overflow' : 'hidden',
     'cursor' : '-moz-grab'
   });
+  
+  $('#workspace').mousedown(function (event) {
+    $(this)
+      .data('down', true)
+      .data('x', event.clientX)
+      .data('scrollLeft', this.scrollLeft);
+      return false;
+  }).mouseup(function (event) {
+    $(this).data('down', false);
+  }).mousemove(function (event) {
+    if ($(this).data('down') == true ) {
+      var scroll_left = $(this).data('scrollLeft') + $(this).data('x') - event.clientX;
+      this.scrollLeft = scroll_left;
+    }
+  }).mousewheel(function (event, delta) {
+      var scroll_left = delta * 30;
+      this.scrollLeft -= scroll_left;
+  }).css({
+    'overflow' : 'hidden',
+    'cursor' : '-moz-grab'
+  });
+
   $( "#dialog-form" ).dialog({
     autoOpen: false,
     height: 150,
@@ -285,6 +307,14 @@ $(document).ready(function () {
       $('#svgworkspace').svg( 'destroy' );
       $.post( 'render_subgraph', { 'node_ids': node_ids_in_magnifier }, function(data) {
           $('#svgworkspace').svg({loadURL: data, onLoad: function() {
+              var svg_element = $('#svgworkspace').children('svg');
+              var svg_graph = svg_element.svg().svg('get').root()
+              var svg_vbwidth = svg_graph.viewBox.baseVal.width;
+              var svg_vbheight = svg_graph.viewBox.baseVal.height;
+              var scroll_padding = $('#graph_container').width();
+              // (Use attr('width') to set width attr, otherwise style="width: npx;" is set.)
+              var svg_element_width = svg_vbwidth/svg_vbheight * parseInt(svg_element.attr('height'));
+              svg_element.attr( 'width', svg_element_width );
               $('#svgworkspace ellipse').each( function() {
                   $(this).data( 'node_obj', new node_obj( $(this) ) );
                 }

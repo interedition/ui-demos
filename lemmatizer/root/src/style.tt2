@@ -71,4 +71,8 @@ body {
     padding: 0px;
     overflow: hidden;
 }
+#workspace {
+    padding: 0px;
+    overflow: hidden;
+}
 </style>
