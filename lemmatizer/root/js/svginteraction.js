@@ -87,8 +87,8 @@ function node_obj(ellipse) {
   }
 
   this.mousemove_listener = function(evt) {
-    self.dx = evt.clientX - self.x;
-    self.dy = evt.clientY - self.y;
+    self.dx = (evt.clientX - self.x) / scroll_workspace_ratio;
+    self.dy = (evt.clientY - self.y) / scroll_workspace_ratio;
     self.move_elements();
   }
 
@@ -307,18 +307,20 @@ $(document).ready(function () {
       $('#svgworkspace').svg( 'destroy' );
       $.post( 'render_subgraph', { 'node_ids': node_ids_in_magnifier }, function(data) {
           $('#svgworkspace').svg({loadURL: data, onLoad: function() {
-              var svg_element = $('#svgworkspace').children('svg');
-              var svg_graph = svg_element.svg().svg('get').root()
-              var svg_vbwidth = svg_graph.viewBox.baseVal.width;
-              var svg_vbheight = svg_graph.viewBox.baseVal.height;
-              var scroll_padding = $('#graph_container').width();
-              // (Use attr('width') to set width attr, otherwise style="width: npx;" is set.)
-              var svg_element_width = svg_vbwidth/svg_vbheight * parseInt(svg_element.attr('height'));
-              svg_element.attr( 'width', svg_element_width );
-              $('#svgworkspace ellipse').each( function() {
-                  $(this).data( 'node_obj', new node_obj( $(this) ) );
-                }
-              );}
+                  var svg_element = $('#svgworkspace').children('svg');
+                  var svg_graph = svg_element.svg().svg('get').root()
+                  var svg_vbwidth = svg_graph.viewBox.baseVal.width;
+                  var svg_vbheight = svg_graph.viewBox.baseVal.height;
+                  // (Use attr('width') to set width attr, otherwise style="width: npx;" is set.)
+                  var svg_element_width = svg_vbwidth/svg_vbheight * parseInt(svg_element.attr('height'));
+                  svg_element.attr( 'width', svg_element_width );
+                  $('#svgworkspace ellipse').each( function() {
+                      $(this).data( 'node_obj', new node_obj( $(this) ) );
+                  });
+                  var svg_height = parseInt( $('#svgworkspace').height() );
+                  scroll_workspace_ratio = svg_height/svg_vbheight;
+                  console.log( scroll_workspace_ratio );
+              }
           });
       }, 'text');
   });
