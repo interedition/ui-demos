@@ -77,11 +77,16 @@ sub render_subgraph :Global {
 	my( $self, $c ) = @_;
 	_test_tradition( $c ) unless $tradition;
 	my $collation = $tradition->collation;
-	my $from = $c->request->param('from');
-	my $to = $c->request->param('to');
-	
-	$c->stash->{'result'} = $collation->svg_subgraph( 
-		$collation->reading( $from )->rank, $collation->reading( $to )->rank );
+	my $nodeids = $c->req->params->{'node_ids[]'};
+	my @active = ref( $nodeids ) eq 'ARRAY' ? @$nodeids : ( $nodeids );
+	my( $min, $max ) = ( $collation->end->rank, 0 );
+	foreach my $n ( @active ) {
+		my $r = $collation->reading( $n )->rank;
+		$min = $r if $r < $min;
+		$max = $r if $r > $max;
+	}
+	$c->log->debug( "Rank range calculated as $min -> $max" );
+	$c->stash->{'result'} = $collation->svg_subgraph( $min, $max );
 	$c->forward('View::SVG');
 }
 
