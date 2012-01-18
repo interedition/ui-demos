@@ -19,6 +19,26 @@ body {
     border: 2px solid #B0C6F7;
     background: #fff;
 }
+#update_workspace_button {
+    position: relative;
+    top: -518px;
+    left: 44%;
+    height: 16px;
+    width: 16px;
+    margin-top: 8px;
+    border: 1px solid blue;
+    background: green;
+}
+#workspace_container {
+    height: 504px;
+    width: 43%;
+    position: relative;
+    top: -545px;
+    left: 47%;
+    margin-top: 10px;
+    border: 2px solid #B0C6F7;
+    background: #fff;
+}
 #graph_underlay {
     height: 100%; 
     width: 100%; 
