@@ -288,16 +288,7 @@ $(document).ready(function () {
   });
   
   $('#update_workspace_button').click( function() {
-      var from = node_ids_in_magnifier[0]; 
-      var to = node_ids_in_magnifier[0];
-      $.each( node_ids_in_magnifier, function( index, value ) {
-          node_rank = value.split( ',' )[0];
-          if( node_rank < from.split( ',' )[0] ) { from = value };
-          if( node_rank > to.split( ',' )[0] ) { to = value };
-      } );
-      $('#svgworkspace').svg('destroy');
-      $.post( 'render_subgraph', ( 'from=' + from + '&to=' + to ), function(data) {
-          //console.log( data) ;
+      $.post( 'render_subgraph', node_ids_in_magnifier.toString(), function(data) {
           $('#svgworkspace').svg({loadURL: data});
       }, 'text');
   });
