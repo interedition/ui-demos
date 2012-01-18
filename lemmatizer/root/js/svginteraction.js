@@ -19,12 +19,6 @@ function svgLoaded() {
   svg_element_width += scroll_padding;
   svg_element.attr( 'width', svg_element_width );
   $('ellipse').attr( {stroke:'black', fill:'#fff'} );
-  
-  // Next would turn all ellipses into node objects..
-  // $('ellipse[fill="#fff"]').each( function() {
-  //     $(this).data( 'node_obj', new node_obj( $(this) ) );
-  //   }
-  // );
 }
 
 function svgEnlargementLoaded() {
@@ -217,7 +211,7 @@ function get_edge_elements_for( ellipse ) {
   node_id = ellipse.siblings('title').text();
   edge_in_pattern = new RegExp( node_id + '$' );
   edge_out_pattern = new RegExp( '^' + node_id );
-  $.each( $('.edge').children('title'), function(index) {
+  $.each( $('#svgworkspace .edge').children('title'), function(index) {
     title = $(this).text();
     if( edge_in_pattern.test(title) ) {
       edge_elements.push( new svgshape( $(this).siblings('polygon') ) );
@@ -288,8 +282,14 @@ $(document).ready(function () {
   });
   
   $('#update_workspace_button').click( function() {
+      $('#svgworkspace').svg( 'destroy' );
       $.post( 'render_subgraph', { 'node_ids': node_ids_in_magnifier }, function(data) {
-          $('#svgworkspace').svg({loadURL: data});
+          $('#svgworkspace').svg({loadURL: data, onLoad: function() {
+              $('#svgworkspace ellipse').each( function() {
+                  $(this).data( 'node_obj', new node_obj( $(this) ) );
+                }
+              );}
+          });
       }, 'text');
   });
 });

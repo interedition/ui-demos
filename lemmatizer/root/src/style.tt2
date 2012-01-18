@@ -23,11 +23,12 @@ body {
     position: relative;
     top: -518px;
     left: 44%;
-    height: 16px;
-    width: 16px;
+    height: 17px;
+    width: 17px;
     margin-top: 8px;
-    border: 1px solid blue;
-    background: green;
+    border: 1px solid #B0C6F7;
+    background-image: url('static/images/arr_right.gif');
+    background-color: #fcfcfc;
 }
 #workspace_container {
     height: 504px;
