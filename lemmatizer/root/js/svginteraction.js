@@ -288,7 +288,7 @@ $(document).ready(function () {
   });
   
   $('#update_workspace_button').click( function() {
-      $.post( 'render_subgraph', node_ids_in_magnifier.toString(), function(data) {
+      $.post( 'render_subgraph', { 'node_ids': node_ids_in_magnifier }, function(data) {
           $('#svgworkspace').svg({loadURL: data});
       }, 'text');
   });
@@ -308,7 +308,7 @@ function color_enlarged() {
     node_ids_in_magnifier = [];
     var scroll_offset = parseInt( $('#enlargement').scrollLeft() );
     var scroll_padding = $('#enlargement_container').width()/2;
-    $('ellipse').each( function( index ) {
+    $('#svgenlargement ellipse,#svgbasics ellipse' ).each( function( index ) {
         var cpos_inscrollcoor = parseInt( $(this).attr('cx') ) * scroll_enlargement_ratio;
         if ( ( cpos_inscrollcoor > (scroll_offset - scroll_padding) ) && ( cpos_inscrollcoor < ( scroll_offset + scroll_padding ) ) ) {
            $(this).attr( {stroke:'green', fill:'#b3f36d'} );
