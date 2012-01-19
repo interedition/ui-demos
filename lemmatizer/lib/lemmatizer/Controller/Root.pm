@@ -168,7 +168,8 @@ sub find_dup_edges {
 		my $source_svg_id = $n->id . '&#45;&gt;' . $source;
 		my $target_svg_id = $n->id . '&#45;&gt;' . $target;
 		# There is only one of these.
-		my $el = $collation->path_display_label( [ $n->id, $source ] );
+		my $el = $collation->path_display_label( 
+			$collation->path_witnesses( $n->id, $source ) );
 		my $edgelabel = join( ', ', '', $el );
 		$result->{$source_svg_id} = { 'target' => $target_svg_id,
 									  'label'  => $edgelabel };
@@ -179,7 +180,8 @@ sub find_dup_edges {
 		my $source_svg_id = $source . '&#45;&gt;' . $n->id;
 		my $target_svg_id = $target . '&#45;&gt;' . $n->id;
 		# There is only one of these.
-		my $el = $collation->path_display_label( [ $source, $n->id ] );
+		my $el = $collation->path_display_label(  
+			$collation->path_witnesses( $source, $n->id ) );
 		my $edgelabel = join( ', ', '', $el );
 		$result->{$source_svg_id} = { 'target' => $target_svg_id,
 									  'label'  => $edgelabel };
