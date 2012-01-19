@@ -84,6 +84,8 @@ function node_obj(ellipse) {
     $('body').mouseup( self.mouseup_listener );
     self.ellipse.unbind('mouseenter').unbind('mouseleave')
     self.ellipse.attr( 'fill', '#ff66ff' );
+    first_node_g_element = $("#svgworkspace g g" ).filter( ":first" );
+    if( first_node_g_element.attr('id') !== self.get_g().attr('id') ) { self.get_g().insertBefore( first_node_g_element ) };
   }
 
   this.mousemove_listener = function(evt) {
@@ -319,7 +321,6 @@ $(document).ready(function () {
                   });
                   var svg_height = parseInt( $('#svgworkspace').height() );
                   scroll_workspace_ratio = svg_height/svg_vbheight;
-                  console.log( scroll_workspace_ratio );
               }
           });
       }, 'text');
