@@ -57,6 +57,14 @@ sub index :Path :Args(0) {
 	$c->stash->{'template'} = 'testsvg.tt2';
 }
 
+sub relationship_definition :Global {
+	my( $self, $c ) = @_;
+	my $valid_relationships = [ qw/ punctuation orthography spelling word_form meaning / ];
+	my $valid_scopes = [ qw/ local global / ];
+	$c->stash->{'result'} = { 'types' => $valid_relationships, 'scopes' => $valid_scopes };
+	$c->forward('View::JSON');
+}
+
 # Utility function to render SVG from a graph input.
 sub renderSVG :Global {
 	my( $self, $c ) = @_;
