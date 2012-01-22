@@ -6,6 +6,7 @@ use parent 'Catalyst::Controller';
 use JSON;
 use Data::Dumper;
 use Text::Tradition;
+use TryCatch;
 
 #
 # Sets the actions in this controller to be registered with no prefix
@@ -128,35 +129,38 @@ sub node_collapse :Global {
 	my $relation = $c->request->param('reason');
 	my $note = $c->request->param('note');
 	my $scope = $c->request->param('global') ? 'global' : 'local';
-	my $response = {};
 
-	# TODO all the work.  For now hardcode a test case.
 	my $opts = { 'type' => $relation,
 				 'scope' => $scope };
-	my( $status, @vectors ) = $collation->add_relationship( $node, $target, $opts );
-
-	$c->response->status( $status ? 200 : 403 );
-
-	if( $status ) {
-		# TODO work
-		foreach my $pair ( @vectors ) {
-			my( $ps, $pt ) = @$pair;
-			$response->{$ps} = { 'target' => $pt };
-		}
-
-		foreach my $n ( keys %$response ) {
-			# Edges are of the form $node . &#45;&gt; . $node
-			# Look for any predecessor and successor node shared
-			# between source and target, and collapse those edges.
-			# We want response->node->target = (node)
-			#						->edges->target = (edge)
-			#							   ->label = (label)
-			my $collapsed_edges = find_dup_edges( $n, $response->{$n}->{'target'} );
-			$response->{$n}->{'edges'} = $collapsed_edges;
-		}
-	}
+	
+	my @vectors;
 	$c->response->content_type( 'application/json' );
 	$c->response->content_encoding( 'UTF-8' );
+	try {
+		@vectors = $collation->add_relationship( $node, $target, $opts );
+	} catch( Text::Tradition::Error $e ) {
+		$c->response->status( '403' );
+		$c->response->content_type( 'application/json' );
+		$c->response->body( encode_json( { 'error' => $e->message } ) );
+		return;
+	}
+
+	my $response = {};
+	foreach my $pair ( @vectors ) {
+		my( $ps, $pt ) = @$pair;
+		$response->{$ps} = { 'target' => $pt };
+	}
+
+	foreach my $n ( keys %$response ) {
+		# Edges are of the form $node . &#45;&gt; . $node
+		# Look for any predecessor and successor node shared
+		# between source and target, and collapse those edges.
+		# We want response->node->target = (node)
+		#						->edges->target = (edge)
+		#							   ->label = (label)
+		my $collapsed_edges = find_dup_edges( $n, $response->{$n}->{'target'} );
+		$response->{$n}->{'edges'} = $collapsed_edges;
+	}
 	$c->response->body( encode_json( $response ) );
 }
 
