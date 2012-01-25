@@ -1,3 +1,10 @@
+// Scaling
+// Receding
+// Dragging
+// Stacking
+// Adding Lines
+// Dialogue
+
 function getRelativePath( action ) {
     path_elements = window.location.pathname.split('/'); 
     if( path_elements[1].length > 0 ) {
@@ -10,7 +17,7 @@ function getRelativePath( action ) {
 function svgLoaded() {
   // some initial scaling
   var svg_element = $('#svgbasics').children('svg');
-  var svg_graph = svg_element.svg().svg('get').root()
+  var svg_graph = svg_element.svg().svg('get').root();
   var svg_vbwidth = svg_graph.viewBox.baseVal.width;
   var svg_vbheight = svg_graph.viewBox.baseVal.height;
   var scroll_padding = $('#graph_container').width();
@@ -35,6 +42,21 @@ function svgEnlargementLoaded() {
   $('ellipse').attr( {stroke:'black', fill:'#fff'} );
   var svg_height = parseInt( $('#svgenlargement').height() );
   scroll_enlargement_ratio = svg_height/svg_vbheight;
+}
+
+function svgEnlargement2Loaded() {
+  // some initial scaling
+  var svg_element = $('#svgenlargement2').children('svg');
+  var svg_graph = svg_element.svg().svg('get').root()
+  var svg_vbwidth = svg_graph.viewBox.baseVal.width;
+  var svg_vbheight = svg_graph.viewBox.baseVal.height;
+  var scroll_padding = $('#enlargement_container').width();
+  // (Use attr('width') to set width attr, otherwise style="width: npx;" is set.)
+  var svg_element_width = svg_vbwidth/svg_vbheight * parseInt(svg_element.attr('height'));
+  svg_element_width += scroll_padding;
+  svg_element.attr( 'width', svg_element_width );
+  $('ellipse').attr( {stroke:'black', fill:'#fff'} );
+  var svg_height = parseInt( $('#svgenlargement').height() );
 }
 
 function get_node_obj( node_id ) {
@@ -304,27 +326,40 @@ $(document).ready(function () {
       $('#reason').val( "" ).removeClass( "ui-state-error" );
     }
   });
-  
+
   $('#update_workspace_button').click( function() {
-      $('#svgworkspace').svg( 'destroy' );
-      $.post( 'render_subgraph', { 'node_ids': node_ids_in_magnifier }, function(data) {
-          $('#svgworkspace').svg({loadURL: data, onLoad: function() {
-                  var svg_element = $('#svgworkspace').children('svg');
-                  var svg_graph = svg_element.svg().svg('get').root()
-                  var svg_vbwidth = svg_graph.viewBox.baseVal.width;
-                  var svg_vbheight = svg_graph.viewBox.baseVal.height;
-                  // (Use attr('width') to set width attr, otherwise style="width: npx;" is set.)
-                  var svg_element_width = svg_vbwidth/svg_vbheight * parseInt(svg_element.attr('height'));
-                  svg_element.attr( 'width', svg_element_width );
-                  $('#svgworkspace ellipse').each( function() {
-                      $(this).data( 'node_obj', new node_obj( $(this) ) );
-                  });
-                  var svg_height = parseInt( $('#svgworkspace').height() );
-                  scroll_workspace_ratio = svg_height/svg_vbheight;
-              }
-          });
-      }, 'text');
+     var svg_enlargement = $('#svgenlargement').svg().svg('get').root();
+     if( $(this).data('locked')==true) {
+         svg_enlargement.children[0].setAttribute( 'transform', $(this).data('transform_memo') );
+         $('#enlargement').scrollLeft( $(this).data('scrollleft_memo') );
+         $(this).data('locked', false);
+     } else {
+         var y_min = parseInt( ellipses_in_magnifier[0].attr('cy') ) - parseInt( ellipses_in_magnifier[0].attr('ry') ); 
+         var y_max = parseInt( ellipses_in_magnifier[0].attr('cy') ) + parseInt( ellipses_in_magnifier[0].attr('ry') ); 
+         $.each( ellipses_in_magnifier, function( index, ellipse ) {
+             var ny_min = parseInt( ellipse.attr('cy') ) - parseInt( ellipse.attr('ry') ); 
+             var ny_max = parseInt( ellipse.attr('cy') ) + parseInt( ellipse.attr('ry') ); 
+             if( ny_min < y_min ) { y_min = ny_min }; 
+             if( ny_max > y_max ) { y_max = ny_max }; 
+         })
+         var graph_frag_height = y_max - y_min ;
+         var svg_enlargement_vbheight = svg_enlargement.viewBox.baseVal.height;
+         var svg_enlargement_vbwidth = svg_enlargement.viewBox.baseVal.width;
+         var scale = svg_enlargement_vbheight / graph_frag_height;
+         var scroll_padding = $('#enlargement_container').width();
+         var scroll_scale =  svg_enlargement_vbwidth / ( parseFloat( $('#svgenlargement svg').attr('width') ) - scroll_padding );
+         var vbx_of_scroll = ( $('#enlargement').scrollLeft() ) * scroll_scale;
+         var translate_x = vbx_of_scroll;
+         var transform = svg_enlargement.children[0].getAttribute('transform');
+         $(this).data('transform_memo', transform );
+         $(this).data('scrollleft_memo', $('#enlargement').scrollLeft() ); 
+         $(this).data('locked', true );
+         $('#enlargement').scrollLeft(0);
+         transform = 'scale(' + scale + ') translate(' + (-1 * translate_x) + ',' + (-1 * y_min) + ')';
+         svg_enlargement.children[0].setAttribute( 'transform', transform );
+     }
   });
+  
 });
 
 $(window).mouseout(function (event) {
@@ -338,16 +373,27 @@ $(window).mouseout(function (event) {
 });
 
 function color_enlarged() {
-    node_ids_in_magnifier = [];
+    ellipses_in_magnifier = [];
     var scroll_offset = parseInt( $('#enlargement').scrollLeft() );
     var scroll_padding = $('#enlargement_container').width()/2;
     $('#svgenlargement ellipse,#svgbasics ellipse' ).each( function( index ) {
         var cpos_inscrollcoor = parseInt( $(this).attr('cx') ) * scroll_enlargement_ratio;
         if ( ( cpos_inscrollcoor > (scroll_offset - scroll_padding) ) && ( cpos_inscrollcoor < ( scroll_offset + scroll_padding ) ) ) {
            $(this).attr( {stroke:'green', fill:'#b3f36d'} );
-           node_ids_in_magnifier.push( $(this).siblings('title').text() );
+           push_unique( ellipses_in_magnifier, $(this) );
         } else {
            $(this).attr( {stroke:'black', fill:'#fff'} );
         }
     });   
+}
+
+// Yes, it is ellipse specific, I just don't get how one does a decent .eql? in JavaScript.
+function push_unique( arr, ellipse_to_push ) {
+    var in_arr = false;
+    $.each( arr, function( index, item_in_arr ) { 
+        if( item_in_arr.siblings('title').text() === ellipse_to_push.siblings('title').text() ) {
+            in_arr = true;
+        }        
+    } );
+    if( in_arr != true ) { arr.push( ellipse_to_push ) };    
 }

@@ -35,12 +35,6 @@ $(function() {
 	
 	<div id="update_workspace_button"></div>
 	
-	<div id="workspace_container">	
-		<div id="workspace">
-	        <div id="svgworkspace" style="height: 500px;"></div>
-		</div>
-	</div>
-	
 	<div id="dialog-form" title="Equate readings..">
 		<form id="collapse_node_form">
 		<fieldset>
