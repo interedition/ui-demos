@@ -1,4 +1,3 @@
-// Scaling
 // Receding
 // Dragging
 // Stacking
@@ -42,21 +41,6 @@ function svgEnlargementLoaded() {
   $('ellipse').attr( {stroke:'black', fill:'#fff'} );
   var svg_height = parseInt( $('#svgenlargement').height() );
   scroll_enlargement_ratio = svg_height/svg_vbheight;
-}
-
-function svgEnlargement2Loaded() {
-  // some initial scaling
-  var svg_element = $('#svgenlargement2').children('svg');
-  var svg_graph = svg_element.svg().svg('get').root()
-  var svg_vbwidth = svg_graph.viewBox.baseVal.width;
-  var svg_vbheight = svg_graph.viewBox.baseVal.height;
-  var scroll_padding = $('#enlargement_container').width();
-  // (Use attr('width') to set width attr, otherwise style="width: npx;" is set.)
-  var svg_element_width = svg_vbwidth/svg_vbheight * parseInt(svg_element.attr('height'));
-  svg_element_width += scroll_padding;
-  svg_element.attr( 'width', svg_element_width );
-  $('ellipse').attr( {stroke:'black', fill:'#fff'} );
-  var svg_height = parseInt( $('#svgenlargement').height() );
 }
 
 function get_node_obj( node_id ) {
@@ -106,13 +90,13 @@ function node_obj(ellipse) {
     $('body').mouseup( self.mouseup_listener );
     self.ellipse.unbind('mouseenter').unbind('mouseleave')
     self.ellipse.attr( 'fill', '#ff66ff' );
-    first_node_g_element = $("#svgworkspace g g" ).filter( ":first" );
+    first_node_g_element = $("#svgenlargement g g" ).filter( ":first" );
     if( first_node_g_element.attr('id') !== self.get_g().attr('id') ) { self.get_g().insertBefore( first_node_g_element ) };
   }
 
   this.mousemove_listener = function(evt) {
-    self.dx = (evt.clientX - self.x) / scroll_workspace_ratio;
-    self.dy = (evt.clientY - self.y) / scroll_workspace_ratio;
+    self.dx = (evt.clientX - self.x) / mousemove_enlargement_ratio;
+    self.dy = (evt.clientY - self.y) / mousemove_enlargement_ratio;
     self.move_elements();
   }
 
@@ -235,7 +219,7 @@ function get_edge_elements_for( ellipse ) {
   node_id = ellipse.siblings('title').text();
   edge_in_pattern = new RegExp( node_id + '$' );
   edge_out_pattern = new RegExp( '^' + node_id );
-  $.each( $('#svgworkspace .edge').children('title'), function(index) {
+  $.each( $('#svgenlargement .edge').children('title'), function(index) {
     title = $(this).text();
     if( edge_in_pattern.test(title) ) {
       edge_elements.push( new svgshape( $(this).siblings('polygon') ) );
@@ -273,7 +257,7 @@ $(document).ready(function () {
       var scroll_left = delta * 30;
       this.scrollLeft -= scroll_left;
       var enlarged_scroll_left = $('#enlargement').scrollLeft();
-      enlarged_scroll_left -= (scroll_left * scroll_ratio); //getScrollRatio(); 
+      enlarged_scroll_left -= (scroll_left * scroll_ratio);
       $('#enlargement').scrollLeft( enlarged_scroll_left );
       color_enlarged();      
   }).css({
@@ -281,26 +265,6 @@ $(document).ready(function () {
     'cursor' : '-moz-grab'
   });
   
-  $('#workspace').mousedown(function (event) {
-    $(this)
-      .data('down', true)
-      .data('x', event.clientX)
-      .data('scrollLeft', this.scrollLeft);
-      return false;
-  }).mouseup(function (event) {
-    $(this).data('down', false);
-  }).mousemove(function (event) {
-    if ($(this).data('down') == true ) {
-      var scroll_left = $(this).data('scrollLeft') + $(this).data('x') - event.clientX;
-      this.scrollLeft = scroll_left;
-    }
-  }).mousewheel(function (event, delta) {
-      var scroll_left = delta * 30;
-      this.scrollLeft -= scroll_left;
-  }).css({
-    'overflow' : 'hidden',
-    'cursor' : '-moz-grab'
-  });
 
   $( "#dialog-form" ).dialog({
     autoOpen: false,
@@ -341,11 +305,13 @@ $(document).ready(function () {
              var ny_max = parseInt( ellipse.attr('cy') ) + parseInt( ellipse.attr('ry') ); 
              if( ny_min < y_min ) { y_min = ny_min }; 
              if( ny_max > y_max ) { y_max = ny_max }; 
+             ellipse.data( 'node_obj', new node_obj( ellipse ) );
          })
          var graph_frag_height = y_max - y_min ;
          var svg_enlargement_vbheight = svg_enlargement.viewBox.baseVal.height;
          var svg_enlargement_vbwidth = svg_enlargement.viewBox.baseVal.width;
          var scale = svg_enlargement_vbheight / graph_frag_height;
+         mousemove_enlargement_ratio = scroll_enlargement_ratio * scale;
          var scroll_padding = $('#enlargement_container').width();
          var scroll_scale =  svg_enlargement_vbwidth / ( parseFloat( $('#svgenlargement svg').attr('width') ) - scroll_padding );
          var vbx_of_scroll = ( $('#enlargement').scrollLeft() ) * scroll_scale;
@@ -380,20 +346,9 @@ function color_enlarged() {
         var cpos_inscrollcoor = parseInt( $(this).attr('cx') ) * scroll_enlargement_ratio;
         if ( ( cpos_inscrollcoor > (scroll_offset - scroll_padding) ) && ( cpos_inscrollcoor < ( scroll_offset + scroll_padding ) ) ) {
            $(this).attr( {stroke:'green', fill:'#b3f36d'} );
-           push_unique( ellipses_in_magnifier, $(this) );
+           if( $(this).parents('#svgenlargement').size() == 1 ) { ellipses_in_magnifier.push( $(this) ) };
         } else {
            $(this).attr( {stroke:'black', fill:'#fff'} );
         }
     });   
-}
-
-// Yes, it is ellipse specific, I just don't get how one does a decent .eql? in JavaScript.
-function push_unique( arr, ellipse_to_push ) {
-    var in_arr = false;
-    $.each( arr, function( index, item_in_arr ) { 
-        if( item_in_arr.siblings('title').text() === ellipse_to_push.siblings('title').text() ) {
-            in_arr = true;
-        }        
-    } );
-    if( in_arr != true ) { arr.push( ellipse_to_push ) };    
 }
