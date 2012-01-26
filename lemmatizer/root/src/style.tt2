@@ -21,13 +21,14 @@ body {
 }
 #update_workspace_button {
     position: relative;
-    top: -518px;
+    top: -530px;
     left: 44%;
     height: 17px;
     width: 17px;
     margin-top: 8px;
     border: 1px solid #B0C6F7;
-    background-image: url('static/images/arr_right.gif');
+    background-image: url('static/images/act_arrs.gif');
+    background-position: 0px 0px;
     background-color: #fcfcfc;
 }
 #workspace_container {

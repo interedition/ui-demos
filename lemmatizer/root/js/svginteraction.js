@@ -1,5 +1,3 @@
-// Receding
-// Dragging
 // Stacking
 // Adding Lines
 // Dialogue
@@ -168,6 +166,18 @@ function node_obj(ellipse) {
     self.ellipse.attr( 'fill', '#fff' );
   }
 
+  this.greyout_edges = function() {
+      $.each( self.node_elements, function(index, value) {
+        value.grey_out('.edge');
+      });
+  }
+
+  this.ungreyout_edges = function() {
+      $.each( self.node_elements, function(index, value) {
+        value.un_grey_out('.edge');
+      });
+  }
+
   this.move_elements = function() {
     $.each( self.node_elements, function(index, value) {
       value.move(self.dx,self.dy);
@@ -191,9 +201,20 @@ function svgshape( shape_element ) {
   this.reset = function() {
     this.shape.attr( "transform", "translate( 0, 0 )" );
   }
+  this.grey_out = function(filter) {
+      if( this.shape.parent(filter).size() != 0 ) {
+          this.shape.attr({'stroke':'#e5e5e5', 'fill':'#e5e5e5'});
+      }
+  }
+  this.un_grey_out = function(filter) {
+      if( this.shape.parent(filter).size() != 0 ) {
+        this.shape.attr({'stroke':'#000000', 'fill':'#000000'});
+      }
+  }
 }
 
-function svgpath( path_element ) {
+function svgpath( path_element, svg_element ) {
+  this.svg_element = svg_element;
   this.path = path_element;
   this.x = this.path.x;
   this.y = this.path.y;
@@ -204,6 +225,14 @@ function svgpath( path_element ) {
   this.reset = function() {
     this.path.x = this.x;
     this.path.y = this.y;
+  }
+  this.grey_out = function() {
+      this.svg_element.attr('stroke', '#e5e5e5');
+      this.svg_element.siblings('text').attr('fill', '#e5e5e5');
+  }
+  this.un_grey_out = function() {
+      this.svg_element.attr('stroke', '#000000');
+      this.svg_element.siblings('text').attr('fill', '#000000');
   }
 }
 
@@ -224,11 +253,11 @@ function get_edge_elements_for( ellipse ) {
     if( edge_in_pattern.test(title) ) {
       edge_elements.push( new svgshape( $(this).siblings('polygon') ) );
       path_segments = $(this).siblings('path')[0].pathSegList;
-      edge_elements.push( new svgpath( path_segments.getItem(path_segments.numberOfItems - 1) ) );
+      edge_elements.push( new svgpath( path_segments.getItem(path_segments.numberOfItems - 1), $(this).siblings('path') ) );
     }
     if( edge_out_pattern.test(title) ) {
       path_segments = $(this).siblings('path')[0].pathSegList;
-      edge_elements.push( new svgpath( path_segments.getItem(0) ) );
+      edge_elements.push( new svgpath( path_segments.getItem(0), $(this).siblings('path') ) );
     }
   });
   return edge_elements;
@@ -247,19 +276,23 @@ $(document).ready(function () {
     $(this).data('down', false);
   }).mousemove(function (event) {
     if ($(this).data('down') == true ) {
-      var scroll_left = $(this).data('scrollLeft') + $(this).data('x') - event.clientX;
-      this.scrollLeft = scroll_left;
-      var enlarged_scroll_left = scroll_left * scroll_ratio; 
-      $('#enlargement').scrollLeft( enlarged_scroll_left );
-      color_enlarged();
+      if ( $('#update_workspace_button').data('locked') != true ) {
+          var scroll_left = $(this).data('scrollLeft') + $(this).data('x') - event.clientX;
+          this.scrollLeft = scroll_left;
+          var enlarged_scroll_left = scroll_left * scroll_ratio; 
+          $('#enlargement').scrollLeft( enlarged_scroll_left );
+          color_enlarged();
+      }
     }
   }).mousewheel(function (event, delta) {
-      var scroll_left = delta * 30;
-      this.scrollLeft -= scroll_left;
-      var enlarged_scroll_left = $('#enlargement').scrollLeft();
-      enlarged_scroll_left -= (scroll_left * scroll_ratio);
-      $('#enlargement').scrollLeft( enlarged_scroll_left );
-      color_enlarged();      
+      if ( $('#update_workspace_button').data('locked') != true ) {
+          var scroll_left = delta * 30;
+          this.scrollLeft -= scroll_left;
+          var enlarged_scroll_left = $('#enlargement').scrollLeft();
+          enlarged_scroll_left -= (scroll_left * scroll_ratio);
+          $('#enlargement').scrollLeft( enlarged_scroll_left );
+          color_enlarged();      
+      }
   }).css({
     'overflow' : 'hidden',
     'cursor' : '-moz-grab'
@@ -294,18 +327,29 @@ $(document).ready(function () {
   $('#update_workspace_button').click( function() {
      var svg_enlargement = $('#svgenlargement').svg().svg('get').root();
      if( $(this).data('locked')==true) {
+         $.each( ellipses_in_magnifier, function( index, ellipse ) {
+             ellipse.data( 'node_obj' ).ungreyout_edges();
+             ellipse.data( 'node_obj' ).set_draggable( false );
+         })
          svg_enlargement.children[0].setAttribute( 'transform', $(this).data('transform_memo') );
          $('#enlargement').scrollLeft( $(this).data('scrollleft_memo') );
          $(this).data('locked', false);
+         $(this).css('background-position', '0px 0px');
      } else {
+         $(this).css('background-position', '0px 17px');
          var y_min = parseInt( ellipses_in_magnifier[0].attr('cy') ) - parseInt( ellipses_in_magnifier[0].attr('ry') ); 
          var y_max = parseInt( ellipses_in_magnifier[0].attr('cy') ) + parseInt( ellipses_in_magnifier[0].attr('ry') ); 
          $.each( ellipses_in_magnifier, function( index, ellipse ) {
              var ny_min = parseInt( ellipse.attr('cy') ) - parseInt( ellipse.attr('ry') ); 
              var ny_max = parseInt( ellipse.attr('cy') ) + parseInt( ellipse.attr('ry') ); 
              if( ny_min < y_min ) { y_min = ny_min }; 
-             if( ny_max > y_max ) { y_max = ny_max }; 
-             ellipse.data( 'node_obj', new node_obj( ellipse ) );
+             if( ny_max > y_max ) { y_max = ny_max };
+             if( ellipse.data( 'node_obj' ) == null ) {
+                 ellipse.data( 'node_obj', new node_obj( ellipse ) );
+             } else {
+                 ellipse.data( 'node_obj' ).set_draggable( true );
+             }
+             ellipse.data( 'node_obj' ).greyout_edges();
          })
          var graph_frag_height = y_max - y_min ;
          var svg_enlargement_vbheight = svg_enlargement.viewBox.baseVal.height;
