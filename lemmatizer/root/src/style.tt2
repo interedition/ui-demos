@@ -9,19 +9,21 @@ body {
 #graph_container {
     height: 104px;
     width: 90%;
-    margin-top: 10px;
+    margin-top: 5px;
     border: 2px solid #B0C6F7;
 }
 #enlargement_container {
     height: 504px;
     width: 90%;
-    margin-top: 10px;
+    margin-top: 5px;
     border: 2px solid #B0C6F7;
     background: #fff;
+    padding-top: 5px;
+    padding-bottom: 5px;    
 }
 #update_workspace_button {
     position: relative;
-    top: -530px;
+    top: -538px;
     left: 44%;
     height: 17px;
     width: 17px;
