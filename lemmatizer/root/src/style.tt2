@@ -21,6 +21,19 @@ body {
     padding-top: 5px;
     padding-bottom: 5px;    
 }
+#dialog_overlay {
+    display: none;
+    position: absolute;
+    background-image: url("/css/cupertino/images/ui-bg_diagonals-thick_90_eeeeee_40x40.png");
+    background-repeat: repeat;
+    background-attachment: scroll;
+    background-position: 50% 50%;
+    background-color: #EEEEEE; 
+    opacity: 0.7;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    border: 2px solid #B0C6F7;
+}
 #update_workspace_button {
     position: relative;
     top: -538px;
@@ -32,6 +45,7 @@ body {
     background-image: url('static/images/act_arrs.gif');
     background-position: 0px 0px;
     background-color: #fcfcfc;
+    z-index: 50;
 }
 #workspace_container {
     height: 504px;
@@ -77,5 +91,10 @@ body {
 #workspace {
     padding: 0px;
     overflow: hidden;
+}
+.SamplePath { 
+    fill:none; 
+    stroke:red; 
+    stroke-width:5 
 }
 </style>

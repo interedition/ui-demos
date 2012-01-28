@@ -47,3 +47,5 @@ $(function() {
 		</fieldset>
 		</form>
 	</div>
+	<div id="dialog_overlay"></div>
+	
