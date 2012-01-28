@@ -122,7 +122,12 @@ function node_obj(ellipse) {
     if( self.super_node ) {
       self.eclipse();
     } else {
-      self.reset_elements();
+        self.reset_elements();
+        //TODO: this should move some place before which is checked that the relationship is possible
+        if( $('ellipse[fill="#ffccff"]').size() > 0 ) {
+              self.node_elements = node_elements_for(self.ellipse);
+              target_ellipse.data( 'node_obj' ).node_elements = node_elements_for(target_ellipse);
+        }
     }
   }
 
@@ -237,13 +242,17 @@ function svgpath( path_element, svg_element ) {
     this.path.x = this.x;
     this.path.y = this.y;
   }
-  this.grey_out = function() {
-      this.svg_element.attr('stroke', '#e5e5e5');
-      this.svg_element.siblings('text').attr('fill', '#e5e5e5');
+  this.grey_out = function(filter) {
+      if( this.svg_element.parent(filter).size() != 0 ) {
+          this.svg_element.attr('stroke', '#e5e5e5');
+          this.svg_element.siblings('text').attr('fill', '#e5e5e5');
+      }
   }
-  this.un_grey_out = function() {
-      this.svg_element.attr('stroke', '#000000');
-      this.svg_element.siblings('text').attr('fill', '#000000');
+  this.un_grey_out = function(filter) {
+      if( this.svg_element.parent(filter).size() != 0 ) {
+          this.svg_element.attr('stroke', '#000000');
+          this.svg_element.siblings('text').attr('fill', '#000000');
+      }
   }
 }
 
@@ -259,12 +268,15 @@ function get_edge_elements_for( ellipse ) {
   node_id = ellipse.siblings('title').text();
   edge_in_pattern = new RegExp( node_id + '$' );
   edge_out_pattern = new RegExp( '^' + node_id );
-  $.each( $('#svgenlargement .edge').children('title'), function(index) {
+  $.each( $('#svgenlargement .edge,#svgenlargement .relation').children('title'), function(index) {
     title = $(this).text();
     if( edge_in_pattern.test(title) ) {
-      edge_elements.push( new svgshape( $(this).siblings('polygon') ) );
-      path_segments = $(this).siblings('path')[0].pathSegList;
-      edge_elements.push( new svgpath( path_segments.getItem(path_segments.numberOfItems - 1), $(this).siblings('path') ) );
+        polygon = $(this).siblings('polygon');
+        if( polygon.size() > 0 ) {
+            edge_elements.push( new svgshape( polygon ) );
+        }
+        path_segments = $(this).siblings('path')[0].pathSegList;
+        edge_elements.push( new svgpath( path_segments.getItem(path_segments.numberOfItems - 1), $(this).siblings('path') ) );
     }
     if( edge_out_pattern.test(title) ) {
       path_segments = $(this).siblings('path')[0].pathSegList;
