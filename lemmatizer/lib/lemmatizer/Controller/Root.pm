@@ -133,11 +133,9 @@ sub set_relationship :Global {
 	my $opts = { 'type' => $relation,
 				 'scope' => $scope };
 	
-	my @vectors;
-	$c->response->content_type( 'application/json' );
-	$c->response->content_encoding( 'UTF-8' );
 	try {
-		$c->stash->{'result'} = $collation->add_relationship( $node, $target, $opts );
+		my @vectors = $collation->add_relationship( $node, $target, $opts );
+		$c->stash->{'result'} = \@vectors;
 	} catch( Text::Tradition::Error $e ) {
 		$c->response->status( '403' );
 		$c->stash->{'result'} = { 'error' => $e->message };
