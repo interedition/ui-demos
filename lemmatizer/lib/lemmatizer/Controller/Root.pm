@@ -126,9 +126,9 @@ sub set_relationship :Global {
 
 	my $node = $c->request->param('source_id');
 	my $target = $c->request->param('target_id');
-	my $relation = $c->request->param('reason');
+	my $relation = $c->request->param('rel_type');
 	my $note = $c->request->param('note');
-	my $scope = $c->request->param('global') ? 'global' : 'local';
+	my $scope = $c->request->param('scope');
 
 	my $opts = { 'type' => $relation,
 				 'scope' => $scope };

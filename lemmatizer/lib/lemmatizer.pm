@@ -30,7 +30,11 @@ our $VERSION = '0.01';
 # local deployment.
 
 __PACKAGE__->config( name => 'lemmatizer',
-					 default_view => 'TT', );
+					 default_view => 'TT',
+					 'View::JSON' => {
+					 	expose_stash => 'result',
+					 },
+					);
 
 # Start the application
 __PACKAGE__->setup();
