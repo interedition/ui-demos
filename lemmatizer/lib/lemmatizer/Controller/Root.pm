@@ -60,7 +60,7 @@ sub index :Path :Args(0) {
 
 sub relationship_definition :Global {
 	my( $self, $c ) = @_;
-	my $valid_relationships = [ qw/ punctuation orthography spelling word_form meaning / ];
+	my $valid_relationships = [ qw/ spelling orthographic grammatical meaning / ];
 	my $valid_scopes = [ qw/ local global / ];
 	$c->stash->{'result'} = { 'types' => $valid_relationships, 'scopes' => $valid_scopes };
 	$c->forward('View::JSON');
@@ -120,7 +120,7 @@ sub render_alignment :Global {
 	$c->stash->{'template'} = 'alignment_table.tt2';
 }
 
-sub node_collapse :Global {
+sub set_relationship :Global {
 	my( $self, $c ) = @_;
 	my $collation = $tradition->collation;
 
