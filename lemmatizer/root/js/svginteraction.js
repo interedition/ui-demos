@@ -62,8 +62,6 @@ function node_obj(ellipse) {
   this.dx = 0;
   this.dy = 0;
   this.node_elements = node_elements_for(self.ellipse);
-  this.sub_nodes = [];
-  this.super_node = null;
 
   this.get_id = function() {
     return self.ellipse.siblings('title').text()
@@ -110,17 +108,7 @@ function node_obj(ellipse) {
     $('body').unbind('mouseup');
     self.ellipse.attr( 'fill', '#fff' );
     self.ellipse.hover( self.enter_node, self.leave_node );
-//    if( self.super_node ) {
-//      self.eclipse();
-//    } else {
-        self.reset_elements();
-        //TODO: this should move some place before which is checked that the relationship is possible
-    //     if( $('ellipse[fill="#ffccff"]').size() > 0 ) {
-    //           self.node_elements = node_elements_for(self.ellipse);
-    //           var target_ellipse = $('ellipse[fill="#ffccff"]');
-    //           target_ellipse.data( 'node_obj' ).node_elements = node_elements_for(target_ellipse);
-    //     }
-    // }
+    self.reset_elements();
   }
 
   this.cpos = function() {
@@ -129,42 +117,6 @@ function node_obj(ellipse) {
 
   this.get_g = function() {
     return self.ellipse.parent('g');
-  }
-
-  //TODO: Is this deprecated now? It's not used.
-  this.stack_behind = function( collapse_info ) {
-    self.super_node = get_node_obj( collapse_info.target );
-    self.super_node.sub_nodes.push( self );
-    self.eclipse();
-    if( collapse_info.edges ) {
-      $.each( collapse_info.edges, function( source_edge_id, target_info ) {
-        get_edge(source_edge_id).attr( 'display', 'none' );
-        target_edge = get_edge(target_info.target);
-        // Unfortunately, the simple solution doesn't work...
-        // target_edge.children( 'text' ).replaceWith( '<text x="2270" y="-59.400001525878906"><tspan text-anchor="middle">A, B</tspan><tspan fill="red">, C</tspan></text>' );
-        // ..so we take the long and winding road...
-        var svg = $('#svgbasics').children('svg').svg().svg('get');
-        textx = target_edge.children( 'text' )[0].x.baseVal.getItem(0).value
-        texty = target_edge.children( 'text' )[0].y.baseVal.getItem(0).value
-        current_label = target_edge.children( 'text' ).text(); 
-        target_edge.children( 'text' ).remove();
-        texts = svg.createText();
-        texts.span(current_label, {'text-anchor': 'middle'}).span(target_info.label, {fill: 'red'});
-        svg.text(target_edge, textx, texty, texts);
-      }); 
-    }
-  }
-
-  this.eclipse = function() {
-    self.dx = new Number( self.super_node.cpos().x ) - new Number( self.cpos().x ) + ( 10 * (self.super_node.sub_nodes.indexOf(self) + 1) );
-    self.dy = new Number( self.super_node.cpos().y ) - new Number( self.cpos().y ) + ( 5 * (self.super_node.sub_nodes.indexOf(self) + 1) );
-    self.move_elements();
-    eclipse_index = self.super_node.sub_nodes.indexOf(self) - 1;
-    if( eclipse_index > -1 ) {
-      self.get_g().insertBefore( self.super_node.sub_nodes[eclipse_index].get_g() );
-    } else {
-      self.get_g().insertBefore( self.super_node.get_g() );
-    }
   }
 
   this.enter_node = function(evt) {
@@ -321,6 +273,7 @@ function relation_factory() {
         get_node_obj( target_node_id ).update_elements();
     }
     this.remove = function( source_node_id, target_id ) {
+        //TODO (When needed)
         console.log( "Unsupported function node_obj.remove()." );
     }
 }
