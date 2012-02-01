@@ -1,6 +1,3 @@
-//colors hard coded for now
-relation_colors = [ "#5CCCCC", "#67E667", "#F9FE72", "#6B90D4", "#FF7673", "#E467B3", "#AA67D5", "#8370D8", "#FFC173" ];
-
 function getRelativePath( action ) {
     path_elements = window.location.pathname.split('/'); 
     if( path_elements[1].length > 0 ) {
@@ -41,17 +38,17 @@ function svgEnlargementLoaded() {
 }
 
 function get_ellipse( node_id ) {
-  return $('.node').children('title').filter( function(index) {
+  return $('#svgenlargement .node').children('title').filter( function(index) {
     return $(this).text() == node_id;
   }).siblings('ellipse');
 }
 
 function get_node_obj( node_id ) {
-  get_ellipse( node_id ).data( 'node_obj' );
+  return get_ellipse( node_id ).data( 'node_obj' );
 }
 
 function get_edge( edge_id ) {
-  return $('.edge').filter( function(index) {
+  return $('#svgenlargement .edge').filter( function(index) {
     return $(this).children( 'title' ).text() == $('<div/>').html(edge_id).text() ;
   });
 }
@@ -107,24 +104,23 @@ function node_obj(ellipse) {
         var target_node_id = $('ellipse[fill="#ffccff"]').siblings("title").text();
         $('#source_node_id').val( source_node_id );
         $('#target_node_id').val( target_node_id );
-        draw_relation( source_node_id, target_node_id, '#FFA14F' );
         $('#dialog-form').dialog( 'open' );
     };
     $('body').unbind('mousemove');
     $('body').unbind('mouseup');
     self.ellipse.attr( 'fill', '#fff' );
     self.ellipse.hover( self.enter_node, self.leave_node );
-    if( self.super_node ) {
-      self.eclipse();
-    } else {
+//    if( self.super_node ) {
+//      self.eclipse();
+//    } else {
         self.reset_elements();
         //TODO: this should move some place before which is checked that the relationship is possible
-        if( $('ellipse[fill="#ffccff"]').size() > 0 ) {
-              self.node_elements = node_elements_for(self.ellipse);
-              var target_ellipse = $('ellipse[fill="#ffccff"]');
-              target_ellipse.data( 'node_obj' ).node_elements = node_elements_for(target_ellipse);
-        }
-    }
+    //     if( $('ellipse[fill="#ffccff"]').size() > 0 ) {
+    //           self.node_elements = node_elements_for(self.ellipse);
+    //           var target_ellipse = $('ellipse[fill="#ffccff"]');
+    //           target_ellipse.data( 'node_obj' ).node_elements = node_elements_for(target_ellipse);
+    //     }
+    // }
   }
 
   this.cpos = function() {
@@ -201,6 +197,10 @@ function node_obj(ellipse) {
     $.each( self.node_elements, function(index, value) {
       value.reset();
     });
+  }
+
+  this.update_elements = function() {
+      self.node_elements = node_elements_for(self.ellipse);
   }
 
   self.set_draggable( true );
@@ -283,50 +283,68 @@ function get_edge_elements_for( ellipse ) {
   return edge_elements;
 } 
 
-function draw_relation( source_id, target_id, relation_color ) {
-    var relation_id = source_id + '->' + target_id;
-    var relation = $('#svgenlargement .relation').filter( function(index) {
-        var relation_id = $(this).children('title').text();
-        if( ( relation_id == ( source_id + '->' + target_id ) ) || ( relation_id == ( target_id + '->' + source_id ) ) ) {
-            return true;
-        } 
-    } );
-    if( relation.size() == 0 ) {
-        var source_ellipse = get_ellipse( source_id );
-        var target_ellipse = get_ellipse( target_id );
-        var svg = $('#svgenlargement').children('svg').svg().svg('get');
-        var path = svg.createPath(); 
-        var sx = parseInt( source_ellipse.attr('cx') );
-        var rx = parseInt( source_ellipse.attr('rx') );
-        var sy = parseInt( source_ellipse.attr('cy') );
-        var ex = parseInt( target_ellipse.attr('cx') );
-        var ey = parseInt( target_ellipse.attr('cy') );
-        var relation = svg.group( $("#svgenlargement svg g"), {'class':'relation'} );
-        svg.title( relation, source_id + '->' + target_id );
-        svg.path( relation, path.move( sx, sy ).curveC( sx + (2*rx), sy, ex + (2*rx), ey, ex, ey ), {fill: 'none', stroke: relation_color, strokeWidth: 4});
-        $('#svgenlargement .relation').filter( ':last' ).insertBefore( $('#svgenlargement g g').filter(':first') );
-        org_color = null;
-    } else {
-        org_color = relation.children('path').attr( 'stroke' );
-        relation.children('path').attr( 'stroke', relation_color );
+function relation_factory() {
+    var self = this;
+    this.color_memo = null;
+    //TODO: colors hard coded for now
+    this.temp_color = '#FFA14F';
+    this.relation_colors = [ "#5CCCCC", "#67E667", "#F9FE72", "#6B90D4", "#FF7673", "#E467B3", "#AA67D5", "#8370D8", "#FFC173" ];
+
+    this.create_temporary = function( source_node_id, target_node_id ) {
+        var relation = $('#svgenlargement .relation').filter( function(index) {
+            var relation_id = $(this).children('title').text();
+            if( ( relation_id == ( source_node_id + '->' + target_node_id ) ) || ( relation_id == ( target_node_id + '->' + source_node_id ) ) ) {
+                return true;
+            } 
+        } );
+        if( relation.size() == 0 ) { 
+            draw_relation( source_node_id, target_node_id, self.temp_color );
+        } else {
+            self.color_memo = relation.children('path').attr( 'stroke' );
+            relation.children('path').attr( 'stroke', self.temp_color );
+        }
+    }
+    this.remove_temporary = function() {
+        var path_element = $('#svgenlargement .relation').children('path[stroke="' + self.temp_color + '"]');
+        if( self.color_memo != null ) {
+            path_element.attr( 'stroke', self.color_memo );
+            self.color_memo = null;
+        } else {
+            path_element.parent('g').remove();
+        }
+    }
+    this.create = function( source_node_id, target_node_id, color_index ) {
+        //TODO: Protect from (color_)index out of bound..
+        var relation_color = self.relation_colors[ color_index ];
+        draw_relation( source_node_id, target_node_id, relation_color );
+        get_node_obj( source_node_id ).update_elements();
+        get_node_obj( target_node_id ).update_elements();
+    }
+    this.remove = function( source_node_id, target_id ) {
+        console.log( "Unsupported function node_obj.remove()." );
     }
 }
 
-function remove_relation( source_id, target_id ) {
-    var relation = $('#svgenlargement .relation').filter( function(index) {
-        var relation_id = $(this).children('title').text();
-        if( ( relation_id == ( source_id + '->' + target_id ) ) || ( relation_id == ( target_id + '->' + source_id ) ) ) {
-            return true;
-        } 
-    })
-    if( org_color == null ) {
-        relation.remove();
-    } else {
-        relation.children('path').attr( 'stroke', org_color );
-    };
+function draw_relation( source_id, target_id, relation_color ) {
+    var source_ellipse = get_ellipse( source_id );
+    var target_ellipse = get_ellipse( target_id );
+    var svg = $('#svgenlargement').children('svg').svg().svg('get');
+    var path = svg.createPath(); 
+    var sx = parseInt( source_ellipse.attr('cx') );
+    var rx = parseInt( source_ellipse.attr('rx') );
+    var sy = parseInt( source_ellipse.attr('cy') );
+    var ex = parseInt( target_ellipse.attr('cx') );
+    var ey = parseInt( target_ellipse.attr('cy') );
+    var relation = svg.group( $("#svgenlargement svg g"), {'class':'relation'} );
+    svg.title( relation, source_id + '->' + target_id );
+    svg.path( relation, path.move( sx, sy ).curveC( sx + (2*rx), sy, ex + (2*rx), ey, ex, ey ), {fill: 'none', stroke: relation_color, strokeWidth: 4});
+    var relation_element = $('#svgenlargement .relation').filter( ':last' );
+    relation_element.insertBefore( $('#svgenlargement g g').filter(':first') );
 }
 
 $(document).ready(function () {
+  
+  relation_manager = new relation_factory();
   
   scroll_ratio =  $('#enlargement').height() / $('#graph').height();
   
@@ -375,17 +393,14 @@ $(document).ready(function () {
         ncpath = getRelativePath( 'set_relationship' );
         var jqjson = $.getJSON( ncpath, form_values, function(data) {
             $.each( data, function(item, source_target) { 
-                var relation_color = relation_colors[ $('#rel_type').attr('selectedIndex') ];
-                draw_relation( source_target[0], source_target[1], relation_color );
+                relation_manager.create( source_target[0], source_target[1], $('#rel_type').attr('selectedIndex') );
             });
-            if( data.length == 0 ) {
-                 remove_relation( $('#source_node_id').val(), $('#target_node_id').val() );
-            }
+            relation_manager.remove_temporary();
             $( "#dialog-form" ).dialog( "close" );
         });
       },
       Cancel: function() {
-          remove_relation( $('#source_node_id').val(), $('#target_node_id').val() );
+          relation_manager.remove_temporary();
           $( this ).dialog( "close" );
       }
     },
@@ -396,7 +411,7 @@ $(document).ready(function () {
             var types = data.types.sort();
             $.each( types, function(index, value) {   
                  $('#rel_type').append( $('<option>').attr( "value", value ).text(value) ); 
-                 $('#keymaplist').append( $('<li>').css( "border-color", relation_colors[index] ).text(value) ); 
+                 $('#keymaplist').append( $('<li>').css( "border-color", relation_manager.relation_colors[index] ).text(value) ); 
             });
             var scopes = data.scopes;
             $.each( scopes, function(index, value) {   
@@ -405,11 +420,12 @@ $(document).ready(function () {
         });        
     },
     open: function() {
-      $(".ui-widget-overlay").css("background", "none");
-      $("#dialog_overlay").show();
-      $("#dialog_overlay").height( $("#enlargement_container").height() );
-      $("#dialog_overlay").width( $("#enlargement_container").width() );
-      $("#dialog_overlay").offset( $("#enlargement_container").offset() );
+        relation_manager.create_temporary( $('#source_node_id').val(), $('#target_node_id').val() );
+        $(".ui-widget-overlay").css("background", "none");
+        $("#dialog_overlay").show();
+        $("#dialog_overlay").height( $("#enlargement_container").height() );
+        $("#dialog_overlay").width( $("#enlargement_container").width() );
+        $("#dialog_overlay").offset( $("#enlargement_container").offset() );
     },
     close: function() {
         $( '#status' ).empty();
@@ -494,5 +510,7 @@ function color_enlarged() {
         }
     });   
 }
+
+
 
 
