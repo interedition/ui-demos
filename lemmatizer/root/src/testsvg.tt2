@@ -35,17 +35,24 @@ $(function() {
 	
 	<div id="update_workspace_button"></div>
 	
-	<div id="dialog-form" title="Equate readings..">
+	<div id="dialog-form" title="Create relation between two nodes..">
 		<form id="collapse_node_form">
 		<fieldset>
 			<input type="hidden" name="source_id" id="source_node_id"/>
 			<input type="hidden" name="target_id" id="target_node_id"/>
-			<label for="reason">Reason..</label>
-			<input type="text" name="reason" id="reason" class="text ui-widget-content ui-corner-all" />
-			<br/><label for="global">Apply globally?</label>
-			<input type="checkbox" name="global" id="global" class="text ui-widget-content ui-corner-all" />
+			<label for="rel_type">Relation type..&nbsp;</label>
+			<select name="rel_type" id="rel_type" class=".ui-widget select">
+			</select>
+			<br/><br/>
+			<label for="scope">Scope of relation..&nbsp;</label>
+			<select name="scope" id="scope" class=".ui-widget select">
+			</select>
+			<br/><br/>
+			<label for="note">Annotation on note..&nbsp;</label>
+			<input type="text" width="60" name="note" id="note" class=".ui-widget input" />
 		</fieldset>
+    	<div id="status"></div>		
 		</form>
 	</div>
 	<div id="dialog_overlay"></div>
-	
+

@@ -6,6 +6,9 @@ body {
     font-size: 85%; 
     background: #EDF1FA;
 }
+.error {
+    color: red;
+}
 #graph_container {
     height: 104px;
     width: 90%;
@@ -91,10 +94,5 @@ body {
 #workspace {
     padding: 0px;
     overflow: hidden;
-}
-.SamplePath { 
-    fill:none; 
-    stroke:red; 
-    stroke-width:5 
 }
 </style>

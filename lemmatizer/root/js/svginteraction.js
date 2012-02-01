@@ -1,5 +1,5 @@
-// Stacking
-// Dialogue
+//colors hard coded for now
+relation_colors = [ "#5CCCCC", "#67E667", "#F9FE72", "#6B90D4", "#FF7673", "#E467B3", "#AA67D5", "#8370D8", "#FFC173" ];
 
 function getRelativePath( action ) {
     path_elements = window.location.pathname.split('/'); 
@@ -40,10 +40,14 @@ function svgEnlargementLoaded() {
   scroll_enlargement_ratio = svg_height/svg_vbheight;
 }
 
-function get_node_obj( node_id ) {
+function get_ellipse( node_id ) {
   return $('.node').children('title').filter( function(index) {
     return $(this).text() == node_id;
-  }).siblings('ellipse').data( 'node_obj' );
+  }).siblings('ellipse');
+}
+
+function get_node_obj( node_id ) {
+  get_ellipse( node_id ).data( 'node_obj' );
 }
 
 function get_edge( edge_id ) {
@@ -99,20 +103,11 @@ function node_obj(ellipse) {
 
   this.mouseup_listener = function(evt) {    
     if( $('ellipse[fill="#ffccff"]').size() > 0 ) {
-        $('#source_node_id').val( self.ellipse.siblings('title').text() );
-        var target_ellipse = $('ellipse[fill="#ffccff"]');
-        $('#target_node_id').val( target_ellipse.siblings("title").text() );
-        var svg = $('#svgenlargement').children('svg').svg().svg('get');
-        var path = svg.createPath(); 
-        var sx = parseInt( self.ellipse.attr('cx') );
-        var rx = parseInt( self.ellipse.attr('rx') );
-        var sy = parseInt( self.ellipse.attr('cy') );
-        var ex = parseInt( target_ellipse.attr('cx') );
-        var ey = parseInt( target_ellipse.attr('cy') );
-        var relation = svg.group( $("#svgenlargement svg g"), {'class':'relation'} );
-        svg.title( relation, $('#source_node_id').val() + '->' + $('#target_node_id').val() );
-        svg.path( relation, path.move( sx, sy ).curveC( sx + (2*rx), sy, ex + (2*rx), ey, ex, ey ), {fill: 'none', stroke: '#FFA14F', strokeWidth: 4});
-        $('#svgenlargement .relation').filter( ':last' ).insertBefore( $('#svgenlargement g g').filter(':first') );
+        var source_node_id = self.ellipse.siblings('title').text();
+        var target_node_id = $('ellipse[fill="#ffccff"]').siblings("title").text();
+        $('#source_node_id').val( source_node_id );
+        $('#target_node_id').val( target_node_id );
+        draw_relation( source_node_id, target_node_id, '#FFA14F' );
         $('#dialog-form').dialog( 'open' );
     };
     $('body').unbind('mousemove');
@@ -126,6 +121,7 @@ function node_obj(ellipse) {
         //TODO: this should move some place before which is checked that the relationship is possible
         if( $('ellipse[fill="#ffccff"]').size() > 0 ) {
               self.node_elements = node_elements_for(self.ellipse);
+              var target_ellipse = $('ellipse[fill="#ffccff"]');
               target_ellipse.data( 'node_obj' ).node_elements = node_elements_for(target_ellipse);
         }
     }
@@ -139,6 +135,7 @@ function node_obj(ellipse) {
     return self.ellipse.parent('g');
   }
 
+  //TODO: Is this deprecated now? It's not used.
   this.stack_behind = function( collapse_info ) {
     self.super_node = get_node_obj( collapse_info.target );
     self.super_node.sub_nodes.push( self );
@@ -286,7 +283,51 @@ function get_edge_elements_for( ellipse ) {
   return edge_elements;
 } 
 
+function draw_relation( source_id, target_id, relation_color ) {
+    var relation_id = source_id + '->' + target_id;
+    var relation = $('#svgenlargement .relation').filter( function(index) {
+        var relation_id = $(this).children('title').text();
+        if( ( relation_id == ( source_id + '->' + target_id ) ) || ( relation_id == ( target_id + '->' + source_id ) ) ) {
+            return true;
+        } 
+    } );
+    if( relation.size() == 0 ) {
+        var source_ellipse = get_ellipse( source_id );
+        var target_ellipse = get_ellipse( target_id );
+        var svg = $('#svgenlargement').children('svg').svg().svg('get');
+        var path = svg.createPath(); 
+        var sx = parseInt( source_ellipse.attr('cx') );
+        var rx = parseInt( source_ellipse.attr('rx') );
+        var sy = parseInt( source_ellipse.attr('cy') );
+        var ex = parseInt( target_ellipse.attr('cx') );
+        var ey = parseInt( target_ellipse.attr('cy') );
+        var relation = svg.group( $("#svgenlargement svg g"), {'class':'relation'} );
+        svg.title( relation, source_id + '->' + target_id );
+        svg.path( relation, path.move( sx, sy ).curveC( sx + (2*rx), sy, ex + (2*rx), ey, ex, ey ), {fill: 'none', stroke: relation_color, strokeWidth: 4});
+        $('#svgenlargement .relation').filter( ':last' ).insertBefore( $('#svgenlargement g g').filter(':first') );
+        org_color = null;
+    } else {
+        org_color = relation.children('path').attr( 'stroke' );
+        relation.children('path').attr( 'stroke', relation_color );
+    }
+}
+
+function remove_relation( source_id, target_id ) {
+    var relation = $('#svgenlargement .relation').filter( function(index) {
+        var relation_id = $(this).children('title').text();
+        if( ( relation_id == ( source_id + '->' + target_id ) ) || ( relation_id == ( target_id + '->' + source_id ) ) ) {
+            return true;
+        } 
+    })
+    if( org_color == null ) {
+        relation.remove();
+    } else {
+        relation.children('path').attr( 'stroke', org_color );
+    };
+}
+
 $(document).ready(function () {
+  
   scroll_ratio =  $('#enlargement').height() / $('#graph').height();
   
   $('#graph').mousedown(function (event) {
@@ -314,7 +355,7 @@ $(document).ready(function () {
           var enlarged_scroll_left = $('#enlargement').scrollLeft();
           enlarged_scroll_left -= (scroll_left * scroll_ratio);
           $('#enlargement').scrollLeft( enlarged_scroll_left );
-          color_enlarged();      
+          color_enlarged();
       }
   }).css({
     'overflow' : 'hidden',
@@ -324,23 +365,43 @@ $(document).ready(function () {
 
   $( "#dialog-form" ).dialog({
     autoOpen: false,
-    height: 150,
-    width: 250,
+    height: 270,
+    width: 290,
     modal: true,
     buttons: {
       "Ok": function() {
+        $('#status').empty();
         form_values = $('#collapse_node_form').serialize()
-        ncpath = getRelativePath( 'node_collapse' );
+        ncpath = getRelativePath( 'set_relationship' );
         var jqjson = $.getJSON( ncpath, form_values, function(data) {
-          $.each( data, function(item, collapse_info) { 
-            get_node_obj( item ).stack_behind( collapse_info );
-          });
+            $.each( data, function(item, source_target) { 
+                var relation_color = relation_colors[ $('#rel_type').attr('selectedIndex') ];
+                draw_relation( source_target[0], source_target[1], relation_color );
+            });
+            if( data.length == 0 ) {
+                 remove_relation( $('#source_node_id').val(), $('#target_node_id').val() );
+            }
+            $( "#dialog-form" ).dialog( "close" );
         });
-        $( this ).dialog( "close" );
       },
       Cancel: function() {
-        $( this ).dialog( "close" );
+          remove_relation( $('#source_node_id').val(), $('#target_node_id').val() );
+          $( this ).dialog( "close" );
       }
+    },
+    create: function(event, ui) { 
+        $(this).data( 'relation_drawn', false );
+        //TODO? Err handling?
+        var jqjson = $.getJSON( 'relationship_definition', function(data) {
+            var types = data.types.sort();
+            $.each( types, function(index, value) {   
+                 $('#rel_type').append( $('<option>').attr( "value", value ).text(value) ); 
+            });
+            var scopes = data.scopes;
+            $.each( scopes, function(index, value) {   
+                 $('#scope').append( $('<option>').attr( "value", value ).text(value) ); 
+            });
+        });        
     },
     open: function() {
       $(".ui-widget-overlay").css("background", "none");
@@ -350,10 +411,14 @@ $(document).ready(function () {
       $("#dialog_overlay").offset( $("#enlargement_container").offset() );
     },
     close: function() {
-      $('#reason').val( "" ).removeClass( "ui-state-error" );
-      $("#dialog_overlay").hide();
+        $( '#status' ).empty();
+        $("#dialog_overlay").hide();
     }
-  });
+  }).ajaxError( function(event, jqXHR, ajaxSettings, thrownError) {
+      if( ( ajaxSettings.url.split("?")[0] == 'set_relationship' ) && jqXHR.status == 403 ) {
+          $('#status').append( '<p class="error">The relationship can not be made in this way between these nodes.</p>' );
+      }
+  } );
 
   $('#update_workspace_button').click( function() {
      var svg_enlargement = $('#svgenlargement').svg().svg('get').root();
@@ -428,3 +493,5 @@ function color_enlarged() {
         }
     });   
 }
+
+
