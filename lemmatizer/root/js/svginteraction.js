@@ -396,6 +396,7 @@ $(document).ready(function () {
             var types = data.types.sort();
             $.each( types, function(index, value) {   
                  $('#rel_type').append( $('<option>').attr( "value", value ).text(value) ); 
+                 $('#keymaplist').append( $('<li>').css( "border-color", relation_colors[index] ).text(value) ); 
             });
             var scopes = data.scopes;
             $.each( scopes, function(index, value) {   

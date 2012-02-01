@@ -95,4 +95,23 @@ body {
     padding: 0px;
     overflow: hidden;
 }
+#keymap {
+    position: absolute;
+    left: 80%;
+    top: 100px;
+    border: 2px solid #B0C6F7;
+    background: #fff;
+}
+#keymap ul {
+    padding: 10px;
+    padding-left: 14px;
+    padding-right: 14px;
+    margin: 0px;
+}
+#keymap li {
+    border-left: 16px solid #fff;
+    padding-left: 8px;
+    list-style: none;
+    margin-bottom: 3px;
+}
 </style>

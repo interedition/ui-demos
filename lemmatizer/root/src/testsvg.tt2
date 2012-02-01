@@ -56,3 +56,8 @@ $(function() {
 	</div>
 	<div id="dialog_overlay"></div>
 
+    <div id="keymap">
+        <ul id="keymaplist">
+        </ul>
+    </div>
+    
