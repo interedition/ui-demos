@@ -16,7 +16,7 @@ body {
     border: 2px solid #B0C6F7;
 }
 #enlargement_container {
-    height: 504px;
+    height: 252px;
     width: 90%;
     margin-top: 5px;
     border: 2px solid #B0C6F7;

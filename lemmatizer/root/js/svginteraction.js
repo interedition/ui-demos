@@ -30,11 +30,12 @@ function svgEnlargementLoaded() {
   var scroll_padding = $('#enlargement_container').width();
   // (Use attr('width') to set width attr, otherwise style="width: npx;" is set.)
   var svg_element_width = svg_vbwidth/svg_vbheight * parseInt(svg_element.attr('height'));
-  svg_element_width += scroll_padding;
+  //svg_element_width += scroll_padding;
   svg_element.attr( 'width', svg_element_width );
   $('ellipse').attr( {stroke:'black', fill:'#fff'} );
   var svg_height = parseInt( $('#svgenlargement').height() );
   scroll_enlargement_ratio = svg_height/svg_vbheight;
+  svg_magnifier = $('#svgenlargement').svg().svg('get').root();
 }
 
 function get_ellipse( node_id ) {
@@ -301,7 +302,7 @@ $(document).ready(function () {
   
   scroll_ratio =  $('#enlargement').height() / $('#graph').height();
   
-  $('#graph').mousedown(function (event) {
+  $('#enlargement').mousedown(function (event) {
     $(this)
       .data('down', true)
       .data('x', event.clientX)
@@ -320,14 +321,14 @@ $(document).ready(function () {
       }
     }
   }).mousewheel(function (event, delta) {
-      if ( $('#update_workspace_button').data('locked') != true ) {
-          var scroll_left = delta * 30;
-          this.scrollLeft -= scroll_left;
-          var enlarged_scroll_left = $('#enlargement').scrollLeft();
-          enlarged_scroll_left -= (scroll_left * scroll_ratio);
-          $('#enlargement').scrollLeft( enlarged_scroll_left );
-          color_enlarged();
-      }
+      event.stopPropagation();
+      var transform = svg_magnifier.children[0].getAttribute('transform');
+      console.log( transform );
+      var current_scale = transform.match( /scale\([^\)]*\)/ )[0].split('(')[1].split(' ')[0];
+      var scale = parseFloat( current_scale ) + (delta / 10);
+      transform = transform.replace( /scale\([^\)]*\)/, 'scale(' + scale + ' ' + scale + ')' );
+      console.log( transform );
+      svg_magnifier.children[0].setAttribute( 'transform', transform );
   }).css({
     'overflow' : 'hidden',
     'cursor' : '-moz-grab'
