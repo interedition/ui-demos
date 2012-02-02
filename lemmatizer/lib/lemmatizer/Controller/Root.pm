@@ -120,6 +120,24 @@ sub render_alignment :Global {
 	$c->stash->{'template'} = 'alignment_table.tt2';
 }
 
+sub get_relationships :Global {
+	my( $self, $c ) = @_;
+	_test_tradition( $c ) unless $tradition;
+	my $collation = $tradition->collation;
+	# TODO make this API
+	my @pairs = $collation->relationships; # returns the edges
+	my @all_relations;
+	foreach my $p ( @pairs ) {
+		my $relobj = $collation->relations->get_relationship( @$p );
+		push( @all_relations, 
+			{ source => $p->[0], target => $p->[1], 
+			  type => $relobj->type, scope => $relobj->scope } );
+	}
+	$c->stash->{'result'} = \@all_relations;
+	$c->forward('View::JSON');
+}		
+		
+
 sub set_relationship :Global {
 	my( $self, $c ) = @_;
 	my $collation = $tradition->collation;
@@ -209,10 +227,14 @@ sub _test_tradition {
 		'input' => $testdata eq 'john.xml' ? 'Self' : 'CollateX',
 		'file'  => $c->path_to( 't', 'data', $testdata ),
 	);
-	# Fix up the CX file
 	if( $testdata eq 'Collatex-16.xml' ) {
+		# Fix up the CX file
 		$tradition->collation->reading( 'n9' )->rank( 17 );
 		$tradition->collation->reading( 'n25' )->rank( 18 );
+	} else {
+		# Add a test pre-existing relationships
+		$tradition->collation->add_relationship( '1,4', '1,5', 
+			{ type => 'orthographic', scope => 'global' } );
 	}
 }
 
