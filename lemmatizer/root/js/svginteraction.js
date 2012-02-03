@@ -110,8 +110,11 @@ function node_obj(ellipse) {
   }
 
   this.mousemove_listener = function(evt) {
-    self.dx = (evt.clientX - self.x) / mousemove_enlargement_ratio;
-    self.dy = (evt.clientY - self.y) / mousemove_enlargement_ratio;
+    // magnification on workspace lock temporarily disabled
+    // self.dx = (evt.clientX - self.x) / mousemove_enlargement_ratio;
+    // self.dy = (evt.clientY - self.y) / mousemove_enlargement_ratio;
+    self.dx = (evt.clientX - self.x) / scroll_enlargement_ratio;
+    self.dy = (evt.clientY - self.y) / scroll_enlargement_ratio;
     self.move_elements();
   }
 
@@ -365,6 +368,7 @@ $(document).ready(function () {
         $('#status').empty();
         form_values = $('#collapse_node_form').serialize()
         ncpath = getRelativePath( 'set_relationship' );
+        $(':button :contains("Ok")').attr("disabled", true);
         var jqjson = $.getJSON( ncpath, form_values, function(data) {
             $.each( data, function(item, source_target) { 
                 relation_manager.create( source_target[0], source_target[1], $('#rel_type').attr('selectedIndex') );
@@ -419,8 +423,9 @@ $(document).ready(function () {
              ellipse.data( 'node_obj' ).set_draggable( false );
              ellipse.data( 'node_obj', null );
          })
-         svg_enlargement.children[0].setAttribute( 'transform', $(this).data('transform_memo') );
-         $('#enlargement').scrollLeft( $(this).data('scrollleft_memo') );
+         // magnification on workspace lock temporarily disabled
+         // svg_enlargement.children[0].setAttribute( 'transform', $(this).data('transform_memo') );
+         // $('#enlargement').scrollLeft( $(this).data('scrollleft_memo') );
          $(this).data('locked', false);
          $(this).css('background-position', '0px 0px');
      } else {
@@ -439,22 +444,23 @@ $(document).ready(function () {
              }
              ellipse.data( 'node_obj' ).greyout_edges();
          })
-         var graph_frag_height = y_max - y_min ;
-         var svg_enlargement_vbheight = svg_enlargement.viewBox.baseVal.height;
-         var svg_enlargement_vbwidth = svg_enlargement.viewBox.baseVal.width;
-         var scale = svg_enlargement_vbheight / graph_frag_height;
-         mousemove_enlargement_ratio = scroll_enlargement_ratio * scale;
-         var scroll_padding = $('#enlargement_container').width();
-         var scroll_scale =  svg_enlargement_vbwidth / ( parseFloat( $('#svgenlargement svg').attr('width') ) - scroll_padding );
-         var vbx_of_scroll = ( $('#enlargement').scrollLeft() ) * scroll_scale;
-         var translate_x = vbx_of_scroll;
-         var transform = svg_enlargement.children[0].getAttribute('transform');
-         $(this).data('transform_memo', transform );
-         $(this).data('scrollleft_memo', $('#enlargement').scrollLeft() ); 
+         // magnification on workspace lock temporarily disabled
+         // var graph_frag_height = y_max - y_min ;
+         // var svg_enlargement_vbheight = svg_enlargement.viewBox.baseVal.height;
+         // var svg_enlargement_vbwidth = svg_enlargement.viewBox.baseVal.width;
+         // var scale = svg_enlargement_vbheight / graph_frag_height;
+         // mousemove_enlargement_ratio = scroll_enlargement_ratio * scale;
+         // var scroll_padding = $('#enlargement_container').width();
+         // var scroll_scale =  svg_enlargement_vbwidth / ( parseFloat( $('#svgenlargement svg').attr('width') ) - scroll_padding );
+         // var vbx_of_scroll = ( $('#enlargement').scrollLeft() ) * scroll_scale;
+         // var translate_x = vbx_of_scroll;
+         // var transform = svg_enlargement.children[0].getAttribute('transform');
+         // $(this).data('transform_memo', transform );
+         // $(this).data('scrollleft_memo', $('#enlargement').scrollLeft() ); 
          $(this).data('locked', true );
-         $('#enlargement').scrollLeft(0);
-         transform = 'scale(' + scale + ') translate(' + (-1 * translate_x) + ',' + (-1 * y_min) + ')';
-         svg_enlargement.children[0].setAttribute( 'transform', transform );
+         // $('#enlargement').scrollLeft(0);
+         // transform = 'scale(' + scale + ') translate(' + (-1 * translate_x) + ',' + (-1 * y_min) + ')';
+         // svg_enlargement.children[0].setAttribute( 'transform', transform );
      }
   });
   
