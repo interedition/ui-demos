@@ -27,6 +27,7 @@ function svgEnlargementLoaded() {
   var svg_graph = svg_element.svg().svg('get').root()
   var svg_vbwidth = svg_graph.viewBox.baseVal.width;
   var svg_vbheight = svg_graph.viewBox.baseVal.height;
+  tempsvgvbheight = svg_vbheight;
   var scroll_padding = $('#enlargement_container').width();
   // (Use attr('width') to set width attr, otherwise style="width: npx;" is set.)
   var svg_element_width = svg_vbwidth/svg_vbheight * parseInt(svg_element.attr('height'));
@@ -326,7 +327,9 @@ $(document).ready(function () {
       console.log( transform );
       var current_scale = transform.match( /scale\([^\)]*\)/ )[0].split('(')[1].split(' ')[0];
       var scale = parseFloat( current_scale ) + (delta / 10);      
-      var translateY = ( $('#svgenlargement').height()/2 * scale ) + 75;
+      //var translateY = ( $('#svgenlargement').height()/2 * scale ) + 500;//<-- svg_height * svg_height/vb_height //338; //75;
+      var translateY = ( $('#svgenlargement').height() * scale ) / 2;
+      translateY = translateY - ( $('#svgenlargement').height() * tempsvgvbheight / $('#svgenlargement').height());
       transform = 'rotate(0) translate(4, ' + translateY + ') scale(' + scale + ' ' + scale + ')';
       console.log( transform );
       svg_magnifier.children[0].setAttribute( 'transform', transform );
