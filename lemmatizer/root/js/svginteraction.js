@@ -22,19 +22,41 @@ function svgLoaded() {
 }
 
 function svgEnlargementLoaded() {
-  // some initial scaling
-  var svg_element = $('#svgenlargement').children('svg');
-  var svg_graph = svg_element.svg().svg('get').root()
-  var svg_vbwidth = svg_graph.viewBox.baseVal.width;
-  var svg_vbheight = svg_graph.viewBox.baseVal.height;
-  var scroll_padding = $('#enlargement_container').width();
-  // (Use attr('width') to set width attr, otherwise style="width: npx;" is set.)
-  var svg_element_width = svg_vbwidth/svg_vbheight * parseInt(svg_element.attr('height'));
-  svg_element_width += scroll_padding;
-  svg_element.attr( 'width', svg_element_width );
-  $('ellipse').attr( {stroke:'black', fill:'#fff'} );
-  var svg_height = parseInt( $('#svgenlargement').height() );
-  scroll_enlargement_ratio = svg_height/svg_vbheight;
+    // some initial scaling
+    var svg_element = $('#svgenlargement').children('svg');
+    var svg_graph = svg_element.svg().svg('get').root()
+    var svg_vbwidth = svg_graph.viewBox.baseVal.width;
+    var svg_vbheight = svg_graph.viewBox.baseVal.height;
+    var scroll_padding = $('#enlargement_container').width();
+    // (Use attr('width') to set width attr, otherwise style="width: npx;" is set.)
+    var svg_element_width = svg_vbwidth / svg_vbheight * parseInt(svg_element.attr('height'));
+    svg_element_width += scroll_padding;
+    svg_element.attr('width', svg_element_width);
+    $('ellipse').attr({
+        stroke: 'black',
+        fill: '#fff'
+    });
+    var svg_height = parseInt($('#svgenlargement').height());
+    scroll_enlargement_ratio = svg_height / svg_vbheight;
+    add_relations();
+}
+
+function add_relations() {
+    $.getJSON( 'relationship_definition', function(data) {
+        var rel_types = data.types.sort();
+        $.getJSON('get_relationships',
+        function(data) {
+            $.each(data, function( index, rel_info ) {
+                var type_index = $.inArray(rel_info.type, rel_types);
+                if( type_index != -1 ) {
+                    console.log( 'drawing' );
+                    relation_manager.create( rel_info.source, rel_info.target, type_index );
+                } else {
+                    console.log( 'not drawing' );
+                }
+            })
+        });    
+    });
 }
 
 function get_ellipse( node_id ) {
@@ -269,8 +291,10 @@ function relation_factory() {
         //TODO: Protect from (color_)index out of bound..
         var relation_color = self.relation_colors[ color_index ];
         draw_relation( source_node_id, target_node_id, relation_color );
-        get_node_obj( source_node_id ).update_elements();
-        get_node_obj( target_node_id ).update_elements();
+        var source_node = get_node_obj( source_node_id );
+        var target_node = get_node_obj( target_node_id );
+        if( source_node != null ) { source_node.update_elements() };
+        if( target_node != null ) { target_node.update_elements() };
     }
     this.remove = function( source_node_id, target_id ) {
         //TODO (When needed)
