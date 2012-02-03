@@ -49,10 +49,7 @@ function add_relations() {
             $.each(data, function( index, rel_info ) {
                 var type_index = $.inArray(rel_info.type, rel_types);
                 if( type_index != -1 ) {
-                    console.log( 'drawing' );
                     relation_manager.create( rel_info.source, rel_info.target, type_index );
-                } else {
-                    console.log( 'not drawing' );
                 }
             })
         });    
