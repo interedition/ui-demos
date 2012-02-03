@@ -325,8 +325,9 @@ $(document).ready(function () {
       var transform = svg_magnifier.children[0].getAttribute('transform');
       console.log( transform );
       var current_scale = transform.match( /scale\([^\)]*\)/ )[0].split('(')[1].split(' ')[0];
-      var scale = parseFloat( current_scale ) + (delta / 10);
-      transform = transform.replace( /scale\([^\)]*\)/, 'scale(' + scale + ' ' + scale + ')' );
+      var scale = parseFloat( current_scale ) + (delta / 10);      
+      var translateY = ( $('#svgenlargement').height()/2 * scale ) + 75;
+      transform = 'rotate(0) translate(4, ' + translateY + ') scale(' + scale + ' ' + scale + ')';
       console.log( transform );
       svg_magnifier.children[0].setAttribute( 'transform', transform );
   }).css({
