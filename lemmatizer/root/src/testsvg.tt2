@@ -43,7 +43,8 @@ $(function() {
 		</form>
 	</div>
 	<div id="dialog_overlay"></div>
-
+    	
+    <p/><p/>	
     <div id="keymap">
         <ul id="keymaplist">
         </ul>

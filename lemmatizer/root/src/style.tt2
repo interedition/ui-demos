@@ -9,12 +9,6 @@ body {
 .error {
     color: red;
 }
-#graph_container {
-    height: 104px;
-    width: 90%;
-    margin-top: 5px;
-    border: 2px solid #B0C6F7;
-}
 #enlargement_container {
     height: 504px;
     width: 90%;
@@ -38,9 +32,9 @@ body {
     border: 2px solid #B0C6F7;
 }
 #update_workspace_button {
-    position: relative;
-    top: -538px;
-    left: 44%;
+    position: absolute;
+    left: 79%;
+    top: 5px;
     height: 17px;
     width: 17px;
     margin-top: 8px;
@@ -98,7 +92,7 @@ body {
 #keymap {
     position: absolute;
     left: 80%;
-    top: 100px;
+    top: 20px;
     border: 2px solid #B0C6F7;
     background: #fff;
 }

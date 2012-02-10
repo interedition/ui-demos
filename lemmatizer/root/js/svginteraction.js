@@ -7,36 +7,26 @@ function getRelativePath( action ) {
     }
 }
 
-function svgLoaded() {
-  // some initial scaling
-  var svg_element = $('#svgbasics').children('svg');
-  var svg_graph = svg_element.svg().svg('get').root();
-  var svg_vbwidth = svg_graph.viewBox.baseVal.width;
-  var svg_vbheight = svg_graph.viewBox.baseVal.height;
-  var scroll_padding = $('#graph_container').width();
-  // (Use attr('width') to set width attr, otherwise style="width: npx;" is set.)
-  var svg_element_width = svg_vbwidth/svg_vbheight * parseInt(svg_element.attr('height'));
-  svg_element_width += scroll_padding;
-  svg_element.attr( 'width', svg_element_width );
-  $('ellipse').attr( {stroke:'black', fill:'#fff'} );
-}
-
 function svgEnlargementLoaded() {
-  // some initial scaling
-  var svg_element = $('#svgenlargement').children('svg');
-  var svg_graph = svg_element.svg().svg('get').root()
-  var svg_vbwidth = svg_graph.viewBox.baseVal.width;
-  var svg_vbheight = svg_graph.viewBox.baseVal.height;
-  tempsvgvbheight = svg_vbheight;
-  var scroll_padding = $('#enlargement_container').width();
-  // (Use attr('width') to set width attr, otherwise style="width: npx;" is set.)
-  var svg_element_width = svg_vbwidth/svg_vbheight * parseInt(svg_element.attr('height'));
-  //svg_element_width += scroll_padding;
-  svg_element.attr( 'width', svg_element_width );
-  $('ellipse').attr( {stroke:'black', fill:'#fff'} );
-  var svg_height = parseInt( $('#svgenlargement').height() );
-  scroll_enlargement_ratio = svg_height/svg_vbheight;
-  svg_magnifier = $('#svgenlargement').svg().svg('get').root();
+    //Set viewbox widht and height to widht and height of $('#svgenlargement svg').
+    //This is essential to make sure zooming and panning works properly.
+    $('#svgenlargement ellipse').attr( {stroke:'green', fill:'#b3f36d'} );
+    var graph_svg = $('#svgenlargement svg');
+    var svg_g = $('#svgenlargement svg g')[0];
+    svg_root = graph_svg.svg().svg('get').root();
+    svg_root.viewBox.baseVal.width = graph_svg.attr( 'width' );
+    svg_root.viewBox.baseVal.height = graph_svg.attr( 'height' );
+    //Now set scale and translate so svg height is about 150px and vertically centered in viewbox.
+    //This is just to create a nice starting enlargement.
+    // translate + (height - 150)/(2 * scale)
+    var initial_svg_height = 250;
+    var scale = initial_svg_height/graph_svg.attr( 'height' );
+    var additional_translate = (graph_svg.attr( 'height' ) - initial_svg_height)/(2*scale);
+    var transform = svg_g.getAttribute('transform');
+    var translate = parseFloat( transform.match( /translate\([^\)]*\)/ )[0].split('(')[1].split(' ')[1].split(')')[0] );
+    translate += additional_translate;
+    var transform = 'rotate(0) scale(' + scale + ') translate(4 ' + translate + ')';
+    svg_g.setAttribute('transform', transform);
 }
 
 function get_ellipse( node_id ) {
@@ -93,8 +83,8 @@ function node_obj(ellipse) {
   }
 
   this.mousemove_listener = function(evt) {
-    self.dx = (evt.clientX - self.x) / mousemove_enlargement_ratio;
-    self.dy = (evt.clientY - self.y) / mousemove_enlargement_ratio;
+    self.dx = (evt.clientX - self.x) / mouse_scale;
+    self.dy = (evt.clientY - self.y) / mouse_scale;
     self.move_elements();
   }
 
@@ -300,39 +290,48 @@ function draw_relation( source_id, target_id, relation_color ) {
 $(document).ready(function () {
   
   relation_manager = new relation_factory();
-  
-  scroll_ratio =  $('#enlargement').height() / $('#graph').height();
+  $('#update_workspace_button').data('locked', false);
   
   $('#enlargement').mousedown(function (event) {
     $(this)
-      .data('down', true)
-      .data('x', event.clientX)
-      .data('scrollLeft', this.scrollLeft);
-      return false;
+        .data('down', true)
+        .data('x', event.clientX)
+        .data('y', event.clientY)
+        .data('scrollLeft', this.scrollLeft)
+        stateTf = svg_root.children[0].getCTM().inverse();
+        var p = svg_root.createSVGPoint();
+        p.x = event.clientX;
+        p.y = event.clientY;
+        stateOrigin = p.matrixTransform(stateTf);
+        return false;
   }).mouseup(function (event) {
-    $(this).data('down', false);
+        $(this).data('down', false);
   }).mousemove(function (event) {
-    if ($(this).data('down') == true ) {
-      if ( $('#update_workspace_button').data('locked') != true ) {
-          var scroll_left = $(this).data('scrollLeft') + $(this).data('x') - event.clientX;
-          this.scrollLeft = scroll_left;
-          var enlarged_scroll_left = scroll_left * scroll_ratio; 
-          $('#enlargement').scrollLeft( enlarged_scroll_left );
-          color_enlarged();
-      }
+    if ( ($(this).data('down') == true) && ($('#update_workspace_button').data('locked') == false) ) {
+        var p = svg_root.createSVGPoint();
+        p.x = event.clientX;
+        p.y = event.clientY;
+        p = p.matrixTransform(stateTf);
+        var matrix = stateTf.inverse().translate(p.x - stateOrigin.x, p.y - stateOrigin.y);
+        var s = "matrix(" + matrix.a + "," + matrix.b + "," + matrix.c + "," + matrix.d + "," + matrix.e + "," + matrix.f + ")";
+        svg_root.children[0].setAttribute("transform", s);
     }
   }).mousewheel(function (event, delta) {
-      event.stopPropagation();
-      var transform = svg_magnifier.children[0].getAttribute('transform');
-      console.log( transform );
-      var current_scale = transform.match( /scale\([^\)]*\)/ )[0].split('(')[1].split(' ')[0];
-      var scale = parseFloat( current_scale ) + (delta / 10);      
-      //var translateY = ( $('#svgenlargement').height()/2 * scale ) + 500;//<-- svg_height * svg_height/vb_height //338; //75;
-      var translateY = ( $('#svgenlargement').height() * scale ) / 2;
-      translateY = translateY - ( $('#svgenlargement').height() * tempsvgvbheight / $('#svgenlargement').height());
-      transform = 'rotate(0) translate(4, ' + translateY + ') scale(' + scale + ' ' + scale + ')';
-      console.log( transform );
-      svg_magnifier.children[0].setAttribute( 'transform', transform );
+    event.returnValue = false;
+    event.preventDefault();
+    if ( $('#update_workspace_button').data('locked') == false ) {
+        var z = 1 + delta/10;
+        var g = svg_root.children[0];
+        var root = svg_root;
+        var p = root.createSVGPoint();
+        p.x = event.clientX;
+        p.y = event.clientY;
+        p = p.matrixTransform(g.getCTM().inverse());
+        var k = root.createSVGMatrix().translate(p.x, p.y).scale(z).translate(-p.x, -p.y);
+        var matrix = g.getCTM().multiply(k);
+        var s = "matrix(" + matrix.a + "," + matrix.b + "," + matrix.c + "," + matrix.d + "," + matrix.e + "," + matrix.f + ")";
+        g.setAttribute("transform", s);
+    }
   }).css({
     'overflow' : 'hidden',
     'cursor' : '-moz-grab'
@@ -397,25 +396,31 @@ $(document).ready(function () {
 
   $('#update_workspace_button').click( function() {
      var svg_enlargement = $('#svgenlargement').svg().svg('get').root();
+     mouse_scale = svg_root.children[0].getScreenCTM().a;
      if( $(this).data('locked')==true) {
          $.each( ellipses_in_magnifier, function( index, ellipse ) {
              ellipse.data( 'node_obj' ).ungreyout_edges();
              ellipse.data( 'node_obj' ).set_draggable( false );
              ellipse.data( 'node_obj', null );
          })
-         svg_enlargement.children[0].setAttribute( 'transform', $(this).data('transform_memo') );
-         $('#enlargement').scrollLeft( $(this).data('scrollleft_memo') );
          $(this).data('locked', false);
          $(this).css('background-position', '0px 0px');
      } else {
-         $(this).css('background-position', '0px 17px');
-         var y_min = parseInt( ellipses_in_magnifier[0].attr('cy') ) - parseInt( ellipses_in_magnifier[0].attr('ry') ); 
-         var y_max = parseInt( ellipses_in_magnifier[0].attr('cy') ) + parseInt( ellipses_in_magnifier[0].attr('ry') ); 
+         var left = $('#enlargement').offset().left;
+         var right = left + $('#enlargement').width();
+         var tf = svg_root.children[0].getScreenCTM().inverse(); 
+         var p = svg_root.createSVGPoint();
+         p.x=left;
+         p.y=100;
+         var cx_min = p.matrixTransform(tf).x;
+         p.x=right;
+         var cx_max = p.matrixTransform(tf).x;
+         ellipses_in_magnifier = [];
+         $('#svgenlargement ellipse' ).each( function( index ) {
+             var cx = parseInt( $(this).attr('cx') );
+             if( cx > cx_min && cx < cx_max) { ellipses_in_magnifier.push( $(this) ) };
+         });
          $.each( ellipses_in_magnifier, function( index, ellipse ) {
-             var ny_min = parseInt( ellipse.attr('cy') ) - parseInt( ellipse.attr('ry') ); 
-             var ny_max = parseInt( ellipse.attr('cy') ) + parseInt( ellipse.attr('ry') ); 
-             if( ny_min < y_min ) { y_min = ny_min }; 
-             if( ny_max > y_max ) { y_max = ny_max };
              if( ellipse.data( 'node_obj' ) == null ) {
                  ellipse.data( 'node_obj', new node_obj( ellipse ) );
              } else {
@@ -423,52 +428,11 @@ $(document).ready(function () {
              }
              ellipse.data( 'node_obj' ).greyout_edges();
          })
-         var graph_frag_height = y_max - y_min ;
-         var svg_enlargement_vbheight = svg_enlargement.viewBox.baseVal.height;
-         var svg_enlargement_vbwidth = svg_enlargement.viewBox.baseVal.width;
-         var scale = svg_enlargement_vbheight / graph_frag_height;
-         mousemove_enlargement_ratio = scroll_enlargement_ratio * scale;
-         var scroll_padding = $('#enlargement_container').width();
-         var scroll_scale =  svg_enlargement_vbwidth / ( parseFloat( $('#svgenlargement svg').attr('width') ) - scroll_padding );
-         var vbx_of_scroll = ( $('#enlargement').scrollLeft() ) * scroll_scale;
-         var translate_x = vbx_of_scroll;
-         var transform = svg_enlargement.children[0].getAttribute('transform');
-         $(this).data('transform_memo', transform );
-         $(this).data('scrollleft_memo', $('#enlargement').scrollLeft() ); 
+         $(this).css('background-position', '0px 17px');
          $(this).data('locked', true );
-         $('#enlargement').scrollLeft(0);
-         transform = 'scale(' + scale + ') translate(' + (-1 * translate_x) + ',' + (-1 * y_min) + ')';
-         svg_enlargement.children[0].setAttribute( 'transform', transform );
      }
   });
   
 });
-
-$(window).mouseout(function (event) {
-  if ($('#graph').data('down')) {
-    try {
-      if (event.originalTarget.nodeName == 'BODY' || event.originalTarget.nodeName == 'HTML') {
-        $('#graph').data('down', false);
-      }                
-    } catch (e) {}
-  }
-});
-
-function color_enlarged() {
-    ellipses_in_magnifier = [];
-    var scroll_offset = parseInt( $('#enlargement').scrollLeft() );
-    var scroll_padding = $('#enlargement_container').width()/2;
-    $('#svgenlargement ellipse,#svgbasics ellipse' ).each( function( index ) {
-        var cpos_inscrollcoor = parseInt( $(this).attr('cx') ) * scroll_enlargement_ratio;
-        if ( ( cpos_inscrollcoor > (scroll_offset - scroll_padding) ) && ( cpos_inscrollcoor < ( scroll_offset + scroll_padding ) ) ) {
-           $(this).attr( {stroke:'green', fill:'#b3f36d'} );
-           if( $(this).parents('#svgenlargement').size() == 1 ) { ellipses_in_magnifier.push( $(this) ) };
-        } else {
-           $(this).attr( {stroke:'black', fill:'#fff'} );
-        }
-    });   
-}
-
-
 
 
