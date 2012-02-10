@@ -18,7 +18,6 @@ function svgEnlargementLoaded() {
     svg_root.viewBox.baseVal.height = graph_svg.attr( 'height' );
     //Now set scale and translate so svg height is about 150px and vertically centered in viewbox.
     //This is just to create a nice starting enlargement.
-    // translate + (height - 150)/(2 * scale)
     var initial_svg_height = 250;
     var scale = initial_svg_height/graph_svg.attr( 'height' );
     var additional_translate = (graph_svg.attr( 'height' ) - initial_svg_height)/(2*scale);
@@ -27,6 +26,8 @@ function svgEnlargementLoaded() {
     translate += additional_translate;
     var transform = 'rotate(0) scale(' + scale + ') translate(4 ' + translate + ')';
     svg_g.setAttribute('transform', transform);
+    //used to calculate min and max zoom level:
+    start_element_height = $("#svgenlargement .node title:contains('#START#')").siblings('ellipse')[0].getBBox().height;
 }
 
 function get_ellipse( node_id ) {
@@ -36,7 +37,11 @@ function get_ellipse( node_id ) {
 }
 
 function get_node_obj( node_id ) {
-  return get_ellipse( node_id ).data( 'node_obj' );
+    var node_ellipse = get_ellipse( node_id );
+    if( node_ellipse.data( 'node_obj' ) == null ) {
+        node_ellipse.data( 'node_obj', new node_obj(node_ellipse) );
+    };
+    return node_ellipse.data( 'node_obj' );
 }
 
 function get_edge( edge_id ) {
@@ -320,17 +325,20 @@ $(document).ready(function () {
     event.returnValue = false;
     event.preventDefault();
     if ( $('#update_workspace_button').data('locked') == false ) {
+        if( delta < -9 ) { delta = -9 }; 
         var z = 1 + delta/10;
         var g = svg_root.children[0];
-        var root = svg_root;
-        var p = root.createSVGPoint();
-        p.x = event.clientX;
-        p.y = event.clientY;
-        p = p.matrixTransform(g.getCTM().inverse());
-        var k = root.createSVGMatrix().translate(p.x, p.y).scale(z).translate(-p.x, -p.y);
-        var matrix = g.getCTM().multiply(k);
-        var s = "matrix(" + matrix.a + "," + matrix.b + "," + matrix.c + "," + matrix.d + "," + matrix.e + "," + matrix.f + ")";
-        g.setAttribute("transform", s);
+        if( (z<1 && (g.getScreenCTM().a * start_element_height) > 4.0) || (z>1 && (g.getScreenCTM().a * start_element_height) < 100) ) {
+            var root = svg_root;
+            var p = root.createSVGPoint();
+            p.x = event.clientX;
+            p.y = event.clientY;
+            p = p.matrixTransform(g.getCTM().inverse());
+            var k = root.createSVGMatrix().translate(p.x, p.y).scale(z).translate(-p.x, -p.y);
+            var matrix = g.getCTM().multiply(k);
+            var s = "matrix(" + matrix.a + "," + matrix.b + "," + matrix.c + "," + matrix.d + "," + matrix.e + "," + matrix.f + ")";
+            g.setAttribute("transform", s);
+        }
     }
   }).css({
     'overflow' : 'hidden',
@@ -397,14 +405,16 @@ $(document).ready(function () {
   $('#update_workspace_button').click( function() {
      var svg_enlargement = $('#svgenlargement').svg().svg('get').root();
      mouse_scale = svg_root.children[0].getScreenCTM().a;
-     if( $(this).data('locked')==true) {
-         $.each( ellipses_in_magnifier, function( index, ellipse ) {
-             ellipse.data( 'node_obj' ).ungreyout_edges();
-             ellipse.data( 'node_obj' ).set_draggable( false );
-             ellipse.data( 'node_obj', null );
+     if( $(this).data('locked') == true ) {
+         $('#svgenlargement ellipse' ).each( function( index ) {
+             if( $(this).data( 'node_obj' ) != null ) {
+                 $(this).data( 'node_obj' ).ungreyout_edges();
+                 $(this).data( 'node_obj' ).set_draggable( false );
+                 $(this).data( 'node_obj', null );
+             }
          })
          $(this).data('locked', false);
-         $(this).css('background-position', '0px 0px');
+         $(this).css('background-position', '0px 37px');
      } else {
          var left = $('#enlargement').offset().left;
          var right = left + $('#enlargement').width();
@@ -416,19 +426,18 @@ $(document).ready(function () {
          p.x=right;
          var cx_max = p.matrixTransform(tf).x;
          ellipses_in_magnifier = [];
-         $('#svgenlargement ellipse' ).each( function( index ) {
+         $('#svgenlargement ellipse').each( function( index ) {
              var cx = parseInt( $(this).attr('cx') );
-             if( cx > cx_min && cx < cx_max) { ellipses_in_magnifier.push( $(this) ) };
-         });
-         $.each( ellipses_in_magnifier, function( index, ellipse ) {
-             if( ellipse.data( 'node_obj' ) == null ) {
-                 ellipse.data( 'node_obj', new node_obj( ellipse ) );
-             } else {
-                 ellipse.data( 'node_obj' ).set_draggable( true );
+             if( cx > cx_min && cx < cx_max) { 
+                 if( $(this).data( 'node_obj' ) == null ) {
+                     $(this).data( 'node_obj', new node_obj( $(this) ) );
+                 } else {
+                     $(this).data( 'node_obj' ).set_draggable( true );
+                 }
+                 $(this).data( 'node_obj' ).greyout_edges();
              }
-             ellipse.data( 'node_obj' ).greyout_edges();
-         })
-         $(this).css('background-position', '0px 17px');
+         });
+         $(this).css('background-position', '0px 0px');
          $(this).data('locked', true );
      }
   });
