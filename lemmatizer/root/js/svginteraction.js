@@ -28,6 +28,28 @@ function svgEnlargementLoaded() {
     svg_g.setAttribute('transform', transform);
     //used to calculate min and max zoom level:
     start_element_height = $("#svgenlargement .node title:contains('#START#')").siblings('ellipse')[0].getBBox().height;
+    add_relations();
+}
+
+function add_relations() {
+    $.getJSON( 'relationship_definition', function(data) {
+        var rel_types = data.types.sort();
+        $.getJSON('get_relationships',
+        function(data) {
+            $.each(data, function( index, rel_info ) {
+                var type_index = $.inArray(rel_info.type, rel_types);
+                if( type_index != -1 ) {
+                    relation_manager.create( rel_info.source, rel_info.target, type_index );
+                    var node_obj = get_node_obj(rel_info.source);
+                    node_obj.set_draggable( false );
+                    node_obj.ellipse.data( 'node_obj', null );
+                    node_obj = get_node_obj(rel_info.target);
+                    node_obj.set_draggable( false );
+                    node_obj.ellipse.data( 'node_obj', null );
+                }
+            })
+        });
+    });
 }
 
 function get_ellipse( node_id ) {
