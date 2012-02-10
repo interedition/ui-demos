@@ -33,15 +33,15 @@ body {
 }
 #update_workspace_button {
     position: absolute;
-    left: 75%;
+    left: 74.5%;
     top: 6px;
-    height: 37px;
-    width: 37px;
-    margin-top: 8px;
-    border: 2px solid #B0C6F7;
+    height: 44px;
+    width: 46px;
+    margin-top: 17px;
+    border: none;
     background-image: url('static/images/act_icons.png');
-    background-position: 0px 37px;
-    background-color: #fcfcfc;
+    background-position: 0px 44px;
+    background-color: none;
     background-repeat: none;
     z-index: 50;
 }

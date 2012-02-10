@@ -436,7 +436,7 @@ $(document).ready(function () {
              }
          })
          $(this).data('locked', false);
-         $(this).css('background-position', '0px 37px');
+         $(this).css('background-position', '0px 44px');
      } else {
          var left = $('#enlargement').offset().left;
          var right = left + $('#enlargement').width();
