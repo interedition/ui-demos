@@ -161,6 +161,23 @@ sub set_relationship :Global {
 	$c->forward('View::JSON');
 }
 
+sub del_relationship :Global {
+	my( $self, $c ) = @_;
+	my $collation = $tradition->collation;
+	my $node = $c->request->param('source_id');
+	my $target = $c->request->param('target_id');
+
+	try {
+		my @vectors = $collation->del_relationship( $node, $target );
+		$c->stash->{'result'} = \@vectors;
+	} catch( Text::Tradition::Error $e ) {
+		$c->response->status( '403' );
+		$c->stash->{'result'} = { 'error' => $e->message };
+	}
+	$c->forward('View::JSON');
+}
+
+
 sub find_dup_edges {
 	my( $source, $target ) = @_;
 	my $collation = $tradition->collation;
