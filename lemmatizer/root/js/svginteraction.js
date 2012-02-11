@@ -287,9 +287,33 @@ function relation_factory() {
     this.create = function( source_node_id, target_node_id, color_index ) {
         //TODO: Protect from (color_)index out of bound..
         var relation_color = self.relation_colors[ color_index ];
-        draw_relation( source_node_id, target_node_id, relation_color );
+        var relation = draw_relation( source_node_id, target_node_id, relation_color );
         get_node_obj( source_node_id ).update_elements();
         get_node_obj( target_node_id ).update_elements();
+    }
+    this.toggle_active = function( relation_id ) {
+        var relation = $("#svgenlargement .relation:has(title:contains('" + relation_id + "'))").children('path');
+        if( !relation.data( 'active' ) ) {
+            relation.mouseenter( function(event) { 
+                outerTimer = setTimeout( function() { 
+                    timer = setTimeout( function() { 
+                        self.showinfo(event) 
+                    }, 500 ) 
+                }, 1000 );
+            });
+            relation.mouseleave( function(event) {
+                clearTimeout(outerTimer); 
+                if( timer != null ) { clearTimeout(timer); } 
+            });
+            relation.data( 'active', true );
+        } else {
+            relation.unbind( 'mouseenter' );
+            relation.unbind( 'mouseleave' );
+            relation.data( 'active', false );
+        }
+    }
+    this.showinfo = function(event) {
+        console.log( event.clientX );
     }
     this.remove = function( source_node_id, target_id ) {
         //TODO (When needed)
@@ -312,10 +336,13 @@ function draw_relation( source_id, target_id, relation_color ) {
     svg.path( relation, path.move( sx, sy ).curveC( sx + (2*rx), sy, ex + (2*rx), ey, ex, ey ), {fill: 'none', stroke: relation_color, strokeWidth: 4});
     var relation_element = $('#svgenlargement .relation').filter( ':last' );
     relation_element.insertBefore( $('#svgenlargement g g').filter(':first') );
+    return relation_element;
 }
+
 
 $(document).ready(function () {
   
+  timer = null;
   relation_manager = new relation_factory();
   $('#update_workspace_button').data('locked', false);
   
@@ -334,6 +361,7 @@ $(document).ready(function () {
   }).mouseup(function (event) {
         $(this).data('down', false);
   }).mousemove(function (event) {
+    if( timer != null ) { clearTimeout(timer); } 
     if ( ($(this).data('down') == true) && ($('#update_workspace_button').data('locked') == false) ) {
         var p = svg_root.createSVGPoint();
         p.x = event.clientX;
@@ -432,6 +460,8 @@ $(document).ready(function () {
              if( $(this).data( 'node_obj' ) != null ) {
                  $(this).data( 'node_obj' ).ungreyout_edges();
                  $(this).data( 'node_obj' ).set_draggable( false );
+                 var node_id = $(this).data( 'node_obj' ).get_id();
+                 toggle_relation_active( node_id );
                  $(this).data( 'node_obj', null );
              }
          })
@@ -447,7 +477,6 @@ $(document).ready(function () {
          var cx_min = p.matrixTransform(tf).x;
          p.x=right;
          var cx_max = p.matrixTransform(tf).x;
-         ellipses_in_magnifier = [];
          $('#svgenlargement ellipse').each( function( index ) {
              var cx = parseInt( $(this).attr('cx') );
              if( cx > cx_min && cx < cx_max) { 
@@ -457,6 +486,8 @@ $(document).ready(function () {
                      $(this).data( 'node_obj' ).set_draggable( true );
                  }
                  $(this).data( 'node_obj' ).greyout_edges();
+                 var node_id = $(this).data( 'node_obj' ).get_id();
+                 toggle_relation_active( node_id );
              }
          });
          $(this).css('background-position', '0px 0px');
@@ -464,6 +495,15 @@ $(document).ready(function () {
      }
   });
   
+  function toggle_relation_active( node_id ) {
+      $('#svgenlargement .relation').find( "title:contains('" + node_id +  "')" ).each( function(index) {
+          matchid = new RegExp( "^" + node_id );
+          if( $(this).text().match( matchid ) != null ) {
+              relation_manager.toggle_active( $(this).text() );
+          };
+      });
+  }
+
 });
 
 
