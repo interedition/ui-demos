@@ -39,7 +39,9 @@ function add_relations() {
             $.each(data, function( index, rel_info ) {
                 var type_index = $.inArray(rel_info.type, rel_types);
                 if( type_index != -1 ) {
-                    relation_manager.create( rel_info.source, rel_info.target, type_index );
+                    var relation = relation_manager.create( rel_info.source, rel_info.target, type_index );
+                    relation.data( 'type', rel_info.type );
+                    relation.data( 'scope', rel_info.scope );
                     var node_obj = get_node_obj(rel_info.source);
                     node_obj.set_draggable( false );
                     node_obj.ellipse.data( 'node_obj', null );
@@ -290,34 +292,50 @@ function relation_factory() {
         var relation = draw_relation( source_node_id, target_node_id, relation_color );
         get_node_obj( source_node_id ).update_elements();
         get_node_obj( target_node_id ).update_elements();
+        return relation;
     }
     this.toggle_active = function( relation_id ) {
-        var relation = $("#svgenlargement .relation:has(title:contains('" + relation_id + "'))").children('path');
+        var relation = $("#svgenlargement .relation:has(title:contains('" + relation_id + "'))");
+        var relation_path = relation.children('path');
         if( !relation.data( 'active' ) ) {
-            relation.mouseenter( function(event) { 
+            relation_path.mouseenter( function(event) { 
                 outerTimer = setTimeout( function() { 
                     timer = setTimeout( function() { 
-                        self.showinfo(event) 
+                        var title = relation.children('title').text();
+                        var source_node_id = title.substring( 0, title.indexOf( "->" ) );
+                        var target_node_id = title.substring( (title.indexOf( "->" ) + 2) );
+                        $('#delete_source_node_id').val( source_node_id );
+                        $('#delete_target_node_id').val( target_node_id );
+                        self.showinfo(relation); 
                     }, 500 ) 
                 }, 1000 );
             });
-            relation.mouseleave( function(event) {
+            relation_path.mouseleave( function(event) {
                 clearTimeout(outerTimer); 
                 if( timer != null ) { clearTimeout(timer); } 
             });
             relation.data( 'active', true );
         } else {
-            relation.unbind( 'mouseenter' );
-            relation.unbind( 'mouseleave' );
+            relation_path.unbind( 'mouseenter' );
+            relation_path.unbind( 'mouseleave' );
             relation.data( 'active', false );
         }
     }
-    this.showinfo = function(event) {
-        console.log( event.clientX );
+    this.showinfo = function(relation) {
+        $('#delete-form-text').html( 'type: ' + relation.data( 'type' ) + '<br/>scope: ' + relation.data( 'scope' ) );
+        var path_start = relation.children('path').attr('d').split('C')[0].split('M')[1].split(','); 
+        var ctm = svg_root.children[0].getCTM();
+        var p = svg_root.createSVGPoint();
+        p.x = path_start[0];
+        p.y = path_start[1];
+        var nx = p.matrixTransform(ctm).x;
+        var dialog_aria = $ ("div[aria-labelledby='ui-dialog-title-delete-form']");
+        $('#delete-form').dialog( 'open' );
+        dialog_aria.offset({ left: nx+90 });
     }
-    this.remove = function( source_node_id, target_id ) {
-        //TODO (When needed)
-        console.log( "Unsupported function node_obj.remove()." );
+    this.remove = function( relation_id ) {
+        var relation = $("#svgenlargement .relation:has(title:contains('" + relation_id + "'))");
+        relation.remove();
     }
 }
 
@@ -408,14 +426,15 @@ $(document).ready(function () {
         ncpath = getRelativePath( 'set_relationship' );
         var jqjson = $.getJSON( ncpath, form_values, function(data) {
             $.each( data, function(item, source_target) { 
-                relation_manager.create( source_target[0], source_target[1], $('#rel_type').attr('selectedIndex') );
+                var relation = relation_manager.create( source_target[0], source_target[1], $('#rel_type').attr('selectedIndex') );
+                relation.data( 'type', $('#rel_type :selected').text()  );
+                relation.data( 'scope', $('#scope :selected').text()  );
+                relation_manager.toggle_active( relation.children('title').text() );
             });
-            relation_manager.remove_temporary();
             $( "#dialog-form" ).dialog( "close" );
         });
       },
       Cancel: function() {
-          relation_manager.remove_temporary();
           $( this ).dialog( "close" );
       }
     },
@@ -443,6 +462,7 @@ $(document).ready(function () {
         $("#dialog_overlay").offset( $("#enlargement_container").offset() );
     },
     close: function() {
+        relation_manager.remove_temporary();
         $( '#status' ).empty();
         $("#dialog_overlay").hide();
     }
@@ -451,6 +471,44 @@ $(document).ready(function () {
           $('#status').append( '<p class="error">The relationship can not be made in this way between these nodes.</p>' );
       }
   } );
+
+  $( "#delete-form" ).dialog({
+    autoOpen: false,
+    height: 120,
+    width: 160,
+    modal: false,
+    buttons: {
+        Cancel: function() {
+            $( this ).dialog( "close" );
+        },
+        Delete: function() {
+          form_values = $('#delete_relation_form').serialize()
+          ncpath = getRelativePath( 'del_relationship' );
+          var jqjson = $.getJSON( ncpath, form_values, function(data) {
+              $.each( data, function(item, source_target) { 
+                  relation_manager.remove( source_target[0] + '->' + source_target[1] );
+              });
+              $( "#delete-form" ).dialog( "close" );
+          });
+        }
+    },
+    create: function(event, ui) {
+        var buttonset = $(this).parent().find( '.ui-dialog-buttonset' ).css( 'width', '100%' );
+        buttonset.find( "button:contains('Cancel')" ).css( 'float', 'right' );
+        var dialog_aria = $("div[aria-labelledby='ui-dialog-title-delete-form']");  
+        dialog_aria.mouseenter( function() {
+            if( mouseWait != null ) { clearTimeout(mouseWait) };
+        })
+        dialog_aria.mouseleave( function() {
+            mouseWait = setTimeout( function() { $("#delete-form").dialog( "close" ) }, 2000 );
+        })
+    },
+    open: function() {
+        mouseWait = setTimeout( function() { $("#delete-form").dialog( "close" ) }, 2000 );
+    },
+    close: function() {
+    }
+  });
 
   $('#update_workspace_button').click( function() {
      var svg_enlargement = $('#svgenlargement').svg().svg('get').root();
