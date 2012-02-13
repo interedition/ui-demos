@@ -283,7 +283,9 @@ function relation_factory() {
             path_element.attr( 'stroke', self.color_memo );
             self.color_memo = null;
         } else {
-            path_element.parent('g').remove();
+            var temporary = path_element.parent('g').remove();
+            temporary.empty();
+            temporary = null; 
         }
     }
     this.create = function( source_node_id, target_node_id, color_index ) {
@@ -359,7 +361,7 @@ function draw_relation( source_id, target_id, relation_color ) {
 
 
 $(document).ready(function () {
-  
+    
   timer = null;
   relation_manager = new relation_factory();
   $('#update_workspace_button').data('locked', false);
