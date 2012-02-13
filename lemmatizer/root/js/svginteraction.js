@@ -325,15 +325,20 @@ function relation_factory() {
     }
     this.showinfo = function(relation) {
         $('#delete-form-text').html( 'type: ' + relation.data( 'type' ) + '<br/>scope: ' + relation.data( 'scope' ) );
-        var path_start = relation.children('path').attr('d').split('C')[0].split('M')[1].split(','); 
-        var ctm = svg_root.children[0].getCTM();
+        var points = relation.children('path').attr('d').slice(1).replace('C',' ').split(' ');
+        var xs = parseFloat( points[0].split(',')[0] );
+        var xe = parseFloat( points[1].split(',')[0] );
+        var ys = parseFloat( points[0].split(',')[1] );
+        var ye = parseFloat( points[3].split(',')[1] );
         var p = svg_root.createSVGPoint();
-        p.x = path_start[0];
-        p.y = path_start[1];
+        p.x = xs + ((xe-xs)*1.1);
+        p.y = ye - ((ye-ys)/2);
+        var ctm = svg_root.children[0].getScreenCTM();
         var nx = p.matrixTransform(ctm).x;
+        var ny = p.matrixTransform(ctm).y;
         var dialog_aria = $ ("div[aria-labelledby='ui-dialog-title-delete-form']");
         $('#delete-form').dialog( 'open' );
-        dialog_aria.offset({ left: nx+90 });
+        dialog_aria.offset({ left: nx, top: ny });
     }
     this.remove = function( relation_id ) {
         var relation = $("#svgenlargement .relation:has(title:contains('" + relation_id + "'))");

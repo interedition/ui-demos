@@ -96,6 +96,11 @@ body {
     top: 20px;
     border: 2px solid #B0C6F7;
     background: #fff;
+    background: url("/css/cupertino/images/ui-bg_highlight-hard_100_f2f5f7_1x100.png");
+    background-repeat: repeat-x;
+    background-scroll: scroll;
+    background-position: 50% top;
+    background-color: #F2F5F7;
 }
 #keymap ul {
     padding: 10px;
