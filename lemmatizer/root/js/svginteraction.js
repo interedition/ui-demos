@@ -300,6 +300,7 @@ function relation_factory() {
         var relation = $("#svgenlargement .relation:has(title:contains('" + relation_id + "'))");
         var relation_path = relation.children('path');
         if( !relation.data( 'active' ) ) {
+            relation_path.css( {'cursor':'pointer'} );
             relation_path.mouseenter( function(event) { 
                 outerTimer = setTimeout( function() { 
                     timer = setTimeout( function() { 
@@ -320,6 +321,7 @@ function relation_factory() {
         } else {
             relation_path.unbind( 'mouseenter' );
             relation_path.unbind( 'mouseleave' );
+            relation_path.css( {'cursor':'inherit'} );
             relation.data( 'active', false );
         }
     }
