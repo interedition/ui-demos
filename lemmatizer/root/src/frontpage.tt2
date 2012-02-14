@@ -10,6 +10,8 @@
  
  <p>The relationships are displayed as colored paths between readings; clicking on a relationship path will display the information associated with it, and give the user an option to delete it.<p>
  
+ <p>Please note that this tool is known to work with Firefox version 10 and above; it is known not to work with Safari and Chrome.</p>
+ 
  <h3>Try with sample texts:</h3>
  <ul>
  	<li><a href="/0/">Simple example with CollateX test fragment</a></li>
@@ -41,5 +43,11 @@
 <p class="api">DELETE ROOT/textid/relationships</p>
 <p><span class="apimore">Params: source_id, target_id</span></p>
 <p>Deletes the relationship between the two specified readings. If successful, returns a JSON list of source/target pairs whose relationship links should be deleted. (It is up to the server-side implementation whether deletion of a document-level or global relationship link deletes all instances, or only the requested instance.)</p>
+
+<h3>Credits</h3>
+<p>Joris J van Zundert: front-end implementation<br/>
+Tara L Andrews: back-end prototype, API design<br/>
+Troy A Griffitts: API design<br/>
+</p>
  
 </div>
