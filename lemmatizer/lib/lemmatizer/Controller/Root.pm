@@ -5,7 +5,6 @@ use warnings;
 use parent 'Catalyst::Controller';
 use JSON;
 use Data::Dumper;
-use Text::Tradition;
 use TryCatch;
 
 #
@@ -28,37 +27,28 @@ lemmatizer::Controller::Root - Root Controller for lemmatizer
 
 =head2 index
 
+ GET relation/$textid
+ 
+Renders the application for the text identified by $textid.
+
 =cut
 
 my $tradition;
 
 sub index :Path :Args(0) {
-	my ( $self, $c ) = @_;
-
-	# First we need to generate the SVG from the GraphML, and also keep track
-	# of the GraphML nodes.
-
-	# Hacky hacky to make this work with the interedition-tools interface:
-	# accept XML in a parameter called 'result'.
-	my $input = $c->request->param('result');
-	if( $input ) {
-		my $datatype = $c->request->param('type') || 'CollateX';
-		$tradition = Text::Tradition->new( 
-			'name'  => 'inline', 
-			'input' => $datatype,
-			'string'  => $input,
-			);
-    } else {
-    	_test_tradition( $c );
-    }
-	my $collation = $tradition->collation;
-	my $svg_str = $collation->as_svg;
-	$svg_str =~ s/\n//gs;
-	$c->stash->{'svg_string'} = $svg_str;
-	$c->stash->{'template'} = 'testsvg.tt2';
+	my( $self, $c ) = @_;
+	$c->stash->{'template'} = 'frontpage.tt2';
 }
 
-sub relationship_definition :Global {
+=head2 definitions
+
+ GET definitions
+ 
+Returns a data structure giving the valid types and scopes for a relationship.
+
+=cut
+
+sub definitions :Local :Args(0) {
 	my( $self, $c ) = @_;
 	my $valid_relationships = [ qw/ spelling orthographic grammatical meaning / ];
 	my $valid_scopes = [ qw/ local global / ];
@@ -66,167 +56,93 @@ sub relationship_definition :Global {
 	$c->forward('View::JSON');
 }
 
-# Utility function to render SVG from a graph input.
-sub renderSVG :Global {
-	my( $self, $c ) = @_;
-	my $origin_data = $c->request->param('data');
-	my $format = $c->request->param('format') || 'string';
-	my $type = $c->request->param('type');
-	my $name = $c->request->param('name') || 'Collation graph';
-	my $tradition = Text::Tradition->new( 
-		'name' => $name,
-		'input' => $type,
-		$format => $origin_data,
-		);
-	$c->stash->{'result'} = $tradition->collation->as_svg;
-	$c->forward('View::SVG');
+=head2 text
+
+ GET $textid/
+ 
+ Runs the relationship mapper for the specified text ID.
+ 
+=cut
+
+sub text :Chained('/') :PathPart('') :CaptureArgs(1) {
+	my( $self, $c, $textid ) = @_;
+	$c->stash->{'tradition'} = $c->model('Directory')->tradition( $textid );
 }
 
-sub render_subgraph :Global {
+sub main :Chained('text') :PathPart('') :Args(0) {
 	my( $self, $c ) = @_;
-	_test_tradition( $c ) unless $tradition;
+	my $tradition = delete $c->stash->{'tradition'};
 	my $collation = $tradition->collation;
-	my $nodeids = $c->req->params->{'node_ids[]'};
-	my @active = ref( $nodeids ) eq 'ARRAY' ? @$nodeids : ( $nodeids );
-	my( $min, $max ) = ( $collation->end->rank, 0 );
-	foreach my $n ( @active ) {
-		my $r = $collation->reading( $n )->rank;
-		$min = $r if $r < $min;
-		$max = $r if $r > $max;
-	}
-	$c->log->debug( "Rank range calculated as $min -> $max" );
-	$c->stash->{'result'} = $collation->svg_subgraph( $min, $max );
-	$c->forward('View::SVG');
+	my $svg_str = $collation->as_svg;
+	$svg_str =~ s/\n//gs;
+	$c->stash->{'svg_string'} = $svg_str;
+	$c->stash->{'template'} = 'testsvg.tt2';
+
 }
 
-sub render_alignment :Global {
+=head2 relationships
+
+ GET $textid/relationships
+
+Returns the list of relationships defined for this text.
+
+ POST $textid/relationships { request }
+ 
+Attempts to define the requested relationship within the text. Returns 200 on
+success or 403 on error.
+
+ DELETE $textid/relationships { request }
+ 
+
+=cut
+
+sub relationships :Chained('text') :PathPart :Args(0) {
 	my( $self, $c ) = @_;
-	_test_tradition( $c ) unless $tradition;
+	my $tradition = delete $c->stash->{'tradition'};
 	my $collation = $tradition->collation;
-	my $alignment = $collation->make_alignment_table;
+	if( $c->request->method eq 'GET' ) {
+		my @pairs = $collation->relationships; # returns the edges
+		my @all_relations;
+		foreach my $p ( @pairs ) {
+			my $relobj = $collation->relations->get_relationship( @$p );
+			push( @all_relations, 
+				{ source => $p->[0], target => $p->[1], 
+				  type => $relobj->type, scope => $relobj->scope } );
+		}
+		$c->stash->{'result'} = \@all_relations;
+	} elsif( $c->request->method eq 'POST' ) {
+		my $node = $c->request->param('source_id');
+		my $target = $c->request->param('target_id');
+		my $relation = $c->request->param('rel_type');
+		my $note = $c->request->param('note');
+		my $scope = $c->request->param('scope');
 	
-	# Turn the table, so that witnesses are by column and the rows
-	# are by rank.
-	my $wits = [ map { $_->{'witness'} } @{$alignment->{'alignment'}} ];
-	my $rows;
-	foreach my $i ( 0 .. $alignment->{'length'} - 1 ) {
-		my @rankrdgs = map { $_->{'tokens'}->[$i]->{'t'} } 
-			@{$alignment->{'alignment'}};
-		push( @$rows, { 'rank' => $i+1, 'readings' => \@rankrdgs } );
+		my $opts = { 'type' => $relation,
+					 'scope' => $scope };
+		
+		try {
+			my @vectors = $collation->add_relationship( $node, $target, $opts );
+			$c->stash->{'result'} = \@vectors;
+		} catch( Text::Tradition::Error $e ) {
+			$c->response->status( '403' );
+			$c->stash->{'result'} = { 'error' => $e->message };
+		}
+	} elsif( $c->request->method eq 'DELETE' ) {
+		my $node = $c->request->param('source_id');
+		my $target = $c->request->param('target_id');
+	
+		try {
+			my @vectors = $collation->del_relationship( $node, $target );
+			$c->stash->{'result'} = \@vectors;
+		} catch( Text::Tradition::Error $e ) {
+			$c->response->status( '403' );
+			$c->stash->{'result'} = { 'error' => $e->message };
+		}	
 	}
-	$c->log->debug( Dumper( $rows ) );
-	$c->stash->{'witnesses'} = $wits;
-	$c->stash->{'table'} = $rows;
-	$c->stash->{'template'} = 'alignment_table.tt2';
-}
-
-sub get_relationships :Global {
-	my( $self, $c ) = @_;
-	_test_tradition( $c ) unless $tradition;
-	my $collation = $tradition->collation;
-	# TODO make this API
-	my @pairs = $collation->relationships; # returns the edges
-	my @all_relations;
-	foreach my $p ( @pairs ) {
-		my $relobj = $collation->relations->get_relationship( @$p );
-		push( @all_relations, 
-			{ source => $p->[0], target => $p->[1], 
-			  type => $relobj->type, scope => $relobj->scope } );
-	}
-	$c->stash->{'result'} = \@all_relations;
 	$c->forward('View::JSON');
 }		
 		
 
-sub set_relationship :Global {
-	my( $self, $c ) = @_;
-	my $collation = $tradition->collation;
-
-	my $node = $c->request->param('source_id');
-	my $target = $c->request->param('target_id');
-	my $relation = $c->request->param('rel_type');
-	my $note = $c->request->param('note');
-	my $scope = $c->request->param('scope');
-
-	my $opts = { 'type' => $relation,
-				 'scope' => $scope };
-	
-	try {
-		my @vectors = $collation->add_relationship( $node, $target, $opts );
-		$c->stash->{'result'} = \@vectors;
-	} catch( Text::Tradition::Error $e ) {
-		$c->response->status( '403' );
-		$c->stash->{'result'} = { 'error' => $e->message };
-	}
-	$c->forward('View::JSON');
-}
-
-sub del_relationship :Global {
-	my( $self, $c ) = @_;
-	my $collation = $tradition->collation;
-	my $node = $c->request->param('source_id');
-	my $target = $c->request->param('target_id');
-
-	try {
-		my @vectors = $collation->del_relationship( $node, $target );
-		$c->stash->{'result'} = \@vectors;
-	} catch( Text::Tradition::Error $e ) {
-		$c->response->status( '403' );
-		$c->stash->{'result'} = { 'error' => $e->message };
-	}
-	$c->forward('View::JSON');
-}
-
-
-sub find_dup_edges {
-	my( $source, $target ) = @_;
-	my $collation = $tradition->collation;
-	my @source_origin = $collation->reading( $source )->predecessors();
-	my @target_origin = $collation->reading( $target )->predecessors();
-	my @source_dest = $collation->reading( $source )->successors();
-	my @target_dest = $collation->reading( $target )->successors();
-	my @shared_origin = union( \@source_origin, \@target_origin );
-	my @shared_dest = union( \@source_dest, \@target_dest );
-	my $result = {};
-	foreach my $n ( @shared_origin ) {
-		# This is a hardcoded hack that will break if GraphViz changes its
-		# SVG rendering logic.
-		my $source_svg_id = $n->id . '&#45;&gt;' . $source;
-		my $target_svg_id = $n->id . '&#45;&gt;' . $target;
-		# There is only one of these.
-		my $el = $collation->path_display_label( 
-			$collation->path_witnesses( $n->id, $source ) );
-		my $edgelabel = join( ', ', '', $el );
-		$result->{$source_svg_id} = { 'target' => $target_svg_id,
-									  'label'  => $edgelabel };
-	}
-	foreach my $n ( @shared_dest ) {
-		# This is a hardcoded hack that will break if GraphViz changes its
-		# SVG rendering logic.
-		my $source_svg_id = $source . '&#45;&gt;' . $n->id;
-		my $target_svg_id = $target . '&#45;&gt;' . $n->id;
-		# There is only one of these.
-		my $el = $collation->path_display_label(  
-			$collation->path_witnesses( $source, $n->id ) );
-		my $edgelabel = join( ', ', '', $el );
-		$result->{$source_svg_id} = { 'target' => $target_svg_id,
-									  'label'  => $edgelabel };
-	}
-	return $result;
-}
-
-sub union {
-	my( $list1, $list2 ) = @_;
-	my %all;
-	my @union;
-	map { $all{$_->id} = 1 } @$list1;
-	foreach my $l ( @$list2 ) {
-		if( $all{$l->id} ) {
-			push( @union, $l );
-		}
-	}
-	return @union;
-}
 
 sub default :Path {
 	my ( $self, $c ) = @_;
@@ -234,26 +150,6 @@ sub default :Path {
 	$c->response->status(404);
 }
 
-# Set a default tradition for testing
-sub _test_tradition {
-	my $c = shift;
-	my $testdata = $c->request->param('test') || 'Collatex-16.xml';
-	# Default testing stuff.
-	$tradition = Text::Tradition->new( 
-		'name'  => 'inline', 
-		'input' => $testdata eq 'john.xml' ? 'Self' : 'CollateX',
-		'file'  => $c->path_to( 't', 'data', $testdata ),
-	);
-	if( $testdata eq 'Collatex-16.xml' ) {
-		# Fix up the CX file
-		$tradition->collation->reading( 'n9' )->rank( 17 );
-		$tradition->collation->reading( 'n25' )->rank( 18 );
-	} else {
-		# Add a test pre-existing relationships
-		$tradition->collation->add_relationship( '1,4', '1,5', 
-			{ type => 'orthographic', scope => 'global' } );
-	}
-}
 
 =head2 end
 
