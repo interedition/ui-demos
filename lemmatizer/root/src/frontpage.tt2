@@ -2,11 +2,44 @@
  <h2>Relationship mapper / regularization tool</h2>
  <h3>An Interedition prototype interface</h3>
  
- <p>This should eventually have some explanation of what it is.</p>
+ <p>The relationship mapper / regularizer is a tool born of the joint requirements of the <a href="http://byzantini.st/treeoftexts/">Tree of Texts</a> project at the KU Leuven, and the <a href="http://www.bibelwissenschaft.de/start/editionsprojekte/editio-critica-maior-ecm/">Editio Critica Maior</a> project at the Institute for New Testament Research (INTF), University of Münster.</p>
  
- <p>Try with sample texts:</p>
+ <p>The premise of the tool is that, once a set of texts has been collated, there will be a need to chart the relationships between the variants—are they substantially the same word? Different words meaning the same thing? Is one an orthographic variant of the other that should be excluded from any eventual apparatus?</p>
+ 
+ <p>The tool itself is an interface for allowing these relationships to be declared.  The collation is presented as a variant graph running from left to right.  In 'select' mode, scrolling up or down will zoom into or out of the graph.  In 'edit' mode, dragging a reading node onto another reading will establish a relationship link between them; the details of the relationship can be filled in by the user.  It is possible to specify a type, scope, and comment for each relationship. The <span class="term">type</span> is one of a pre-defined set of relationship types; the <span class="term">scope</span> defines how widely the relationship should apply. For example, a relationship between two co-located variant readings with a document-level scope should apply throughout the graph; such a relationship with a global scope should apply in any document that is encountered.</p>
+ 
+ <p>The relationships are displayed as colored paths between readings; clicking on a relationship path will display the information associated with it, and give the user an option to delete it.<p>
+ 
+ <h3>Try with sample texts:</h3>
  <ul>
  	<li><a href="/0/">Simple example with CollateX test fragment</a></li>
  	<li><a href="/1/">Example with a verse from the New Testament</a></li>
  </ul>
+
+ <h3>API</h3>
+ 
+ <p>This is a demonstration interface with a prototype server-side implementation.  Interested developers and researchers are welcome to adopt the interface for their own needs. The following is a quick guide to the server-side API needed to run this tool, which is a RESTlike URL-based interface.</p>
+ 
+ <p>In the following, 'ROOT' will denote the base URL where the tool is to be run. Each collated text is presumed to have a unique ID at which it can be addressed; this will be denoted by 'textid'.</p>
+ 
+<p class="api">GET ROOT/textid/</p>
+<p>Loads the tool for the specified text.  The response to this GET request should return the following value to build the template:</p>
+<p><span class="apimore">svg_string</span> - an SVG representation of the text collation. The SVG is presumed to have its readings represented in elements of class "node", and to have a unique ID for each reading in the &lt;title&gt; child element.</p>
+
+<p class="api">GET ROOT/definitions</p>
+<p>Returns a JSON string containing the valid relationship types and scopes. The JSON has the following format:</p>
+<p><span class="apimore">{ "types": [ "type1","type2","type3"...], "scopes": [ "scope1", "scope2", "scope3", ... ] }</span></p>
+
+<p class="api">GET ROOT/textid/relationships</p>
+<p>Returns a JSON list of all relationships defined within the text.  The list elements should have the following format:</p>
+<p><span class="apimore">{ "source": (reading ID), "target": (reading ID), "type": (relationship type), "scope": (relationship scope) }</span></p>
+
+<p class="api">POST ROOT/textid/relationships</p>
+<p><span class="apimore">Params: source_id, target_id, rel_type, scope, note</span></p>
+<p>Attempts to create the specified relationship. If successful, returns a JSON list of source/target pairs, one for each relationship created. (Locally scoped relationships should always return one pair; others may return more than one.)  If unsuccessful, returns a 403 response code and a JSON response <span class="apimore">{ "error": (error message) }</span></p>
+
+<p class="api">DELETE ROOT/textid/relationships</p>
+<p><span class="apimore">Params: source_id, target_id</span></p>
+<p>Deletes the relationship between the two specified readings. If successful, returns a JSON list of source/target pairs whose relationship links should be deleted. (It is up to the server-side implementation whether deletion of a document-level or global relationship link deletes all instances, or only the requested instance.)</p>
+ 
 </div>

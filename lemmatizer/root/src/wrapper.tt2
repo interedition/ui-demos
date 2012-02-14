@@ -3,13 +3,17 @@
 <head>
 <title>[% template.title or "Collation lemmatizer" %]</title>
 <link type="text/css" href="[% c.uri_for('/css/cupertino/jquery-ui-1.8.13.custom.css') %]" rel="stylesheet" />
+<link type="text/css" href="[% c.uri_for('/css/style.css') %]" rel="stylesheet" />
 [% script %]
-[% INCLUDE style.tt2 %]
 </head>
 
 <body>
  <div id="banner">
- 
+ 	<div id="logoimg"><img src="[% c.uri_for( '/static/images/wikilogo.png' ) %]" alt="Interedition" /></div>
+ 	<div id="logotitle">
+		<h1 class="title"><a href="http://www.interedition.eu/">Interedition</a></h1>
+		<p class="tagline">powered by interoperability</p>
+	</div>
  </div>
 [% content %]
 </body>

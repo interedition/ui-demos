@@ -6,8 +6,9 @@ use base 'Catalyst::View::TT';
 __PACKAGE__->config(
     TEMPLATE_EXTENSION => '.tt2',
     INCLUDE_PATH => [
-	lemmatizer->path_to( 'root', 'src' ),
+		lemmatizer->path_to( 'root', 'src' ),
     ],
+    ENCODING => 'utf-8',
     WRAPPER => 'wrapper.tt2',
 );
 

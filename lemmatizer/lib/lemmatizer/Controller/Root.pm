@@ -4,7 +4,6 @@ use strict;
 use warnings;
 use parent 'Catalyst::Controller';
 use JSON;
-use Data::Dumper;
 use TryCatch;
 
 #
