@@ -1,10 +1,23 @@
-function getRelativePath( action ) {
-    path_elements = window.location.pathname.split('/'); 
-    if( path_elements[1].length > 0 ) {
-        return window.location.pathname.split('/')[1] + '/' + action;
-    } else {
-        return action;
-    }
+function getTextPath() {
+    var currpath = window.location.pathname
+    if( currpath.lastIndexOf('/') == currpath.length - 1 ) { 
+    	currpath = currpath.slice( 0, currpath.length - 1) 
+    };
+    var path_elements = currpath.split('/');
+    var textid = path_elements.pop();
+    var basepath = path_elements.join( '/' );
+    var path_parts = [ basepath, textid ];
+    return path_parts;
+}
+
+function getRelativePath() {
+	var path_parts = getTextPath();
+	return path_parts[0];
+}
+
+function getRelationshipURL() {
+	var path_parts = getTextPath();
+	return path_parts[0] + '/' + path_parts[1] + '/relationships';
 }
 
 function svgEnlargementLoaded() {
@@ -32,9 +45,11 @@ function svgEnlargementLoaded() {
 }
 
 function add_relations() {
-    $.getJSON( 'relationship_definition', function(data) {
+	var basepath = getRelativePath();
+	var textrelpath = getRelationshipURL();
+    $.getJSON( basepath + '/definitions', function(data) {
         var rel_types = data.types.sort();
-        $.getJSON('get_relationships',
+        $.getJSON( textrelpath,
         function(data) {
             $.each(data, function( index, rel_info ) {
                 var type_index = $.inArray(rel_info.type, rel_types);
@@ -432,9 +447,9 @@ $(document).ready(function () {
       "Ok": function() {
         $('#status').empty();
         form_values = $('#collapse_node_form').serialize()
-        ncpath = getRelativePath( 'set_relationship' );
+        ncpath = getRelationshipURL();
         $(':button :contains("Ok")').attr("disabled", true);
-        var jqjson = $.getJSON( ncpath, form_values, function(data) {
+        var jqjson = $.post( ncpath, form_values, function(data) {
             $.each( data, function(item, source_target) { 
                 var relation = relation_manager.create( source_target[0], source_target[1], $('#rel_type').attr('selectedIndex') );
                 relation.data( 'type', $('#rel_type :selected').text()  );
@@ -442,7 +457,7 @@ $(document).ready(function () {
                 relation_manager.toggle_active( relation.children('title').text() );
             });
             $( "#dialog-form" ).dialog( "close" );
-        });
+        }, 'json' );
       },
       Cancel: function() {
           $( this ).dialog( "close" );
@@ -451,7 +466,8 @@ $(document).ready(function () {
     create: function(event, ui) { 
         $(this).data( 'relation_drawn', false );
         //TODO? Err handling?
-        var jqjson = $.getJSON( 'relationship_definition', function(data) {
+		var basepath = getRelativePath();
+        var jqjson = $.getJSON( basepath + '/definitions', function(data) {
             var types = data.types.sort();
             $.each( types, function(index, value) {   
                  $('#rel_type').append( $('<option>').attr( "value", value ).text(value) ); 
@@ -477,7 +493,7 @@ $(document).ready(function () {
         $("#dialog_overlay").hide();
     }
   }).ajaxError( function(event, jqXHR, ajaxSettings, thrownError) {
-      if( ( ajaxSettings.url.split("?")[0] == 'set_relationship' ) && jqXHR.status == 403 ) {
+      if( ( ajaxSettings.type == 'POST' ) && jqXHR.status == 403 ) {
           $('#status').append( '<p class="error">The relationship can not be made in this way between these nodes.</p>' );
       }
   } );
@@ -493,13 +509,13 @@ $(document).ready(function () {
         },
         Delete: function() {
           form_values = $('#delete_relation_form').serialize()
-          ncpath = getRelativePath( 'del_relationship' );
-          var jqjson = $.getJSON( ncpath, form_values, function(data) {
+          ncpath = getRelationshipURL()
+          var jqjson = $.ajax({ url: ncpath, data: form_values, success: function(data) {
               $.each( data, function(item, source_target) { 
                   relation_manager.remove( source_target[0] + '->' + source_target[1] );
               });
               $( "#delete-form" ).dialog( "close" );
-          });
+          }, dataType: 'json', type: 'DELETE' });
         }
     },
     create: function(event, ui) {

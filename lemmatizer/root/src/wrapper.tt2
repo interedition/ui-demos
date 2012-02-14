@@ -2,12 +2,15 @@
 <html lang="en-US" xml:lang="en-US" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>[% template.title or "Collation lemmatizer" %]</title>
-<link type="text/css" href="[% c.uri_for('css/cupertino/jquery-ui-1.8.13.custom.css') %]" rel="stylesheet" />
+<link type="text/css" href="[% c.uri_for('/css/cupertino/jquery-ui-1.8.13.custom.css') %]" rel="stylesheet" />
 [% script %]
 [% INCLUDE style.tt2 %]
 </head>
 
 <body>
+ <div id="banner">
+ 
+ </div>
 [% content %]
 </body>
 </html>

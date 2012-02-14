@@ -34,6 +34,9 @@ __PACKAGE__->config( name => 'lemmatizer',
 					 'View::JSON' => {
 					 	expose_stash => 'result',
 					 },
+					 'Model::Directory' => {
+					 	datapath => __PACKAGE__->path_to( 't', 'data' ),
+					 },
 					);
 
 # Start the application

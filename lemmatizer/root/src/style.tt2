@@ -39,7 +39,7 @@ body {
     width: 46px;
     margin-top: 17px;
     border: none;
-    background-image: url('static/images/act_icons.png');
+    background-image: url('/static/images/act_icons.png');
     background-position: 0px 44px;
     background-color: none;
     background-repeat: none;

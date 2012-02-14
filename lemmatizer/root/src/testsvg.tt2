@@ -1,12 +1,12 @@
 [% META title = 'TestSVG' -%]
 
 [% script = BLOCK %]
-<script type="text/javascript" src="[% c.uri_for('js/jquery-1.4.4.min.js') %]"></script>
-<script type="text/javascript" src="[% c.uri_for('js/jquery-ui-1.8.10.custom.min.js') %]"></script>
-<script type="text/javascript" src="[% c.uri_for('js/jquery.mousewheel.min.js') %]"></script>
-<script type="text/javascript" src="[% c.uri_for('js/jquery.svg.js') %]"></script>
-<script type="text/javascript" src="[% c.uri_for('js/jquery.svgdom.js') %]"></script>
-<script type="text/javascript" src="[% c.uri_for('js/svginteraction.js') %]"></script>
+<script type="text/javascript" src="[% c.uri_for('/js/jquery-1.4.4.min.js') %]"></script>
+<script type="text/javascript" src="[% c.uri_for('/js/jquery-ui-1.8.10.custom.min.js') %]"></script>
+<script type="text/javascript" src="[% c.uri_for('/js/jquery.mousewheel.min.js') %]"></script>
+<script type="text/javascript" src="[% c.uri_for('/js/jquery.svg.js') %]"></script>
+<script type="text/javascript" src="[% c.uri_for('/js/jquery.svgdom.js') %]"></script>
+<script type="text/javascript" src="[% c.uri_for('/js/svginteraction.js') %]"></script>
 <script type="text/javascript">
 $(function() {
   $('#svgenlargement').svg({loadURL: '[% svg_string %]', onLoad: svgEnlargementLoaded});

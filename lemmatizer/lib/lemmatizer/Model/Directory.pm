@@ -1,5 +1,6 @@
 package lemmatizer::Model::Directory;
 use Moose;
+use MooseX::Types::Path::Class qw/ Dir /;
 use namespace::autoclean;
 use Text::Tradition;
 
@@ -16,12 +17,19 @@ has 'traditions' => (
 	default => sub { {} },
 	);
 	
+has 'datapath' => (
+	is => 'ro',
+	isa => Dir,
+	coerce => 1,
+	required => 1,
+	);
+
 # Return one of our two test traditions, on ID 0 or 1.
 around 'tradition' => sub {
 	my( $orig, $self, $id ) = @_;
 	if( !$self->has_tradition( $id ) ) {
 		# Make it
-		my $t = _test_tradition( $id );
+		my $t = $self->_test_tradition( $id );
 		$self->add_tradition( $id, $t );
 	}
 	$self->$orig( $id ); 	
@@ -30,13 +38,13 @@ around 'tradition' => sub {
 # Our default test traditions. 0 for the simple one, 1 for the less
 # simple one.
 sub _test_tradition {
-	my $tid = shift;
+	my( $self, $tid )= shift;
 	my $testdata = $tid == 0 ? 'Collatex-16.xml' : 'john.xml';
 	# Default testing stuff.
 	my $tradition = Text::Tradition->new( 
 		'name'  => 'inline', 
 		'input' => $testdata eq 'john.xml' ? 'Self' : 'CollateX',
-		'file'  => __PACKAGE__->path_to( 't', 'data', $testdata ),
+		'file'  => $self->datapath->absolute . "/$testdata",
 	);
 	if( $testdata eq 'Collatex-16.xml' ) {
 		# Fix up the CX file

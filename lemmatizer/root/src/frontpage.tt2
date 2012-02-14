@@ -1,0 +1,12 @@
+<div id="docco">
+ <h2>Relationship mapper / regularization tool</h2>
+ <h3>An Interedition prototype interface</h3>
+ 
+ <p>This should eventually have some explanation of what it is.</p>
+ 
+ <p>Try with sample texts:</p>
+ <ul>
+ 	<li><a href="/0/">Simple example with CollateX test fragment</a></li>
+ 	<li><a href="/1/">Example with a verse from the New Testament</a></li>
+ </ul>
+</div>
