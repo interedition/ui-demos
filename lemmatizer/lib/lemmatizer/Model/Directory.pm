@@ -38,7 +38,7 @@ around 'tradition' => sub {
 # Our default test traditions. 0 for the simple one, 1 for the less
 # simple one.
 sub _test_tradition {
-	my( $self, $tid )= shift;
+	my( $self, $tid ) = @_;
 	my $testdata = $tid == 0 ? 'Collatex-16.xml' : 'john.xml';
 	# Default testing stuff.
 	my $tradition = Text::Tradition->new( 
