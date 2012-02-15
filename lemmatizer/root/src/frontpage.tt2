@@ -44,7 +44,7 @@
 
 <p class="api">DELETE ROOT/textid/relationships</p>
 <p><span class="apimore">Params: source_id, target_id</span></p>
-<p>Deletes the relationship between the two specified readings. If successful, returns a JSON list of source/target pairs whose relationship links should be deleted. (It is up to the server-side implementation whether deletion of a document-level or global relationship link deletes all instances, or only the requested instance.)</p>
+<p>Deletes the relationship between the two specified readings. If successful, returns a JSON list of source/target pairs whose relationship links should be deleted. (It is up to the server-side implementation whether deletion of a document-level or global relationship link deletes all instances, or only the requested instance.)  If unsuccessful, returns a 403 response code and a JSON response <span class="apimore">{ "error": (error message) }</span></p>
 
 <h3>Credits</h3>
 <p>Joris J van Zundert: front-end implementation<br/>

@@ -494,7 +494,8 @@ $(document).ready(function () {
     }
   }).ajaxError( function(event, jqXHR, ajaxSettings, thrownError) {
       if( ( ajaxSettings.type == 'POST' ) && jqXHR.status == 403 ) {
-          $('#status').append( '<p class="error">The relationship can not be made in this way between these nodes.</p>' );
+      	  var errobj = jQuery.parseJSON( jqXHR.responseText );
+          $('#status').append( '<p class="error">Error: ' + errobj.error + '</br>The relationship cannot be made.</p>' );
       }
   } );
 
