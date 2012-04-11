@@ -10,7 +10,7 @@
  
  <p>The relationships are displayed as colored paths between readings; clicking on a relationship path will display the information associated with it, and give the user an option to delete it.<p>
  
- <p>Please note that this tool is known to work with Firefox version 10 and above; it is known not to work with Safari and Chrome.</p>
+ <p>Please note that this tool is known to work with Firefox version 10 and above, as well as recent versions of Safari and Chrome. It will not work on Internet Explorer.</p>
  
  <h3>Try with sample texts:</h3>
  <ul>

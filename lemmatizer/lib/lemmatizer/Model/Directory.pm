@@ -48,8 +48,8 @@ sub _test_tradition {
 	);
 	if( $testdata eq 'Collatex-16.xml' ) {
 		# Fix up the CX file
-		$tradition->collation->reading( 'n9' )->rank( 17 );
-		$tradition->collation->reading( 'n25' )->rank( 18 );
+		$tradition->collation->reading( 'n21' )->rank( 17 );
+		$tradition->collation->reading( 'n22' )->rank( 18 );
 	} else {
 		# Add a test pre-existing relationships
 		$tradition->collation->add_relationship( '1,4', '1,5', 
