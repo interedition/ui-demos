@@ -27,6 +27,16 @@ function getRelationshipURL() {
 }
 
 function svgEnlargementLoaded() {
+	//Give some visual evidence that we are working
+	$('#loading_overlay').show();
+	lo_height = $("#enlargement_container").outerHeight();
+	lo_width = $("#enlargement_container").outerWidth();
+	$("#loading_overlay").height( lo_height );
+	$("#loading_overlay").width( lo_width );
+	$("#loading_overlay").offset( $("#enlargement_container").offset() );
+	$("#loading_message").offset(
+		{ 'top': lo_height / 2 - $("#loading_message").height() / 2,
+		  'left': lo_width / 2 - $("#loading_message").width() / 2 });
     //Set viewbox widht and height to widht and height of $('#svgenlargement svg').
     $('#update_workspace_button').data('locked', false);
     $('#update_workspace_button').css('background-position', '0px 44px');
@@ -90,11 +100,11 @@ function svgEnlargementLoaded() {
     var transform = 'rotate(0) scale(' + scale + ') translate(4 ' + translate + ')';
     svg_g.setAttribute('transform', transform);
     //used to calculate min and max zoom level:
-    start_element_height = $("#svgenlargement .node title:contains('#START#')").siblings('ellipse')[0].getBBox().height;
-    add_relations();
+    start_element_height = $("#svgenlargement .node title:contains('START#')").siblings('ellipse')[0].getBBox().height;
+    add_relations( function() { $('#loading_overlay').hide(); });
 }
 
-function add_relations() {
+function add_relations( callback_fn ) {
 	var basepath = getRelativePath();
 	var textrelpath = getRelationshipURL();
     $.getJSON( basepath + '/definitions', function(data) {
@@ -103,7 +113,9 @@ function add_relations() {
         function(data) {
             $.each(data, function( index, rel_info ) {
                 var type_index = $.inArray(rel_info.type, rel_types);
-                if( type_index != -1 ) {
+                var source_found = get_ellipse( rel_info.source );
+                var target_found = get_ellipse( rel_info.target );
+                if( type_index != -1 && source_found.size() && target_found.size() ) {
                     var relation = relation_manager.create( rel_info.source, rel_info.target, type_index );
                     relation.data( 'type', rel_info.type );
                     relation.data( 'scope', rel_info.scope );
@@ -115,7 +127,8 @@ function add_relations() {
                     node_obj.set_draggable( false );
                     node_obj.ellipse.data( 'node_obj', null );
                 }
-            })
+            });
+            callback_fn.call();
         });
     });
 }
@@ -525,11 +538,15 @@ $(document).ready(function () {
         $(':button :contains("Ok")').attr("disabled", true);
         var jqjson = $.post( ncpath, form_values, function(data) {
             $.each( data, function(item, source_target) { 
+            	var source_found = get_ellipse( source_target[0] );
+            	var target_found = get_ellipse( source_target[1] );
+            	if( source_found.size() && target_found.size() ) {
                 var relation = relation_manager.create( source_target[0], source_target[1], $('#rel_type')[0].selectedIndex-1 );
                 relation.data( 'type', $('#rel_type :selected').text()  );
                 relation.data( 'scope', $('#scope :selected').text()  );
                 relation.data( 'note', $('#note').val()  );
                 relation_manager.toggle_active( relation.children('title').text() );
+				}
             });
             $( "#dialog-form" ).dialog( "close" );
         }, 'json' );
@@ -559,7 +576,7 @@ $(document).ready(function () {
         $(".ui-widget-overlay").css("background", "none");
         $("#dialog_overlay").show();
         $("#dialog_overlay").height( $("#enlargement_container").height() );
-        $("#dialog_overlay").width( $("#enlargement_container").width() );
+        $("#dialog_overlay").width( $("#enlargement_container").innerWidth() );
         $("#dialog_overlay").offset( $("#enlargement_container").offset() );
     },
     close: function() {

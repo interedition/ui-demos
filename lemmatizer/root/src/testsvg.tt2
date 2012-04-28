@@ -17,6 +17,10 @@ $(document).ready(function () {
 [% END %]
 
 	<div id="enlargement_container" class="fillPage">	
+		<div id="loading_overlay">
+			<div id="loading_message"><span>Loading, please wait...</span></div>
+		</div>
+		<div id="dialog_overlay"></div>
 		<div id="enlargement" style="">
 	        <div id="svgenlargement" class="fillPage"></div>
 		</div>
@@ -41,7 +45,7 @@ $(document).ready(function () {
 				<option></option>
 			</select>
 			<br/><br/>
-			<label for="note">Annotation on note..&nbsp;</label>
+			<label for="note">Annotation or note..&nbsp;</label>
 			<textarea rows="3" style="width:100%;" name="note" id="note" class=".ui-widget input"></textarea>
 		</fieldset>
     	<div id="status"></div>		
