@@ -628,6 +628,9 @@ $(document).ready(function () {
     close: function() {
     }
   });
+  
+  // function for reading form dialog should go here; for now hide the element
+  $('#reading_form').hide();
 
   $('#update_workspace_button').click( function() {
      var svg_enlargement = $('#svgenlargement').svg().svg('get').root();

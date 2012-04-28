@@ -28,7 +28,7 @@ $(document).ready(function () {
 	
 	<div id="update_workspace_button"></div>
 	
-	<div id="dialog-form" title="Create relation between two nodes..">
+	<div id="dialog-form" title="Create relation between two nodes...">
 		<form id="collapse_node_form" action="#">
 		<fieldset>
 			<input type="hidden" name="source_id" id="source_node_id"/>
@@ -53,12 +53,23 @@ $(document).ready(function () {
 	</div>
 	<div id="dialog_overlay"></div>
 
-	<div id="delete-form" title="Relation info..">
+	<div id="delete-form" title="Relation info...">
 		<form id="delete_relation_form" action="#">
 			<input type="hidden" name="source_id" id="delete_source_node_id"/>
 			<input type="hidden" name="target_id" id="delete_target_node_id"/>
 		</form>
 		<div id="delete-form-text"></div>
+	</div>
+	
+	<div id="reading-form" title="Reading info...">
+		<form id="reading_data_form" action="#">
+			<input type="hidden" name="reading_id" id="reading_data_id"/>
+			<label for="reading_nonsense">This is a nonsense word</label>
+			<input type="checkbox" name="reading_nonsense" id="reading_nonsense_id"/>
+			<label for="reading_badgrammar">This word's grammar cannot be right</label>
+			<input type="checkbox" name="reading_badgrammar" id="reading_badgrammar_id"/>
+			<!-- Morphological options will go here -->
+		</form>
 	</div>
     	
     <p/><p/>	
